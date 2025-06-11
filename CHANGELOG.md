@@ -1,5 +1,10 @@
 # AeroGenesis A330 For X-Plane 12
 
+## Pending
+- Updated GPWS sounds (#27)
+
+---
+
 ## Version 1.1.2
 - Fixed ENG 2 won't start after ASU been turned on
 - Fixed ECAM ADIRS ALIGN MSG overlapping
