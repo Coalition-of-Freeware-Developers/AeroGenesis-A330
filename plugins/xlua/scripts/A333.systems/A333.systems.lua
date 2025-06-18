@@ -424,6 +424,30 @@ simDR_engine1_loss = find_dataref("sim/cockpit2/bleedair/indicators/engine_loss_
 simDR_engine2_loss = find_dataref("sim/cockpit2/bleedair/indicators/engine_loss_from_bleed_air_ratio[1]")
 simDR_apu_loss = find_dataref("sim/cockpit2/bleedair/indicators/APU_loss_from_bleed_air_ratio")
 
+-- COOL BRAKES
+function cool_brakes()
+    simDR_brake_temp_left = 0.1
+    simDR_brake_temp_right = 0.1
+end
+
+simDR_on_ground    = find_dataref("sim/flightmodel/failures/onground_any")
+simDR_speed        = find_dataref("sim/flightmodel/position/indicated_airspeed")
+simDR_thrust       = find_dataref("sim/flightmodel/engine/ENGN_thro_use[0]")
+simDR_left_brake   = find_dataref("sim/flightmodel2/gear/tire_part_brake[1]")
+simDR_right_brake  = find_dataref("sim/flightmodel2/gear/tire_part_brake[2]")
+
+function auto_brake()
+    if simDR_on_ground == 1 and simDR_speed > 20 and simDR_thrust < 0.2 then
+        simDR_left_brake = 0.3  -- medium braking force
+        simDR_right_brake = 0.3
+    else
+        simDR_left_brake = 0.0
+        simDR_right_brake = 0.0
+    end
+end
+
+do_every_frame("cool_brakes()")
+
 -- PFD STUFF
 
 simDR_radio_altimeter_capt = find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
