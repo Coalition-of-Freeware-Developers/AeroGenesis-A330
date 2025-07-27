@@ -10148,7 +10148,7 @@ P _obja/40/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/40/_v10_is_internal 0
 P _obja/40/_v10_steers_with_gear 0
 P _obja/41/_obj_flags 0
-P _obja/41/_obj_hide_dataref Durantula_Chocks_Status
+P _obja/41/_obj_hide_dataref AG330/objects/chocks_hide
 P _obja/41/_v10_att_body -1
 P _obja/41/_v10_att_file_stl Chocks.obj
 P _obja/41/_v10_att_gear -1
@@ -40175,7 +40175,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.054000001
 P acf/_ff_rat_idle_PRP 0.100000001
 P acf/_ff_rat_idle_turbo 0.100000001
-P acf/_file_writer_version 121407
+P acf/_file_writer_version 122015
 P acf/_fixed_max/0 2E4
 P acf/_fixed_max/1 2E4
 P acf/_fixed_max/2 2E4
@@ -40505,6 +40505,7 @@ P acf/_hud_region_index 0
 P acf/_hud_tapes_track_vector 0
 P acf/_hyd_PTU_type 0
 P acf/_hyd_brakes 5
+P acf/_hyd_brakes_abs 1
 P acf/_hyd_ele_pump_0123/0 1
 P acf/_hyd_ele_pump_0123/1 4
 P acf/_hyd_ele_pump_0123/2 2
@@ -40539,6 +40540,8 @@ P acf/_hyd_max_p_ele 3000.000000000
 P acf/_hyd_max_p_eng 3000.000000000
 P acf/_hyd_max_p_rot 0.000000000
 P acf/_hyd_nw_steer 1
+P acf/_hyd_park_brake_toe 1
+P acf/_hyd_park_brake_trap 0
 P acf/_hyd_prop_brake 0
 P acf/_hyd_prop_pump_0123/0 0
 P acf/_hyd_prop_pump_0123/1 0
@@ -40684,6 +40687,7 @@ P acf/_n2_power_curve 3.210000038
 P acf/_name AeroGenesis A330-300 (PW4000)
 P acf/_new_plot_XP3D_cock/0 1
 P acf/_new_plot_outer_acf/0 1
+P acf/_no_default_chocks 0
 P acf/_no_default_contact_fx 0
 P acf/_no_default_engine_fx 0
 P acf/_no_default_gear_fx 0
@@ -40706,7 +40710,7 @@ P acf/_num_generators 2
 P acf/_num_inverters 1
 P acf/_num_prop 0
 P acf/_num_xmsn 2
-P acf/_o2_bottle_liter 415
+P acf/_o2_bottle_liter 415.000000000
 P acf/_oilT_is_C 1
 P acf/_ott_asi_kts_off_for_full_def 45.000000000
 P acf/_ott_asi_sec_into_future 12.000000000
