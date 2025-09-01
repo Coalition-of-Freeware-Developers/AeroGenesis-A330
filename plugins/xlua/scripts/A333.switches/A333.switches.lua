@@ -718,14 +718,14 @@ A333_switches_park_brake_pos_tar	= create_dataref("laminar/A333/switches/park_br
 
 ---- BAROMETER --------------------------------------------------------------------------
 
-A333_capt_baro_knob_pos				= create_dataref("laminar/A333/barometer/capt_knob_pos", "number")
-A333_fo_baro_knob_pos				= create_dataref("laminar/A333/barometer/fo_knob_pos", "number")
-A333_capt_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/capt_inHg_hPa_pos", "number")
-A333_fo_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/fo_inHg_hPa_pos", "number")
-A333_capt_pull_std_pos				= create_dataref("laminar/A333/barometer/capt_pull_std_pos", "number")
-A333_fo_pull_std_pos				= create_dataref("laminar/A333/barometer/fo_pull_std_pos", "number")
-A333_capt_baro_mode					= create_dataref("laminar/A333/barometer/capt_mode", "number")
-A333_fo_baro_mode					= create_dataref("laminar/A333/barometer/fo_mode", "number")
+A333_capt_baro_knob_pos				= create_dataref("laminar/A333/barometer/capt_knob_pos", "number", function cptBaroKnobDRhandler() end)
+A333_fo_baro_knob_pos				= create_dataref("laminar/A333/barometer/fo_knob_pos", "number", function foBaroKnobDRhandler() end)
+A333_capt_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/capt_inHg_hPa_pos", "number", function cptBaroInHgHPaDRhandler() end)
+A333_fo_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/fo_inHg_hPa_pos", "number", function foBaroInHgHPaDRhandler() end)
+A333_capt_pull_std_pos				= create_dataref("laminar/A333/barometer/capt_pull_std_pos", "number", function cptBaroPullStdDRhandler() end)
+A333_fo_pull_std_pos				= create_dataref("laminar/A333/barometer/fo_pull_std_pos", "number", function foBaroPullStdDRhandler() end)
+A333_capt_baro_mode					= create_dataref("laminar/A333/barometer/capt_mode", "number", function cptBaroModeDRhandler() end)
+A333_fo_baro_mode					= create_dataref("laminar/A333/barometer/fo_mode", "number", function foBaroModeDRhandler() end)
 
 
 ---- AI ---------------------------------------------------------------------------------
