@@ -40175,7 +40175,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.054000001
 P acf/_ff_rat_idle_PRP 0.100000001
 P acf/_ff_rat_idle_turbo 0.100000001
-P acf/_file_writer_version 122015
+P acf/_file_writer_version 122103
 P acf/_fixed_max/0 2E4
 P acf/_fixed_max/1 2E4
 P acf/_fixed_max/2 2E4
@@ -43251,7 +43251,7 @@ GROUP Radio Tune Panel C
   END_GROUP
 END_GROUP
 GROUP Standby
-  SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/ready
+  SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/SelfTest_finished
   LOCKED
   HIDE
   GROUP horizon
@@ -44701,7 +44701,6 @@ gen_rotary Blue Death
 GROUP PFDcapt
   LOCKED
   HIDE
-  GROUP_OPEN
   gen_rotary flicker effect
     POS 261.500000 516.500000
     IMAGE AeroGenesis/PFDcapt/DisplayFlash
@@ -48297,7 +48296,6 @@ GROUP PFDcapt
       SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_heading_mode
       LOCKED
       HIDE
-      GROUP_OPEN
       GROUP HDG AP pointer
         SHOW_LESS 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
