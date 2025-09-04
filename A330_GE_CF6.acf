@@ -43225,7 +43225,7 @@ GROUP Radio Tune Panel C
   END_GROUP
 END_GROUP
 GROUP Standby
-  SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/ready
+  SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/SelfTest_finished
   LOCKED
   HIDE
   GROUP horizon
