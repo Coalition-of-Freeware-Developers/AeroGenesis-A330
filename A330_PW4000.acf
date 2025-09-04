@@ -38723,7 +38723,7 @@ P acf/_ann_wav_file/count 198
 P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
-P acf/_author AeroGenesisDevTeam
+P acf/_author AeroGenesis DevTeam
 P acf/_auto_engage_BC_deg 120.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -39777,7 +39777,7 @@ P acf/_cyclic_dn_trim_rat 0.000000000
 P acf/_cyclic_lf_trim_rat 0.000000000
 P acf/_cyclic_rt_trim_rat 0.000000000
 P acf/_cyclic_up_trim_rat 0.000000000
-P acf/_default_livery_name Lufthansa D-AIKN
+P acf/_default_livery_name AeroGenesis House
 P acf/_deg_psi_per_deg_def 10.000000000
 P acf/_deg_the_per_deg_def 6.000000000
 P acf/_delta3 0.000000000
@@ -41100,7 +41100,7 @@ P acf/_tail_rot_with_v2_kts 0.000000000
 P acf/_tail_rotor_lf_trim_rat 0.000000000
 P acf/_tail_rotor_rt_trim_rat 0.000000000
 P acf/_tail_with_coll 0.000000000
-P acf/_tailnum D-AIKN
+P acf/_tailnum D-AGEN
 P acf/_tailrotor_EQ 0
 P acf/_takeoff_trim_11 -0.300000012
 P acf/_tank_name/0 Left Wing
@@ -41265,7 +41265,7 @@ P acf/_vect_min_nace 0.000000000
 P acf/_vect_power_aft 1.000000000
 P acf/_vect_power_for 1.000000000
 P acf/_vect_rate 15.000000000
-P acf/_version 1.1.1
+P acf/_version 1.2.0
 P acf/_vnav_descend_auto_arm 0
 P acf/_vor_mode_has_dead_reckon 1
 P acf/_vvi_but_adjusts_pitch 0
