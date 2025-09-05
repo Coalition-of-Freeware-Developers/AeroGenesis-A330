@@ -44701,6 +44701,7 @@ gen_rotary Blue Death
 GROUP PFDcapt
   LOCKED
   HIDE
+  GROUP_OPEN
   gen_rotary flicker effect
     POS 261.500000 516.500000
     IMAGE AeroGenesis/PFDcapt/DisplayFlash
@@ -48296,6 +48297,7 @@ GROUP PFDcapt
       SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_heading_mode
       LOCKED
       HIDE
+      GROUP_OPEN
       GROUP HDG AP pointer
         SHOW_LESS 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot

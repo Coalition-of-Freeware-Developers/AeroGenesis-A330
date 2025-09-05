@@ -43215,7 +43215,6 @@ GROUP Standby
   SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/SelfTest_finished
   LOCKED
   HIDE
-  GROUP_OPEN
   GROUP horizon
     LOCKED
     HIDE
@@ -44713,7 +44712,6 @@ GROUP PFDcapt
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/showATT
     LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     KEY_FRAME 0.000000 0.000000 1.000000
@@ -44731,7 +44729,6 @@ GROUP PFDcapt
 
   GROUP normal operation
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/normalOperation
-    HIDE
     GROUP_OPEN
     GROUP FMAs Captain
       LOCKED
@@ -47625,7 +47622,6 @@ GROUP PFDcapt
       IMAGE PFD/Horizon/flight_director_blank_square
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -48377,7 +48373,6 @@ GROUP PFDcapt
       IMAGE PFD/PFD_background
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -51436,7 +51431,7 @@ GROUP PFDcapt
 END_GROUP
 GROUP PFDfo
   LOCKED
-  HIDE
+  GROUP_OPEN
   gen_rotary flicker effect
     POS 261.500000 4.500000
     IMAGE AeroGenesis/PFDfo/DisplayFlash
@@ -51505,7 +51500,6 @@ GROUP PFDfo
 
   GROUP normal operation
     SHOW_EQUAL 1.000000 AG330/Displays/PFDfo/normalOperation
-    HIDE
     GROUP_OPEN
     GROUP FMAs FO
       LOCKED
@@ -55139,7 +55133,6 @@ GROUP PFDfo
       IMAGE PFD/PFD_background
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 2
@@ -58190,13 +58183,11 @@ GROUP MFDcapt
   HIDE
   GROUP ATT
     SHOW_EQUAL 1.000000 AG330/Displays/MFDcapt/showATT
-    HIDE
     gen_rotary ATTscreen
       POS 768.000000 511.000000
       IMAGE AeroGenesis/MFDcapt/MFD_ATT
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       KEY_FRAME 0.000000 0.000000 1.000000
@@ -58216,13 +58207,11 @@ GROUP MFDcapt
       SHOW_LESS 3.000000 sim/cockpit2/EFIS/map_mode
       SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/EFIS_1_selection_pilot
       LOCKED
-      HIDE
       gen_rotary Tuning Mode Nav1
         POS 618.000000 294.000000
         IMAGE ND/tuning_mode
         DATAREF sim/cockpit2/radios/actuators/nav1_tuning_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58245,7 +58234,6 @@ GROUP MFDcapt
         IMAGE ND/VOR1_ADF1
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58268,7 +58256,6 @@ GROUP MFDcapt
         DATAREF 
         SHOW_LESS 0.000000 laminar/A333/nd/vor1_id_flag/capt
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58288,13 +58275,11 @@ GROUP MFDcapt
       GROUP DME1
         SHOW_EQUAL 1024.000000 sim/cockpit2/radios/indicators/nav_type[2]
         LOCKED
-        HIDE
         gen_text DME1 ID
           POS 559.500000 299.000000
           IMAGE Text/airbus_display_20_white
           DATAREF sim/cockpit2/radios/indicators/nav3_dme_id
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58308,7 +58293,6 @@ GROUP MFDcapt
           IMAGE ND/DME
           DATAREF sim/cockpit2/radios/indicators/nav_has_dme[2]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58332,7 +58316,6 @@ GROUP MFDcapt
           SHOW_LESS 19.950001 sim/cockpit2/radios/indicators/nav_dme_distance_nm[2]
           SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav_has_dme[2]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58351,7 +58334,6 @@ GROUP MFDcapt
           SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav_has_dme[2]
           SHOW_GREATER 19.950001 sim/cockpit2/radios/indicators/nav_dme_distance_nm[2]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58367,14 +58349,12 @@ GROUP MFDcapt
       GROUP VOR1
         SHOW_EQUAL 4.000000 sim/cockpit2/radios/indicators/nav_type[2]
         LOCKED
-        HIDE
         GROUP_OPEN
         gen_text V1 ID
           POS 559.500000 299.000000
           IMAGE Text/airbus_display_20_white
           DATAREF sim/cockpit2/radios/indicators/nav3_nav_id
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58388,7 +58368,6 @@ GROUP MFDcapt
           IMAGE ND/DME
           DATAREF sim/cockpit2/radios/indicators/nav_has_dme[2]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58412,7 +58391,6 @@ GROUP MFDcapt
           SHOW_LESS 19.950001 sim/cockpit2/radios/indicators/nav_dme_distance_nm[2]
           SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav_has_dme[2]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58431,7 +58409,6 @@ GROUP MFDcapt
           SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav_has_dme[2]
           SHOW_GREATER 19.950001 sim/cockpit2/radios/indicators/nav_dme_distance_nm[2]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58449,13 +58426,11 @@ GROUP MFDcapt
       SHOW_LESS 3.000000 sim/cockpit2/EFIS/map_mode
       SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/EFIS_2_selection_pilot
       LOCKED
-      HIDE
       gen_rotary Tuning Mode Nav2
         POS 918.000000 294.000000
         IMAGE ND/tuning_mode
         DATAREF sim/cockpit2/radios/actuators/nav2_tuning_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58478,7 +58453,6 @@ GROUP MFDcapt
         IMAGE ND/VOR2_ADF2
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58501,7 +58475,6 @@ GROUP MFDcapt
         DATAREF 
         SHOW_LESS 0.000000 laminar/A333/nd/vor2_id_flag/capt
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58521,13 +58494,11 @@ GROUP MFDcapt
       GROUP DME2
         SHOW_EQUAL 1024.000000 sim/cockpit2/radios/indicators/nav_type[3]
         LOCKED
-        HIDE
         gen_text DME2 ID
           POS 967.500000 299.000000
           IMAGE Text/airbus_display_20_white
           DATAREF sim/cockpit2/radios/indicators/nav4_dme_id
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58541,7 +58512,6 @@ GROUP MFDcapt
           IMAGE ND/DME
           DATAREF sim/cockpit2/radios/indicators/nav_has_dme[3]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58565,7 +58535,6 @@ GROUP MFDcapt
           SHOW_LESS 19.950001 sim/cockpit2/radios/indicators/nav_dme_distance_nm[3]
           SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav_has_dme[3]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58584,7 +58553,6 @@ GROUP MFDcapt
           SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav_has_dme[3]
           SHOW_GREATER 19.950001 sim/cockpit2/radios/indicators/nav_dme_distance_nm[3]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58600,13 +58568,11 @@ GROUP MFDcapt
       GROUP VOR2
         SHOW_EQUAL 4.000000 sim/cockpit2/radios/indicators/nav_type[3]
         LOCKED
-        HIDE
         gen_text V2 ID
           POS 967.500000 299.000000
           IMAGE Text/airbus_display_20_white
           DATAREF sim/cockpit2/radios/indicators/nav4_nav_id
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58620,7 +58586,6 @@ GROUP MFDcapt
           IMAGE ND/DME
           DATAREF sim/cockpit2/radios/indicators/nav_has_dme[3]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58644,7 +58609,6 @@ GROUP MFDcapt
           SHOW_LESS 19.950001 sim/cockpit2/radios/indicators/nav_dme_distance_nm[3]
           SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav_has_dme[3]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58663,7 +58627,6 @@ GROUP MFDcapt
           SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav_has_dme[3]
           SHOW_GREATER 19.950001 sim/cockpit2/radios/indicators/nav_dme_distance_nm[3]
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -58681,13 +58644,11 @@ GROUP MFDcapt
       SHOW_LESS 3.000000 sim/cockpit2/EFIS/map_mode
       SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_1_selection_pilot
       LOCKED
-      HIDE
       gen_rotary Tuning Mode Nav1
         POS 618.000000 294.000000
         IMAGE ND/tuning_mode
         DATAREF sim/cockpit2/radios/actuators/nav1_tuning_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58710,7 +58671,6 @@ GROUP MFDcapt
         IMAGE ND/VOR1_ADF1
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58733,7 +58693,6 @@ GROUP MFDcapt
         DATAREF 
         SHOW_LESS 0.000000 laminar/A333/nd/adf1_id_flag/capt
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58755,7 +58714,6 @@ GROUP MFDcapt
         IMAGE Text/airbus_display_20_green
         DATAREF sim/cockpit2/radios/indicators/adf1_nav_id
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58769,7 +58727,6 @@ GROUP MFDcapt
         IMAGE ND/DME
         DATAREF sim/cockpit2/radios/indicators/adf1_has_dme
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58793,7 +58750,6 @@ GROUP MFDcapt
         SHOW_LESS 19.950001 sim/cockpit2/radios/indicators/adf1_dme_distance_nm
         SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/adf1_has_dme
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58812,7 +58768,6 @@ GROUP MFDcapt
         SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/adf1_has_dme
         SHOW_GREATER 19.950001 sim/cockpit2/radios/indicators/adf1_dme_distance_nm
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58829,13 +58784,11 @@ GROUP MFDcapt
       SHOW_LESS 3.000000 sim/cockpit2/EFIS/map_mode
       SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_2_selection_pilot
       LOCKED
-      HIDE
       gen_rotary Tuning Mode Nav2
         POS 918.000000 294.000000
         IMAGE ND/tuning_mode
         DATAREF sim/cockpit2/radios/actuators/nav2_tuning_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58858,7 +58811,6 @@ GROUP MFDcapt
         IMAGE ND/VOR2_ADF2
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58881,7 +58833,6 @@ GROUP MFDcapt
         DATAREF 
         SHOW_LESS 0.000000 laminar/A333/nd/adf2_id_flag/capt
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58903,7 +58854,6 @@ GROUP MFDcapt
         IMAGE Text/airbus_display_20_green
         DATAREF sim/cockpit2/radios/indicators/adf2_nav_id
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58917,7 +58867,6 @@ GROUP MFDcapt
         IMAGE ND/DME
         DATAREF sim/cockpit2/radios/indicators/adf2_has_dme
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58941,7 +58890,6 @@ GROUP MFDcapt
         SHOW_LESS 19.950001 sim/cockpit2/radios/indicators/adf2_dme_distance_nm
         SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/adf2_has_dme
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58960,7 +58908,6 @@ GROUP MFDcapt
         SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/adf2_has_dme
         SHOW_GREATER 19.950001 sim/cockpit2/radios/indicators/adf2_dme_distance_nm
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -58978,13 +58925,11 @@ GROUP MFDcapt
       SHOW_EQUAL 1.000000 laminar/A333/radios/capt_gps_status
       SHOW_GREATER 2.000000 sim/cockpit2/EFIS/map_mode
       LOCKED
-      HIDE
       gen_rotary GPS indicators
         POS 1002.000000 731.000000
         IMAGE ND/GPS_deg_nm_minutes
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59006,7 +58951,6 @@ GROUP MFDcapt
         IMAGE Text/airbus_display_20_white
         DATAREF sim/cockpit2/radios/indicators/gps_nav_id
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59020,7 +58964,6 @@ GROUP MFDcapt
         IMAGE LED/airbus_display_LED_20_green
         DATAREF sim/cockpit2/radios/indicators/gps_bearing_deg_mag
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59038,7 +58981,6 @@ GROUP MFDcapt
         DATAREF sim/cockpit2/radios/indicators/gps_dme_distance_nm
         SHOW_LESS 19.950001 sim/cockpit2/radios/indicators/gps_dme_distance_nm
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59056,7 +58998,6 @@ GROUP MFDcapt
         DATAREF sim/cockpit2/radios/indicators/gps_dme_distance_nm
         SHOW_GREATER 19.950001 sim/cockpit2/radios/indicators/gps_dme_distance_nm
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59073,7 +59014,6 @@ GROUP MFDcapt
         IMAGE LED/airbus_display_LED_20_green
         DATAREF laminar/A333/nd/gps_dme_time_min
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59090,7 +59030,6 @@ GROUP MFDcapt
         IMAGE LED/airbus_display_LED_20_green
         DATAREF laminar/A333/nd/gps_dme_time_sec
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59107,13 +59046,11 @@ GROUP MFDcapt
       SHOW_EQUAL 1.000000 [1]
       SHOW_GREATER 0.010000 sim/cockpit2/clock_timer/chrono_time[1]
       LOCKED
-      HIDE
       gen_rotary Background
         POS 559.000000 347.000000
         IMAGE ND/chrono_bg
         DATAREF [1]
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59137,7 +59074,6 @@ GROUP MFDcapt
         SHOW_EQUAL 1.000000 [2]
         SHOW_GREATER 19.950001 [2]
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59156,7 +59092,6 @@ GROUP MFDcapt
         SHOW_EQUAL 1.000000 [2]
         SHOW_GREATER 19.950001 [2]
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59172,13 +59107,11 @@ GROUP MFDcapt
     GROUP GS TAS WIND CAPT
       SHOW_EQUAL 0.000000 laminar/A333/ECAM_on_EFIS_capt
       LOCKED
-      HIDE
       gen_rotary Degree Slash
         POS 561.000000 729.000000
         IMAGE ND/GS_TAS_WIND/wind_slash
         DATAREF sim/cockpit2/gauges/indicators/wind_speed_kts
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
@@ -59198,13 +59131,11 @@ GROUP MFDcapt
 
       GROUP GS TAS CAPT
         LOCKED
-        HIDE
         gen_rotary GS ind
           POS 530.000000 750.000000
           IMAGE ND/GS_TAS_WIND/GS
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59226,7 +59157,6 @@ GROUP MFDcapt
           IMAGE LED/airbus_display_LED_20_no_zeros_green
           DATAREF sim/cockpit2/gauges/indicators/ground_speed_kt
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59243,7 +59173,6 @@ GROUP MFDcapt
           IMAGE ND/GS_TAS_WIND/TAS
           DATAREF sim/flightmodel/position/true_airspeed
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59267,7 +59196,6 @@ GROUP MFDcapt
           DATAREF sim/flightmodel/position/true_airspeed
           SHOW_GREATER 52.000000 sim/flightmodel/position/true_airspeed
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59283,13 +59211,11 @@ GROUP MFDcapt
       GROUP Wind CAPT
         SHOW_GREATER 6.000000 sim/cockpit2/gauges/indicators/wind_speed_kts
         LOCKED
-        HIDE
         gen_LED Wind Direction
           POS 537.500000 728.500000
           IMAGE LED/airbus_display_LED_18_green
           DATAREF sim/cockpit2/gauges/indicators/wind_heading_deg_mag
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59307,7 +59233,6 @@ GROUP MFDcapt
           DATAREF sim/cockpit2/gauges/indicators/wind_speed_kts
           SHOW_LESS 9.500000 sim/cockpit2/gauges/indicators/wind_speed_kts
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59326,7 +59251,6 @@ GROUP MFDcapt
           SHOW_LESS 99.500000 sim/cockpit2/gauges/indicators/wind_speed_kts
           SHOW_GREATER 9.500000 sim/cockpit2/gauges/indicators/wind_speed_kts
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59344,7 +59268,6 @@ GROUP MFDcapt
           DATAREF sim/cockpit2/gauges/indicators/wind_speed_kts
           SHOW_GREATER 99.500000 sim/cockpit2/gauges/indicators/wind_speed_kts
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59358,7 +59281,6 @@ GROUP MFDcapt
 
         GROUP Wind Correction
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE ROTATE
           GROUP_WIDTH 20
           GROUP_HEIGHT 20
@@ -59373,7 +59295,6 @@ GROUP MFDcapt
             IMAGE ND/GS_TAS_WIND/wind_needle
             DATAREF sim/cockpit2/gauges/indicators/wind_heading_deg_mag
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 8
@@ -59388,18 +59309,15 @@ GROUP MFDcapt
     GROUP Capt Map range
       SHOW_EQUAL 0.000000 laminar/A333/ECAM_on_EFIS_capt
       LOCKED
-      HIDE
       GROUP_OPEN
       GROUP Arc Range
         LOCKED
-        HIDE
         gen_rotary TRU ref 
           POS 768.000000 731.000000
           IMAGE PFD/Tru_ref
           DATAREF 
           SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59421,7 +59339,6 @@ GROUP MFDcapt
           IMAGE ND/map_range_ind
           DATAREF sim/cockpit2/EFIS/map_range
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59443,7 +59360,6 @@ GROUP MFDcapt
           IMAGE ND/map_range_ind
           DATAREF sim/cockpit2/EFIS/map_range
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59465,7 +59381,6 @@ GROUP MFDcapt
           IMAGE ND/map_range_ind2
           DATAREF sim/cockpit2/EFIS/map_range
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59487,7 +59402,6 @@ GROUP MFDcapt
           IMAGE ND/map_range_ind2
           DATAREF sim/cockpit2/EFIS/map_range
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 1
           BUS_SRC 8
@@ -59513,7 +59427,6 @@ GROUP MFDcapt
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/MFDcapt/showDisplayFlicker
     LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 1
     KEY_FRAME 0.000000 0.000000 1.000000
@@ -59535,7 +59448,6 @@ GROUP MFDcapt
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/MFDcapt/showSelfTestmsg
     LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 1
     KEY_FRAME 0.000000 0.000000 1.000000
