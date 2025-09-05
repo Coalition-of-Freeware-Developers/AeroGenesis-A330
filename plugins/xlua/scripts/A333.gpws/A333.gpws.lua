@@ -1,3 +1,4 @@
+jit.off()
 -- *******************************************************************
 -- Simple GPWS implementation (according to Honeywell MK VIII)
 -- Daniela Rodríguez Careri <daniela@x-plane.com>

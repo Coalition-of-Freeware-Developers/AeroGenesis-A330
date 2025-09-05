@@ -1,3 +1,4 @@
+jit.off()
 -- *******************************************************************
 -- Helper datarefs for use on the sound system
 -- Daniela Rodríguez Careri <daniela@x-plane.com>
