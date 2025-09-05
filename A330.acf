@@ -10084,6 +10084,45 @@ P _obja/36/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/36/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/36/_v10_is_internal 1
 P _obja/36/_v10_steers_with_gear 0
+P _obja/37/_obj_flags 29
+P _obja/37/_v10_att_body -1
+P _obja/37/_v10_att_file_stl cockpit/Console.obj
+P _obja/37/_v10_att_gear -1
+P _obja/37/_v10_att_phi_ref 0.000000000
+P _obja/37/_v10_att_psi_ref 0.000000000
+P _obja/37/_v10_att_the_ref 0.000000000
+P _obja/37/_v10_att_wing -1
+P _obja/37/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/37/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/37/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/37/_v10_is_internal 0
+P _obja/37/_v10_steers_with_gear 0
+P _obja/38/_obj_flags 1
+P _obja/38/_v10_att_body -1
+P _obja/38/_v10_att_file_stl cockpit/penholder.obj
+P _obja/38/_v10_att_gear -1
+P _obja/38/_v10_att_phi_ref 0.000000000
+P _obja/38/_v10_att_psi_ref 0.000000000
+P _obja/38/_v10_att_the_ref 0.000000000
+P _obja/38/_v10_att_wing -1
+P _obja/38/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/38/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/38/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/38/_v10_is_internal 0
+P _obja/38/_v10_steers_with_gear 0
+P _obja/39/_obj_flags 5
+P _obja/39/_v10_att_body -1
+P _obja/39/_v10_att_file_stl EFB/EFB_PRO.obj
+P _obja/39/_v10_att_gear -1
+P _obja/39/_v10_att_phi_ref 0.000000000
+P _obja/39/_v10_att_psi_ref 0.000000000
+P _obja/39/_v10_att_the_ref 0.000000000
+P _obja/39/_v10_att_wing -1
+P _obja/39/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/39/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/39/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/39/_v10_is_internal 0
+P _obja/39/_v10_steers_with_gear 0
 P _obja/4/_obj_flags 24
 P _obja/4/_v10_att_body -1
 P _obja/4/_v10_att_file_stl A330_trent_700.obj
@@ -10097,6 +10136,72 @@ P _obja/4/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/4/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/4/_v10_is_internal 1081147483
 P _obja/4/_v10_steers_with_gear 0
+P _obja/40/_obj_flags 1
+P _obja/40/_v10_att_body -1
+P _obja/40/_v10_att_file_stl cockpit/Tablet_Display.obj
+P _obja/40/_v10_att_gear -1
+P _obja/40/_v10_att_phi_ref 0.000000000
+P _obja/40/_v10_att_psi_ref 0.000000000
+P _obja/40/_v10_att_the_ref 0.000000000
+P _obja/40/_v10_att_wing -1
+P _obja/40/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/40/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/40/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/40/_v10_is_internal 0
+P _obja/40/_v10_steers_with_gear 0
+P _obja/41/_obj_flags 0
+P _obja/41/_obj_hide_dataref AG330/objects/chocks_hide
+P _obja/41/_v10_att_body -1
+P _obja/41/_v10_att_file_stl Chocks.obj
+P _obja/41/_v10_att_gear -1
+P _obja/41/_v10_att_phi_ref 0.000000000
+P _obja/41/_v10_att_psi_ref 0.000000000
+P _obja/41/_v10_att_the_ref 0.000000000
+P _obja/41/_v10_att_wing -1
+P _obja/41/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/41/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/41/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/41/_v10_is_internal 0
+P _obja/41/_v10_steers_with_gear 0
+P _obja/42/_obj_flags 9
+P _obja/42/_v10_att_body -1
+P _obja/42/_v10_att_file_stl cockpit/Pen.obj
+P _obja/42/_v10_att_gear -1
+P _obja/42/_v10_att_phi_ref 0.000000000
+P _obja/42/_v10_att_psi_ref 0.000000000
+P _obja/42/_v10_att_the_ref 0.000000000
+P _obja/42/_v10_att_wing -1
+P _obja/42/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/42/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/42/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/42/_v10_is_internal 0
+P _obja/42/_v10_steers_with_gear 0
+P _obja/43/_obj_flags 9
+P _obja/43/_v10_att_body -1
+P _obja/43/_v10_att_file_stl cockpit/penholder.obj
+P _obja/43/_v10_att_gear -1
+P _obja/43/_v10_att_phi_ref 0.000000000
+P _obja/43/_v10_att_psi_ref 0.000000000
+P _obja/43/_v10_att_the_ref 0.000000000
+P _obja/43/_v10_att_wing -1
+P _obja/43/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/43/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/43/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/43/_v10_is_internal 0
+P _obja/43/_v10_steers_with_gear 0
+P _obja/44/_obj_flags 9
+P _obja/44/_v10_att_body -1
+P _obja/44/_v10_att_file_stl cockpit/Console.obj
+P _obja/44/_v10_att_gear -1
+P _obja/44/_v10_att_phi_ref 0.000000000
+P _obja/44/_v10_att_psi_ref 0.000000000
+P _obja/44/_v10_att_the_ref 0.000000000
+P _obja/44/_v10_att_wing -1
+P _obja/44/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/44/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/44/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/44/_v10_is_internal 0
+P _obja/44/_v10_steers_with_gear 0
 P _obja/5/_obj_flags 9
 P _obja/5/_v10_att_body -1
 P _obja/5/_v10_att_file_stl cabin/cabin.obj
@@ -10162,7 +10267,7 @@ P _obja/9/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/9/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/9/_v10_is_internal -291569519
 P _obja/9/_v10_steers_with_gear 0
-P _obja/count 37
+P _obja/count 45
 P _prop/0/_des_AOA_pwr 1.000000000
 P _prop/0/_des_AOA_root 0.000000000
 P _prop/0/_des_AOA_tip 0.000000000
@@ -38589,7 +38694,7 @@ P acf/_ann_wav_file/count 198
 P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
-P acf/_author Alex Unruh, Rodrigo Fernandez, Massimo Durando, Jim Gregory, Marco Auer
+P acf/_author AeroGenesis DevTeam
 P acf/_auto_engage_BC_deg 120.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -38858,10 +38963,10 @@ P acf/_cdi_auto_crs_gps1 1
 P acf/_cgX_lft -0.010000000
 P acf/_cgX_rgt 0.010000000
 P acf/_cgY -3.279999971
-P acf/_cgZ 95.000000000
-P acf/_cgZ_aft 97.500000000
-P acf/_cgZ_fwd 92.500000000
-P acf/_cg_in_mac 0
+P acf/_cgZ 98.930000305
+P acf/_cgZ_aft 100.910003662
+P acf/_cgZ_fwd 95.519996643
+P acf/_cg_in_mac 1
 P acf/_chaff_max 0
 P acf/_chute_line_len/0 0.000000000
 P acf/_chute_line_len/1 0.000000000
@@ -39643,7 +39748,7 @@ P acf/_cyclic_dn_trim_rat 0.000000000
 P acf/_cyclic_lf_trim_rat 0.000000000
 P acf/_cyclic_rt_trim_rat 0.000000000
 P acf/_cyclic_up_trim_rat 0.000000000
-P acf/_default_livery_name Lufthansa D-AIKN
+P acf/_default_livery_name AeroGenesis House
 P acf/_deg_psi_per_deg_def 10.000000000
 P acf/_deg_the_per_deg_def 6.000000000
 P acf/_delta3 0.000000000
@@ -40043,7 +40148,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.054000001
 P acf/_ff_rat_idle_PRP 0.100000001
 P acf/_ff_rat_idle_turbo 0.100000001
-P acf/_file_writer_version 122010
+P acf/_file_writer_version 122103
 P acf/_fixed_max/0 2E4
 P acf/_fixed_max/1 2E4
 P acf/_fixed_max/2 2E4
@@ -40100,9 +40205,9 @@ P acf/_fixed_role/6 0
 P acf/_fixed_role/7 0
 P acf/_fixed_role/8 0
 P acf/_fixed_role/count 9
-P acf/_flap1_cd 0.075000003
-P acf/_flap1_cl 1.200000048
-P acf/_flap1_cm -0.194999993
+P acf/_flap1_cd 0.011378167
+P acf/_flap1_cl 0.880852342
+P acf/_flap1_cm -0.287860245
 P acf/_flap1_cratR 0.140000001
 P acf/_flap1_cratT 0.219999999
 P acf/_flap1_dn/0 0.000000000
@@ -40124,9 +40229,9 @@ P acf/_flap1_ptch_above_50 0
 P acf/_flap1_roll 0.000000000
 P acf/_flap1_roll_above_50 0
 P acf/_flap1_type 2
-P acf/_flap2_cd 0.075000003
-P acf/_flap2_cl 1.200000048
-P acf/_flap2_cm -0.194999993
+P acf/_flap2_cd 0.015422001
+P acf/_flap2_cl 1.193909883
+P acf/_flap2_cm -0.390166640
 P acf/_flap2_cratR 0.270000011
 P acf/_flap2_cratT 0.270000011
 P acf/_flap2_dn/0 0.000000000
@@ -40310,7 +40415,7 @@ P acf/_ground_pwr/2 24.000000000
 P acf/_ground_pwr/count 3
 P acf/_gyro_spooldown_time 60.000000000
 P acf/_gyro_spoolup_time 5.000000000
-P acf/_h_eqlbm 13.441884995
+P acf/_h_eqlbm 13.435399055
 P acf/_has_ADG 1
 P acf/_has_APU_bleed_air 1
 P acf/_has_APU_generator 1
@@ -40520,7 +40625,7 @@ P acf/_max_CHT 500.000000000
 P acf/_max_EGT 830.000000000
 P acf/_max_ITT 940.000000000
 P acf/_max_MP_limit 29.920000076
-P acf/_max_atc_alt_ft 0.000000000
+P acf/_max_atc_alt_ft 4.265E4
 P acf/_max_bat_amp 60.000000000
 P acf/_max_bat_temp 60.000000000
 P acf/_max_gen_amp0 575.000000000
@@ -40557,11 +40662,11 @@ P acf/_min_n2_ITT 27.000000000
 P acf/_min_rwy_len 4000.000000000
 P acf/_min_vec_on_ground 0.000000000
 P acf/_mixt_x_ctr 0.000000000
-P acf/_n1_power_curve1 2.799999952
-P acf/_n1_power_curve2 2.150000095
+P acf/_n1_power_curve1 2.759999990
+P acf/_n1_power_curve2 2.250000000
 P acf/_n1_rated_thrust 100.000000000
 P acf/_n2_power_curve 3.210000038
-P acf/_name Airbus A330-300
+P acf/_name AeroGenesis A330-300 (Trent 700)
 P acf/_new_plot_XP3D_cock/0 1
 P acf/_new_plot_outer_acf/0 1
 P acf/_no_default_chocks 0
@@ -40598,14 +40703,14 @@ P acf/_ott_atr_Kp 9.000000000
 P acf/_ott_flare_begin 33.000000000
 P acf/_ott_flare_end 12.000000000
 P acf/_ott_gls_sec_into_future 14.000000000
-P acf/_ott_phi_deg_off_for_full_def 3.000000000
-P acf/_ott_phi_sec_into_future 2.000000000
-P acf/_ott_phi_sec_to_tune 2.000000000
+P acf/_ott_phi_deg_off_for_full_def 10.399999619
+P acf/_ott_phi_sec_into_future 2.700000048
+P acf/_ott_phi_sec_to_tune 1.000000000
 P acf/_ott_psi_deg_off_for_full_def 15.000000000
 P acf/_ott_psi_sec_into_future 0.800000012
 P acf/_ott_psi_sec_to_tune 15.000000000
 P acf/_ott_roll_rate 6.199999809
-P acf/_ott_roll_response 8.000000000
+P acf/_ott_roll_response 9.600000381
 P acf/_ott_the_deg_off_for_full_def 5.500000000
 P acf/_ott_the_deg_per_kt 0.250000000
 P acf/_ott_the_sec_into_future 2.500000000
@@ -40757,7 +40862,7 @@ P acf/_rock_max_vac 0.000000000
 P acf/_roll_acft_lf_trim_rat 0.150000006
 P acf/_roll_acft_rt_trim_rat 0.150000006
 P acf/_roll_acft_trim_mode 1
-P acf/_roll_co 0.025000000
+P acf/_roll_co 0.003000000
 P acf/_roll_max_full_def_KIAS 999.000000000
 P acf/_roll_to_eng_spo1 0.300000012
 P acf/_roll_to_eng_spo2 0.000000000
@@ -40870,8 +40975,8 @@ P acf/_snd_rpm_eng 2500.000000000
 P acf/_snd_rpm_prp 2500.000000000
 P acf/_solar_cover_part 0.000000000
 P acf/_solar_eta 0.000000000
-P acf/_speedbrake_ext_time 1.000000000
-P acf/_speedbrake_ret_time 2.000000000
+P acf/_speedbrake_ext_time 5.000000000
+P acf/_speedbrake_ret_time 6.000000000
 P acf/_speedbrake_size 2.000000000
 P acf/_spoi1_cratR 0.150000006
 P acf/_spoi1_cratT 0.150000006
@@ -40963,7 +41068,7 @@ P acf/_starter_torque_rat 0.064000003
 P acf/_steerdeg_castor 0.000000000
 P acf/_ster_hi_speed_use 40.000000000
 P acf/_stickshaker 0
-P acf/_studio Laminar Research
+P acf/_studio Laminar Research, AeroGenesis
 P acf/_sweep_extend_protect 0
 P acf/_sweep_m1 0.000000000
 P acf/_sweep_m2 0.000000000
@@ -40981,7 +41086,7 @@ P acf/_tail_rot_with_v2_kts 0.000000000
 P acf/_tail_rotor_lf_trim_rat 0.000000000
 P acf/_tail_rotor_rt_trim_rat 0.000000000
 P acf/_tail_with_coll 0.000000000
-P acf/_tailnum D-AIKN
+P acf/_tailnum D-AGEN
 P acf/_tailrotor_EQ 0
 P acf/_takeoff_trim_11 -0.300000012
 P acf/_tank_name/0 Left Wing
@@ -41102,7 +41207,7 @@ P acf/_tank_xyz_full/8,1 0.000000000
 P acf/_tank_xyz_full/8,2 0.000000000
 P acf/_tank_xyz_full/i_count 9
 P acf/_tank_xyz_full/j_count 3
-P acf/_the_eqlbm -0.724769235
+P acf/_the_eqlbm -0.565050960
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.000000000
 P acf/_throt_max_fwd_emr 1.019999981
@@ -41146,7 +41251,7 @@ P acf/_vect_min_nace 0.000000000
 P acf/_vect_power_aft 1.000000000
 P acf/_vect_power_for 1.000000000
 P acf/_vect_rate 15.000000000
-P acf/_version 1.01
+P acf/_version 1.2.0
 P acf/_vnav_descend_auto_arm 0
 P acf/_vor_mode_has_dead_reckon 1
 P acf/_vvi_but_adjusts_pitch 0
@@ -42070,6 +42175,50 @@ GROUP MISC
     PERIOD_WIDTH 0
     LED_ROWS 4
     ROUNDING ROUND_ROUND
+
+  gen_rotary ACARS capt
+    POS 1542.000000 96.000000
+    IMAGE MISC/ACARS
+    DATAREF 
+    SHOW_EQUAL 1.000000 AG330/ACARScapt/selfTest/ready
+    LOCKED
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 11
+    BUS_SRC 3
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary ACARS fo
+    POS 1808.000000 96.000000
+    IMAGE MISC/ACARS
+    DATAREF
+    SHOW_EQUAL 1.000000 AG330/ACARSfo/selfTest/ready
+    LOCKED
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 11
+    BUS_SRC 3
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
 
 END_GROUP
 GROUP Chronograph
