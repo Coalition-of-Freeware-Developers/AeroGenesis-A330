@@ -1,5 +1,6 @@
 {1772c137-86b0-4228-8d0e-83c4479f4880} bank:/Master Bank
 {8f6fe1e3-f7cb-0e6a-0b47-093ab66c4e18} bank:/Master Bank.strings
+{84d3cac3-05d7-47db-98e9-ab3606ed11ac} bank:/AeroGenesis
 {9f08114d-36ec-44cc-b8bf-b2babda09f9e} bus:/
 {7f7c05a4-e05a-4d44-94fe-d4691147a9b7} bus:/Master
 {e3492bec-f854-4fbb-b2bc-23586269032e} bus:/Master/Copilot
@@ -180,6 +181,13 @@
 {4a289c24-e7c6-4646-abcf-11987c73184c} event:/a330/equipment/switches/switch_paddle
 {5b3bb07f-180b-4faf-9587-3f71defb8661} event:/a330/equipment/switches/switch_ruddtrim_hold
 {e3c0e3f3-711b-4dae-bc81-5802a99c503d} event:/a330/equipment/wipers/wipers
+{b51f2cc5-9fb2-4274-81e0-fd4cea603d05} event:/AG_MCDU
+{351057c1-f999-4582-8109-7ce9d1d23b8d} event:/PW4000
+{cd89edf0-4a5d-486e-bc2c-3ef260ded057} event:/PW4000_Start
+{1dad55e4-3edc-4c1c-887b-4aeca28ad6ae} event:/GE_CF6
+{f8bdef35-b0bf-4755-8d1f-af68a16bb127} event:/GE_CF6_Start
+{08b937ac-410e-4c75-a30b-75952341730f} event:/Start_Inside
+{c8bfa8b4-31eb-4d76-a63f-f34c7e4fb8e3} event:/Safety
 {136703bc-9496-4bf5-a318-eeb092525a3e} parameter:/Distance
 {794589ac-9ac5-4dfc-b9db-c539ec9a311b} parameter:/Distance1
 {d4d676bf-5977-467a-b6af-4cf6b52eb4be} parameter:/Distance2
