@@ -764,14 +764,19 @@ A333_switches_park_brake_pos_tar	= create_dataref("laminar/A333/switches/park_br
 
 ---- BAROMETER --------------------------------------------------------------------------
 
-A333_capt_baro_knob_pos				= create_dataref("laminar/A333/barometer/capt_knob_pos", "number")
-A333_fo_baro_knob_pos				= create_dataref("laminar/A333/barometer/fo_knob_pos", "number")
-A333_capt_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/capt_inHg_hPa_pos", "number")
-A333_fo_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/fo_inHg_hPa_pos", "number")
-A333_capt_pull_std_pos				= create_dataref("laminar/A333/barometer/capt_pull_std_pos", "number")
-A333_fo_pull_std_pos				= create_dataref("laminar/A333/barometer/fo_pull_std_pos", "number")
---A333_capt_baro_mode				= create_dataref("laminar/A333/barometer/capt_mode", "number")
---A333_fo_baro_mode					= create_dataref("laminar/A333/barometer/fo_mode", "number")
+function cptBaroKnobDRhandler() end
+function foBaroKnobDRhandler() end
+function cptBaroInHgHPaDRhandler() end
+function foBaroInHgHPaDRhandler() end
+function cptBaroPullStdDRhandler() end
+function foBaroPullStdDRhandler() end
+
+A333_capt_baro_knob_pos				= create_dataref("laminar/A333/barometer/capt_knob_pos", "number", cptBaroKnobDRhandler)
+A333_fo_baro_knob_pos				= create_dataref("laminar/A333/barometer/fo_knob_pos", "number", foBaroKnobDRhandler)
+A333_capt_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/capt_inHg_hPa_pos", "number", cptBaroInHgHPaDRhandler)
+A333_fo_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/fo_inHg_hPa_pos", "number", foBaroInHgHPaDRhandler)
+A333_capt_pull_std_pos				= create_dataref("laminar/A333/barometer/capt_pull_std_pos", "number", cptBaroPullStdDRhandler)
+A333_fo_pull_std_pos				= create_dataref("laminar/A333/barometer/fo_pull_std_pos", "number", foBaroPullStdDRhandler)
 
 ---- AI ---------------------------------------------------------------------------------
 

@@ -33,7 +33,7 @@ dofile("A333.ecam_fws110.lua")	-- GLOBAL SIM & CUSTOM DATAREFS
 dofile("A333.ecam_fws120.lua")	-- GLOBAL GENERAL FUNCTION DEFINITIONS
 dofile("A333.ecam_fws150.lua")	-- GLOBAL EWD MESSAGE TABLE
 dofile("A333.ecam_fws170.lua")	-- GLOBAL STATUS MESSAGE TABLE
-
+dofile("A333.ecam_fws180.lua")  --
 --| DATA PROCESSING
 dofile("A333.ecam_fws200.lua")	-- GLOBAL VARIABLE ASSIGNMENT
 dofile("A333.ecam_fws210.lua")	-- GENERAL DATA

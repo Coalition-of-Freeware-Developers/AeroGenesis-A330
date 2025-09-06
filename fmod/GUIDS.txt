@@ -253,6 +253,8 @@
 {92cb39ec-482e-4296-bb80-222081c99f1c} parameter:/sim.operation.sound.inside_any
 {16725111-7add-4706-97c2-ec36c7efdb26} parameter:/sim.weather.precipitation_on_aircraft_ratio
 {4fe23128-910a-4c51-9d54-c8f7010aaf03} parameter:/sim.weather.view.snow_ratio
+{bad4ec5c-8b25-47bb-9ab7-aaa4024b968d} parameter:/Speed
+{4f3819de-4890-428a-8301-bcc92d50cba0} parameter:/sim.flightmodel2.engines.N2_percent[#]
 {de1c3527-26bc-4e53-b5ff-e5f912556177} snapshot:/door
 {4402c804-b596-4b30-84b7-041bd3ee7f2d} snapshot:/door_cockpit
 {164fc5dc-28d7-44ff-9991-ec77785fa35e} snapshot:/ducker
