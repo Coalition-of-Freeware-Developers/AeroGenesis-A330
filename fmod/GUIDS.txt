@@ -91,11 +91,8 @@
 {12a5f69e-64eb-4274-9fe8-f2e71bb20c14} event:/a330/equipment/egpws/dont_sink
 {89657c9f-d210-4a56-837c-3f8234061b11} event:/a330/equipment/egpws/dual_input
 {870fdd74-a42e-44cb-9dd4-7644c91be24b} event:/a330/equipment/egpws/glideslope
-{85e32e05-2897-4cd5-8033-03ce50d16a5a} event:/a330/equipment/egpws/glideslope_loud
-{c4c88c74-8a0d-4189-8768-c873aa5b5864} event:/a330/equipment/egpws/go_around_windshear_ahead
 {d6c195a9-a150-4767-bdc9-de59a59e8e58} event:/a330/equipment/egpws/hundred_above
 {332f643c-c48f-486f-94f4-0a361c3f55e2} event:/a330/equipment/egpws/minimums
-{4942bc6d-618f-41f9-bb2c-ce1069aa3a36} event:/a330/equipment/egpws/monitor_radar_display
 {e1022911-6a65-4054-bcea-223920ff478d} event:/a330/equipment/egpws/prio_left
 {d9f8de34-7e62-4578-a5fa-eadf7137c124} event:/a330/equipment/egpws/prio_right
 {d49830a8-3982-47a5-8760-f3d208cfe19e} event:/a330/equipment/egpws/pull_up
@@ -107,7 +104,6 @@
 {4504c7bc-2075-41ef-bdc5-82b7ac03620b} event:/a330/equipment/egpws/too_low_gear
 {8e5a5b93-97c5-4e30-a318-77088ce8426e} event:/a330/equipment/egpws/too_low_terrain
 {6d8681a9-f8fc-402a-99d9-6415a8784064} event:/a330/equipment/egpws/windshear
-{5b81cf04-2de7-47f6-b745-6634d9c3edde} event:/a330/equipment/egpws/windshear_ahead
 {21f8175a-610d-48dd-87c4-694be7a0a49c} event:/a330/equipment/flaps/flaps
 {55eabab0-1065-4382-820b-94754309569f} event:/a330/equipment/levers/engine_master_down
 {7e3e99a9-d688-4841-8913-267e6e89ed3f} event:/a330/equipment/levers/engine_master_up
@@ -123,7 +119,6 @@
 {fd4e989d-3426-4f1a-90a1-e72bb56c0002} event:/a330/equipment/levers/speedbrake_pull
 {4e1b73d2-04c3-494d-8dcb-f7cfdb77cca5} event:/a330/equipment/levers/speedbrake_push
 {66a4f198-d1e8-490c-902f-a5ca5fcef4ee} event:/a330/equipment/levers/speedbrake_top
-{15df004e-9683-479f-baa6-c8ea08faee3f} event:/a330/equipment/levers/throttle_lever_detent
 {2ddba8fa-0139-49fe-8af4-410e94323941} event:/a330/equipment/levers/throttle_lever_full
 {18306d37-f7eb-4c28-a229-6a6d03ce49b0} event:/a330/equipment/levers/throttle_lever_idle
 {f968d46c-2272-44a2-a23a-03633ec1434e} event:/a330/equipment/pumps/fuel
