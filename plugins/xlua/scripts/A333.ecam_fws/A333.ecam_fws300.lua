@@ -8,7 +8,7 @@ jit.off()
 *
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
-*
+* 10/09/2025   AG330 v1.2.0   add ADIRS ALIGN MSG to EWD
 *
 *
 *
@@ -3153,6 +3153,15 @@ end
 
 
 
+	
+function A333_ewd_msg.ADIRS_ALIGN.WarningMonitor()
+	-- AG330 ADIRS ALIGN announcement
+	A333_ewd_msg.ADIRS_ALIGN.Monitor.video.IN = bool2num[ADRALGN]
+
+end
+
+
+
 
 function A333_ewd_msg.SEAT_BELTS.WarningMonitor()
 
@@ -3198,13 +3207,6 @@ function A333_ewd_msg.GPWS_FLAP_MODE_OFF.WarningMonitor()
 	A333_ewd_msg.GPWS_FLAP_MODE_OFF.Monitor.video.IN = bool2num[NGPWSFMOF]
 
 end
-
-
-
-
-
-
-
 
 
 
