@@ -3157,7 +3157,7 @@ end
 function A333_ewd_msg.ADIRS_ALIGN.WarningMonitor()
 	-- AG330 ADIRS ALIGN announcement
 	A333_ewd_msg.ADIRS_ALIGN.Monitor.video.IN = bool2num[ADRALGN]
-
+	A333_ewd_msg.ADIRS_ALIGN.WarningTitle = (ADRTIME .. " MN")
 end
 
 

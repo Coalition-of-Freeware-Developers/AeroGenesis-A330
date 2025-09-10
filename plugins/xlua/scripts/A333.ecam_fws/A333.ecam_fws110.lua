@@ -8,7 +8,7 @@ jit.off()
 *
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
-* 10/09/2025   AG330 v1.2.0   add ADRALGN variable for ADIRS ALIGN EWD MSG
+* 10/09/2025   AG330 v1.2.0   add ADRALGN & ADRTIME variable for ADIRS ALIGN EWD MSG
 *
 *
 *
@@ -550,7 +550,7 @@ A333_buttons_idg1_discon_pos			= find_dataref("laminar/A333/buttons/IDG1_discon_
 A333_buttons_idg2_discon_pos			= find_dataref("laminar/A333/buttons/IDG2_discon_pos")
 
 AG330_adirs_is_align					= find_dataref("AG330/ADIRS/isAligned")
-
+AG330_adirs_time						= find_dataref("AG330/ADIRS/time_remaining")
 
 
 --*************************************************************************************--

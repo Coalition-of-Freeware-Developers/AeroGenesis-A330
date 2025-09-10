@@ -1009,7 +1009,7 @@ A333_ewd_msg.GND_SPLRS_ARMED = newEWDwarningMessage('GND_SPLRS_ARMED', 'MEM0$0',
 A333_ewd_msg.GND_SPLRS_ARMED.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.GND_SPLRS_ARMED.CmdInputs = ''
 
-A333_ewd_msg.ADIRS_ALIGN = newEWDwarningMessage('ADIRS_ALIGN', 'MEM0$1', 'ADIRS ALIGN', '', 0, 0, 2, 0, 6, 0, 0, 0, 0, 7975)
+A333_ewd_msg.ADIRS_ALIGN = newEWDwarningMessage('ADIRS_ALIGN', 'MEM0$1', 'IR IN ALIGN', '[time_remaining]', 0, 0, 2, 0, 6, 0, 0, 0, 0, 7975)
 A333_ewd_msg.ADIRS_ALIGN.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.ADIRS_ALIGN.CmdInputs = ''
 
