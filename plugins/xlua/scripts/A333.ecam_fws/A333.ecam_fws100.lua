@@ -8,7 +8,7 @@ jit.off()
 *
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
-*
+* 10/09/2025   AG330 v1.2.0   add ADRALGN & ADRTIME variable for ADIRS ALIGN EWD MSG
 *
 *
 *
@@ -115,6 +115,9 @@ A333_fws_process_sts_normal	= false
 FlightPhaseIsValid = false
 
 masterCancelSilence = false
+
+ADRALGN             = false         -- [AG330] ADIRS IS ALIGNED
+ADRTIME             = 12
 
 AB1AVAIL			= false			-- AIR BLEED 1 AVAIL
 AB1WAIAV			= false			-- AIR BLEED 1 WAI AVAIL
