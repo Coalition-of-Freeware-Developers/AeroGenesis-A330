@@ -8,7 +8,7 @@ jit.off()
 *
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
-*
+* 10/09/2025   AG330 v1.2.0   add ADRALGN variable for ADIRS ALIGN EWD MSG
 *
 *
 *
@@ -153,6 +153,8 @@ local bool2num = {[true] = 1, [false] = 0}
 --*************************************************************************************--
 
 function A333_fws_global_variable_assignment()
+
+    ADRALGN         = AG330_adirs_is_align == 0
 
     AP1CF           = A333DR_pack1_fault == 1
     AP1F            = A333DR_pack1_fault == 1
