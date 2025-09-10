@@ -10930,7 +10930,7 @@ P _wing/0/_chord_for_RIB/3 35.805000305
 P _wing/0/_chord_for_RIB/4 34.290000916
 P _wing/0/_chord_for_RIB/5 32.775001526
 P _wing/0/_chord_for_RIB/6 31.260000229
-P _wing/0/_chord_for_RIB/7 29.745000839
+P _wing/0/_chord_for_RIB/7 29.744998932
 P _wing/0/_chord_for_RIB/8 28.229999542
 P _wing/0/_chord_for_RIB/9 26.715000153
 P _wing/0/_chord_for_RIB/count 11
@@ -12733,7 +12733,7 @@ P _wing/1/_chord_for_RIB/3 35.805000305
 P _wing/1/_chord_for_RIB/4 34.290000916
 P _wing/1/_chord_for_RIB/5 32.775001526
 P _wing/1/_chord_for_RIB/6 31.260000229
-P _wing/1/_chord_for_RIB/7 29.745000839
+P _wing/1/_chord_for_RIB/7 29.744998932
 P _wing/1/_chord_for_RIB/8 28.229999542
 P _wing/1/_chord_for_RIB/9 26.715000153
 P _wing/1/_chord_for_RIB/count 11
@@ -14536,9 +14536,9 @@ P _wing/10/_chord_for_RIB/3 21.022047043
 P _wing/10/_chord_for_RIB/4 19.499292374
 P _wing/10/_chord_for_RIB/5 17.950853348
 P _wing/10/_chord_for_RIB/6 16.426456451
-P _wing/10/_chord_for_RIB/7 14.884174347
+P _wing/10/_chord_for_RIB/7 14.884172440
 P _wing/10/_chord_for_RIB/8 13.348372459
-P _wing/10/_chord_for_RIB/9 11.818071365
+P _wing/10/_chord_for_RIB/9 11.818070412
 P _wing/10/_chord_for_RIB/count 11
 P _wing/10/_dihed_design 90.000000000
 P _wing/10/_dihed_full_up 0.000000000
@@ -27159,7 +27159,7 @@ P _wing/4/_chord_for_RIB/5 15.875000000
 P _wing/4/_chord_for_RIB/6 15.067999840
 P _wing/4/_chord_for_RIB/7 14.260999680
 P _wing/4/_chord_for_RIB/8 13.454000473
-P _wing/4/_chord_for_RIB/9 12.647000313
+P _wing/4/_chord_for_RIB/9 12.646999359
 P _wing/4/_chord_for_RIB/count 11
 P _wing/4/_dihed_design 9.300000191
 P _wing/4/_dihed_full_up 0.000000000
@@ -28962,7 +28962,7 @@ P _wing/5/_chord_for_RIB/5 15.875000000
 P _wing/5/_chord_for_RIB/6 15.067999840
 P _wing/5/_chord_for_RIB/7 14.260999680
 P _wing/5/_chord_for_RIB/8 13.454000473
-P _wing/5/_chord_for_RIB/9 12.647000313
+P _wing/5/_chord_for_RIB/9 12.646999359
 P _wing/5/_chord_for_RIB/count 11
 P _wing/5/_dihed_design 9.300000191
 P _wing/5/_dihed_full_up 0.000000000
@@ -30759,7 +30759,7 @@ P _wing/6/_chord_for_RIB/0 11.840000153
 P _wing/6/_chord_for_RIB/1 11.223333359
 P _wing/6/_chord_for_RIB/10 0.000000000
 P _wing/6/_chord_for_RIB/2 10.606666565
-P _wing/6/_chord_for_RIB/3 9.990000725
+P _wing/6/_chord_for_RIB/3 9.989999771
 P _wing/6/_chord_for_RIB/4 9.373333931
 P _wing/6/_chord_for_RIB/5 8.756667137
 P _wing/6/_chord_for_RIB/6 8.140000343
@@ -32562,7 +32562,7 @@ P _wing/7/_chord_for_RIB/0 11.840000153
 P _wing/7/_chord_for_RIB/1 11.223333359
 P _wing/7/_chord_for_RIB/10 0.000000000
 P _wing/7/_chord_for_RIB/2 10.606666565
-P _wing/7/_chord_for_RIB/3 9.990000725
+P _wing/7/_chord_for_RIB/3 9.989999771
 P _wing/7/_chord_for_RIB/4 9.373333931
 P _wing/7/_chord_for_RIB/5 8.756667137
 P _wing/7/_chord_for_RIB/6 8.140000343
@@ -34369,9 +34369,9 @@ P _wing/8/_chord_for_RIB/3 13.803999901
 P _wing/8/_chord_for_RIB/4 12.771999359
 P _wing/8/_chord_for_RIB/5 11.739999771
 P _wing/8/_chord_for_RIB/6 10.708000183
-P _wing/8/_chord_for_RIB/7 9.675999641
+P _wing/8/_chord_for_RIB/7 9.676000595
 P _wing/8/_chord_for_RIB/8 8.644000053
-P _wing/8/_chord_for_RIB/9 7.611999989
+P _wing/8/_chord_for_RIB/9 7.612000465
 P _wing/8/_chord_for_RIB/count 11
 P _wing/8/_dihed_design 8.000000000
 P _wing/8/_dihed_full_up 0.000000000
@@ -36172,9 +36172,9 @@ P _wing/9/_chord_for_RIB/3 13.803999901
 P _wing/9/_chord_for_RIB/4 12.771999359
 P _wing/9/_chord_for_RIB/5 11.739999771
 P _wing/9/_chord_for_RIB/6 10.708000183
-P _wing/9/_chord_for_RIB/7 9.675999641
+P _wing/9/_chord_for_RIB/7 9.676000595
 P _wing/9/_chord_for_RIB/8 8.644000053
-P _wing/9/_chord_for_RIB/9 7.611999989
+P _wing/9/_chord_for_RIB/9 7.612000465
 P _wing/9/_chord_for_RIB/count 11
 P _wing/9/_dihed_design 8.000000000
 P _wing/9/_dihed_full_up 0.000000000
@@ -38707,8 +38707,9 @@ P acf/_auto_rpm_EQ 0
 P acf/_auto_rpm_with_tvec 0
 P acf/_auto_sync_EQ 0
 P acf/_auto_trim_EQ 0
+P acf/_autofeather_min_throttle 0.500000000
 P acf/_autopilot_logic 12
-P acf/_average_mac_acf 24.836240768
+P acf/_average_mac_acf 24.836244583
 P acf/_bagg_1/0 5.190000057
 P acf/_bagg_1/1 -7.619999886
 P acf/_bagg_1/2 31.379999161
@@ -39873,6 +39874,10 @@ P acf/_esys_amperage/rel_cop_radalt 2.000000000
 P acf/_esys_amperage/rel_cop_tsi 0.000000000
 P acf/_esys_amperage/rel_dice_AOA_heat_0 7.500000000
 P acf/_esys_amperage/rel_dice_AOA_heat_1 7.500000000
+P acf/_esys_amperage/rel_dice_AOA_heat_2 0.000000000
+P acf/_esys_amperage/rel_dice_TAT_heat_0 0.000000000
+P acf/_esys_amperage/rel_dice_TAT_heat_1 0.000000000
+P acf/_esys_amperage/rel_dice_TAT_heat_2 0.000000000
 P acf/_esys_amperage/rel_dice_brake_heat 3.000000000
 P acf/_esys_amperage/rel_dice_detect 0.500000000
 P acf/_esys_amperage/rel_dice_pitot_heat_0 3.000000000
@@ -39981,6 +39986,8 @@ P acf/_esys_amperage/rel_startr4 0.000000000
 P acf/_esys_amperage/rel_startr5 0.000000000
 P acf/_esys_amperage/rel_startr6 0.000000000
 P acf/_esys_amperage/rel_startr7 0.000000000
+P acf/_esys_amperage/rel_stby_AOA 0.000000000
+P acf/_esys_amperage/rel_vac_pump_stby 0.000000000
 P acf/_esys_amperage/rel_wxr_radar 0.000000000
 P acf/_esys_amperage/rel_xpndr 5.000000000
 P acf/_esys_amperage/rel_yaw_damp 5.000000000
@@ -40007,6 +40014,10 @@ P acf/_esys_bus_bit_add/rel_cop_radalt 2
 P acf/_esys_bus_bit_add/rel_cop_tsi 0
 P acf/_esys_bus_bit_add/rel_dice_AOA_heat_0 8
 P acf/_esys_bus_bit_add/rel_dice_AOA_heat_1 2
+P acf/_esys_bus_bit_add/rel_dice_AOA_heat_2 0
+P acf/_esys_bus_bit_add/rel_dice_TAT_heat_0 0
+P acf/_esys_bus_bit_add/rel_dice_TAT_heat_1 0
+P acf/_esys_bus_bit_add/rel_dice_TAT_heat_2 0
 P acf/_esys_bus_bit_add/rel_dice_brake_heat 3
 P acf/_esys_bus_bit_add/rel_dice_detect 1
 P acf/_esys_bus_bit_add/rel_dice_pitot_heat_0 8
@@ -40115,6 +40126,8 @@ P acf/_esys_bus_bit_add/rel_startr4 0
 P acf/_esys_bus_bit_add/rel_startr5 0
 P acf/_esys_bus_bit_add/rel_startr6 0
 P acf/_esys_bus_bit_add/rel_startr7 0
+P acf/_esys_bus_bit_add/rel_stby_AOA 0
+P acf/_esys_bus_bit_add/rel_vac_pump_stby 0
 P acf/_esys_bus_bit_add/rel_wxr_radar 0
 P acf/_esys_bus_bit_add/rel_xpndr 3
 P acf/_esys_bus_bit_add/rel_yaw_damp 3
@@ -40740,6 +40753,10 @@ P acf/_phase_roll_tvect_in_at_90 0
 P acf/_pitch_cyc_with_v1_kts 0.000000000
 P acf/_pitch_cyc_with_v2_deg 0.000000000
 P acf/_pitch_cyc_with_v2_kts 0.000000000
+P acf/_pitot_probes/0 1
+P acf/_pitot_probes/1 1
+P acf/_pitot_probes/2 0
+P acf/_pitot_probes/count 3
 P acf/_power_max_limit 0.000000000
 P acf/_prim_is_epr 1
 P acf/_prop_inlet_recovery_v12 0.000000000
@@ -41207,6 +41224,14 @@ P acf/_tank_xyz_full/8,1 0.000000000
 P acf/_tank_xyz_full/8,2 0.000000000
 P acf/_tank_xyz_full/i_count 9
 P acf/_tank_xyz_full/j_count 3
+P acf/_tat_probe_aspiration/0 0
+P acf/_tat_probe_aspiration/1 0
+P acf/_tat_probe_aspiration/2 0
+P acf/_tat_probe_aspiration/count 3
+P acf/_tat_probes/0 0
+P acf/_tat_probes/1 0
+P acf/_tat_probes/2 0
+P acf/_tat_probes/count 3
 P acf/_the_eqlbm -0.565050960
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.000000000
@@ -43616,7 +43641,7 @@ GROUP ECAMupr
   HIDE
   GROUP_OPEN
   gen_rotary SelfTest
-    POS 1277.500000 611.500000
+    POS 1277.500000 509.500000
     IMAGE AeroGenesis/ECAMupr/selftest
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/ECAMupr/showSelfTestmsg
@@ -43638,7 +43663,7 @@ GROUP ECAMupr
     CLICK_DY 0
 
   gen_rotary DisplayFlicker
-    POS 1277.500000 611.500000
+    POS 1277.500000 509.500000
     IMAGE AeroGenesis/ECAMupr/DisplayFlash
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/ECAMupr/showDisplayFlicker
@@ -43663,7 +43688,6 @@ GROUP ECAMupr
     SHOW_EQUAL 1.000000 AG330/Displays/ECAMupr/normalOperation
     LOCKED
     HIDE
-    GROUP_OPEN
     gen_rotary ECAM background
       POS 1277.000000 611.000000
       IMAGE ECAM/background
@@ -93718,8 +93742,9 @@ GROUP ECAMupr
 END_GROUP
 GROUP ECAMlwr
   HIDE
+  GROUP_OPEN
   gen_rotary SelfTest
-    POS 1792.500000 596.500000
+    POS 1792.500000 509.500000
     IMAGE AeroGenesis/ECAMlwr/selftest
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/ECAMlwr/showSelfTestmsg
@@ -93741,7 +93766,7 @@ GROUP ECAMlwr
     CLICK_DY 0
 
   gen_rotary DisplayFlicker
-    POS 1792.500000 596.500000
+    POS 1792.500000 509.500000
     IMAGE AeroGenesis/ECAMlwr/DisplayFlash
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/ECAMlwr/showDisplayFlicker
@@ -126980,8 +127005,9 @@ GROUP Standby
 END_GROUP
 GROUP PFDcapt
   HIDE
+  GROUP_OPEN
   gen_rotary ATT
-    POS 251.000000 516.000000
+    POS 251.000000 509.500000
     IMAGE AeroGenesis/PFDcapt/PFD_ATT
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/showATT
@@ -127004,7 +127030,7 @@ GROUP PFDcapt
     CLICK_DY 0
 
   gen_rotary SelfTest
-    POS 251.000000 516.000000
+    POS 251.000000 509.500000
     IMAGE AeroGenesis/PFDcapt/selftest
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/showSelfTestmsg
@@ -127027,7 +127053,7 @@ GROUP PFDcapt
     CLICK_DY 0
 
   gen_rotary DisplayFlicker
-    POS 251.000000 516.000000
+    POS 251.000000 509.500000
     IMAGE AeroGenesis/PFDcapt/DisplayFlash
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/showDisplayFlicker
@@ -134000,8 +134026,9 @@ GROUP PFDcapt
 END_GROUP
 GROUP PFDfo
   HIDE
+  GROUP_OPEN
   gen_rotary ATT
-    POS 251.000000 4.000000
+    POS 251.000000 0.000000
     IMAGE AeroGenesis/PFDfo/PFD_ATT
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDfo/showATT
@@ -134024,7 +134051,7 @@ GROUP PFDfo
     CLICK_DY 0
 
   gen_rotary SelfTest
-    POS 251.000000 4.000000
+    POS 251.000000 0.000000
     IMAGE AeroGenesis/PFDfo/selftest
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDfo/showSelfTestmsg
@@ -134047,7 +134074,7 @@ GROUP PFDfo
     CLICK_DY 0
 
   gen_rotary DisplayFlicker
-    POS 251.000000 4.000000
+    POS 251.000000 0.000000
     IMAGE AeroGenesis/PFDfo/DisplayFlash
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDfo/showDisplayFlicker
@@ -141244,8 +141271,9 @@ gen_rotary Blue Death
   CLICK_DY 0
 
 GROUP MFDcapt
+  GROUP_OPEN
   gen_rotary ATT
-    POS 765.000000 611.000000
+    POS 765.000000 509.500000
     IMAGE AeroGenesis/MFDcapt/MFD_ATT
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/MFDcapt/showATT
@@ -141267,7 +141295,7 @@ GROUP MFDcapt
     CLICK_DY 0
 
   gen_rotary SelfTest
-    POS 765.000000 611.000000
+    POS 765.000000 509.500000
     IMAGE AeroGenesis/MFDcapt/selftest
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/MFDcapt/showSelfTestmsg
@@ -141289,7 +141317,7 @@ GROUP MFDcapt
     CLICK_DY 0
 
   gen_rotary DisplayFlicker
-    POS 765.000000 611.000000
+    POS 765.000000 509.500000
     IMAGE AeroGenesis/MFDcapt/DisplayFlash
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/MFDcapt/showDisplayFlicker
@@ -146355,8 +146383,9 @@ GROUP MFDcapt
   END_GROUP
 END_GROUP
 GROUP MFDfo
+  GROUP_OPEN
   gen_rotary ATT
-    POS 765.000000 99.000000
+    POS 765.000000 0.000000
     IMAGE AeroGenesis/MFDfo/MFD_ATT
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/MFDfo/showATT
@@ -146378,7 +146407,7 @@ GROUP MFDfo
     CLICK_DY 0
 
   gen_rotary SelfTest
-    POS 765.000000 99.000000
+    POS 765.000000 0.000000
     IMAGE AeroGenesis/MFDfo/selftest
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/MFDfo/showSelfTestmsg
@@ -146400,7 +146429,7 @@ GROUP MFDfo
     CLICK_DY 0
 
   gen_rotary DisplayFlicker
-    POS 765.000000 99.000000
+    POS 765.000000 0.000000
     IMAGE AeroGenesis/MFDfo/DisplayFlash
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/MFDfo/showDisplayFlicker
