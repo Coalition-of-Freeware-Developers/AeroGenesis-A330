@@ -475,6 +475,18 @@ function A333_altitude_step_rightCMDhandler(phase, duration)
 	end
 end
 
+function A333_altitude_step_toggleCMDhandler(phase, duration)
+    if phase == 0 then
+        if A333_alt_step_knob_pos == 0 then
+ 		    A333_alt_step_knob_pos = 1
+ 		    simDR_alt_step_size = 1000
+        else
+		    A333_alt_step_knob_pos = 0
+		    simDR_alt_step_size = 100
+        end
+    end
+end
+
 function A333_auto_throttle_toggleCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_athrottle_pos = 1
@@ -704,8 +716,10 @@ end
 --*************************************************************************************--
 
 A333CMD_metric_alt_toggle			= create_command("laminar/A333/autopilot/metric_alt_push", "Metric Altitude Toggle", A333_metric_alt_toggleCMDhandler)
+
 A333CMD_altitude_step_left			= create_command("laminar/A333/autopilot/alt_step_left", "Altitude Step 100 FT", A333_altitude_step_leftCMDhandler)
 A333CMD_altitude_step_right			= create_command("laminar/A333/autopilot/alt_step_right", "Altitude Step 1000 FT", A333_altitude_step_rightCMDhandler)
+A333CMD_altitude_step_toggle        = create_command("laminar/A333/autopilot/alt_step_toggle", "Altitude Step Toggle Between 100/1000 FT", A333_altitude_step_toggleCMDhandler)
 
 A333CMD_auto_throttle_toggle		= create_command("laminar/A333/autopilot/a_thr_toggle", "A/THR Toggle", A333_auto_throttle_toggleCMDhandler)
 

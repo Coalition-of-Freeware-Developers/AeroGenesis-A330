@@ -87,6 +87,10 @@ simDR_fo_mkr_listen			= find_dataref("sim/cockpit2/radios/actuators/audio_marker
 --** 				              FIND CUSTOM DATAREFS             			    	 **--
 --*************************************************************************************--
 
+A333DR_com1_receive					= find_dataref("laminar/A333/selcal/com1_receive")
+A333DR_com2_receive					= find_dataref("laminar/A333/selcal/com2_receive")
+A333DR_com1_acknowledge				= find_dataref("laminar/A333/selcal/com1_acknowledge")
+A333DR_com2_acknowledge				= find_dataref("laminar/A333/selcal/com2_acknowledge")
 
 --*************************************************************************************--
 --** 				        CREATE READ-ONLY CUSTOM DATAREFS               	         **--
@@ -171,11 +175,6 @@ A333DR_audio_panel_obs_mic7_status		= create_dataref("laminar/A333/audio/obs/mic
 A333DR_audio_panel_obs_mic8_status		= create_dataref("laminar/A333/audio/obs/mic_status8", "number")
 A333DR_audio_panel_obs_mic9_status		= create_dataref("laminar/A333/audio/obs/mic_status9", "number")
 A333DR_audio_panel_obs_mic10_status		= create_dataref("laminar/A333/audio/obs/mic_status10", "number")
-
-	-- CALL LIGHTS -- GLOBAL
-
-A333DR_audio_panel_com1_call_light		= create_dataref("laminar/A333/audio/call_com1", "number")
-A333DR_audio_panel_com2_call_light		= create_dataref("laminar/A333/audio/call_com2", "number")
 
 	-- CALL RESET BUTTONS
 
@@ -264,14 +263,26 @@ end
 
 	-- CAPT
 
+--A333DR_com1_receive					= create_dataref("laminar/A333/selcal/com1_receive", "number", selcal_com1_receive_DLhandler)
+--A333DR_com2_receive					= create_dataref("laminar/A333/selcal/com2_receive", "number", selcal_com2_receive_DLhandler)
+--A333DR_com1_acknowledge				= create_dataref("laminar/A333/selcal/com1_acknowledge", "number", selcal_com1_transmit_DLhandler)
+--A333DR_com2_acknowledge				= create_dataref("laminar/A333/selcal/com2_acknowledge", "number", selcal_com2_transmit_DLhandler)
+
+
+
 function A333_capt_push_mic1_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333DR_audio_panel_capt_mic1_pos = 1
 		if A333DR_audio_panel_capt_mic1_status == 1 then
-			A333DR_audio_panel_capt_mic1_status = 0
-			simDR_capt_transmit_mode = 0
+			if A333DR_com1_receive == 0 then
+				A333DR_audio_panel_capt_mic1_status = 0
+				simDR_capt_transmit_mode = 0
+			elseif A333DR_com1_receive == 1 then
+				A333DR_com1_acknowledge = 1
+			end
 		elseif A333DR_audio_panel_capt_mic1_status == 0 then
 			simDR_capt_transmit_mode = 6
+			A333DR_com1_acknowledge = 1
 			A333DR_audio_panel_capt_mic1_status = 1
 			A333DR_audio_panel_capt_mic2_status = 0
 			A333DR_audio_panel_capt_mic3_status = 0
@@ -292,10 +303,15 @@ function A333_capt_push_mic2_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333DR_audio_panel_capt_mic2_pos = 1
 		if A333DR_audio_panel_capt_mic2_status == 1 then
-			A333DR_audio_panel_capt_mic2_status = 0
-			simDR_capt_transmit_mode = 0
+			if A333DR_com2_receive == 0 then
+				A333DR_audio_panel_capt_mic2_status = 0
+				simDR_capt_transmit_mode = 0
+			elseif A333DR_com2_receive == 1 then
+				A333DR_com2_acknowledge = 1
+			end
 		elseif A333DR_audio_panel_capt_mic2_status == 0 then
 			simDR_capt_transmit_mode = 7
+			A333DR_com2_acknowledge = 1
 			A333DR_audio_panel_capt_mic1_status = 0
 			A333DR_audio_panel_capt_mic2_status = 1
 			A333DR_audio_panel_capt_mic3_status = 0
@@ -503,10 +519,15 @@ function A333_fo_push_mic1_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333DR_audio_panel_fo_mic1_pos = 1
 		if A333DR_audio_panel_fo_mic1_status == 1 then
-			A333DR_audio_panel_fo_mic1_status = 0
-			simDR_fo_transmit_mode = 0
+			if A333DR_com1_receive == 0 then
+				A333DR_audio_panel_fo_mic1_status = 0
+				simDR_fo_transmit_mode = 0
+			elseif A333DR_com1_receive == 1 then
+				A333DR_com1_acknowledge = 1
+			end
 		elseif A333DR_audio_panel_fo_mic1_status == 0 then
 			simDR_fo_transmit_mode = 6
+			A333DR_com1_acknowledge = 1
 			A333DR_audio_panel_fo_mic1_status = 1
 			A333DR_audio_panel_fo_mic2_status = 0
 			A333DR_audio_panel_fo_mic3_status = 0
@@ -527,10 +548,15 @@ function A333_fo_push_mic2_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333DR_audio_panel_fo_mic2_pos = 1
 		if A333DR_audio_panel_fo_mic2_status == 1 then
-			A333DR_audio_panel_fo_mic2_status = 0
-			simDR_fo_transmit_mode = 0
+			if A333DR_com2_receive == 0 then
+				A333DR_audio_panel_fo_mic2_status = 0
+				simDR_fo_transmit_mode = 0
+			elseif A333DR_com2_receive == 1 then
+				A333DR_com2_acknowledge = 1
+			end
 		elseif A333DR_audio_panel_fo_mic2_status == 0 then
 			simDR_fo_transmit_mode = 7
+			A333DR_com2_acknowledge = 1
 			A333DR_audio_panel_fo_mic1_status = 0
 			A333DR_audio_panel_fo_mic2_status = 1
 			A333DR_audio_panel_fo_mic3_status = 0
@@ -738,8 +764,13 @@ function A333_obs_push_mic1_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333DR_audio_panel_obs_mic1_pos = 1
 		if A333DR_audio_panel_obs_mic1_status == 1 then
-			A333DR_audio_panel_obs_mic1_status = 0
+			if A333DR_com1_receive == 0 then
+				A333DR_audio_panel_obs_mic1_status = 0
+			elseif A333DR_com1_receive == 1 then
+				A333DR_com1_acknowledge = 1
+			end
 		elseif A333DR_audio_panel_obs_mic1_status == 0 then
+			A333DR_com1_acknowledge = 1
 			A333DR_audio_panel_obs_mic1_status = 1
 			A333DR_audio_panel_obs_mic2_status = 0
 			A333DR_audio_panel_obs_mic3_status = 0
@@ -760,8 +791,13 @@ function A333_obs_push_mic2_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333DR_audio_panel_obs_mic2_pos = 1
 		if A333DR_audio_panel_obs_mic2_status == 1 then
-			A333DR_audio_panel_obs_mic2_status = 0
+			if A333DR_com2_receive == 0 then
+				A333DR_audio_panel_obs_mic2_status = 0
+			elseif A333DR_com2_receive == 1 then
+				A333DR_com2_acknowledge = 1
+			end
 		elseif A333DR_audio_panel_obs_mic2_status == 0 then
+			A333DR_com2_acknowledge = 1
 			A333DR_audio_panel_obs_mic1_status = 0
 			A333DR_audio_panel_obs_mic2_status = 1
 			A333DR_audio_panel_obs_mic3_status = 0
@@ -1195,11 +1231,6 @@ end
 --*************************************************************************************--
 --** 				                  SYSTEM FUNCTIONS           	    			 **--
 --*************************************************************************************--
-
------ TERNARY CONDITIONAL ---------------------------------------------------------------
-function A333_ternary(condition, ifTrue, ifFalse)
-    if condition then return ifTrue else return ifFalse end
-end
 
 ----- RESCALE ---------------------------------------------------------------------------
 function A333_rescale(in1, out1, in2, out2, x)

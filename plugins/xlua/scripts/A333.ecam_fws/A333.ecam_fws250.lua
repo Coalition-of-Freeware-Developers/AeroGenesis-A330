@@ -53,6 +53,7 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
+local bool2num = {[true] = 1, [false] = 0}
 
 
 
@@ -506,7 +507,7 @@ function A333_ecp_ProcessCLR()
 		-- CLR LIGHT REMAINS ON
 		-- STS LIGHT COMES ON
 		if ewdZone0HasNoMoreMsgsToClear
-			and not EWDzone1HasMsgsToClear
+			and not EWDzone1hasMsgsToClear()
 			and SDhasMsgsForAutoShow()
 		then
 			ZASTSPD = true
@@ -992,13 +993,13 @@ end
 function A333_fws_CLR_annun()
 
 	A333DR_ecp_clr_pushbutton_annun =
-		bool2logic(
+		bool2num[
 			bOR3(
 				EWDzone0hasMsgsToClear(),
 				EWDzone1hasMsgsToClear(),
 				bAND(ZSTSPD, SDhasMessages())
 			)
-		)
+		]
 
 end
 

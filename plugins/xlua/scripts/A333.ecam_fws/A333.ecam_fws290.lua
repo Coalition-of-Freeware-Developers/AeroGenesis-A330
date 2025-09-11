@@ -256,25 +256,36 @@ end
 
 
 
+
+
+
 function resetMasterAnnunciator()
 
-	local resetCaution = true
 	local resetWarning = true
+	local resetCaution = true
 
 	for _, msg in pairs(A333_ewd_msg) do
-		if msg.Monitor.audio.IN > 0 then
-			if msg.MasterType == 1 then
-				resetWarning = false
-			elseif msg.MasterType == 2 then
-				resetCaution = false
-			end
+
+		if msg.Monitor.video.OUT == 1 or msg.Monitor.audio.OUT == 1 then
+			if msg.MasterType == 1 then resetWarning = false end
+			if msg.MasterType == 2 then resetCaution = false end
 		end
+
 	end
 
-	if resetCaution and simDR_plugin_master_caution == 1 then simDR_plugin_master_caution = 0 end
-	if resetWarning and simDR_plugin_master_warning == 1 then simDR_plugin_master_warning = 0 end
+	if resetCaution and simDR_plugin_master_caution == 1 then
+		simDR_plugin_master_caution = 0
+		simCMD_master_caut_canx:once()
+	end
+
+
+	if resetWarning and simDR_plugin_master_warning == 1 then
+		simDR_plugin_master_warning = 0
+		simCMD_master_warn_canx:once()
+	end
 
 end
+
 
 
 

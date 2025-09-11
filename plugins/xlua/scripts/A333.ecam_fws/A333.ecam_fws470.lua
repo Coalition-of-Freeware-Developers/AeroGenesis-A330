@@ -54,6 +54,7 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
+local bool2num = {[true] = 1, [false] = 0}
 
 local sp_pulse01 = newLeadingEdgePulse('sp_pulse01')
 local sp_SRRlatch01 = newSRlatchResetPriority('sp_SRRlatch01')
@@ -177,7 +178,7 @@ function A333_status_page_manager()
 	ZSTSPD = sp_SRRlatch01.Q
 	ZMSTSPD = d.S												-- TRUE IF MANUAL, FALSE IF ANY AUTO MODE
 
-	A333_ecam_status_system_page_num = ternary(ZSTSPD, 15, 0)
+	A333_ecam_status_system_page_num = bool2num[ZSTSPD] * 15
 
 
 	-- RESET THE CLEARED MESSAGES WHEN STATUS PAGE IS CLOSED

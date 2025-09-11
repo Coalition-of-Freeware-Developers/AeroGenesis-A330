@@ -8,7 +8,7 @@ jit.off()
 *
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
-*
+* 10/09/2025   AG330 v1.2.0   add ADRALGN & ADRTIME variable for ADIRS ALIGN EWD MSG
 *
 *
 *
@@ -85,10 +85,14 @@ simDR_radio_alt_ht_pilot 				=  find_dataref("sim/cockpit2/gauges/indicators/rad
 simDR_radio_alt_ht_copilot				=  find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_copilot")
 simDR_radio_alt_pilot_fail 				=  find_dataref("sim/operation/failures/rel_pil_radalt")
 simDR_radio_alt_copilot_fail 			=  find_dataref("sim/operation/failures/rel_cop_radalt")
+simDR_radio_altimeter_bug_ft_pilot 		=  find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot")
+simDR_radio_altimeter_bug_ft_copilot 	=  find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_copilot")
 
 simDR_baro_alt_ft_pilot 				=  find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 simDR_baro_alt_ft_copilot 				=  find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_copilot")
 simDR_baro_alt_ft_stby 					=  find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_stby")
+simDR_baro_alt_bug_ft_pilot 			=  find_dataref("sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot")
+simDR_baro_alt_bug_ft_copilot 			=  find_dataref("sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_copilot")
 
 simDR_pressure_altitude					= find_dataref("sim/flightmodel2/position/pressure_altitude")
 
@@ -134,9 +138,6 @@ simDR_slat1_deploy_rat					=  find_dataref("sim/flightmodel2/controls/slat1_depl
 simDR_slat2_deploy_rat					=  find_dataref("sim/flightmodel2/controls/slat2_deploy_ratio")
 
 simDR_stall_warning						=  find_dataref("sim/cockpit2/annunciators/stall_warning")
-
-simDR_radio_altimeter_bug_ft_pilot 		=  find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot")
-simDR_radio_altimeter_bug_ft_copilot 	=  find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_copilot")
 
 simDR_ap_flight_director_mode 			=  find_dataref("sim/cockpit2/autopilot/flight_director_mode")
 simDR_ap_flight_director2_mode 			=  find_dataref("sim/cockpit2/autopilot/flight_director2_mode")
@@ -235,10 +236,11 @@ simDR_pos_y_agl 						= find_dataref("sim/flightmodel2/position/y_agl")				-- ME
 
 simDR_igniter_on 						= find_dataref("sim/cockpit2/annunciators/igniter_on")
 
-simDR_tire_radius 						= find_dataref("sim/aircraft/parts/acf_gear_tirrad")					-- [10]
+simDR_tire_radius 						= find_dataref("sim/flightmodel2/gear/tire_radius_mtrs")					-- [10]
 simDR_tire_rot_speed_rad_sec 			= find_dataref("sim/flightmodel2/gear/tire_rotation_speed_rad_sec")
 
 simDR_throttle_jet_rev_ratio 			= find_dataref("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio")
+simDR_throttle_beta_rev_ratio 			= find_dataref("sim/cockpit2/engine/actuators/throttle_beta_rev_ratio")
 
 simDR_fail_rel_ignitr0 					= find_dataref("sim/operation/failures/rel_ignitr0")
 simDR_fail_rel_ignitr1 					= find_dataref("sim/operation/failures/rel_ignitr1")
@@ -311,12 +313,26 @@ simDR_priority_side						= find_dataref("sim/joystick/priority_side") -- 0 = Nor
 
 simDR_gs_annun 							= find_dataref("sim/cockpit/warnings/annunciators/glideslope")
 
+simDR_fms_landing_flap_config			= find_dataref("sim/cockpit2/gauges/indicators/landing_config_flap")
+
+simDR_barometer_setting_is_std_pilot	= find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot")
+simDR_barometer_setting_is_std_copilot	= find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot")
+
+simDR_flex_temp							= find_dataref("sim/flightmodel/engine/ENGN_assumed_temp")
+
+simDR_engine_throttle_used_ratio		= find_dataref('sim/flightmodel2/engines/throttle_used_ratio')
+
+simDR_company_msg						= find_dataref('sim/atc/company_msg')
+
+
 
 
 --*************************************************************************************--
 --** 				             FIND X-PLANE COMMANDS                   	    	 **--
 --*************************************************************************************--
 
+--clear_master_warning = find_command("sim/annunciator/clear_master_warning")
+--clear_master_caution = find_command("sim/annunciator/clear_master_caution")
 
 
 --*************************************************************************************--
@@ -533,8 +549,8 @@ A333DR_fws_aco_ap_off_playing 			= find_dataref("laminar/A333/fws/aco_ap_off_pla
 A333_buttons_idg1_discon_pos			= find_dataref("laminar/A333/buttons/IDG1_discon_pos")
 A333_buttons_idg2_discon_pos			= find_dataref("laminar/A333/buttons/IDG2_discon_pos")
 
-
-
+AG330_adirs_is_align					= find_dataref("AG330/ADIRS/isAligned")
+AG330_adirs_time						= find_dataref("AG330/ADIRS/time_remaining")
 
 
 --*************************************************************************************--
@@ -1723,22 +1739,7 @@ A333DR_fws_aural_alert_c = create_dataref("laminar/A333/sound/c_chord", "number"
 
 A333DR_audio_attenuation = create_dataref("laminar/A333/sound/audio_attenuation", "number")
 
-A333DR_fws_main_gear_comp_L = create_dataref("laminar/A333/fws/main_gear_comp_L", "number")
-A333DR_fws_main_gear_comp_R = create_dataref("laminar/A333/fws/main_gear_comp_R", "number")
-
 A333DR_fws_landing_gear_down = create_dataref("laminar/A333/fws/landing_gear_down", "number")
-
-A333DR_fws_tla1_idle = create_dataref("laminar/A333/fws/tla1_idle", "number")
-A333DR_fws_tla2_idle = create_dataref("laminar/A333/fws/tla2_idle", "number")
-A333DR_fws_tla12_idle = create_dataref("laminar/A333/fws/tla12_idle", "number")
-
-A333DR_fws_tla1_rev = create_dataref("laminar/A333/fws/tla1_rev", "number")
-A333DR_fws_tla2_rev = create_dataref("laminar/A333/fws/tla2_rev", "number")
-
-A333DR_tla1_mct = create_dataref("laminar/A333/fws/tla1_mct", "number")
-A333DR_tla2_mct = create_dataref("laminar/A333/fws/tla2_mct", "number")
-
-A333DR_fws_zgndi = create_dataref("laminar/A333/fws/zgndi", "number")
 
 
 

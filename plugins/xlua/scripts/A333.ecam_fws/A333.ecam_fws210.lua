@@ -55,6 +55,8 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
 
+local bool2num = {[true] = 1, [false] = 0}
+
 local flight_phase_status = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 local A333_fws = {}
@@ -109,6 +111,14 @@ logic.TLAMCTorFlex08 = newThreshold('TLAMCTorFlex08', '>', 0.7287)
 
 logic.pwrRev_conf01 = newFallingEdgeDelayedConfirmation('pwrRev_conf01', 10.0)
 logic.pwrRev_conf02 = newFallingEdgeDelayedConfirmation('pwrRev_conf02', 10.0)
+logic.pwrRev_th01 = newThreshold('pwrRev_th01', '>', 0.8012)
+logic.pwrRev_th02 = newThreshold('pwrRev_th02', '>', 0.8012)
+logic.pwrRev_th03 = newThreshold('pwrRev_th03', '<', 0.0) -- -0.09999)
+logic.pwrRev_th04 = newThreshold('pwrRev_th04', '<', 0.0) -- -0.09999)
+logic.pwrRev_th05 = newThreshold('pwrRev_th05', '>', 0.8012)
+logic.pwrRev_th06 = newThreshold('pwrRev_th06', '>', 0.8012)
+logic.pwrRev_th07 = newThreshold('pwrRev_th07', '<', 0.0) -- -0.09999)
+logic.pwrRev_th08 = newThreshold('pwrRev_th08', '<', 0.0) -- -0.09999)
 
 logic.tlaSupClThreshold01 = newThreshold('tlaSupClThreshold01', '>', 0.63334)
 logic.tlaSupClThreshold02 = newThreshold('tlaSupClThreshold02', '>', 0.63334)
@@ -188,15 +198,22 @@ logic.slatSSLTSG_R = newMarginSensor('slatSSLTSG_R', '[', ']',  -50.47,  -22.00)
 logic.slatSSLTCC_L = newMarginSensor('slatSSLTCC_L', '[', ']', -161.90,   -4.00)
 logic.slatSSLTCC_R = newMarginSensor('slatSSLTCC_R', '[', ']', -161.90,   -4.00)
 
+
+logic.fo_baro_alti_comp = newMarginSensor('fo_baro_alti_comp', ']', '[', -250.0, 250.0)
+logic.capt_baro_alti_comp = newMarginSensor('capt_baro_alti_comp', ']', '[', -250.0, 250.0)
+logic.fo_std_alti_comp = newMarginSensor('fo_std_alti_comp', ']', '[', -500.0, 500.0)
+logic.capt_std_alti_comp = newMarginSensor('capt_std_alti_comp', ']', '[', -500.0, 500.0)
+
 logic.dh_dt_pos_s01	= newAnalogSwitch2in1out('dh_dt_pos_s01')
 logic.dh_dt_pos_threshold01 = newSlopeThreshold('dh_dt_pos_threshold01', '>', 0.0, 'meters/sec')
 
 logic.decHeightVal_s01 = newAnalogSwitch2in1out('decHeightVal_s01')
 logic.decHeightVal_s02 = newAnalogSwitch2in1out('decHeightVal_s02')
+logic.decHeightVal_s03 = newAnalogSwitch2in1out('decHeightVal_s03')
 logic.decHeightVal_comp01 = newComparison('decHeightVal_comp01', '>')
 
-logic.hundrdAbvNum_01	= newNumerical('hundrdAbvNum_01', '+', '+')
-logic.hundrdAbvNum_02	= newNumerical('hundrdAbvNum_02', '+', '+')
+logic.hundrdAbvNum_01 = newNumerical('hundrdAbvNum_01', '+', '+')
+logic.hundrdAbvNum_02 = newNumerical('hundrdAbvNum_02', '+', '+')
 logic.hundrdAbvThreshold_01 = newThreshold('hunAbvThreshold_01', '<', 90.0 )
 logic.hundrdAbvThreshold_02 = newThreshold('hundrdAbvThreshold_02', '<=', 3.0 )
 logic.hundrdAbvComp01 = newComparison('hundrdAbvComp01', '<')
@@ -306,6 +323,17 @@ logic.climb = false
 logic.descend = false
 logic.CabAltExcessive = false
 
+logic.eng1_flex_mode_is_available = true
+logic.eng1_idle_mode_selected = false
+logic.eng1_flex_mode_selected = false
+logic.eng1_clb_mode_selected = false
+
+logic.eng2_flex_mode_is_available = true
+logic.eng2_idle_mode_selected = false
+logic.eng2_flex_mode_selected = false
+logic.eng2_clb_mode_selected = false
+
+
 
 
 --*************************************************************************************--
@@ -317,7 +345,7 @@ logic.CabAltExcessive = false
 --*************************************************************************************--
 --** 				             FIND X-PLANE COMMANDS                   	    	 **--
 --*************************************************************************************--
-
+DR_running_time = find_dataref("sim/time/total_running_time_sec")
 
 
 --*************************************************************************************--
@@ -403,30 +431,30 @@ logic.CabAltExcessive = false
 
 function A333_fws.nav_vfe_speed()
 
-	local speedThr184_1 = ternary(NCAS_1 > 184.0, true, false)
-	local speedThr184_2 = ternary(NCAS_2 > 184.0, true, false)
-	local speedThr184_3 = ternary(NCAS_3 > 184.0, true, false)
-	local speedThr190_1 = ternary(NCAS_1 > 190.0, true, false)
-	local speedThr190_2 = ternary(NCAS_2 > 190.0, true, false)
-	local speedThr190_3 = ternary(NCAS_3 > 190.0, true, false)
-	local speedThr200_1 = ternary(NCAS_1 > 200.0, true, false)
-	local speedThr200_2 = ternary(NCAS_2 > 200.0, true, false)
-	local speedThr200_3 = ternary(NCAS_3 > 200.0, true, false)
-	local speedThr204_1 = ternary(NCAS_1 > 204.0, true, false)
-	local speedThr204_2 = ternary(NCAS_2 > 204.0, true, false)
-	local speedThr204_3 = ternary(NCAS_3 > 204.0, true, false)
-	local speedThr209_1 = ternary(NCAS_1 > 209.0, true, false)
-	local speedThr209_2 = ternary(NCAS_2 > 209.0, true, false)
-	local speedThr209_3 = ternary(NCAS_3 > 209.0, true, false)
-	local speedThr219_1 = ternary(NCAS_1 > 219.0, true, false)
-	local speedThr219_2 = ternary(NCAS_2 > 219.0, true, false)
-	local speedThr219_3 = ternary(NCAS_3 > 219.0, true, false)
-	local speedThr244_1 = ternary(NCAS_1 > 244.0, true, false)
-	local speedThr244_2 = ternary(NCAS_2 > 244.0, true, false)
-	local speedThr244_3 = ternary(NCAS_3 > 244.0, true, false)
-	local speedThr250_1 = ternary(NCAS_1 > 250.0, true, false)
-	local speedThr250_2 = ternary(NCAS_2 > 250.0, true, false)
-	local speedThr250_3 = ternary(NCAS_3 > 250.0, true, false)
+	local speedThr184_1 = NCAS_1 > 184.0
+	local speedThr184_2 = NCAS_2 > 184.0
+	local speedThr184_3 = NCAS_3 > 184.0
+	local speedThr190_1 = NCAS_1 > 190.0
+	local speedThr190_2 = NCAS_2 > 190.0
+	local speedThr190_3 = NCAS_3 > 190.0
+	local speedThr200_1 = NCAS_1 > 200.0
+	local speedThr200_2 = NCAS_2 > 200.0
+	local speedThr200_3 = NCAS_3 > 200.0
+	local speedThr204_1 = NCAS_1 > 204.0
+	local speedThr204_2 = NCAS_2 > 204.0
+	local speedThr204_3 = NCAS_3 > 204.0
+	local speedThr209_1 = NCAS_1 > 209.0
+	local speedThr209_2 = NCAS_2 > 209.0
+	local speedThr209_3 = NCAS_3 > 209.0
+	local speedThr219_1 = NCAS_1 > 219.0
+	local speedThr219_2 = NCAS_2 > 219.0
+	local speedThr219_3 = NCAS_3 > 219.0
+	local speedThr244_1 = NCAS_1 > 244.0
+	local speedThr244_2 = NCAS_2 > 244.0
+	local speedThr244_3 = NCAS_3 > 244.0
+	local speedThr250_1 = NCAS_1 > 250.0
+	local speedThr250_2 = NCAS_2 > 250.0
+	local speedThr250_3 = NCAS_3 > 250.0
 
 	local a = {E1 = NCAS_1_INV, E2 = NCAS_1_NCD}
 	a.S = bOR(a.E1, a.E2)
@@ -1346,12 +1374,12 @@ end
 
 function A333_fws.def_alt()
 
-	local alt_th01 = ternary(NRADH_1 > 1500.0, true, false)
-	local alt_th02 = ternary(NRADH_2 > 1500.0, true, false)
-	local alt_th03 = ternary(NRADH_1 < 800.0, true, false)
-	local alt_th04 = ternary(NRADH_2 < 800.0, true, false)
+	local alt_th01 = NRADH_1 > 1500.0
+	local alt_th02 = NRADH_2 > 1500.0
+	local alt_th03 = NRADH_1 < 800.0
+	local alt_th04 = NRADH_2 < 800.0
 
-	local a  ={E1 = alt_th01, E2 = bNOT(NRADH_1_INV)}
+	local a = {E1 = alt_th01, E2 = bNOT(NRADH_1_INV)}
 		a.S = bAND(a.E1, a.E2)
 
 	local b = {E1 = alt_th02, E2 = bNOT(NRADH_2_INV)}
@@ -1381,7 +1409,7 @@ function A333_fws.def_alt()
 	logic.alt_conf01:update(h.S)
 
 	local j = {E1 = a.S, E2 = b.S, E3 = logic.alt_conf01.OUT}
-		j.S = bOR(j.E1, j.E2, j.E3)
+		j.S = bOR3(j.E1, j.E2, j.E3)
 
 	local k = {E1 = bNOT(logic.alt_conf01.OUT), E2 = i.S}
 		k.S = bAND(k.E1, k.E2)
@@ -1471,9 +1499,6 @@ function A333_fws.tla_mct_flex()
 	JR1SUPMCT	= n.S
 	JR2TLAMCT	= o.S
 	JR2SUPMCT	= p.S
-
-	A333DR_tla1_mct = bool2logic(JR1TLAMCT)
-	A333DR_tla2_mct = bool2logic(JR2TLAMCT)
 
 end
 
@@ -1613,6 +1638,84 @@ end
 
 
 
+function A333_fws.tr_mode_selected()
+
+	-- ENGINE 1 FLEX MODE
+	if A333DR_flight_phase <= 4
+		and logic.eng1_flex_mode_is_available
+		and JR1TLAMCT
+		and (simDR_flex_temp[0] >= 15 and simDR_flex_temp[0] <= 70)
+	then
+		logic.eng1_flex_mode_selected = true
+
+	elseif A333DR_flight_phase > 4 then
+		if logic.eng1_flex_mode_selected == 1
+			and
+			(simDR_fadec_power_mode_eng1 == 1 or simDR_fadec_power_mode_eng1 == 3)
+		then
+			logic.eng1_flex_mode_is_available = false
+			logic.eng1_flex_mode_selected = false
+		end
+	end
+
+	if not logic.eng1_flex_mode_is_available
+		and
+		A333DR_flight_phase >= 8    -- Touchdown
+		and
+		simDR_flex_temp[0] == 0		-- MCDU has been reset @ touchdown
+	then
+		logic.eng1_flex_mode_is_available = true
+	end
+
+	-- ENGINE 2 FLEX MODE
+	if A333DR_flight_phase <= 4
+		and logic.eng2_flex_mode_is_available
+		and JR2TLAMCT
+		and (simDR_flex_temp[1] >= 15 and simDR_flex_temp[1] <= 70)
+	then
+		logic.eng2_flex_mode_selected = true
+
+	elseif A333DR_flight_phase > 4 then
+		if logic.eng2_flex_mode_selected == 1
+			and
+			(simDR_fadec_power_mode_eng2 == 1 or simDR_fadec_power_mode_eng2 == 3)
+		then
+			logic.eng2_flex_mode_is_available = false
+			logic.eng2_flex_mode_selected = false
+		end
+	end
+
+	if not logic.eng2_flex_mode_is_available
+		and
+		A333DR_flight_phase >= 8    -- Touchdown
+		and
+		simDR_flex_temp[0] == 0		-- MCDU has been reset @ touchdown
+	then
+		logic.eng2_flex_mode_is_available = true
+	end
+
+
+	JR1TRMDB19_1A = false								-- ENG 1 TR MODE IDLE SELECTED
+	JR1TRMDB20_1A = JR1TLACL							-- ENG 1 TR MODE MAX CLIMB SELECTED
+	JR1TRMDB21_1A = logic.eng1_flex_mode_selected		-- ENG 1 TR MODE FLEX TAKE OFF SELECTED
+	JR2TRMDB19_2A = false								-- ENG 1 TR MODE IDLE SELECTED
+	JR2TRMDB20_2A = JR1TLACL							-- ENG 1 TR MODE MAX CLIMB SELECTED
+	JR1TRMDB21_1B = logic.eng1_flex_mode_selected		-- ENG 1 TR MODE FLEX TAKE OFF SELECTE
+
+	JR2TRMDB19_2A = false								-- ENG 2 TR MODE IDLE SELECTED
+	JR2TRMDB20_2A = JR2TLACL							-- ENG 2 TR MODE MAX CLIMB SELECTED
+	JR2TRMDB21_2A = logic.eng2_flex_mode_selected		-- ENG 2 TR MODE FLEX TAKE OFF SELECTED
+	JR2TRMDB19_2B = false								-- ENG 2 TR MODE IDLE SELECTED
+	JR2TRMDB20_2B = JR2TLACL							-- ENG 2 TR MODE MAX CLIMB SELECTED
+	JR2TRMDB21_2B = logic.eng2_flex_mode_selected		-- ENG 2 TR MODE FLEX TAKE OFF SELECTED
+
+end
+
+
+
+
+
+
 function A333_fws.fto_mode()
 
 	local a = {E1 = bNOT(JR1TRMDB19_1A), E2 = bNOT(JR1TRMDB20_1A), E3 = JR1TRMDB21_1A}
@@ -1633,16 +1736,16 @@ function A333_fws.fto_mode()
 	local f = {E1 = a.S, E2 = b.S}
 		f.S = bOR(f.E1, f.E2)
 
-	local g = {E1 = JR1TRMDB19_1B, E1 = bNOT(JR1TRMDB20_1B), E3 = JR1TRMDB21_1B}
+	local g = {E1 = JR1TRMDB19_1B, E2 = bNOT(JR1TRMDB20_1B), E3 = JR1TRMDB21_1B}
 		g.S = bAND3(g.E1, g.E2, g.E3)
 
-	local h = {E1 = JR2TRMDB19_2A, E1 = bNOT(JR2TRMDB20_2A), E3 = JR2TRMDB21_2A}
+	local h = {E1 = JR2TRMDB19_2A, E2 = bNOT(JR2TRMDB20_2A), E3 = JR2TRMDB21_2A}
 		h.S = bAND3(h.E1, h.E2, h.E3)
 
 	local i = {E1 = c.S, E2 = d.S}
 		i.S = bOR(i.E1, i.E2)
 
-	local j = {E1 = JR2TRMDB19_2B, E1 = bNOT(JR2TRMDB20_2B), E3 = JR2TRMDB21_2B}
+	local j = {E1 = JR2TRMDB19_2B, E2 = bNOT(JR2TRMDB20_2B), E3 = JR2TRMDB21_2B}
 		j.S = bAND3(j.E1, j.E2, j.E3)
 
 	local k = {E1 = e.S, E2 = g.S}
@@ -1697,11 +1800,11 @@ end
 function A333_fws.takeoff()
 
 	--| THRESHOLD
-	local epwr_th01 = ternary(JR1N1_1A > 95.0, true, false)
-	local epwr_th02 = ternary(JR1N1_1B > 95.0, true, false)
+	local epwr_th01 = JR1N1_1A > 95.0
+	local epwr_th02 = JR1N1_1B > 95.0
 
-	local epwr_th03 = ternary(JR2N1_2A > 95.0, true, false)
-	local epwr_th04 = ternary(JR2N1_2B > 95.0, true, false)
+	local epwr_th03 = JR2N1_2A > 95.0
+	local epwr_th04 = JR2N1_2B > 95.0
 
 	local a = {E1 = JR1N1_1A_INV, E2 = JR1N1_1A_NCD}
 		a.S = bOR(a.E1, a.E2)
@@ -1754,18 +1857,14 @@ end
 function A333_fws.tla_pwr_rev()
 
 	--| THRESHOLD
-	local pwrRev_th01 = ternary(JR1TLA_1A > 0.8012, true, false)
-	local pwrRev_th02 = ternary(JR1TLA_1B > 0.8012, true, false)
-
-	local pwrRev_th03 = ternary(JR1TLA_1A < -0.09999, true, false)
-	local pwrRev_th04 = ternary(JR1TLA_1B < -0.09999, true, false)
-
-	local pwrRev_th05 = ternary(JR2TLA_2A > 0.8012, true, false)
-	local pwrRev_th06 = ternary(JR2TLA_2B > 0.8012, true, false)
-
-	local pwrRev_th07 = ternary(JR2TLA_2A < -0.09999, true, false)
-	local pwrRev_th08 = ternary(JR2TLA_2B < -0.09999, true, false)
-
+	logic.pwrRev_th01:update(JR1TLA_1A)	-- TL 1 Full Power
+	logic.pwrRev_th02:update(JR1TLA_1B) -- TL 1 Full Power
+	logic.pwrRev_th03:update(JR1TLA_1A)	-- TL 1 Reverse
+	logic.pwrRev_th04:update(JR1TLA_1B)	-- TL 1 Reverse
+	logic.pwrRev_th05:update(JR2TLA_2A)	-- TL 2 Full Power
+	logic.pwrRev_th06:update(JR2TLA_2B)	-- TL 2 Full Power
+	logic.pwrRev_th07:update(JR2TLA_2A)	-- TL 2 Reverse
+	logic.pwrRev_th08:update(JR2TLA_2B)	-- TL 2 Reverse
 
 	local a = {E1 = JR1TLA_1A_INV, E2 = JR1TLA_1A_NCD}
 		a.S = bOR(a.E1, a.E2)
@@ -1779,23 +1878,23 @@ function A333_fws.tla_pwr_rev()
 	local d = {E1 = JR2TLA_2B_INV, E2 = JR2TLA_2B_NCD}
 		d.S = bOR(d.E1, d.E2)
 
-	local e = {E1 = bNOT(a.S), E2 = pwrRev_th03}
+	local e = {E1 = bNOT(a.S), E2 = logic.pwrRev_th03.out}
 		e.S = bAND(e.E1, e.E2)
 
-	local f = {E1 = pwrRev_th04, E2 = bNOT(b.S)}
+	local f = {E1 = logic.pwrRev_th04.out, E2 = bNOT(b.S)}
 		f.S = bAND(f.E1, f.E2)
 
-	local g = {E1 = bNOT(c.S), E2 = pwrRev_th07}
+	local g = {E1 = bNOT(c.S), E2 = logic.pwrRev_th07.out}
 		g.S = bAND(g.E1, g.E2)
 
-	local h = {E1 = pwrRev_th08, E2 = bNOT(d.S)}
+	local h = {E1 = logic.pwrRev_th08.out, E2 = bNOT(d.S)}
 		h.S = bAND(h.E1, h.E2)
 
-	local i = {E1 = e.S, E2 = f.S}
-		i.S = bOR(i.E1, i.E2)
+	local i = {E1 = e.S, E2 = f.S, E3 = JR1CMDREV_1A, E4 = JR1CMDREV_1B}
+		i.S = bOR4(i.E1, i.E2, i.E3, i.E4)
 
-	local j  ={E1 = g.S, E2 = h.S}
-		j.S = bOR(j.E1, j.E2)
+	local j = {E1 = g.S, E2 = h.S, E3 = JR2CMDREV_2A, E4 = JR2CMDREV_2B}
+		j.S = bOR4(j.E1, j.E2, j.E3, j.E4)
 
  	logic.pwrRev_conf01:update(i.S)
 
@@ -1819,10 +1918,10 @@ function A333_fws.tla_pwr_rev()
 	local p = {E1 = JR2TOFF, E2 = bNOT(m.S)}
 		p.S = bAND(p.E1, p.E2)
 
-	local q = {E1 = pwrRev_th01, E2 = o.S, E3 = pwrRev_th02}
+	local q = {E1 = logic.pwrRev_th01.out, E2 = o.S, E3 = logic.pwrRev_th02.out}
 		q.S = bOR3(q.E1, q.E1, q.E3)
 
-	local r = {E1 = pwrRev_th05, E2 = p.S, E3 = pwrRev_th06}
+	local r = {E1 = logic.pwrRev_th05.out, E2 = p.S, E3 = logic.pwrRev_th06.out}
 		r.S = bOR3(r.E1, r.E2, r.E3)
 
 	local s = {E1 = q.S, E2 = WRRT}
@@ -1837,9 +1936,6 @@ function A333_fws.tla_pwr_rev()
 	JR2TLFPWR	= t.S
 	JR2TLREV	= n.S
 
-	A333DR_fws_tla1_rev = bool2logic(JR1TLREV)
-	A333DR_fws_tla2_rev = bool2logic(JR2TLREV)
-
 end
 
 
@@ -1849,29 +1945,26 @@ end
 
 function A333_fws.tla_idle()
 
-	local tlaIDLE_th01 = ternary(JR1TLA_1A < 0.05, true, false)
-	local tlaIDLE_th02 = ternary(JR1TLA_1A > -0.05, true, false)
-
-	local tlaIDLE_th03 = ternary(JR1TLA_1B < 0.05, true, false)
-	local tlaIDLE_th04 = ternary(JR1TLA_1B > -0.05, true, false)
-
-	local tlaIDLE_th05 = ternary(JR2TLA_2A < 0.05, true, false)
-	local tlaIDLE_th06 = ternary(JR2TLA_2A > -0.05, true, false)
-
-	local tlaIDLE_th07 = ternary(JR2TLA_2B < 0.05, true, false)
-	local tlaIDLE_th08 = ternary(JR2TLA_2B > -0.05, true, false)
+	local tlaIDLE_th01 = JR1TLA_1A < 0.05
+	local tlaIDLE_th02 = JR1TLA_1A > -0.05
+	local tlaIDLE_th03 = JR1TLA_1B < 0.05
+	local tlaIDLE_th04 = JR1TLA_1B > -0.05
+	local tlaIDLE_th05 = JR2TLA_2A < 0.05
+	local tlaIDLE_th06 = JR2TLA_2A > -0.05
+	local tlaIDLE_th07 = JR2TLA_2B < 0.05
+	local tlaIDLE_th08 = JR2TLA_2B > -0.05
 
 	local a = {E1 = JR1TLA_1A_VAL, E2 = tlaIDLE_th01, E3 = tlaIDLE_th02}
-	a.S = bAND(a.E1, a.E2, a.E3)
+	a.S = bAND3(a.E1, a.E2, a.E3)
 
 	local b = {E1 = JR1TLA_1B_VAL, E2 = tlaIDLE_th03, E3 = tlaIDLE_th04}
-	b.S = bAND(b.E1, b.E2, b.E3)
+	b.S = bAND3(b.E1, b.E2, b.E3)
 
 	local c = {E1 = JR2TLA_2A_VAL, E2 = tlaIDLE_th05, E3 = tlaIDLE_th06}
-	c.S = bAND(c.E1, c.E2, c.E3)
+	c.S = bAND3(c.E1, c.E2, c.E3)
 
 	local d = {E1 = JR2TLA_2B_VAL, E2 = tlaIDLE_th07, E3 = tlaIDLE_th08}
-	d.S = bAND(d.E1, d.E2, d.E3)
+	d.S = bAND3(d.E1, d.E2, d.E3)
 
 	local e = {E1 = a.S, E2 = b.S}
 	e.S = bOR(e.E1, e.E2)
@@ -1885,10 +1978,6 @@ function A333_fws.tla_idle()
 	JR1TLAI 	= e.S
 	JR2TLAI 	= f.S
 	JR12IDLE	= g.S
-
-	A333DR_fws_tla1_idle = bool2logic(JR1TLAI)
-	A333DR_fws_tla2_idle = bool2logic(JR2TLAI)
-	A333DR_fws_tla12_idle = bool2logic(JR12IDLE)
 
 end
 
@@ -1953,17 +2042,17 @@ end
 
 function A333_fws.tla_cl()
 
-	local tlaMCL_th01 = ternary(JR1TLA_1A < 0.57667, true, false)
-	local tlaMCL_th02 = ternary(JR1TLA_1A > 0.48333, true, false)
+	local tlaMCL_th01 = JR1TLA_1A < 0.57667
+	local tlaMCL_th02 = JR1TLA_1A > 0.48333
 
-	local tlaMCL_th03 = ternary(JR1TLA_1B < 0.57667, true, false)
-	local tlaMCL_th04 = ternary(JR1TLA_1B > 0.48333, true, false)
+	local tlaMCL_th03 = JR1TLA_1B < 0.57667
+	local tlaMCL_th04 = JR1TLA_1B > 0.48333
 
-	local tlaMCL_th05 = ternary(JR2TLA_2A < 0.57667, true, false)
-	local tlaMCL_th06 = ternary(JR2TLA_2A > 0.48333, true, false)
+	local tlaMCL_th05 = JR2TLA_2A < 0.57667
+	local tlaMCL_th06 = JR2TLA_2A > 0.48333
 
-	local tlaMCL_th07 = ternary(JR2TLA_2B < 0.57667, true, false)
-	local tlaMCL_th08 = ternary(JR2TLA_2B > 0.48333, true, false)
+	local tlaMCL_th07 = JR2TLA_2B < 0.57667
+	local tlaMCL_th08 = JR2TLA_2B > 0.48333
 
 
 	local a = {E1 = tlaMCL_th01, E2 = JR1TLA_1A_VAL, E3 = tlaMCL_th02}
@@ -2093,14 +2182,14 @@ end
 
 function A333_fws.def_speed()
 
-	local spd_th01 = ternary(NCAS_1 > 83.0, true, false)
-	local spd_th02 = ternary(NCAS_1 < 77.0, true, false)
+	local spd_th01 = NCAS_1 > 83.0
+	local spd_th02 = NCAS_1 < 77.0
 
-	local spd_th03 = ternary(NCAS_2 > 83.0, true, false)
-	local spd_th04 = ternary(NCAS_2 < 77.0, true, false)
+	local spd_th03 = NCAS_2 > 83.0
+	local spd_th04 = NCAS_2 < 77.0
 
-	local spd_th05 = ternary(NCAS_3 > 83.0, true, false)
-	local spd_th06 = ternary(NCAS_3 < 77.0, true, false)
+	local spd_th05 = NCAS_3 > 83.0
+	local spd_th06 = NCAS_3 < 77.0
 
 	local a = {E1 = NCAS_1_INV, E2 = NCAS_1_NCD}
 		a.S = bOR(a.E1, a.E2)
@@ -2226,8 +2315,8 @@ end
 
 function A333_fws.def_ground()
 
-	local alt_th01 = ternary(NRADH_1 < 5.0, true, false)
-	local alt_th02 = ternary(NRADH_2 < 5.0, true, false)
+	local alt_th01 = NRADH_1 < 5.0
+	local alt_th02 = NRADH_2 < 5.0
 
 	local a = {E1 = bNOT(GNLLGCOMPR), E2 = bNOT(GELLGCOMPR)}
 		a.S = bOR(a.E1, a.E2)
@@ -2281,8 +2370,6 @@ function A333_fws.def_ground()
 
 	ZGNDI 	= l.S
 	ZGND 	= logic.gr_conf01.OUT
-
-	A333DR_fws_zgndi = bool2logic(ZGND)
 
 end
 
@@ -2457,16 +2544,16 @@ function A333_fws.flight_phases()
 	ZPH9	= w.S
 	ZPH10	= u.S
 
-	flight_phase_status[1] = bool2logic(ZPH1)
-	flight_phase_status[2] = bool2logic(ZPH2)
-	flight_phase_status[3] = bool2logic(ZPH3)
-	flight_phase_status[4] = bool2logic(ZPH4)
-	flight_phase_status[5] = bool2logic(ZPH5)
-	flight_phase_status[6] = bool2logic(ZPH6)
-	flight_phase_status[7] = bool2logic(ZPH7)
-	flight_phase_status[8] = bool2logic(ZPH8)
-	flight_phase_status[9] = bool2logic(ZPH9)
-	flight_phase_status[10] = bool2logic(ZPH10)
+	flight_phase_status[1] = bool2num[ZPH1]
+	flight_phase_status[2] = bool2num[ZPH2]
+	flight_phase_status[3] = bool2num[ZPH3]
+	flight_phase_status[4] = bool2num[ZPH4]
+	flight_phase_status[5] = bool2num[ZPH5]
+	flight_phase_status[6] = bool2num[ZPH6]
+	flight_phase_status[7] = bool2num[ZPH7]
+	flight_phase_status[8] = bool2num[ZPH8]
+	flight_phase_status[9] = bool2num[ZPH9]
+	flight_phase_status[10] = bool2num[ZPH10]
 
 	local trueCounter = 0
 	for phaseNum = 1, 10 do
@@ -2487,7 +2574,7 @@ function A333_fws.flight_phases()
 		A333DR_flight_phase = 1
 	end
 
-	A333DR_fws_grnd_flt_trans = bool2logic(i.S)
+	A333DR_fws_grnd_flt_trans = bool2num[i.S]
 
 end
 
@@ -2636,22 +2723,22 @@ end
 
 function A333_fws.nav_stall_warn()
 
-	logic.stallConf01:update(WRCL)
+	logic.stallConf01:update(WRCL)							-- false
 	logic.stallPulse01:update(logic.stallConf01.OUT)
-	logic.stallPulse02:update(NSTALL1)
+	logic.stallPulse02:update(NSTALL1)						-- sim/cockpit2/annunciators/stall_warning
 
 	local a = {E1 = bNOT(logic.stallPulse01.OUT), E2 = NSTALL1}
 	a.S = bAND(a.E1, a.E2)
 
 	logic.stallPulse03:update(a.S)
 
-	local b = {E1 = WEMERC, E2 = logic.stallSRRlatch01.Q}
+	local b = {E1 = WEMERC, E2 = logic.stallSRRlatch01.Q}	--	WEMERC = false
 	b.S = bAND(b.E1, b.E2)
-
-	logic.stallSRRlatch01:update(logic.stallPulse03.OUT, b.S)
 
 	local c = {E1 = logic.stallPulse02.OUT, E2 = b.S}
 	c.S = bOR(c.E1, c.E2)
+
+	logic.stallSRRlatch01:update(logic.stallPulse03.OUT, c.S)
 
 	NSTALLW	= logic.stallSRRlatch01.Q
 
@@ -2679,7 +2766,7 @@ function A333_fws.nav_stall_warning()
 	local d = {E1 = logic.stallWarn_pulse01.OUT, E2 = NSTALLW}
 	d.S = bOR(d.E1, d.E2)
 
-	local e = {E1 = d.S, E2 = STALLW}
+	local e = {E1 = d.S, E2 = c.S}
 	e.S = bAND(e.E1, e.E2)
 
 	local f = {E1 = e.S, E2 = WEMERC}
@@ -2695,7 +2782,7 @@ function A333_fws.nav_stall_warning()
 	WSTALL_S	= g.S
 	WSTO		= g.S
 
-	A333DR_fws_aco_stall = bool2logic(e.S)
+	A333DR_fws_aco_stall = bool2num[e.S]
 
 end
 
@@ -2736,11 +2823,9 @@ function A333_fws.auto_flight_low_energy()
 
 	NSPDO = h.S
 
-	A333DR_fws_aco_speed = bool2logic(g.S)
+	A333DR_fws_aco_speed = bool2num[g.S]
 
 end
-
-
 
 
 
@@ -2767,35 +2852,55 @@ end
 
 
 
-function A333_fws.decision_ht_val()
+function A333_fws.decision_height()
+
+	decision_height_pilot = ((simDR_radio_altimeter_bug_ft_pilot > 0 and simDR_radio_altimeter_bug_ft_pilot) or (simDR_baro_alt_bug_ft_pilot > -1000.00 and simDR_baro_alt_bug_ft_pilot)) or 0.0
+	decision_height_copilot = ((simDR_radio_altimeter_bug_ft_copilot > 0 and simDR_radio_altimeter_bug_ft_copilot) or (simDR_baro_alt_bug_ft_copilot > -1000.00 and simDR_baro_alt_bug_ft_copilot)) or 0.0
+
+	WDH_1 = decision_height_pilot
+	WDH_2 = decision_height_copilot
+
+end
+
+
+
+
+
+function A333_fws.decision_height_value()
+
+	logic.decHeightVal_comp01:update(WDH_1, WDH_2)
 
 	local a = {E1 = NRADH_1_INV, E2 = NRADH_1_NCD}
 	a.S = bOR(a.E1, a.E2)
 
-	logic.decHeightVal_comp01:update(WDH_1, WDH_2)
+	local aa = {E1 = NCBAC_1_INV, E2 = NCBAC_1_NCD}
+	aa.S = bOR(aa.E1, aa.E2)
 
-	local b = {E1 = NRADH_2_INV, E2 = NRADH_2_NCD}
+	local b = {E1 = WDH_2_INV, E2 = WDH_2_NCD}
 	b.S = bOR(b.E1, b.E2)
 
-	local c = {E1 = NRADH_1_INV, E2 = NRADH_1_NCD}
+	local c = {E1 = WDH_1_INV, E2 = WDH_1_NCD}
 	c.S = bOR(c.E1, c.E2)
 
-	logic.decHeightVal_s01:update(a.S, NRADH_1, NRADH_2)
+	logic.decHeightVal_s01:update(a.S, NRADH_2, NRADH_1)		-- Radio
+	logic.decHeightVal_s02:update(aa.S, NFOBAC_2, NCBAC_1)		-- Baro
 
-	local d = {E1= NRADH_1_VAL, E2 = bNOT(NRADH_1_NCD), E3 = NRADH_2_VAL, E4 = bNOT(NRADH_2_NCD), E5 = logic.decHeightVal_comp01.out}
+	local refHeightVal = (simDR_radio_altimeter_bug_ft_pilot > 0 and logic.decHeightVal_s01.out) or (simDR_baro_alt_bug_ft_pilot > -1000.00 and logic.decHeightVal_s02.out) or 0.0
+
+	local d = {E1= WDH_1_VAL, E2 = bNOT(WDH_1_NCD), E3 = WDH_2_VAL, E4 = bNOT(WDH_2_NCD), E5 = logic.decHeightVal_comp01.out}
 	d.S = bAND5(d.E1, d.E2, d.E3, d.E4, d.E5)
 
 	local e = {E1 = b.S, E2 = c.S}
 	e.S = bAND(e.E1, e.E2)
 
-	local f = {E1 = d.S, E2 = NRADH_1_NCD, E3 = NRADH_2_INV}
+	local f = {E1 = d.S, E2 = WDH_1_NCD, E3 = WDH_1_INV}
 	f.S = bOR3(f.E1, f.E2, f.E3)
 
-	logic.decHeightVal_s02:update(f.S, WDH_1, WDH_2)
+	logic.decHeightVal_s03:update(f.S, WDH_1, WDH_2)
 
-	NRHV 		= logic.decHeightVal_s01.out
+	NRHV 		= refHeightVal
 	WDH2SELEC	= f.S
-	NDHV		= logic.decHeightVal_s02.out
+	NDHV		= logic.decHeightVal_s03.out
 	NDINV		= e.S
 
 end
@@ -2858,7 +2963,7 @@ function A333_fws.hundred_above()
 	WHAGENERATED	= j.S
 	WHAMTRIG 		= logic.hundrdAbvMtrig01.OUT
 
-	A333DR_fws_aco_hndrd_abv = bool2logic(j.S)
+	A333DR_fws_aco_hndrd_abv = bool2num[j.S]
 
 end
 
@@ -2900,12 +3005,11 @@ function A333_fws.dh_minimum()
 	local g = {E1 = d.S, E2 = e.S}
 	g.S = bOR(g.E1, g.E2)
 
-	logic.dhConf01:update(g.S)
-	logic.dhTrig01:update(logic.dhConf01.OUT)
-
 	local h = {E1 = logic.dhThreshold02.out, E2 = NACOINIB, E3 = NDINV, E4 = f.S}
 	h.S = bOR4(h.E1, h.E2, h.E3, h.E4)
 
+	logic.dhConf01:update(g.S)
+	logic.dhTrig01:update(logic.dhConf01.OUT)
 	logic.dhSRRlatch01:update(NMINGEN, logic.dhTrig01.OUT)
 
 	local i = {E1 = bNOT(logic.dhSRRlatch01.Q), E2 = logic.dhTrig01.OUT}
@@ -2924,7 +3028,7 @@ function A333_fws.dh_minimum()
 	WDHMTRIG 		= logic.dhTrig01.OUT
 	WDHINF3FT 		= logic.dhThreshold02.out
 
-	A333DR_fws_aco_minimum = bool2logic(j.S)
+	A333DR_fws_aco_minimum = bool2num[j.S]
 
 end
 
@@ -3105,7 +3209,7 @@ function A333_fws.gear_locked_up()
 	a.S = bOR(a.E1, a.E2)
 
 	local b = {E1 = GLGLUP, E2 = a.S, E3 = GRGLUP}
-	b.S = bAND(b.E1, b.E2, b.E3)
+	b.S = bAND3(b.E1, b.E2, b.E3)
 
 	GGLUP = b.S
 
@@ -3152,7 +3256,7 @@ function A333_fws.gear_downlocked()
 	d.S = bAND3(d.E1, d.E2, d.E3)
 
 	GLGDNLKD = d.S
-	A333DR_fws_landing_gear_down = bool2logic(GLGDNLKD)
+	A333DR_fws_landing_gear_down = bool2num[GLGDNLKD]
 
 end
 
@@ -3419,7 +3523,7 @@ function A333_fws.engines_out()
 	h.S = bAND4(h.E1, h.E2, h.E3, h.E4)
 
 	JENGSOUTR = h.S
-	A333DR_ecam_testNum[0] = bool2logic(h.S)
+	A333DR_ecam_testNum[0] = bool2num[h.S]
 
 end
 
@@ -3859,12 +3963,12 @@ function A333_fws.ai_aft_EngShutdown_proc()
 	f.S = bOR(f.E1, f.E2)
 
 	local g = {E1 = logic.procAftEngShutDwnPulse01.OUT, E2 = b.S, E3 = bNOT(c.S), E4 = f.S}
-	g.S = bAND(g.E1, g.E2, g.E3, g.E4)
+	g.S = bAND4(g.E1, g.E2, g.E3, g.E4)
 
 	logic.procAftEngShutDwnPulse02:update{ZPH1}
 
 	local h = {E1 = bNOT(f.S), E2 = bNOT(IWAION), E3 = logic.procAftEngShutDwnPulse02.OUT}
-	h.S = bOR(h.E1, h.E2, h.E3)
+	h.S = bOR3(h.E1, h.E2, h.E3)
 
 	logic.procAftEngShutDwnSRR01:update(g.S, h.S)
 	logic.procAftEngShutDwnConf01:update(logic.procAftEngShutDwnSRR01.Q)
@@ -4083,8 +4187,8 @@ function A333_fws.status_auto_call_approach()
 	local d = {E1 = ZLSTSC, E2 = ZAPSTSC, E3 = ZPSTSC, E4 = ZSTSOEBPC, E5 = ZISTSC, E6 = ZISSTSC}
 	d.S = bOR6(d.E1, d.E2, d.E3, d.E4, d.E5, d.E6)
 
-	local e = {E1 = 	logic.stsAutoCallPulse01.OUT, E2 = 	logic.stsAutoCallPulse02.OUT}
-	e.S = bOR(e.E1, e.E2, e.E3)
+	local e = {E1 = logic.stsAutoCallPulse01.OUT, E2 = logic.stsAutoCallPulse02.OUT}
+	e.S = bOR(e.E1, e.E2)
 
 	local f = {E1 = e.S, E2 = d.S, E3 = a.S}
 	f.S = bAND3(f.E1, f.E2, f.E3)
@@ -4126,7 +4230,7 @@ function A333_fws.status_reminders()
 	e.S = bOR4(e.E1, e.E2, e.E3, e.E4)
 
 	local f = {E1 = ZISTSC, E2 = ZISSTSC, E3 = b.S, E4 = d.S, E5 = c.S}
-	f.S = bOR4(f.E1, f.E2, f.E3, f.E4, f.E5)
+	f.S = bOR5(f.E1, f.E2, f.E3, f.E4, f.E5)
 
 	local g = {E1 = d.S, E2 = ZSTSRPSD}
 	g.S = bOR(g.E1, g.E2)
@@ -4153,7 +4257,7 @@ function A333_fws.status_reminders()
 	ZNOSTSREM = bNOT(m.S)
 	ZSTSREMP = l.Sg
 
-	A333DR_ecam_ewd_show_sts = bool2logic(ZSTSREMS)
+	A333DR_ecam_ewd_show_sts = bool2num[ZSTSREMS]
 
 end
 
@@ -4217,9 +4321,6 @@ end
 
 
 
-
-
-
 function A333_fws.memo_msg_displayed()
 
 	ZLMEMD = false
@@ -4245,6 +4346,158 @@ function A333_fws.memo_msg_displayed()
 
 end
 
+
+
+
+
+
+function A333_fws.dmc_l_alt_sel()
+
+	local a = {E1 = KFCU1H, E2 = NBRQ20_1}
+	a.S = bAND(a.E1, a.E2)
+
+	local b = {E1 = KFCU1H, E2 = NBRQ21_1}
+	b.S = bAND(b.E1, b.E2)
+
+	local c = {E1 = bNOT(a.S), E2 = b.S}
+	c.S = bAND(c.E1, c.E2)
+
+	local d = {E1 = a.S, E2 = bNOT(b.S)}
+	d.S = bAND(d.E1, d.E2)
+
+	local e = {E1 = bNOT(b.S), E2 = bNOT(a.S), E3 = KFCU1H, E4 = NBRQ21_1_VAL, E5 = bNOT(NBRQ21_1_NCD)}
+	e.S = bAND5(e.E1, e.E2, e.E3, e.E4, e.E5)
+
+	NBAROSEL1 = a.S
+	NDMCLQNH = c.S
+	NDMCLS = d.S
+	NBAROSEL3 = b.S
+	NDMCLQFE = e.S
+
+end
+
+
+
+
+
+function A333_fws.dmc_r_alt_sel()
+
+	local a = {E1 = KFCU2H, E2 = NBRQ20_2}
+	a.S = bAND(a.E1, a.E2)
+
+	local b = {E1 = KFCU2H, E2 = NBRQ21_2}
+	b.S = bAND(b.E1, b.E2)
+
+	local c = {E1 = bNOT(a.S), E2 = b.S}
+	c.S = bAND(c.E1, c.E2)
+
+	local d = {E1 = a.S, E2 = bNOT(b.S)}
+	d.S = bAND(d.E1, d.E2)
+
+	local e = {E1 = bNOT(b.S), E2 = bNOT(a.S), E3 = KFCU2H, E4 = NBRQ21_2_VAL, E5 = bNOT(NBRQ21_2_NCD)}
+	e.S = bAND5(e.E1, e.E2, e.E3, e.E4, e.E5)
+
+	NBAROSEL2 = a.S
+	NDMCRQNH = c.S
+	NDMCRS = d.S
+	NBAROSEL4 = b.S
+	NDMCRQFE = e.S
+
+end
+
+
+
+
+
+
+function A333_fws.baro_alti_comp()
+
+	local a = {E1 = NALTFBK_1_INV, E2 = NALTFBK_1_NCD}
+	a.S = bOR(a.E1, a.E2)
+
+	local b = {E1 = NALTFBK_2_INV, E2 = NALTFBK_2_NCD}
+	b.S = bOR(b.E1, b.E2)
+
+	local c = {E1 = NDMCLQNH, E2 = NDMCRQNH}
+	c.S = bAND(c.E1, c.E2)
+
+	local d = {E1 = NDMCLQFE, E2 = NDMCRQFE }
+	d.S = bAND(d.E1, d.E2)
+
+	local e = {E1 = NFOBAC_2_INV, E2 = NFOBAC_2_NCD, E3 = a.S}
+	e.S = bOR3(e.E1, e.E2, e.E3)
+
+	local f = {E1 = NCBAC_1_INV, E2 = NCBAC_1_NCD, E3 = b.S}
+	f.S = bOR3(f.E1, f.E2, f.E3)
+
+	local g = {E1 = c.S, E2 = d.S}
+	g.S = bOR(g.E1, g.E2)
+
+	logic.fo_baro_alti_comp:update(NALTFBK_1 - NFOBAC_2)
+
+	local h = {E1 = bNOT(logic.fo_baro_alti_comp.output), E2 = bNOT(e.S)}
+	h.S = bAND(h.E1, h.E2)
+
+	logic.capt_baro_alti_comp:update(NALTFBK_2 - NCBAC_1)
+
+	local i = {E1 = bNOT(logic.capt_baro_alti_comp.output), E2 = bNOT(f.S)}
+	i.S = bAND(i.E1, i.E2)
+
+	local j = {E1 = h.S, E2 = g.S}
+	j.S = bAND(j.E1, j.E2)
+
+	local k = {E1 = i.S, E2 = g.S}
+	k.S = bAND(k.E1, k.E2)
+
+	local l = {E1 = j.S, E2 = k.S}
+	l.S = bOR(l.E1, l.E2)
+
+	NALTBD = l.S
+
+end
+
+
+
+
+
+
+
+function A333_fws.std_alti_comp()
+
+	local a = {E1 = NALTFBK_1_INV, E2 = NALTFBK_1_NCD}
+	a.S = bOR(a.E1, a.E2)
+
+	local b = {E1 = NALTFBK_2_INV, E2 = NALTFBK_2_NCD}
+	b.S = bOR(b.E1, b.E2)
+
+	local c = {E1 = NALTI_2_INV, E2 = NALTI_2_NCD, E3 = a.S}
+	c.S = bOR3(c.E1, c.E2, c.E3)
+
+	local d = {E1 = NALTI_1_INV, E2 = NALTI_1_NCD, E3 = b.S}
+	d.S = bOR3(d.E1, d.E2, d.E3)
+
+	logic.fo_std_alti_comp:update(NALTFBK_1 - NALTI_2)
+
+	local e = {E1 = bNOT(logic.fo_std_alti_comp.output), E2 = bNOT(c.S)}
+	e.S = bAND(e.E1, e.E2)
+
+	logic.capt_std_alti_comp:update(NALTFBK_2 - NALTI_1)
+
+	local f = {E1 = bNOT(logic.capt_std_alti_comp.output), E2 = bNOT(d.S)}
+	f.S = bAND(f.E1, f.E2)
+
+	local g = {E1 = NDMCRS, E2 = e.S, E3 = NDMCLS}
+	g.S = bAND3(g.E1, g.E2, g.E3)
+
+	local h = {E1 = NDMCRS, E2 = f.S, E3 = NDMCLS}
+	h.S = bAND3(h.E1, h.E2, h.E3)
+
+	local i = {E1 = g.S, E2 = h.S}
+	i.S = bOR(i.E1, i.E2)
+
+	NALTSTDD = i.S
+
+end
 
 
 
@@ -4311,7 +4564,7 @@ function A333_fws_210()
 	A333_fws.def_speed()
 	A333_fws.dto_installed()
 	A333_fws.dto_sel()
-
+	A333_fws.tr_mode_selected()
 	A333_fws.fto_mode()
 	A333_fws.eng1_or_2_to_pwr()
 	A333_fws.eng_start_switch_delayed()
@@ -4329,7 +4582,8 @@ function A333_fws_210()
 	A333_fws.nav_stall_warning()
 	A333_fws.auto_flight_low_energy()
 	A333_fws.dh_dt_positive()
-	A333_fws.decision_ht_val()
+	A333_fws.decision_height()
+	A333_fws.decision_height_value()
 	A333_fws.hundred_above()
 	A333_fws.dh_minimum()
 	A333_fws.rh_gear_extended()
@@ -4372,6 +4626,10 @@ function A333_fws_210()
 	A333_fws.clear_status()
 	A333_fws.sys_page_call_inhib()
 	A333_fws.memo_msg_displayed()
+	A333_fws.dmc_l_alt_sel()
+	A333_fws.dmc_r_alt_sel()
+	A333_fws.baro_alti_comp()
+	A333_fws.std_alti_comp()
 
 end
 

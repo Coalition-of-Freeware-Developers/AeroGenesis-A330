@@ -53,9 +53,21 @@ latency_level = 0.07
 --*************************************************************************************--
 
 local sin_output = 1
-local vibration_speed = 55
+local vibration_speed = 33
 local vibration_speed2 = 58
 local vibration_speed3 = 53
+
+local vibration_speed4 = 14
+local vibration_speed5 = 13
+local vibration_speed6 = 12
+
+local vibration_speed7 = 7
+local vibration_speed8 = 7
+
+local vibration_speed9 = 14
+local vibration_speed10 = 13
+local vibration_speed11 = 12
+
 local brake_factor = 0
 
 local vertical_def_ratio = 1.0131
@@ -74,6 +86,13 @@ local lenDc = 0.9315
 local nacelle_temp_eng1_target = 0
 local nacelle_temp_eng2_target = 0
 
+local wing_tip_def_delta = 0
+local wing_tip_def_delta_loop = 0
+local wing_flex_timer = 0
+local engine_flex_fade = 0
+local wing_init = 0
+
+
 --*************************************************************************************--
 --** 				                X-PLANE DATAREFS            			    	 **--
 --*************************************************************************************--
@@ -82,6 +101,7 @@ simDR_sim_time				= find_dataref("sim/time/total_running_time_sec")
 simDR_engine1_N1			= find_dataref("sim/flightmodel2/engines/N1_percent[0]")
 simDR_engine2_N1			= find_dataref("sim/flightmodel2/engines/N1_percent[1]")
 simDR_groundspeed			= find_dataref("sim/flightmodel/position/groundspeed")
+simDR_equiv_airspeed		= find_dataref("sim/flightmodel/position/equivalent_airspeed")
 simDR_park_brake		 	= find_dataref("sim/cockpit2/controls/parking_brake_ratio")
 simDR_on_ground				= find_dataref("sim/flightmodel/failures/onground_any")
 simDR_flap_left				= find_dataref("sim/flightmodel2/wing/flap1_deg[0]")							-- min 14 max 32
@@ -98,9 +118,11 @@ simDR_eagle_theta_right		= find_dataref("sim/flightmodel2/gear/eagle_claw_angle_
 eng1_n3						= find_dataref("sim/flightmodel2/engines/N2_percent[0]")
 eng2_n3						= find_dataref("sim/flightmodel2/engines/N2_percent[1]")
 
-simDR_TAT					= find_dataref("sim/cockpit2/temperature/outside_air_LE_temp_degc")
-simDR_EGT1					= find_dataref("sim/flightmodel2/engines/EGT_deg_C[0]")
-simDR_EGT2					= find_dataref("sim/flightmodel2/engines/EGT_deg_C[1]")
+simDR_TAT					= find_dataref("sim/weather/aircraft/temperature_leadingedge_deg_c")
+simDR_EGT1					= find_dataref("sim/flightmodel2/engines/EGT_deg_cel[0]")
+simDR_EGT2					= find_dataref("sim/flightmodel2/engines/EGT_deg_cel[1]")
+
+simDR_wing_tip_def			= find_dataref("sim/flightmodel2/wing/wing_tip_deflection_deg")
 
 --*************************************************************************************--
 --** 				              FIND CUSTOM DATAREFS             			    	 **--
@@ -151,6 +173,20 @@ A333DR_trent700_n3_eng2		= create_dataref("laminar/A333/trent700/n3_eng2", "numb
 
 A333DR_nacelle_temp_eng1	= create_dataref("laminar/A333/trent700/nacelle_temp1", "number")
 A333DR_nacelle_temp_eng2	= create_dataref("laminar/A333/trent700/nacelle_temp2", "number")
+
+A333DR_nacelleL_x_vib		= create_dataref("laminar/A333/engineL/vibration_x", "number")
+A333DR_navelleL_y_vib		= create_dataref("laminar/A333/engineL/vibration_y", "number")
+A333DR_nacelleL_z_vib		= create_dataref("laminar/A333/engineL/vibration_z", "number")
+
+A333DR_nacelleR_x_vib		= create_dataref("laminar/A333/engineR/vibration_x", "number")
+A333DR_navelleR_y_vib		= create_dataref("laminar/A333/engineR/vibration_y", "number")
+A333DR_nacelleR_z_vib		= create_dataref("laminar/A333/engineR/vibration_z", "number")
+
+A333DR_wing_flex_var		= create_dataref("laminar/A333/math/wing_flex_delta", "number")
+A333DR_wing_flex_timer		= create_dataref("laminar/A333/math/wing_flex_timer", "number")
+
+A333DR_wing_flex_right		= create_dataref("laminar/A333/math/wing_flex_right", "number")
+A333DR_wing_flex_left		= create_dataref("laminar/A333/math/wing_flex_left", "number")
 
 --*************************************************************************************--
 --** 				       READ-WRITE CUSTOM DATAREF HANDLERS     	        	     **--
@@ -309,16 +345,30 @@ function A333_sin_output()
 
 	local time_modulator = math.sin(simDR_sim_time) / 7										-- frequency variable
 	local time_modulator2 = math.sin(simDR_sim_time) / 9									-- frequency variable
+	local time_modulator3 = math.sin(simDR_sim_time) / 5			
 
 	local vibration_time = simDR_sim_time + time_modulator									-- sim time + frequency var. Fractionally modulates the sim time to result in a subtle frequency sweep back and forth
 	local vibration_time2 = simDR_sim_time + time_modulator2
 	local vibration_time3 = simDR_sim_time + 2 + time_modulator2
+	
+	local vibration_time4 = simDR_sim_time + time_modulator3
+	local vibration_time5 = simDR_sim_time + 1 + time_modulator
+	local vibration_time6 = simDR_sim_time + 2 + time_modulator3
+	
+	local vibration_time7 = simDR_sim_time + 2 + time_modulator
+	local vibration_time8 = simDR_sim_time + 5 + time_modulator
+
+	local vibration_time9 = simDR_sim_time + 4.5 + time_modulator2
+	local vibration_time10 = simDR_sim_time + 6.5 + time_modulator3
+	local vibration_time11 = simDR_sim_time + 3.5 + time_modulator2
 
 	-- tail amp vars
 
 	N1_max = math.max(simDR_engine1_N1, simDR_engine2_N1)
 
-	local speed_amp_factor = A333_rescale(15, 1, 70, 0, simDR_groundspeed)					-- amplitude var with speed
+	local speed_amp_factor = A333_rescale(15, 1, 70, 0, simDR_groundspeed)					-- amplitude var with groundspeed
+	local speed_amp_factor2 = A333_rescale(30, 1, 175, 0, simDR_equiv_airspeed)				-- amplitude var for engines with airspeed
+	local speed_amp_factor3 = A333_rescale(30, 1, 90, 0, simDR_equiv_airspeed)				-- amplitude var for wings with airspeed
 	local n1_amp_factor = A333_rescale(60, 0, 100, 1, N1_max)								-- amplitude var with N1
 
 	if simDR_on_ground == 1 then															-- amplitude var with brake + onground status
@@ -336,15 +386,29 @@ function A333_sin_output()
 
 	local n1_left_fac = A333_rescale(60, 0, 100, 1.1, simDR_engine1_N1)
 	local n1_right_fac = A333_rescale(60, 0, 100, 1.1, simDR_engine2_N1)
+	
+	local n1_left_fac2 = A333_rescale(55, 0, 100, 1.1, simDR_engine1_N1)
+	local n1_right_fac2 = A333_rescale(55, 0, 100, 1.1, simDR_engine2_N1)
 
 	local reverse1_fac = A333_rescale(0, 0.8, 1, 1.25, simDR_reverse_left)
 	local reverse2_fac = A333_rescale(0, 0.8, 1, 1.25, simDR_reverse_right)
+	
+	local reverse1_fac2 = A333_rescale(0, 0.8, 1, 2, simDR_reverse_left)
+	local reverse2_fac2 = A333_rescale(0, 0.8, 1, 2, simDR_reverse_right)
 
-	local flap_l_deploy_fac = A333_rescale(14, 0, 32, 1.2, simDR_flap_left)
-	local flap_r_deploy_fac = A333_rescale(14, 0, 32, 1.2, simDR_flap_right)
+	local flap_l_deploy_fac = A333_rescale(2, 0, 32, 1.3, simDR_flap_left)
+	local flap_r_deploy_fac = A333_rescale(2, 0, 32, 1.3, simDR_flap_right)
 
 	local left_flap_amp_fac = speed_flap_fac * n1_left_fac * reverse1_fac * flap_l_deploy_fac
 	local right_flap_amp_fac = speed_flap_fac * n1_right_fac * reverse2_fac * flap_r_deploy_fac
+
+	-- engine amp vars
+	
+	local right_engine_fac = n1_right_fac2 * reverse2_fac2
+	local left_engine_fac = n1_left_fac2 * reverse1_fac2
+	
+	local right_engine_fac_wing = math.max(right_engine_fac, 0.3 * left_engine_fac)
+	local left_engine_fac_wing = math.max(left_engine_fac, 0.3 * right_engine_fac)
 
 	-- sin outputs
 
@@ -354,6 +418,18 @@ function A333_sin_output()
 
 	sin_output4 = math.sin(vibration_time2 * vibration_speed3)								-- base sine constructed out of running simtime and base frequency for left flaps
 	sin_output5 = math.sin(vibration_time3 * vibration_speed3)								-- base sine constructed out of running simtime and base frequency for right flaps
+
+	sin_output6 = math.sin(vibration_time4 * vibration_speed4)
+	sin_output7 = math.sin(vibration_time5 * vibration_speed5)
+	sin_output8 = math.sin(vibration_time6 * vibration_speed6)
+	
+	sin_output9 = math.sin(vibration_time7 * vibration_speed7)
+	sin_output10 = math.sin(vibration_time8 * vibration_speed8)
+	
+	sin_output11 = math.sin(vibration_time9 * vibration_speed9)
+	sin_output12 = math.sin(vibration_time10 * vibration_speed10)
+	sin_output13 = math.sin(vibration_time11 * vibration_speed11)
+
 
 	local sin_output_mod = math.sin(simDR_sim_time * 5)										-- sine amplitude vars, uses prime numbers in the frequency var to maximally spread out peaks
 	local sin_output_mod2 = math.sin(simDR_sim_time * 11)
@@ -367,15 +443,49 @@ function A333_sin_output()
 	sin_output_mod_amp_fac4 = A333_rescale(-1, 0.6, 1, 1.1, sin_output_mod4)
 	sin_output_mod_amp_fac5 = A333_rescale(-1, 0.6, 1, 1.1, sin_output_mod5)
 
+	-- CALCULATIONS FOR FLEX INDUCED ENGINE SHAKE
+
+	A333DR_wing_test = wing_init
+
+	if wing_init == 0 then
+		wing_tip_def_delta_loop = simDR_wing_tip_def[0]
+		wing_init = 1
+	elseif wing_init == 1 then
+
+		wing_tip_def_delta = simDR_wing_tip_def[0] - wing_tip_def_delta_loop
+	
+		A333DR_wing_flex_var = math.abs(wing_tip_def_delta / SIM_PERIOD) -- determines change over cycle loop of wingflex
+
+		wing_tip_def_delta_loop = simDR_wing_tip_def[0]
+	
+		if A333DR_wing_flex_var > wing_flex_timer then
+			wing_flex_timer = math.min(A333DR_wing_flex_var, 15)
+		else wing_flex_timer = math.abs(wing_flex_timer - SIM_PERIOD * 3)
+		end
+	
+		A333DR_wing_flex_timer = wing_flex_timer
+
+	end
+
 	-- DR outputs
 
-	A333DR_tail_sin_wave = sin_output * amplitude_factor * sin_output_mod_amp_fac * sin_output_mod_amp_fac2 * sin_output_mod_amp_fac3
+	A333DR_tail_sin_wave = sin_output * amplitude_factor * sin_output_mod_amp_fac * sin_output_mod_amp_fac2 * sin_output_mod_amp_fac3 * 0.85
 
 	A333DR_flapl_sin_wave = sin_output2 * left_flap_amp_fac * sin_output_mod_amp_fac5 * sin_output_mod_amp_fac4
 	A333DR_flapr_sin_wave = sin_output3 * right_flap_amp_fac * sin_output_mod_amp_fac5 * sin_output_mod_amp_fac2
 	A333DR_flapl_sin_wave2 = sin_output4 * left_flap_amp_fac * sin_output_mod_amp_fac * sin_output_mod_amp_fac4 * 2
 	A333DR_flapr_sin_wave2 = sin_output5 * right_flap_amp_fac * sin_output_mod_amp_fac * sin_output_mod_amp_fac2 * 2
 
+	A333DR_nacelleR_x_vib = sin_output6	* math.max( (A333_rescale(0.1, 0, 15, 0.8, wing_flex_timer)) , (right_engine_fac * speed_amp_factor2 * 0.5) )
+	A333DR_navelleR_y_vib = sin_output7	* math.max( (A333_rescale(0.1, 0, 15, 0.8, wing_flex_timer)) , (right_engine_fac * speed_amp_factor2 * 0.5) )
+	A333DR_nacelleR_z_vib = sin_output8	* math.max( (A333_rescale(0.1, 0, 15, 0.8, wing_flex_timer)) , (right_engine_fac * speed_amp_factor2 * 0.5) )
+
+	A333DR_wing_flex_right = simDR_wing_tip_def[1] + 0.25 * (sin_output9 * right_engine_fac_wing * speed_amp_factor3) -- need to add sympathetic factor for differential thrust
+	A333DR_wing_flex_left = simDR_wing_tip_def[0] + 0.25 * (sin_output10 * left_engine_fac_wing * speed_amp_factor3)
+
+	A333DR_nacelleL_x_vib = sin_output11 * math.max( (A333_rescale(0.1, 0, 15, 0.8, wing_flex_timer)) , (left_engine_fac * speed_amp_factor2 * 0.5) )
+	A333DR_navelleL_y_vib = sin_output12 * math.max( (A333_rescale(0.1, 0, 15, 0.8, wing_flex_timer)) , (left_engine_fac * speed_amp_factor2 * 0.5) )
+	A333DR_nacelleL_z_vib = sin_output13 * math.max( (A333_rescale(0.1, 0, 15, 0.8, wing_flex_timer)) , (left_engine_fac * speed_amp_factor2 * 0.5) )
 
 end
 
@@ -434,6 +544,39 @@ function A333_gear_geo()
 end
 
 
+function A333_init_math_all_modes() 
+
+	wing_init = 0
+
+end
+
+function A333_init_math_CD() end
+
+function A333_init_math_ER() end
+
+
+----- FLIGHT START ---------------------------------------------------------------------
+function A333_flight_start_math()
+
+    -- ALL MODES ------------------------------------------------------------------------
+    A333_init_math_all_modes()
+
+
+    -- COLD & DARK ----------------------------------------------------------------------
+    if simDR_startup_running == 0 then
+
+        A333_init_math_CD()
+
+
+    -- ENGINES RUNNING ------------------------------------------------------------------
+    elseif simDR_startup_running == 1 then
+
+		A333_init_math_ER()
+
+    end
+
+end
+
 
 --*************************************************************************************--
 --** 				                  EVENT CALLBACKS           	    			 **--
@@ -452,7 +595,11 @@ end
 
 --function aircraft_unload() end
 
---function flight_start() end
+function flight_start()
+
+	A333_flight_start_math()
+	
+end
 
 --function flight_crash() end
 

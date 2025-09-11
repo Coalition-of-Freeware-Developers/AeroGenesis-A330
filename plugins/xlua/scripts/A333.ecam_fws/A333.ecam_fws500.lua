@@ -53,6 +53,7 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
+local bool2num = {[true] = 1, [false] = 0}
 
 local eng1FireActVL01 = newVariableText('eng1FireActVL01', 10.0, 0.0, 1.0, 'dn', 1.0)
 local eng1FireActVL02 = newVariableText('eng1FireActVL02', 30.0, 0.0, 1.0, 'dn', 1.0)
@@ -64,7 +65,7 @@ local apuFireActVL01 = newVariableText('apuFireActVL01', 10.0, 0.0, 1.0, 'dn', 1
 
 local excessCabAltThreshold01 = newThreshold('excessCabAltThreshold01', '>', 10000.0)
 
-local lgNotDnLckActPulse01 newFallingEdgePulse('lgNotDnLckActPulse01')
+local lgNotDnLckActPulse01 = newFallingEdgePulse('lgNotDnLckActPulse01')
 local lgNotDnLckActSRS01 = newSRlatchSetPriority('lgNotDnLckActSRS01')
 
 local lgNotUpLckActThr01 = newThreshold('lgNotUpLckActThr01', '>', 220.0)
@@ -203,55 +204,55 @@ local aftCargoSmkConf01 = newLeadingEdgeDelayedConfirmation('aftCargoSmkConf01',
 --*************************************************************************************--
 
 function A333_ewd_msg.OVER_SPEED_VFE1.Action()
-	A333_ewd_msg.OVER_SPEED_VFE1.MsgLine[1].MsgStatus = bool2logic(NVFE1)
+	A333_ewd_msg.OVER_SPEED_VFE1.MsgLine[1].MsgStatus = bool2num[NVFE1]
 end
 
 
 
 
 function A333_ewd_msg.OVER_SPEED_VFE2.Action()
-	A333_ewd_msg.OVER_SPEED_VFE2.MsgLine[1].MsgStatus = bool2logic(NVFE2)
+	A333_ewd_msg.OVER_SPEED_VFE2.MsgLine[1].MsgStatus = bool2num[NVFE2]
 end
 
 
 
 
 function A333_ewd_msg.OVER_SPEED_VFE3.Action()
-	A333_ewd_msg.OVER_SPEED_VFE3.MsgLine[1].MsgStatus = bool2logic(NVFE3)
+	A333_ewd_msg.OVER_SPEED_VFE3.MsgLine[1].MsgStatus = bool2num[NVFE3]
 end
 
 
 
 
 function A333_ewd_msg.OVER_SPEED_VFE4.Action()
-	A333_ewd_msg.OVER_SPEED_VFE4.MsgLine[1].MsgStatus = bool2logic(NVFE4)
+	A333_ewd_msg.OVER_SPEED_VFE4.MsgLine[1].MsgStatus = bool2num[NVFE4]
 end
 
 
 
 
 function A333_ewd_msg.OVER_SPEED_VFE5.Action()
-	A333_ewd_msg.OVER_SPEED_VFE5.MsgLine[1].MsgStatus = bool2logic(NVFE5)
+	A333_ewd_msg.OVER_SPEED_VFE5.MsgLine[1].MsgStatus = bool2num[NVFE5]
 end
 
 
 
 
 function A333_ewd_msg.OVER_SPEED_VFE6.Action()
-	A333_ewd_msg.OVER_SPEED_VFE6.MsgLine[1].MsgStatus = bool2logic(NVFE6)
+	A333_ewd_msg.OVER_SPEED_VFE6.MsgLine[1].MsgStatus = bool2num[NVFE6]
 end
 
 
 
 
 function A333_ewd_msg.OVER_SPEED_VLE.Action()
-	A333_ewd_msg.OVER_SPEED_VLE.MsgLine[1].MsgStatus = bool2logic(WVLE)
+	A333_ewd_msg.OVER_SPEED_VLE.MsgLine[1].MsgStatus = bool2num[WVLE]
 end
 
 
 
 function A333_ewd_msg.OVER_SPEED_VMO_MMO.Action()
-	A333_ewd_msg.OVER_SPEED_VMO_MMO.MsgLine[1].MsgStatus = bool2logic(WVMOMMO)
+	A333_ewd_msg.OVER_SPEED_VMO_MMO.MsgLine[1].MsgStatus = bool2num[WVMOMMO]
 end
 
 
@@ -285,30 +286,30 @@ function A333_ewd_msg.ENG_DUAL_FAULT.Action()
 	local l = {E1 = JML1ON, E2 = JML2ON}
 	l.S = bOR(l.E1, l.E2)
 
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[1].MsgStatus = bool2logic(bNOT(JRIGNSEL))
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[2].MsgStatus = bool2logic(b.S)
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[1].MsgStatus = bool2num[bNOT(JRIGNSEL)]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[2].MsgStatus = bool2num[b.S]
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[3].MsgStatus = 1
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[4].MsgStatus = 0								-- TODO:  THIS SYSTEM IS NOT MODELED
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[5].MsgStatus = bool2logic(g.S)
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[6].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[7].MsgStatus = bool2logic(i.S)
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[5].MsgStatus = bool2num[g.S]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[6].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[7].MsgStatus = bool2num[i.S]
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[8].MsgStatus = 1
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[9].MsgStatus = 1
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[10].MsgStatus = bool2logic(WA330)
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[11].MsgStatus = bool2logic(WA330)
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[12].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[13].MsgStatus = bool2logic(f.S)
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[10].MsgStatus = bool2num[WA330]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[11].MsgStatus = bool2num[WA330]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[12].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[13].MsgStatus = bool2num[f.S]
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[14].MsgStatus = 1
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[15].MsgStatus = bool2logic(QAVAIL)
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[15].MsgStatus = bool2num[QAVAIL]
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[16].MsgStatus = 1
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[17].MsgStatus = 1
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[18].MsgStatus = 1
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[19].MsgStatus = bool2logic(bNOT(GLGDNLKD))
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[20].MsgStatus = bool2logic(bNOT(GLGDNLKD))
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[21].MsgStatus = bool2logic(WA330)
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[19].MsgStatus = bool2num[bNOT(GLGDNLKD)]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[20].MsgStatus = bool2num[bNOT(GLGDNLKD)]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[21].MsgStatus = bool2num[WA330]
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[22].MsgStatus = 1
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[23].MsgStatus = bool2logic(l.S)
-	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[24].MsgStatus = bool2logic(QMSON)
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[23].MsgStatus = bool2num[l.S]
+	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[24].MsgStatus = bool2num[QMSON]
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[25].MsgStatus = 1
 	A333_ewd_msg.ENG_DUAL_FAULT.MsgLine[26].MsgStatus = 1
 
@@ -328,7 +329,7 @@ function A333_ewd_msg.ENG_1_FIRE.Action()
 	local b = {E1 = EBA1PBON, E2 = EBA2PBON}
 	b.S = bOR(b.E1, b.E2)
 
-	local c = {E1 = bNOT(JR2TLAI), E1 = bNOT(JR1TLAI)}
+	local c = {E1 = bNOT(JR2TLAI), E2 = bNOT(JR1TLAI)}
 	c.S = bOR(c.E1, c.E2)
 
 	local d = {E1 = JML1ON_INV, E2 = JML1ON}
@@ -373,25 +374,25 @@ function A333_ewd_msg.ENG_1_FIRE.Action()
 	local q = {E1 = ZGND, E2 = b.S}
 	q.S = bAND(q.E1, q.E2)
 
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[1].MsgStatus = bool2logic(k.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[2].MsgStatus = bool2logic(l.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[3].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[4].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[5].MsgStatus = bool2logic(d.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[6].MsgStatus = bool2logic(bNOT(UE1FPBOUT))
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[7].MsgText = string.format(' -AGENT 1 AFT %2dS..DISCH', eng1FireActVL01.out); A333_ewd_msg.ENG_1_FIRE.MsgLine[7].MsgStatus = bool2logic(n.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[8].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[9].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[10].MsgStatus = bool2logic(o.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[11].MsgStatus = bool2logic(g.S)
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[1].MsgStatus = bool2num[k.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[2].MsgStatus = bool2num[l.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[3].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[4].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[5].MsgStatus = bool2num[d.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[6].MsgStatus = bool2num[bNOT(UE1FPBOUT)]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[7].MsgText = string.format(' -AGENT 1 AFT %2dS..DISCH', eng1FireActVL01.out); A333_ewd_msg.ENG_1_FIRE.MsgLine[7].MsgStatus = bool2num[n.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[8].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[9].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[10].MsgStatus = bool2num[o.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[11].MsgStatus = bool2num[g.S]
 	A333_ewd_msg.ENG_1_FIRE.MsgLine[12].MsgStatus = 1
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[13].MsgStatus = bool2logic(ZGND)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[14].MsgText = string.format('  .IF FIRE AFTER %2dS:   ', eng1FireActVL02.out); A333_ewd_msg.ENG_1_FIRE.MsgLine[14].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[15].MsgStatus = bool2logic(p.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[16].MsgStatus = bool2logic(ZGND)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[17].MsgStatus = bool2logic(ZGND)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[18].MsgStatus = bool2logic(j.S)
-	A333_ewd_msg.ENG_1_FIRE.MsgLine[19].MsgStatus = bool2logic(q.S)
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[13].MsgStatus = bool2num[ZGND]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[14].MsgText = string.format('  .IF FIRE AFTER %2dS:   ', eng1FireActVL02.out); A333_ewd_msg.ENG_1_FIRE.MsgLine[14].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[15].MsgStatus = bool2num[p.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[16].MsgStatus = bool2num[ZGND]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[17].MsgStatus = bool2num[ZGND]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[18].MsgStatus = bool2num[j.S]
+	A333_ewd_msg.ENG_1_FIRE.MsgLine[19].MsgStatus = bool2num[q.S]
 
 end
 
@@ -416,7 +417,7 @@ function A333_ewd_msg.ENG_2_FIRE.Action()
 	local b = {E1 = EBA1PBON, E2 = EBA2PBON}
 	b.S = bOR(b.E1, b.E2)
 
-	local c = {E1 = bNOT(JR1TLAI), E1 = bNOT(JR2TLAI)}
+	local c = {E1 = bNOT(JR1TLAI), E2 = bNOT(JR2TLAI)}
 	c.S = bOR(c.E1, c.E2)
 
 	local d = {E1 = JML2ON_INV, E2 = JML2ON}
@@ -428,7 +429,7 @@ function A333_ewd_msg.ENG_2_FIRE.Action()
 	local f = {E1 = bNOT(UE2ABLP), E2 = eng2FireActVL02.s2}
 	f.S = bAND(f.E1, f.E2)
 
-	local g = {E1 = ZGND, E2 = JML21ON}
+	local g = {E1 = ZGND, E2 = JML2ON}
 	g.S = bAND(g.E1, g.E2)
 
 	local h = {E1 = eng2FireActVL01.s2, E2 = bNOT(ZGND), E3 = bNOT(UE2FBLP)}
@@ -461,25 +462,25 @@ function A333_ewd_msg.ENG_2_FIRE.Action()
 	local q = {E1 = ZGND, E2 = b.S}
 	q.S = bAND(q.E1, q.E2)
 
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[1].MsgStatus = bool2logic(k.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[2].MsgStatus = bool2logic(l.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[3].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[4].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[5].MsgStatus = bool2logic(d.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[6].MsgStatus = bool2logic(bNOT(UE2FPBOUT))
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[7].MsgText = string.format(' -AGENT 1 AFT %2dS..DISCH', eng2FireActVL01.out); A333_ewd_msg.ENG_2_FIRE.MsgLine[7].MsgStatus = bool2logic(n.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[8].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[9].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[10].MsgStatus = bool2logic(o.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[11].MsgStatus = bool2logic(g.S)
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[1].MsgStatus = bool2num[k.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[2].MsgStatus = bool2num[l.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[3].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[4].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[5].MsgStatus = bool2num[d.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[6].MsgStatus = bool2num[bNOT(UE2FPBOUT)]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[7].MsgText = string.format(' -AGENT 1 AFT %2dS..DISCH', eng2FireActVL01.out); A333_ewd_msg.ENG_2_FIRE.MsgLine[7].MsgStatus = bool2num[n.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[8].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[9].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[10].MsgStatus = bool2num[o.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[11].MsgStatus = bool2num[g.S]
 	A333_ewd_msg.ENG_2_FIRE.MsgLine[12].MsgStatus = 1
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[13].MsgStatus = bool2logic(ZGND)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[14].MsgText = string.format('  .IF FIRE AFTER %2dS:  ', eng2FireActVL02.out); A333_ewd_msg.ENG_2_FIRE.MsgLine[14].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[15].MsgStatus = bool2logic(p.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[16].MsgStatus = bool2logic(ZGND)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[17].MsgStatus = bool2logic(ZGND)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[18].MsgStatus = bool2logic(j.S)
-	A333_ewd_msg.ENG_2_FIRE.MsgLine[19].MsgStatus = bool2logic(q.S)
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[13].MsgStatus = bool2num[ZGND]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[14].MsgText = string.format('  .IF FIRE AFTER %2dS:  ', eng2FireActVL02.out); A333_ewd_msg.ENG_2_FIRE.MsgLine[14].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[15].MsgStatus = bool2num[p.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[16].MsgStatus = bool2num[ZGND]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[17].MsgStatus = bool2num[ZGND]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[18].MsgStatus = bool2num[j.S]
+	A333_ewd_msg.ENG_2_FIRE.MsgLine[19].MsgStatus = bool2num[q.S]
 
 end
 
@@ -501,10 +502,10 @@ function A333_ewd_msg.APU_FIRE.Action()
 	local b = {E1 = apuFireActVL01.s2, E2 = bNOT(UAPUELP)}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_ewd_msg.APU_FIRE.MsgLine[1].MsgStatus = bool2logic(bNOT(UAPUFPBOUT))
-	A333_ewd_msg.APU_FIRE.MsgLine[2].MsgText = string.format(' -AGENT AFT %2dS...DISCH', apuFireActVL01.out); MsgStatus = bool2logic(a.S)
-	A333_ewd_msg.APU_FIRE.MsgLine[3].MsgStatus = bool2logic(b.S)
-	A333_ewd_msg.APU_FIRE.MsgLine[4].MsgStatus = bool2logic(QMSON)
+	A333_ewd_msg.APU_FIRE.MsgLine[1].MsgStatus = bool2num[bNOT(UAPUFPBOUT)]
+	A333_ewd_msg.APU_FIRE.MsgLine[2].MsgText = string.format(' -AGENT AFT %2dS...DISCH', apuFireActVL01.out); MsgStatus = bool2num[a.S]
+	A333_ewd_msg.APU_FIRE.MsgLine[3].MsgStatus = bool2num[b.S]
+	A333_ewd_msg.APU_FIRE.MsgLine[4].MsgStatus = bool2num[QMSON]
 
 end
 
@@ -577,15 +578,15 @@ function A333_ewd_msg.EXCESS_CAB_ALT.Action()
 	local d = {E1 = bNOT(a.S), E2 = bNOT(KATHRE)}
 	d.S = bAND(d.E1, d.E2)
 
-	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[1].MsgStatus = bool2logic(excessCabAltThreshold01.out)
-	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[2].MsgStatus = bool2logic(excessCabAltThreshold01.out)
+	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[1].MsgStatus = bool2num[excessCabAltThreshold01.out]
+	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[2].MsgStatus = bool2num[excessCabAltThreshold01.out]
 	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[3].MsgStatus = 1
 	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[4].MsgStatus = 1
-	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[5].MsgStatus = bool2logic(d.S)
-	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[6].MsgStatus = bool2logic(bNOT(b.S))
+	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[5].MsgStatus = bool2num[d.S]
+	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[6].MsgStatus = bool2num[bNOT(b.S)]
 	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[7].MsgStatus = 1
-	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[8].MsgStatus = bool2logic(bNOT(CSIGNSONP))
-	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[9].MsgStatus = bool2logic(bNOT(c.S))
+	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[8].MsgStatus = bool2num[bNOT(CSIGNSONP)]
+	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[9].MsgStatus = bool2num[bNOT(c.S)]
 	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[10].MsgStatus = 1
 	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[11].MsgStatus = 1
 	A333_ewd_msg.EXCESS_CAB_ALT.MsgLine[12].MsgStatus = 1
@@ -599,9 +600,9 @@ end
 
 function A333_ewd_msg.ENG_1_OIL_LO_PR.Action()
 
-	A333_ewd_msg.ENG_1_OIL_LO_PR.MsgLine[1].MsgStatus = bool2logic(JML1ON)
-	A333_ewd_msg.ENG_1_OIL_LO_PR.MsgLine[2].MsgStatus = bool2logic(bNOT(JR1TLAI))
-	A333_ewd_msg.ENG_1_OIL_LO_PR.MsgLine[3].MsgStatus = bool2logic(JML1ON)
+	A333_ewd_msg.ENG_1_OIL_LO_PR.MsgLine[1].MsgStatus = bool2num[JML1ON]
+	A333_ewd_msg.ENG_1_OIL_LO_PR.MsgLine[2].MsgStatus = bool2num[bNOT(JR1TLAI)]
+	A333_ewd_msg.ENG_1_OIL_LO_PR.MsgLine[3].MsgStatus = bool2num[JML1ON]
 
 end
 
@@ -609,9 +610,9 @@ end
 
 function A333_ewd_msg.ENG_2_OIL_LO_PR.Action()
 
-	A333_ewd_msg.ENG_2_OIL_LO_PR.MsgLine[1].MsgStatus = bool2logic(JML2ON)
-	A333_ewd_msg.ENG_2_OIL_LO_PR.MsgLine[2].MsgStatus = bool2logic(bNOT(JR2TLAI))
-	A333_ewd_msg.ENG_2_OIL_LO_PR.MsgLine[3].MsgStatus = bool2logic(JML2ON)
+	A333_ewd_msg.ENG_2_OIL_LO_PR.MsgLine[1].MsgStatus = bool2num[JML2ON]
+	A333_ewd_msg.ENG_2_OIL_LO_PR.MsgLine[2].MsgStatus = bool2num[bNOT(JR2TLAI)]
+	A333_ewd_msg.ENG_2_OIL_LO_PR.MsgLine[3].MsgStatus = bool2num[JML2ON]
 
 end
 
@@ -671,9 +672,9 @@ function A333_ewd_msg.GEAR_NOT_DOWNLOCKED.Action()
 	local i = {E1 = h.S, E2 = bNOT(GLGDNLKD)}
 	i.S = bAND(i.E1, i.E2)
 
-	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.MsgLine[1].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.MsgLine[2].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.MsgLine[3].MsgStatus = bool2logic(bNOT(GLGDNLKD))
+	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.MsgLine[1].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.MsgLine[2].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.MsgLine[3].MsgStatus = bool2num[bNOT(GLGDNLKD)]
 
 end
 
@@ -714,9 +715,9 @@ function A333_ewd_msg.FWD_CARGO_SMOKE.Action()
 	local h = {E1 = b.S, E2 = c.S, E3 = d.S}
 	h.S = bAND3(h.E1, h.E2, h.E3)
 
-	A333_ewd_msg.FWD_CARGO_SMOKE.MsgLine[1].MsgStatus = bool2logic(fwdCargoSmkConf01.OUT)
-	A333_ewd_msg.FWD_CARGO_SMOKE.MsgLine[2].MsgStatus = bool2logic(g.S)
-	A333_ewd_msg.FWD_CARGO_SMOKE.MsgLine[3].MsgStatus = bool2logic(h.S)
+	A333_ewd_msg.FWD_CARGO_SMOKE.MsgLine[1].MsgStatus = bool2num[fwdCargoSmkConf01.OUT]
+	A333_ewd_msg.FWD_CARGO_SMOKE.MsgLine[2].MsgStatus = bool2num[g.S]
+	A333_ewd_msg.FWD_CARGO_SMOKE.MsgLine[3].MsgStatus = bool2num[h.S]
 
 end
 
@@ -757,9 +758,9 @@ function A333_ewd_msg.AFT_CARGO_SMOKE.Action()
 	local h = {E1 = b.S, E2 = c.S, E3 = d.S}
 	h.S = bAND3(h.E1, h.E2, h.E3)
 
-	A333_ewd_msg.AFT_CARGO_SMOKE.MsgLine[1].MsgStatus = bool2logic(aftCargoSmkConf01.OUT)
-	A333_ewd_msg.AFT_CARGO_SMOKE.MsgLine[2].MsgStatus = bool2logic(g.S)
-	A333_ewd_msg.AFT_CARGO_SMOKE.MsgLine[3].MsgStatus = bool2logic(h.S)
+	A333_ewd_msg.AFT_CARGO_SMOKE.MsgLine[1].MsgStatus = bool2num[aftCargoSmkConf01.OUT]
+	A333_ewd_msg.AFT_CARGO_SMOKE.MsgLine[2].MsgStatus = bool2num[g.S]
+	A333_ewd_msg.AFT_CARGO_SMOKE.MsgLine[3].MsgStatus = bool2num[h.S]
 
 end
 
@@ -790,27 +791,27 @@ function A333_ewd_msg.ELEC_EMER_CONFIG.Action()
 	local f = {E1 = GLGDNLKD, E2 = EEGNCON}
 	f.S = bAND(f.E1, f.E2)
 
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[1].MsgStatus = bool2logic(HRATNFS)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[2].MsgStatus = bool2logic(EGEN12R)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[3].MsgStatus = bool2logic(EGENRESET)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[4].MsgStatus = bool2logic(bNOT(EBTIEPBOF))
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[5].MsgStatus = bool2logic(EGENRESET)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[6].MsgStatus = bool2logic(bNOT(EEGNCON))
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[7].MsgStatus = bool2logic(bNOT(JRIGNSEL))
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[8].MsgStatus = bool2logic(bNOT(WETOPS))
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[9].MsgStatus = bool2logic(WETOPS)
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[1].MsgStatus = bool2num[HRATNFS]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[2].MsgStatus = bool2num[EGEN12R]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[3].MsgStatus = bool2num[EGENRESET]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[4].MsgStatus = bool2num[bNOT(EBTIEPBOF)]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[5].MsgStatus = bool2num[EGENRESET]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[6].MsgStatus = bool2num[bNOT(EEGNCON)]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[7].MsgStatus = bool2num[bNOT(JRIGNSEL)]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[8].MsgStatus = bool2num[bNOT(WETOPS)]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[9].MsgStatus = bool2num[WETOPS]
 	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[10].MsgStatus = 1
 	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[11].MsgStatus = 1
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[12].MsgStatus = bool2logic(bNOT(WMBE))
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[12].MsgStatus = bool2num[bNOT(WMBE)]
 	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[13].MsgStatus = 1
 	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[14].MsgStatus = 1
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[15].MsgStatus = bool2logic(f.S)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[16].MsgStatus = bool2logic(f.S)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[17].MsgStatus = bool2logic(f.S)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[18].MsgStatus = bool2logic(a.S)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[19].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[20].MsgStatus = bool2logic(VAVEPBO)
-	--A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[21].MsgStatus = bool2logic(d.S)			-- TODO: NOT MODELED
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[15].MsgStatus = bool2num[f.S]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[16].MsgStatus = bool2num[f.S]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[17].MsgStatus = bool2num[f.S]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[18].MsgStatus = bool2num[a.S]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[19].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[20].MsgStatus = bool2num[VAVEPBO]
+	--A333_ewd_msg.ELEC_EMER_CONFIG.MsgLine[21].MsgStatus = bool2num[d.S]			-- TODO: NOT MODELED
 
 end
 
@@ -867,17 +868,17 @@ function A333_ewd_msg.ENG_1_FAIL.Action()
 	local m = {E1 = bNOT(d.S), E2 = bNOT(UE1FPBOUT)}
 	m.S = bAND(m.E1, m.E2)
 
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[1].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[2].MsgStatus = bool2logic(j.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[3].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[4].MsgStatus = bool2logic(k.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[5].MsgStatus = bool2logic(l.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[6].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[7].MsgText = string.format(' -AGENT 1 AFT %2dS..DISCH', eng1failActVL01.out); A333_ewd_msg.ENG_1_FAIL.MsgLine[1].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[8].MsgStatus = bool2logic(f.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[9].MsgStatus = bool2logic(g.S)
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[10].MsgStatus = bool2logic(bNOT(d.s))
-	A333_ewd_msg.ENG_1_FAIL.MsgLine[11].MsgStatus = bool2logic(bNOT(d.S))
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[1].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[2].MsgStatus = bool2num[j.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[3].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[4].MsgStatus = bool2num[k.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[5].MsgStatus = bool2num[l.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[6].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[7].MsgText = string.format(' -AGENT 1 AFT %2dS..DISCH', eng1failActVL01.out); A333_ewd_msg.ENG_1_FAIL.MsgLine[1].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[8].MsgStatus = bool2num[f.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[9].MsgStatus = bool2num[g.S]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[10].MsgStatus = bool2num[bNOT(d.s)]
+	A333_ewd_msg.ENG_1_FAIL.MsgLine[11].MsgStatus = bool2num[bNOT(d.S)]
 
 end
 
@@ -891,8 +892,8 @@ end
 
 function A333_ewd_msg.ENG_1_OIL_HI_TEMP.Action()
 
-	A333_ewd_msg.ENG_1_OIL_HI_TEMP.MsgLine[1].MsgStatus = bool2logic(bNOT(JR1TLAI))
-	A333_ewd_msg.ENG_1_OIL_HI_TEMP.MsgLine[2].MsgStatus = bool2logic(JML1ON)
+	A333_ewd_msg.ENG_1_OIL_HI_TEMP.MsgLine[1].MsgStatus = bool2num[bNOT(JR1TLAI)]
+	A333_ewd_msg.ENG_1_OIL_HI_TEMP.MsgLine[2].MsgStatus = bool2num[JML1ON]
 
 end
 
@@ -900,10 +901,10 @@ end
 
 function A333_ewd_msg.ENG_1_SHUT_DOWN.Action()
 
-	local a = {E1 = bNOT(BXFVFC_1), E1 = BXFVFC_1_VAL}
+	local a = {E1 = bNOT(BXFVFC_1), E2 = BXFVFC_1_VAL}
 	a.S = bAND(a.E1, a.E2)
 
-	local b = {E1 = bNOT(BXFVFC_2), E1 = BXFVFC_2_VAL}
+	local b = {E1 = bNOT(BXFVFC_2), E2 = BXFVFC_2_VAL}
 	b.S = bAND(b.E1, b.E2)
 
 	local c = {E1 = ZPH4, E2 = ZPH5}
@@ -940,17 +941,17 @@ function A333_ewd_msg.ENG_1_SHUT_DOWN.Action()
 	m.S = bAND(m.E1, m.E2)
 
 	local n = {E1 = bNOT(c.S), E2 = bNOT(ZGND), E3 = JR1RUSTWD}
-	n.S = bAND(n.E1, n.E2, n.E3)
+	n.S = bAND3(n.E1, n.E2, n.E3)
 
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[1].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[2].MsgStatus = bool2logic(j.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[3].MsgStatus = bool2logic(l.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[4].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[5].MsgStatus = bool2logic(n.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[6].MsgStatus = bool2logic(n.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[7].MsgStatus = bool2logic(k.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[8].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[9].MsgStatus = bool2logic(UE1FPBOUT)
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[1].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[2].MsgStatus = bool2num[j.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[3].MsgStatus = bool2num[l.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[4].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[5].MsgStatus = bool2num[n.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[6].MsgStatus = bool2num[n.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[7].MsgStatus = bool2num[k.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[8].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.MsgLine[9].MsgStatus = bool2num[UE1FPBOUT]
 
 end
 
@@ -983,7 +984,7 @@ function A333_ewd_msg.ENG_2_FAIL.Action()
 	f.S = bAND4(f.E1, f.E2, f.E3, f.E4)
 
 	local g = {E1 = bNOT(UE2FBLP), E2 = ZGND, E3 = bNOT(d.S)}
-	g.S = bAND(g.E1, g.E2, g.E3)
+	g.S = bAND3(g.E1, g.E2, g.E3)
 
 	local h = {E1 = bNOT(b.S), E2  = bNOT(JR2ESI)}
 	h.S = bAND(h.E1, h.E2)
@@ -1003,17 +1004,17 @@ function A333_ewd_msg.ENG_2_FAIL.Action()
 	local m = {E1 = bNOT(d.S), E2 = bNOT(UE2FPBOUT)}
 	m.S = bAND(m.E1, m.E2)
 
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[1].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[2].MsgStatus = bool2logic(j.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[3].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[4].MsgStatus = bool2logic(k.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[5].MsgStatus = bool2logic(l.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[6].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[7].MsgText = string.format(' -AGENT 1 AFT %2dS..DISCH', eng2failActVL01.out); A333_ewd_msg.ENG_2_FAIL.MsgLine[1].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[8].MsgStatus = bool2logic(f.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[9].MsgStatus = bool2logic(g.S)
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[10].MsgStatus = bool2logic(bNOT(d.s))
-	A333_ewd_msg.ENG_2_FAIL.MsgLine[11].MsgStatus = bool2logic(bNOT(d.S))
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[1].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[2].MsgStatus = bool2num[j.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[3].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[4].MsgStatus = bool2num[k.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[5].MsgStatus = bool2num[l.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[6].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[7].MsgText = string.format(' -AGENT 1 AFT %2dS..DISCH', eng2failActVL01.out); A333_ewd_msg.ENG_2_FAIL.MsgLine[1].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[8].MsgStatus = bool2num[f.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[9].MsgStatus = bool2num[g.S]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[10].MsgStatus = bool2num[bNOT(d.s)]
+	A333_ewd_msg.ENG_2_FAIL.MsgLine[11].MsgStatus = bool2num[bNOT(d.S)]
 
 end
 
@@ -1026,8 +1027,8 @@ end
 
 function A333_ewd_msg.ENG_2_OIL_HI_TEMP.Action()
 
-	A333_ewd_msg.ENG_2_OIL_HI_TEMP.MsgLine[1].MsgStatus = bool2logic(bNOT(JR2TLAI))
-	A333_ewd_msg.ENG_2_OIL_HI_TEMP.MsgLine[2].MsgStatus = bool2logic(JML2ON)
+	A333_ewd_msg.ENG_2_OIL_HI_TEMP.MsgLine[1].MsgStatus = bool2num[bNOT(JR2TLAI)]
+	A333_ewd_msg.ENG_2_OIL_HI_TEMP.MsgLine[2].MsgStatus = bool2num[JML2ON]
 
 end
 
@@ -1081,7 +1082,7 @@ function A333_ewd_msg.ENG_2_SHUT_DOWN.Action()
 	m.S = bAND(m.E1, m.E2)
 
 	local n = {E1 = bNOT(c.S), E2 = bNOT(ZGND), E3 = JR2RUSTWD}
-	n.S = bAND(n.E1, n.E2, n.E3)
+	n.S = bAND3(n.E1, n.E2, n.E3)
 
 	local o = {E1 = h.S,  E2 = bb.S}
 	o.S = bAND(o.E1, o.E2)
@@ -1089,16 +1090,16 @@ function A333_ewd_msg.ENG_2_SHUT_DOWN.Action()
 	local p = {E1 = h.S, E2 = bNOT(bb.S)}
 	p.S = bAND(p.E1, p.E2)
 
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[1].MsgStatus = bool2logic(o.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[2].MsgStatus = bool2logic(p.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[3].MsgStatus = bool2logic(j.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[4].MsgStatus = bool2logic(l.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[5].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[6].MsgStatus = bool2logic(n.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[7].MsgStatus = bool2logic(n.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[8].MsgStatus = bool2logic(k.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[9].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[10].MsgStatus = bool2logic(UE2FPBOUT)
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[1].MsgStatus = bool2num[o.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[2].MsgStatus = bool2num[p.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[3].MsgStatus = bool2num[j.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[4].MsgStatus = bool2num[l.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[5].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[6].MsgStatus = bool2num[n.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[7].MsgStatus = bool2num[n.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[8].MsgStatus = bool2num[k.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[9].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.MsgLine[10].MsgStatus = bool2num[UE2FPBOUT]
 
 end
 
@@ -1147,8 +1148,8 @@ function A333_ewd_msg.ENG_1_OIL_LO_TEMP.Action()
 	local c = {E1 = bNOT(a.S), E2 = eng1OilTmpThreshold02.out}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.ENG_1_OIL_LO_TEMP.MsgLine[1].MsgStatus = bool2logic(b.S)
-	A333_ewd_msg.ENG_1_OIL_LO_TEMP.MsgLine[2].MsgStatus = bool2logic(c.S)
+	A333_ewd_msg.ENG_1_OIL_LO_TEMP.MsgLine[1].MsgStatus = bool2num[b.S]
+	A333_ewd_msg.ENG_1_OIL_LO_TEMP.MsgLine[2].MsgStatus = bool2num[c.S]
 
 end
 
@@ -1170,8 +1171,8 @@ function A333_ewd_msg.ENG_2_OIL_LO_TEMP.Action()
 	local c = {E1 = bNOT(a.S), E2 = eng2OilTmpThreshold02.out}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.ENG_2_OIL_LO_TEMP.MsgLine[1].MsgStatus = bool2logic(b.S)
-	A333_ewd_msg.ENG_2_OIL_LO_TEMP.MsgLine[2].MsgStatus = bool2logic(c.S)
+	A333_ewd_msg.ENG_2_OIL_LO_TEMP.MsgLine[1].MsgStatus = bool2num[b.S]
+	A333_ewd_msg.ENG_2_OIL_LO_TEMP.MsgLine[2].MsgStatus = bool2num[c.S]
 
 end
 
@@ -1183,7 +1184,7 @@ end
 
 function A333_ewd_msg.DC_EMER_CONFIG.Action()
 
-	A333_ewd_msg.DC_EMER_CONFIG.MsgLine[1].MsgStatus = bool2logic(EEGNCON)
+	A333_ewd_msg.DC_EMER_CONFIG.MsgLine[1].MsgStatus = bool2num[EEGNCON]
 
 end
 
@@ -1209,11 +1210,11 @@ function A333_ewd_msg.HYD_BY_SYS_LO_PR.Action()
 	local e = {E1 = bNOT(HRATNFS), E2 = bNOT(c.S)}
 	e.S = bAND(e.E1, e.E2)
 
-	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[1].MsgStatus = bool2logic(HRATNFS)
-	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[2].MsgStatus = bool2logic(d.S)
-	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[3].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[4].MsgStatus = bool2logic(bNOT(HBEPPBOF))
-	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[5].MsgStatus = bool2logic(bNOT(HYPPBOF))
+	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[1].MsgStatus = bool2num[HRATNFS]
+	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[2].MsgStatus = bool2num[d.S]
+	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[3].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[4].MsgStatus = bool2num[bNOT(HBEPPBOF)]
+	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[5].MsgStatus = bool2num[bNOT(HYPPBOF)]
 	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[6].MsgStatus = 1
 	A333_ewd_msg.HYD_BY_SYS_LO_PR.MsgLine[7].MsgStatus = 1
 
@@ -1237,10 +1238,10 @@ function A333_ewd_msg.HYD_GB_SYS_LO_PR.Action()
 	local d = {E1 = bNOT(HRATNFS), E2 = bNOT(c.S)}
 	d.S = bAND(d.E1, d.E2)
 
-	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[1].MsgStatus = bool2logic(HRATNFS)
-	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[2].MsgStatus = bool2logic(d.S)
-	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[3].MsgStatus = bool2logic(bNOT(HBEPPBOF))
-	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[4].MsgStatus = bool2logic(bNOT(HGPPBOF))
+	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[1].MsgStatus = bool2num[HRATNFS]
+	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[2].MsgStatus = bool2num[d.S]
+	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[3].MsgStatus = bool2num[bNOT(HBEPPBOF)]
+	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[4].MsgStatus = bool2num[bNOT(HGPPBOF)]
 	A333_ewd_msg.HYD_GB_SYS_LO_PR.MsgLine[5].MsgStatus = 1
 
 end
@@ -1260,9 +1261,9 @@ function A333_ewd_msg.HYD_GY_SYS_LO_PR.Action()
 	local c = {E1 = bNOT(a.S), E2 = bNOT(b.S)}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.HYD_GY_SYS_LO_PR.MsgLine[1].MsgStatus = bool2logic(bNOT(HGPPBOF))
-	A333_ewd_msg.HYD_GY_SYS_LO_PR.MsgLine[2].MsgStatus = bool2logic(bNOT(HYPPBOF))
-	A333_ewd_msg.HYD_GY_SYS_LO_PR.MsgLine[3].MsgStatus = bool2logic(c.S)
+	A333_ewd_msg.HYD_GY_SYS_LO_PR.MsgLine[1].MsgStatus = bool2num[bNOT(HGPPBOF)]
+	A333_ewd_msg.HYD_GY_SYS_LO_PR.MsgLine[2].MsgStatus = bool2num[bNOT(HYPPBOF)]
+	A333_ewd_msg.HYD_GY_SYS_LO_PR.MsgLine[3].MsgStatus = bool2num[c.S]
 	A333_ewd_msg.HYD_GY_SYS_LO_PR.MsgLine[4].MsgStatus = 1
 
 end
@@ -1299,14 +1300,14 @@ function A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.Action()
 	local h = {E1 = ZGND, E2 = g.S}
 	h.S = bAND(h.E1, h.E2)
 
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[1].MsgStatus = bool2logic(a.S)
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[2].MsgStatus = bool2logic(bNOT(JR1TLAI))
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[3].MsgStatus = bool2logic(bNOT(ZGND))
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[4].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[5].MsgStatus = bool2logic(bNOT(ZGND))
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[6].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[7].MsgStatus = bool2logic(f.S)
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[8].MsgStatus = bool2logic(f.S)
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[1].MsgStatus = bool2num[a.S]
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[2].MsgStatus = bool2num[bNOT(JR1TLAI)]
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[3].MsgStatus = bool2num[bNOT(ZGND)]
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[4].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[5].MsgStatus = bool2num[bNOT(ZGND)]
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[6].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[7].MsgStatus = bool2num[f.S]
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.MsgLine[8].MsgStatus = bool2num[f.S]
 
 end
 
@@ -1342,14 +1343,14 @@ function A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Action()
 	local h = {E1 = ZGND, E2 = g.S}
 	h.S = bAND(h.E1, h.E2)
 
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[1].MsgStatus = bool2logic(a.S)
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[2].MsgStatus = bool2logic(bNOT(JR2TLAI))
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[3].MsgStatus = bool2logic(bNOT(ZGND))
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[4].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[5].MsgStatus = bool2logic(bNOT(ZGND))
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[6].MsgStatus = bool2logic(e.S)
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[7].MsgStatus = bool2logic(f.S)
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[8].MsgStatus = bool2logic(f.S)
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[1].MsgStatus = bool2num[a.S]
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[2].MsgStatus = bool2num[bNOT(JR2TLAI)]
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[3].MsgStatus = bool2num[bNOT(ZGND)]
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[4].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[5].MsgStatus = bool2num[bNOT(ZGND)]
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[6].MsgStatus = bool2num[e.S]
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[7].MsgStatus = bool2num[f.S]
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.MsgLine[8].MsgStatus = bool2num[f.S]
 
 end
 
@@ -1362,9 +1363,9 @@ end
 
 function A333_ewd_msg.DC_BUS_1_2_OFF.Action()
 
-	A333_ewd_msg.DC_BUS_1_2_OFF.MsgLine[1].MsgStatus = bool2logic(bNOT(VAVEPBO))
+	A333_ewd_msg.DC_BUS_1_2_OFF.MsgLine[1].MsgStatus = bool2num[bNOT(VAVEPBO)]
 	A333_ewd_msg.DC_BUS_1_2_OFF.MsgLine[2].MsgStatus = 1
-	A333_ewd_msg.DC_BUS_1_2_OFF.MsgLine[3].MsgStatus = bool2logic(bNOT(WMBE))
+	A333_ewd_msg.DC_BUS_1_2_OFF.MsgLine[3].MsgStatus = bool2num[bNOT(WMBE)]
 	A333_ewd_msg.DC_BUS_1_2_OFF.MsgLine[4].MsgStatus = 1
 
 end
@@ -1392,10 +1393,14 @@ function A333_ewd_msg.GEN_1_FAULT.Action()
 
 	gen1faultSRR01:update(b.S, c.S)
 
-	A333_ewd_msg.GEN_1_FAULT.MsgLine[1].MsgStatus = bool2logic(bNOT(gen1faultSRR01.Q))
-	A333_ewd_msg.GEN_1_FAULT.MsgLine[2].MsgStatus = bool2logic(bNOT(EGN1PBOF))
-	A333_ewd_msg.GEN_1_FAULT.MsgLine[3].MsgStatus = bool2logic(bNOT(EGN1PBOF))
+	A333_ewd_msg.GEN_1_FAULT.MsgLine[1].MsgStatus = bool2num[bNOT(gen1faultSRR01.Q)]
+	A333_ewd_msg.GEN_1_FAULT.MsgLine[2].MsgStatus = bool2num[bNOT(EGN1PBOF)]
+	A333_ewd_msg.GEN_1_FAULT.MsgLine[3].MsgStatus = bool2num[bNOT(EGN1PBOF)]
 
+end
+
+function A333_ewd_msg.GEN_1_FAULT.ActionReset()
+	gen1faultSRR01:init()
 end
 
 
@@ -1418,12 +1423,15 @@ function A333_ewd_msg.GEN_2_FAULT.Action()
 
 	gen2faultSRR01:update(b.S, c.S)
 
-	A333_ewd_msg.GEN_2_FAULT.MsgLine[1].MsgStatus = bool2logic(bNOT(gen2faultSRR01.Q))
-	A333_ewd_msg.GEN_2_FAULT.MsgLine[2].MsgStatus = bool2logic(bNOT(EGN2PBOF))
-	A333_ewd_msg.GEN_2_FAULT.MsgLine[3].MsgStatus = bool2logic(bNOT(EGN2PBOF))
+	A333_ewd_msg.GEN_2_FAULT.MsgLine[1].MsgStatus = bool2num[bNOT(gen2faultSRR01.Q)]
+	A333_ewd_msg.GEN_2_FAULT.MsgLine[2].MsgStatus = bool2num[bNOT(EGN2PBOF)]
+	A333_ewd_msg.GEN_2_FAULT.MsgLine[3].MsgStatus = bool2num[bNOT(EGN2PBOF)]
 
 end
 
+function A333_ewd_msg.GEN_2_FAULT.ActionReset()
+	gen2faultSRR01:init()
+end
 
 
 
@@ -1445,10 +1453,14 @@ function A333_ewd_msg.APU_GEN_FAULT.Action()
 
 	apuGenFaultSRR01:update(b.S, c.S)
 
-	A333_ewd_msg.APU_GEN_FAULT.MsgLine[1].MsgStatus = bool2logic(bNOT(apuGenFaultSRR01.Q))
-	A333_ewd_msg.APU_GEN_FAULT.MsgLine[2].MsgStatus = bool2logic(bNOT(EAPUGNPBOF))
-	A333_ewd_msg.APU_GEN_FAULT.MsgLine[3].MsgStatus = bool2logic(bNOT(EAPUGNPBOF))
+	A333_ewd_msg.APU_GEN_FAULT.MsgLine[1].MsgStatus = bool2num[bNOT(apuGenFaultSRR01.Q)]
+	A333_ewd_msg.APU_GEN_FAULT.MsgLine[2].MsgStatus = bool2num[bNOT(EAPUGNPBOF)]
+	A333_ewd_msg.APU_GEN_FAULT.MsgLine[3].MsgStatus = bool2num[bNOT(EAPUGNPBOF)]
 
+end
+
+function A333_ewd_msg.APU_GEN_FAULT.ActionReset()
+	apuGenFaultSRR01:init()
 end
 
 
@@ -1507,8 +1519,8 @@ function A333_ewd_msg.DOORS_NOT_CLOSED.Action()
 	local m = {E1 = bNOT(doorNotClsdActSRS01.Q), E2 = i.S, E3 = bNOT(n.S)}
 	m.S = bAND3(m.E1, m.E2, m.E3)
 
-	A333_ewd_msg.DOORS_NOT_CLOSED.MsgLine[1].MsgStatus = bool2logic(m.S)
-	A333_ewd_msg.DOORS_NOT_CLOSED.MsgLine[2].MsgStatus = bool2logic(m.S)
+	A333_ewd_msg.DOORS_NOT_CLOSED.MsgLine[1].MsgStatus = bool2num[m.S]
+	A333_ewd_msg.DOORS_NOT_CLOSED.MsgLine[2].MsgStatus = bool2num[m.S]
 	A333_ewd_msg.DOORS_NOT_CLOSED.MsgLine[3].MsgStatus = 1
 
 end
@@ -1583,12 +1595,12 @@ function A333_ewd_msg.GEAR_NOT_UPLOCKED.Action()
 	local r = {E1 = bNOT(GLGDNLKD), E2 = bNOT(GODNC)}
 	r.S = bAND(r.E1, r.E2)
 
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[1].MsgStatus = bool2logic(bNOT(GLGDNLKD))
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[2].MsgStatus = bool2logic(o.S)
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[3].MsgStatus = bool2logic(q.S)
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[4].MsgStatus = bool2logic(p.S)
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[5].MsgStatus = bool2logic(GLGDNLKD)
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[6].MsgStatus = bool2logic(r.S)
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[1].MsgStatus = bool2num[bNOT(GLGDNLKD)]
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[2].MsgStatus = bool2num[o.S]
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[3].MsgStatus = bool2num[q.S]
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[4].MsgStatus = bool2num[p.S]
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[5].MsgStatus = bool2num[GLGDNLKD]
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.MsgLine[6].MsgStatus = bool2num[r.S]
 
 end
 
@@ -1614,8 +1626,8 @@ function A333_ewd_msg.SHOCK_ABSORBER_FAULT.Action()
 	local a = {E1 = GLGNE, E2 = bNOT(ZGND)}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_ewd_msg.SHOCK_ABSORBER_FAULT.MsgLine[1].MsgStatus = bool2logic(GLGNE)
-	A333_ewd_msg.SHOCK_ABSORBER_FAULT.MsgLine[2].MsgStatus = bool2logic(a.S)
+	A333_ewd_msg.SHOCK_ABSORBER_FAULT.MsgLine[1].MsgStatus = bool2num[GLGNE]
+	A333_ewd_msg.SHOCK_ABSORBER_FAULT.MsgLine[2].MsgStatus = bool2num[a.S]
 
 end
 
@@ -1640,11 +1652,11 @@ function A333_ewd_msg.BRAKES_HOT.Action()
 	local e = {E1 = bNOT(c.S), E2 = d.S}
 	e.S = bAND(e.E1, e.E2)
 
-	A333_ewd_msg.BRAKES_HOT.MsgLine[1].MsgStatus = bool2logic(bNOT(ZGND))
-	A333_ewd_msg.BRAKES_HOT.MsgLine[2].MsgStatus = bool2logic(bNOT(ZGND))
-	A333_ewd_msg.BRAKES_HOT.MsgLine[3].MsgStatus = bool2logic(e.s)
-	A333_ewd_msg.BRAKES_HOT.MsgLine[4].MsgStatus = bool2logic(ZGND)
-	A333_ewd_msg.BRAKES_HOT.MsgLine[5].MsgStatus = bool2logic(bNOT(ZGND))
+	A333_ewd_msg.BRAKES_HOT.MsgLine[1].MsgStatus = bool2num[bNOT(ZGND)]
+	A333_ewd_msg.BRAKES_HOT.MsgLine[2].MsgStatus = bool2num[bNOT(ZGND)]
+	A333_ewd_msg.BRAKES_HOT.MsgLine[3].MsgStatus = bool2num[e.s]
+	A333_ewd_msg.BRAKES_HOT.MsgLine[4].MsgStatus = bool2num[ZGND]
+	A333_ewd_msg.BRAKES_HOT.MsgLine[5].MsgStatus = bool2num[bNOT(ZGND)]
 
 end
 
@@ -1655,11 +1667,11 @@ end
 
 function A333_ewd_msg.L_R_WING_TK_LO_LVL.Action()
 
-	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[1].MsgStatus = bool2logic(bNOT(FLTP1COF))
-	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[2].MsgStatus = bool2logic(bNOT(FLTP2COF))
-	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[3].MsgStatus = bool2logic(bNOT(FRTP1COF))
-	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[4].MsgStatus = bool2logic(bNOT(FRTP2COF))
-	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[5].MsgStatus = bool2logic(bNOT(FXFVPBON))
+	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[1].MsgStatus = bool2num[bNOT(FLTP1COF)]
+	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[2].MsgStatus = bool2num[bNOT(FLTP2COF)]
+	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[3].MsgStatus = bool2num[bNOT(FRTP1COF)]
+	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[4].MsgStatus = bool2num[bNOT(FRTP2COF)]
+	A333_ewd_msg.L_R_WING_TK_LO_LVL.MsgLine[5].MsgStatus = bool2num[bNOT(FXFVPBON)]
 
 end
 
@@ -1667,10 +1679,10 @@ end
 
 function A333_ewd_msg.L_WING_TK_LO_LVL.Action()
 
-	A333_ewd_msg.L_WING_TK_LO_LVL.MsgLine[1].MsgStatus = bool2logic(bNOT(FXFVPBON))
-	A333_ewd_msg.L_WING_TK_LO_LVL.MsgLine[2].MsgStatus = bool2logic(bNOT(FXFVPBON))
-	A333_ewd_msg.L_WING_TK_LO_LVL.MsgLine[3].MsgStatus = bool2logic(bNOT(FLTP1COF))
-	A333_ewd_msg.L_WING_TK_LO_LVL.MsgLine[4].MsgStatus = bool2logic(bNOT(FLTP2COF))
+	A333_ewd_msg.L_WING_TK_LO_LVL.MsgLine[1].MsgStatus = bool2num[bNOT(FXFVPBON)]
+	A333_ewd_msg.L_WING_TK_LO_LVL.MsgLine[2].MsgStatus = bool2num[bNOT(FXFVPBON)]
+	A333_ewd_msg.L_WING_TK_LO_LVL.MsgLine[3].MsgStatus = bool2num[bNOT(FLTP1COF)]
+	A333_ewd_msg.L_WING_TK_LO_LVL.MsgLine[4].MsgStatus = bool2num[bNOT(FLTP2COF)]
 
 end
 
@@ -1678,10 +1690,10 @@ end
 
 function A333_ewd_msg.R_WING_TK_LO_LVL.Action()
 
-	A333_ewd_msg.R_WING_TK_LO_LVL.MsgLine[1].MsgStatus = bool2logic(bNOT(FXFVPBON))
-	A333_ewd_msg.R_WING_TK_LO_LVL.MsgLine[2].MsgStatus = bool2logic(bNOT(FXFVPBON))
-	A333_ewd_msg.R_WING_TK_LO_LVL.MsgLine[3].MsgStatus = bool2logic(bNOT(FRTP1COF))
-	A333_ewd_msg.R_WING_TK_LO_LVL.MsgLine[4].MsgStatus = bool2logic(bNOT(FRTP2COF))
+	A333_ewd_msg.R_WING_TK_LO_LVL.MsgLine[1].MsgStatus = bool2num[bNOT(FXFVPBON)]
+	A333_ewd_msg.R_WING_TK_LO_LVL.MsgLine[2].MsgStatus = bool2num[bNOT(FXFVPBON)]
+	A333_ewd_msg.R_WING_TK_LO_LVL.MsgLine[3].MsgStatus = bool2num[bNOT(FRTP1COF)]
+	A333_ewd_msg.R_WING_TK_LO_LVL.MsgLine[4].MsgStatus = bool2num[bNOT(FRTP2COF)]
 
 end
 
@@ -1726,9 +1738,9 @@ function A333_ewd_msg.X_BLEED_FAULT.Action()
 
 	IXBAIC = g.S
 
-	A333_ewd_msg.X_BLEED_FAULT.MsgLine[1].MsgStatus = bool2logic(h.S)
-	A333_ewd_msg.X_BLEED_FAULT.MsgLine[2].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.X_BLEED_FAULT.MsgLine[3].MsgStatus = bool2logic(g.S)
+	A333_ewd_msg.X_BLEED_FAULT.MsgLine[1].MsgStatus = bool2num[h.S]
+	A333_ewd_msg.X_BLEED_FAULT.MsgLine[2].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.X_BLEED_FAULT.MsgLine[3].MsgStatus = bool2num[g.S]
 
 end
 
@@ -1773,9 +1785,9 @@ function A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.Action()
 	local c = {E1 = IWAIPBON, E2 = a.S}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.MsgLine[1].MsgStatus = bool2logic(b.S)
-	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.MsgLine[2].MsgStatus = bool2logic(c.S)
-	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.MsgLine[3].MsgStatus = bool2logic(a.S)
+	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.MsgLine[1].MsgStatus = bool2num[b.S]
+	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.MsgLine[2].MsgStatus = bool2num[c.S]
+	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.MsgLine[3].MsgStatus = bool2num[a.S]
 
 end
 
@@ -1794,8 +1806,8 @@ end
 
 function A333_ewd_msg.DOOR_L_FWD_CABIN.Action()
 
-	A333_ewd_msg.DOOR_L_FWD_CABIN.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_L_FWD_CABIN.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_L_FWD_CABIN.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_L_FWD_CABIN.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1804,8 +1816,8 @@ end
 
 function A333_ewd_msg.DOOR_L_MID_CABIN.Action()
 
-	A333_ewd_msg.DOOR_L_MID_CABIN.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_L_MID_CABIN.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_L_MID_CABIN.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_L_MID_CABIN.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1814,8 +1826,8 @@ end
 
 function A333_ewd_msg.DOOR_L_AFT_CABIN.Action()
 
-	A333_ewd_msg.DOOR_L_AFT_CABIN.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_L_AFT_CABIN.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_L_AFT_CABIN.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_L_AFT_CABIN.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1824,8 +1836,8 @@ end
 
 function A333_ewd_msg.DOOR_R_FWD_CABIN.Action()
 
-	A333_ewd_msg.DOOR_R_FWD_CABIN.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_R_FWD_CABIN.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_R_FWD_CABIN.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_R_FWD_CABIN.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1834,8 +1846,8 @@ end
 
 function A333_ewd_msg.DOOR_R_MID_CABIN.Action()
 
-	A333_ewd_msg.DOOR_R_MID_CABIN.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_R_MID_CABIN.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_R_MID_CABIN.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_R_MID_CABIN.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1844,8 +1856,8 @@ end
 
 function A333_ewd_msg.DOOR_R_AFT_CABIN.Action()
 
-	A333_ewd_msg.DOOR_R_AFT_CABIN.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_R_AFT_CABIN.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_R_AFT_CABIN.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_R_AFT_CABIN.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1854,8 +1866,8 @@ end
 
 function A333_ewd_msg.DOOR_L_EMER_EXIT.Action()
 
-	A333_ewd_msg.DOOR_L_EMER_EXIT.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_L_EMER_EXIT.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_L_EMER_EXIT.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_L_EMER_EXIT.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1864,8 +1876,8 @@ end
 
 function A333_ewd_msg.DOOR_R_EMER_EXIT.Action()
 
-	A333_ewd_msg.DOOR_R_EMER_EXIT.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_R_EMER_EXIT.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_R_EMER_EXIT.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_R_EMER_EXIT.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1874,8 +1886,8 @@ end
 
 function A333_ewd_msg.DOOR_R_AVIONICS.Action()
 
-	A333_ewd_msg.DOOR_R_AVIONICS.MsgLine[1].MsgStatus = bool2logic(ZPH6)
-	A333_ewd_msg.DOOR_R_AVIONICS.MsgLine[2].MsgStatus = bool2logic(ZPH6)
+	A333_ewd_msg.DOOR_R_AVIONICS.MsgLine[1].MsgStatus = bool2num[ZPH6]
+	A333_ewd_msg.DOOR_R_AVIONICS.MsgLine[2].MsgStatus = bool2num[ZPH6]
 
 end
 
@@ -1928,24 +1940,24 @@ function A333_ewd_msg.TO_MEMO.Action()
 	local l = {E1 = toMemoSRR01.Q, E2 = WTOCNORM}
 	l.S = bAND(l.E1, l.E2)
 
-	A333_ewd_msg.TO_MEMO.MsgLine[1].MsgStatus = bool2logic(bNOT(k.S))
-	A333_ewd_msg.TO_MEMO.MsgLine[2].MsgStatus = bool2logic(bNOT(k.S))
-	A333_ewd_msg.TO_MEMO.MsgLine[3].MsgStatus = bool2logic(k.S)
-	A333_ewd_msg.TO_MEMO.MsgLine[4].MsgStatus = bool2logic(bNOT(CSIGNSONP))
-	A333_ewd_msg.TO_MEMO.MsgLine[5].MsgStatus = bool2logic(bNOT(CSIGNSONP))
-	A333_ewd_msg.TO_MEMO.MsgLine[6].MsgStatus = bool2logic(CSIGNSONP)
-	A333_ewd_msg.TO_MEMO.MsgLine[7].MsgStatus = bool2logic(WCABNR)
-	A333_ewd_msg.TO_MEMO.MsgLine[8].MsgStatus = bool2logic(WCABNR)
-	A333_ewd_msg.TO_MEMO.MsgLine[9].MsgStatus = bool2logic(WCABR)
-	A333_ewd_msg.TO_MEMO.MsgLine[10].MsgStatus = bool2logic(bNOT(b.S))
-	A333_ewd_msg.TO_MEMO.MsgLine[11].MsgStatus = bool2logic(bNOT(b.S))
-	A333_ewd_msg.TO_MEMO.MsgLine[12].MsgStatus = bool2logic(b.S)
-	A333_ewd_msg.TO_MEMO.MsgLine[13].MsgStatus = bool2logic(bNOT(i.S))
-	A333_ewd_msg.TO_MEMO.MsgLine[14].MsgStatus = bool2logic(bNOT(i.S))
-	A333_ewd_msg.TO_MEMO.MsgLine[15].MsgStatus = bool2logic(i.S)
-	A333_ewd_msg.TO_MEMO.MsgLine[16].MsgStatus = bool2logic(bNOT(toMemoSRR01.Q))
-	A333_ewd_msg.TO_MEMO.MsgLine[17].MsgStatus = bool2logic(bNOT(toMemoSRR01.Q))
-	A333_ewd_msg.TO_MEMO.MsgLine[18].MsgStatus = bool2logic(l.S)
+	A333_ewd_msg.TO_MEMO.MsgLine[1].MsgStatus = bool2num[bNOT(k.S)]
+	A333_ewd_msg.TO_MEMO.MsgLine[2].MsgStatus = bool2num[bNOT(k.S)]
+	A333_ewd_msg.TO_MEMO.MsgLine[3].MsgStatus = bool2num[k.S]
+	A333_ewd_msg.TO_MEMO.MsgLine[4].MsgStatus = bool2num[bNOT(CSIGNSONP)]
+	A333_ewd_msg.TO_MEMO.MsgLine[5].MsgStatus = bool2num[bNOT(CSIGNSONP)]
+	A333_ewd_msg.TO_MEMO.MsgLine[6].MsgStatus = bool2num[CSIGNSONP]
+	A333_ewd_msg.TO_MEMO.MsgLine[7].MsgStatus = bool2num[WCABNR]
+	A333_ewd_msg.TO_MEMO.MsgLine[8].MsgStatus = bool2num[WCABNR]
+	A333_ewd_msg.TO_MEMO.MsgLine[9].MsgStatus = bool2num[WCABR]
+	A333_ewd_msg.TO_MEMO.MsgLine[10].MsgStatus = bool2num[bNOT(b.S)]
+	A333_ewd_msg.TO_MEMO.MsgLine[11].MsgStatus = bool2num[bNOT(b.S)]
+	A333_ewd_msg.TO_MEMO.MsgLine[12].MsgStatus = bool2num[b.S]
+	A333_ewd_msg.TO_MEMO.MsgLine[13].MsgStatus = bool2num[bNOT(i.S)]
+	A333_ewd_msg.TO_MEMO.MsgLine[14].MsgStatus = bool2num[bNOT(i.S)]
+	A333_ewd_msg.TO_MEMO.MsgLine[15].MsgStatus = bool2num[i.S]
+	A333_ewd_msg.TO_MEMO.MsgLine[16].MsgStatus = bool2num[bNOT(toMemoSRR01.Q)]
+	A333_ewd_msg.TO_MEMO.MsgLine[17].MsgStatus = bool2num[bNOT(toMemoSRR01.Q)]
+	A333_ewd_msg.TO_MEMO.MsgLine[18].MsgStatus = bool2num[l.S]
 
 end
 
@@ -1981,13 +1993,13 @@ function A333_ewd_msg.LDG_MEMO.Action()
 	local g = {E1 = GRGDL_1, E2 = GRGDL_2}
 	g.S = bOR(g.E1, g.E2)
 
-	local h = {E1 = bNOT(a.S), E2 = bNOT(NFPBLDG3)}
+	local h = {E1 = bNOT(a.S), E2 = bNOT(NFFMSLDG3)}
 	h.S = bAND(h.E1, h.E2)
 
 	local i = {E1 = a.S, E2 = SFLPSF, E3 = bNOT(d.S)}
 	i.S = bAND3(i.E1, i.E2, i.E3)
 
-	local j = {E1 = NFPBLDG3, E2 = bNOT(a.S)}
+	local j = {E1 = NFFMSLDG3, E2 = bNOT(a.S)}
 	j.S = bAND(j.E1, j.E2)
 
 	local k = {E1 = e.S, E2 = f.S, E3 = g.S}
@@ -2000,7 +2012,7 @@ function A333_ewd_msg.LDG_MEMO.Action()
 	m.S = bOR(m.E1, m.E2)
 
 	local n = {E1 = j.S, E2 = l.S, E3 = NAPPRAL}
-	n.S = bOR3(n.E1, n.E2, g.E3)
+	n.S = bOR3(n.E1, n.E2, n.E3)
 
 	local o = {E1 = bNOT(CSIGNSONP), E2 = bNOT(EEMER)}
 	o.S = bAND(o.E1, o.E2)
@@ -2020,25 +2032,24 @@ function A333_ewd_msg.LDG_MEMO.Action()
 	local t = {E1 = bNOT(NSFCONF3NS), E2 = n.S}
 	t.S = bAND(t.E1, t.E2)
 
-
-	A333_ewd_msg.LDG_MEMO.MsgLine[1].MsgStatus = bool2logic(bNOT(k.S))
-	A333_ewd_msg.LDG_MEMO.MsgLine[2].MsgStatus = bool2logic(bNOT(k.S))
-	A333_ewd_msg.LDG_MEMO.MsgLine[3].MsgStatus = bool2logic(k.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[4].MsgStatus = bool2logic(o.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[5].MsgStatus = bool2logic(o.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[6].MsgStatus = bool2logic(p.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[7].MsgStatus = bool2logic(WCABNR)
-	A333_ewd_msg.LDG_MEMO.MsgLine[8].MsgStatus = bool2logic(WCABNR)
-	A333_ewd_msg.LDG_MEMO.MsgLine[9].MsgStatus = bool2logic(WCABR)
-	A333_ewd_msg.LDG_MEMO.MsgLine[10].MsgStatus = bool2logic(bNOT(b.S))
-	A333_ewd_msg.LDG_MEMO.MsgLine[11].MsgStatus = bool2logic(bNOT(b.S))
-	A333_ewd_msg.LDG_MEMO.MsgLine[12].MsgStatus = bool2logic(b.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[13].MsgStatus = bool2logic(q.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[14].MsgStatus = bool2logic(q.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[15].MsgStatus = bool2logic(r.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[16].MsgStatus = bool2logic(s.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[17].MsgStatus = bool2logic(s.S)
-	A333_ewd_msg.LDG_MEMO.MsgLine[18].MsgStatus = bool2logic(t.S)
+	A333_ewd_msg.LDG_MEMO.MsgLine[1].MsgStatus = bool2num[bNOT(k.S)]
+	A333_ewd_msg.LDG_MEMO.MsgLine[2].MsgStatus = bool2num[bNOT(k.S)]
+	A333_ewd_msg.LDG_MEMO.MsgLine[3].MsgStatus = bool2num[k.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[4].MsgStatus = bool2num[o.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[5].MsgStatus = bool2num[o.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[6].MsgStatus = bool2num[p.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[7].MsgStatus = bool2num[WCABNR]
+	A333_ewd_msg.LDG_MEMO.MsgLine[8].MsgStatus = bool2num[WCABNR]
+	A333_ewd_msg.LDG_MEMO.MsgLine[9].MsgStatus = bool2num[WCABR]
+	A333_ewd_msg.LDG_MEMO.MsgLine[10].MsgStatus = bool2num[bNOT(b.S)]
+	A333_ewd_msg.LDG_MEMO.MsgLine[11].MsgStatus = bool2num[bNOT(b.S)]
+	A333_ewd_msg.LDG_MEMO.MsgLine[12].MsgStatus = bool2num[b.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[13].MsgStatus = bool2num[q.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[14].MsgStatus = bool2num[q.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[15].MsgStatus = bool2num[r.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[16].MsgStatus = bool2num[s.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[17].MsgStatus = bool2num[s.S]
+	A333_ewd_msg.LDG_MEMO.MsgLine[18].MsgStatus = bool2num[t.S]
 
 end
 

@@ -188,14 +188,14 @@ A333_epr_go_around = {
 
 simDR_engines_running			= find_dataref("sim/flightmodel/engine/ENGN_running")
 simDR_OAT 						= find_dataref("sim/cockpit2/temperature/outside_air_temp_degc")
-simDR_TAT 						= find_dataref("sim/cockpit2/temperature/outside_air_LE_temp_degc")
+simDR_TAT 						= find_dataref("sim/weather/aircraft/temperature_leadingedge_deg_c")
 simDR_altitude_msl				= find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 simDR_engine_inlet_heat			= find_dataref("sim/cockpit2/ice/ice_inlet_heat_on_per_engine")
 simDR_wing_surface_heat			= find_dataref("sim/cockpit2/ice/ice_surfce_heat_on")
 simDR_duct_isol_valve_left		= find_dataref("sim/cockpit2/bleedair/actuators/isol_valve_left")
 simDR_duct_isol_valve_right		= find_dataref("sim/cockpit2/bleedair/actuators/isol_valve_right")
 simDR_engine_EPR 				= find_dataref("sim/flightmodel/engine/ENGN_EPR")
-simDR_flex_temp					= find_dataref("sim/flightmodel/engine/ENGN_assumed_temp[0]")
+simDR_flex_temp					= find_dataref("sim/flightmodel/engine/ENGN_assumed_temp")
 
 --*************************************************************************************--
 --** 				             FIND X-PLANE COMMANDS                   	    	 **--

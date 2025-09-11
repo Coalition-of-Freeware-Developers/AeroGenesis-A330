@@ -55,6 +55,8 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
 
+local bool2num = {[true] = 1, [false] = 0}
+
 
 
 --*************************************************************************************--
@@ -785,7 +787,7 @@ function newSlopeThreshold(name, operator, threshold, unit)
 			local curRate = (self.input - self.lastIn) / SIM_PERIOD
 			if self.operator == '>' then
 				self.out = curRate > self.threshold
-			elseif slef.operator == '>=' then
+			elseif self.operator == '>=' then
 				self.out = curRate >= self.threshold
 			elseif self.operstor == '<' then
 				self.out = curRate < self.threshold
@@ -991,8 +993,6 @@ end
 
 
 
-
-
 function math.round95(value)
 
 	local i, f = math.modf(value)
@@ -1010,30 +1010,11 @@ end
 
 
 
-
-
-
------| UTIL: TERNARY CONDITIONAL
-function ternary(condition, ifTrue, ifFalse)
-	if condition then return ifTrue else return ifFalse end
-end
-
-
-
-
 -----| UTIL: CONVERT TO TRADITIONAL BOOLEAN
 function toboolean(v)
 	return v ~= nil and v ~= false and v ~= 0
 end
 
-
-
-
-
------| UTIL: BOOLEAN TO LOGIC NUMBER
-function bool2logic(bool)
-	return ternary(bool == true, 1, 0)
-end
 
 
 

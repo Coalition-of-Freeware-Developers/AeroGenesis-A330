@@ -8,7 +8,7 @@ jit.off()
 *
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
-*
+* 10/09/2025   AG330 v1.2.0   add ADIRS ALIGN MSG to EWD
 *
 *
 *
@@ -674,7 +674,7 @@ A333_ewd_msg.DC_BUS_1_2_OFF.MsgLine = {
 
 
 
---name, itemGroup, itemTitle, warningTitle, 		itemGfx, warningGfx, titleColor, zone, failType, level, master, sysPage, aural, priority
+
 
 A333_ewd_msg.GEN_1_FAULT = newEWDwarningMessage('GEN_1_FAULT', 'ELEC$3', 'ELEC', 'GEN 1 FAULT', 1, 0, 1, 0, 1, 2, 2, 4, 2, 5020)
 A333_ewd_msg.GEN_1_FAULT.Inhibit = {1,0,0,1,1,0,1,1,0,1}
@@ -683,7 +683,6 @@ A333_ewd_msg.GEN_1_FAULT.MsgLine = {
 	{MsgColor = 4, MsgText = ' -GEN 1......OFF THEN ON', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
 	{MsgColor = 3, MsgText = '   .IF UNSUCCESSFUL:    ', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
 	{MsgColor = 4, MsgText = ' -GEN1...............OFF', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
-
 }
 
 A333_ewd_msg.GEN_2_FAULT = newEWDwarningMessage('GEN_2_FAULT', 'ELEC$3', 'ELEC', 'GEN 2 FAULT', 1, 0, 1, 0, 1, 2, 2, 4, 2, 5020)
@@ -693,7 +692,6 @@ A333_ewd_msg.GEN_2_FAULT.MsgLine = {
 	{MsgColor = 4, MsgText = ' -GEN 2......OFF THEN ON', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
 	{MsgColor = 3, MsgText = '   .IF UNSUCCESSFUL:    ', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
 	{MsgColor = 4, MsgText = ' -GEN 2..............OFF', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
-
 }
 
 
@@ -705,8 +703,18 @@ A333_ewd_msg.APU_GEN_FAULT.MsgLine = {
 	{MsgColor = 4, MsgText = ' -APU GEN....OFF THEN ON', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
 	{MsgColor = 3, MsgText = '   .IF UNSUCCESSFUL:    ', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
 	{MsgColor = 4, MsgText = ' -APU GEN............OFF', MsgVisible = 0, MsgCleared = 0, MsgStatus = 0},
-
 }
+
+
+
+
+
+--name, itemGroup, itemTitle, warningTitle, 		itemGfx, warningGfx, titleColor, zone, failType, level, master, sysPage, aural, priority
+A333_ewd_msg.ALTI_DISCREPANCY = newEWDwarningMessage('ALTI_DISCREPANCY', 'NAV$1', 'NAV', 'ALTI DISCREPANCY', 1, 0, 1, 0, 1, 2, 2, 0, 2, 5700)
+A333_ewd_msg.ALTI_DISCREPANCY.Inhibit = {0,0,0,1,1,0,0,1,0,0}
+A333_ewd_msg.ALTI_DISCREPANCY.CmdInputs = ':CLR:RCL:C:EC:'
+
+
 
 
 
@@ -997,9 +1005,13 @@ A333_ewd_msg.LDG_MEMO.MsgLine = {
 
 -----| EWD ZONE 0 (LEFT) MEMO
 
-A333_ewd_msg.GND_SPLRS_ARMED = newEWDwarningMessage('GND_SPLRS_ARMED', 'MEM0$1', 'GND SPLRS ARMED', '', 0, 0, 2, 0, 6, 0, 0, 0, 0, 7950)
+A333_ewd_msg.GND_SPLRS_ARMED = newEWDwarningMessage('GND_SPLRS_ARMED', 'MEM0$0', 'GND SPLRS ARMED', '', 0, 0, 2, 0, 6, 0, 0, 0, 0, 7950)
 A333_ewd_msg.GND_SPLRS_ARMED.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.GND_SPLRS_ARMED.CmdInputs = ''
+
+A333_ewd_msg.ADIRS_ALIGN = newEWDwarningMessage('ADIRS_ALIGN', 'MEM0$1', 'IR IN ALIGN', '[time_remaining]', 0, 0, 2, 0, 6, 0, 0, 0, 0, 7975)
+A333_ewd_msg.ADIRS_ALIGN.Inhibit = {0,0,0,0,0,0,0,0,0,0}
+A333_ewd_msg.ADIRS_ALIGN.CmdInputs = ''
 
 A333_ewd_msg.SEAT_BELTS = newEWDwarningMessage('SEAT_BELTS', 'MEM0$2', 'SEAT BELTS', '', 0, 0, 2, 0, 6, 0, 0, 0, 0, 7955)
 A333_ewd_msg.SEAT_BELTS.Inhibit = {0,0,0,0,0,0,0,0,0,0}
@@ -1053,7 +1065,7 @@ A333_ewd_msg.LAND_ASAP_AMBER = newEWDwarningMessage('LAND_ASAP_AMBER', 'SL1$4', 
 A333_ewd_msg.LAND_ASAP_AMBER.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.LAND_ASAP_AMBER.CmdInputs = ''
 
-A333_ewd_msg.AP_OFF_TEXT = newEWDwarningMessage('AP_OFF_TEXT', '', 'AP OFF', '', 0, 0, 1, 1, 0, 0, 0, 0, 0, 8050)
+A333_ewd_msg.AP_OFF_TEXT = newEWDwarningMessage('AP_OFF_TEXT', '', 'AP OFF      ', '', 0, 0, 1, 1, 0, 0, 0, 0, 0, 8050)
 A333_ewd_msg.AP_OFF_TEXT.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.AP_OFF_TEXT.CmdInputs = ''
 
@@ -1070,7 +1082,7 @@ A333_ewd_msg.CAB_PRESS = newEWDwarningMessage('CAB_PRESS', '*CAB PRESS$1', '_CAB
 A333_ewd_msg.CAB_PRESS.Inhibit = {0,0,0,1,1,0,0,0,0,0}
 A333_ewd_msg.CAB_PRESS.CmdInputs = ':CLR:RCL:'
 
-A333_ewd_msg.AVNCS_VENT = newEWDwarningMessage('AVNCS_VENT', '*AVNCS_VENT$1', '_AVNCS VENT ', '', 0, 0, 1, 1, 4, 0, 0, 3, 0, 8510)
+A333_ewd_msg.AVNCS_VENT = newEWDwarningMessage('AVNCS_VENT', '*AVNCS_VENT$1', '_AVNCS_VENT ', '', 0, 0, 1, 1, 4, 0, 0, 3, 0, 8510)
 A333_ewd_msg.AVNCS_VENT.Inhibit = {0,0,0,1,1,0,0,0,1,1}
 A333_ewd_msg.AVNCS_VENT.CmdInputs = ':CLR:RCL:'
 
@@ -1134,79 +1146,88 @@ A333_ewd_msg.FCTLESS.CmdInputs = ':CLR:RCL:'
 
 -----| EWD ZONE 1 (RIGHT) MEMO
 
-A333_ewd_msg.SPEED_BRAKE = newEWDwarningMessage('SPEED_BRAKE', 'MEM1$01', 'SPEED BRAKE ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9000)
+A333_ewd_msg.SPEED_BRAKE = newEWDwarningMessage('SPEED_BRAKE', 'MEM1$0010', 'SPEED BRAKE ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9000)
 A333_ewd_msg.SPEED_BRAKE.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.SPEED_BRAKE.CmdInputs = ''
 
-A333_ewd_msg.PARK_BRAKE = newEWDwarningMessage('PARK_BRAKE', 'MEM1$02', 'PARK BRK    ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9010)
+A333_ewd_msg.PARK_BRAKE = newEWDwarningMessage('PARK_BRAKE', 'MEM1$0020', 'PARK BRK    ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9010)
 A333_ewd_msg.PARK_BRAKE.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.PARK_BRAKE.CmdInputs = ''
 
-A333_ewd_msg.RAT_OUT = newEWDwarningMessage('RAT_OUT', 'MEM1$03', 'RAT OUT     ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9020)
+A333_ewd_msg.RAT_OUT = newEWDwarningMessage('RAT_OUT', 'MEM1$0030', 'RAT OUT     ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9020)
 A333_ewd_msg.RAT_OUT.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.RAT_OUT.CmdInputs = ''
 
-A333_ewd_msg.RAM_AIR_ON = newEWDwarningMessage('RAM_AIR_ON', 'MEM1$04', 'RAM AIR ON  ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9030)
+A333_ewd_msg.RAM_AIR_ON = newEWDwarningMessage('RAM_AIR_ON', 'MEM1$0040', 'RAM AIR ON  ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9030)
 A333_ewd_msg.RAM_AIR_ON.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.RAM_AIR_ON.CmdInputs = ''
 
-A333_ewd_msg.IGNITION = newEWDwarningMessage('IGNITION', 'MEM1$05', 'IGNITION    ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9040)
+A333_ewd_msg.IGNITION = newEWDwarningMessage('IGNITION', 'MEM1$0050', 'IGNITION    ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9040)
 A333_ewd_msg.IGNITION.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.IGNITION.CmdInputs = ''
 
-A333_ewd_msg.CABIN_READY = newEWDwarningMessage('CABIN_READY', 'MEM1$07', 'CABIN READY ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9060)
+A333_ewd_msg.CABIN_READY = newEWDwarningMessage('CABIN_READY', 'MEM1$0070', 'CABIN READY ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9060)
 A333_ewd_msg.CABIN_READY.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.CABIN_READY.CmdInputs = ''
 
-A333_ewd_msg.ENG_A_ICE = newEWDwarningMessage('ENG_A_ICE', 'MEM1$08', 'ENG A.ICE   ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9070)
+A333_ewd_msg.COMPANY_MSG = newEWDwarningMessage('COMPANY_MSG', 'MEM1$0080', 'COMPANY MSG ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9065)
+A333_ewd_msg.COMPANY_MSG.Inhibit = {0,0,0,0,0,0,0,0,0,0}
+A333_ewd_msg.COMPANY_MSG.CmdInputs = ''
+
+A333_ewd_msg.ENG_A_ICE = newEWDwarningMessage('ENG_A_ICE', 'MEM1$0090', 'ENG A.ICE   ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9070)
 A333_ewd_msg.ENG_A_ICE.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.ENG_A_ICE.CmdInputs = ''
 
-A333_ewd_msg.WING_A_ICE = newEWDwarningMessage('WING_A_ICE', 'MEM1$09', 'WING A.ICE  ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9080)
+A333_ewd_msg.WING_A_ICE = newEWDwarningMessage('WING_A_ICE', 'MEM1$0100', 'WING A.ICE  ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9080)
 A333_ewd_msg.WING_A_ICE.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.WING_A_ICE.CmdInputs = ''
 
-A333_ewd_msg.ICE_NOT_DET = newEWDwarningMessage('ICE_NOT_DET', 'MEM1$10', 'ICE NOT DET ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9090)
+A333_ewd_msg.ICE_NOT_DET = newEWDwarningMessage('ICE_NOT_DET', 'MEM1$0110', 'ICE NOT DET ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9090)
 A333_ewd_msg.ICE_NOT_DET.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.ICE_NOT_DET.CmdInputs = ''
 
-A333_ewd_msg.APU_AVAIL = newEWDwarningMessage('APU_AVAIL', 'MEM1$11', 'APU AVAIL   ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9100)
+A333_ewd_msg.APU_AVAIL = newEWDwarningMessage('APU_AVAIL', 'MEM1$0120', 'APU AVAIL   ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9100)
 A333_ewd_msg.APU_AVAIL.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.APU_AVAIL.CmdInputs = ''
 
-A333_ewd_msg.APU_BLEED = newEWDwarningMessage('APU_BLEED', 'MEM1$12', 'APU BLEED   ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9110)
+A333_ewd_msg.APU_BLEED = newEWDwarningMessage('APU_BLEED', 'MEM1$0130', 'APU BLEED   ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9110)
 A333_ewd_msg.APU_BLEED.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.APU_BLEED.CmdInputs = ''
 
-A333_ewd_msg.BRK_FAN = newEWDwarningMessage('BRK_FAN', 'MEM1$13', 'BRK FAN     ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9120)
+A333_ewd_msg.BRK_FAN = newEWDwarningMessage('BRK_FAN', 'MEM1$0140', 'BRK FAN     ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9120)
 A333_ewd_msg.BRK_FAN.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.BRK_FAN.CmdInputs = ''
 
-A333_ewd_msg.GPWS_FLAP_3 = newEWDwarningMessage('GPWS_FLAP_3', 'MEM1$14', 'GPWS FLAP 3 ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9130)
+A333_ewd_msg.GPWS_FLAP_3 = newEWDwarningMessage('GPWS_FLAP_3', 'MEM1$0150', 'GPWS FLAP 3 ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9130)
 A333_ewd_msg.GPWS_FLAP_3.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.GPWS_FLAP_3.CmdInputs = ''
 
-A333_ewd_msg.AUTO_BRK_LO = newEWDwarningMessage('AUTO_BRK_LO', 'MEM1$15', 'AUTO BRK LO ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9140)
+--name, itemGroup, itemTitle, warningTitle, itemGfx, warningGfx, titleColor, zone, failType, level, master, sysPage, aural, priority
+A333_ewd_msg.HF_VOICE = newEWDwarningMessage('HF_VOICE', 'MEM1$0153', 'HF VOICE    ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9133)
+A333_ewd_msg.HF_VOICE.Inhibit = {0,0,0,0,0,0,0,0,0,0}
+A333_ewd_msg.HF_VOICE.CmdInputs = ''
+
+A333_ewd_msg.AUTO_BRK_LO = newEWDwarningMessage('AUTO_BRK_LO', 'MEM1$0160', 'AUTO BRK LO ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9140)
 A333_ewd_msg.AUTO_BRK_LO.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.AUTO_BRK_LO.CmdInputs = ''
 
-A333_ewd_msg.AUTO_BRK_MED = newEWDwarningMessage('AUTO_BRK_MED', 'MEM1$16', 'AUTO BRK MED', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9150)
+A333_ewd_msg.AUTO_BRK_MED = newEWDwarningMessage('AUTO_BRK_MED', 'MEM1$0170', 'AUTO BRK MED', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9150)
 A333_ewd_msg.AUTO_BRK_MED.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.AUTO_BRK_MED.CmdInputs = ''
 
-A333_ewd_msg.AUTO_BRK_MAX = newEWDwarningMessage('AUTO_BRK_MAX', 'MEM1$17', 'AUTO BRK MAX', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9160)
+A333_ewd_msg.AUTO_BRK_MAX = newEWDwarningMessage('AUTO_BRK_MAX', 'MEM1$0180', 'AUTO BRK MAX', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9160)
 A333_ewd_msg.AUTO_BRK_MAX.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.AUTO_BRK_MAX.CmdInputs = ''
 
-A333_ewd_msg.AUTO_BRK_OFF = newEWDwarningMessage('AUTO_BRK_OFF', 'MEM1$18', 'AUTO BRK OFF', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9170)
+A333_ewd_msg.AUTO_BRK_OFF = newEWDwarningMessage('AUTO_BRK_OFF', 'MEM1$0190', 'AUTO BRK OFF', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9170)
 A333_ewd_msg.AUTO_BRK_OFF.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.AUTO_BRK_OFF.CmdInputs = ''
 
-A333_ewd_msg.CTR_TK_FEEDG = newEWDwarningMessage('CTR_TK_FEEDG', 'MEM1$19', 'CTR TK FEEDG', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9180)
+A333_ewd_msg.CTR_TK_FEEDG = newEWDwarningMessage('CTR_TK_FEEDG', 'MEM1$0200', 'CTR TK FEEDG', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9180)
 A333_ewd_msg.CTR_TK_FEEDG.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.CTR_TK_FEEDG.CmdInputs = ''
 
-A333_ewd_msg.FUEL_X_FEED = newEWDwarningMessage('FUEL_X_FEED', 'MEM1$20', 'FUEL X FEED ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9190)
+A333_ewd_msg.FUEL_X_FEED = newEWDwarningMessage('FUEL_X_FEED', 'MEM1$0210', 'FUEL X FEED ', '', 0, 0, 2, 1, 6, 0, 0, 0, 0, 9190)
 A333_ewd_msg.FUEL_X_FEED.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.FUEL_X_FEED.CmdInputs = ''
 
