@@ -193,7 +193,7 @@ MFDcapt_popout = contextWindow {
 --
 
 PFDfo_popout = contextWindow {
-    name = "PDF F/O";
+    name = "PFD F/O";
     position = {535, 560, 505, 505};
     noFocus = true;
     command = "AG330/screens/PFDfo/popout";
