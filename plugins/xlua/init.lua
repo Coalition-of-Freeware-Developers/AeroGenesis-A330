@@ -13,6 +13,26 @@
 --end
 
 
+-- Are you getting terrible Lua performance with complex scripts?
+-- Just use this one secret hack to make your script 5 times faster!!!
+--
+-- No, seriously. LuaJIT has default maxima which are plenty for most situations
+-- but not necessarily all. As of xlua.xpl 1.4.0r1, these limits have been greatly
+-- increased but if you still see a huge dropoff in performance this may be the cause.
+-- First, try adding 'jit.off()' to the top of your complex scripts or, if you want to
+-- go nukular, this one. If performance increases, it's the limits; hitting these causes
+-- the Jit to effectively try to compile the entire script and fail, on every frame.
+-- These are the limits currently set in xlua.xpl, *before* calling init.lua:
+--
+jit.opt.start("maxmcode=8192", "maxtrace=4096", "maxirconst=1500", "maxside=500")
+--
+-- Try increasing these until you regain your Lua performance. Then increase them a little more,
+-- and put this line at the top of whichever script is causing the poor performance.
+
+if jit and jit.arch ~= "x64" then
+	print("Disabling JIT for the A330 on non-x64 arch ", jit.arch)
+	jit.off()
+end
 
 function dump(o)
    if type(o) == 'table' then

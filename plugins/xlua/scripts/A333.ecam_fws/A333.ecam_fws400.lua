@@ -55,6 +55,7 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
 
+local bool2num = {[true] = 1, [false] = 0}
 
 local APUshowPageTimeout = 0
 local APUpageIsVisible = false
@@ -490,9 +491,9 @@ function LandingGearDownAndLocked()
 end
 
 function BaroAltitudeLessThan15000()
-	local baro_altitude_threshold1 = ternary(NALTI_1 < 15000.0, true, false)
-	local baro_altitude_threshold2 = ternary(NALTI_2 < 15000.0, true, false)
-	local baro_altitude_threshold3 = ternary(NALTI_3 < 15000.0, true, false)
+	local baro_altitude_threshold1 = NALTI_1 < 15000.0
+	local baro_altitude_threshold2 = NALTI_2 < 15000.0
+	local baro_altitude_threshold3 = NALTI_3 < 15000.0
 	return bOR(baro_altitude_threshold1, baro_altitude_threshold2, baro_altitude_threshold3)
 end
 

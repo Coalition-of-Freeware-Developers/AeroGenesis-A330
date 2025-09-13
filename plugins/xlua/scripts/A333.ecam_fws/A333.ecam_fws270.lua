@@ -56,6 +56,7 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 
 local DoStatusContentCheck = false
+local bool2num = {[true] = 1, [false] = 0}
 
 
 
@@ -297,7 +298,7 @@ end
 -----| STS PUSHBUTTON ANNUNCIATOR
 -----------------------------------------------------------------------------------------
 function A333_fws_STS_annun()
-	A333DR_ecp_sts_pushbutton_annun = bool2logic(ZSTSPD)
+	A333DR_ecp_sts_pushbutton_annun = bool2num[ZSTSPD]
 end
 
 

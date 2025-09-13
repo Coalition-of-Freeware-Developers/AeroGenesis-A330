@@ -64,6 +64,7 @@ local IR1_mode = 0
 local IR2_mode = 0
 
 local takeoff_mode = 0
+local flex_mode_is_available = true
 local flex_mode = 0
 local max_throttle_mode = 0
 
@@ -85,11 +86,6 @@ local cabin_aft_random_fac2 = math.random(-1, 1)
 local cabin_fwd_mid_random_fac2 = math.random(-1, 1)
 local cabin_mid_fwd_random_fac2 = math.random(-1, 1)
 local cabin_aft_mid_random_fac2 = math.random(-1, 1)
-
-local fuel_tank_left_random_fac = math.random(-3, 3)
-local fuel_tank_right_random_fac = math.random(-3, 3)
-local fuel_tank_trim_random_fac = math.random(-3, 3)
-local fuel_tank_aux_random_fac = math.random(-3, 3)
 
 local wheel_brake_1_random_max_fac = math.random(-60, 60)
 local wheel_brake_2_random_max_fac = math.random(-60, 60)
@@ -125,12 +121,16 @@ local Vle = 250
 
 local off_ground_timer = 0
 local ground_timer = 0
+local windshear_timer = 0
+local ws_ahead_timer = 0
 
 local takeoff_landing_index = 0 -- 0 = takeoff, 1 = landing
 
 local altCaptured = 0
 local gsCaptured = 0
 local locCaptured = 0
+
+local bool2num = {[true] = 1, [false] = 0}
 
 
 --*************************************************************************************--
@@ -294,9 +294,10 @@ simDR_fadec_power_mode_eng1 = find_dataref("sim/flightmodel/engine/ENGN_fadec_po
 simDR_fadec_power_mode_eng2 = find_dataref("sim/flightmodel/engine/ENGN_fadec_pow_req[1]")
 
 simDR_starter_torque = find_dataref("sim/aircraft/engine/acf_starter_torque_ratio")
-simDR_external_temp = find_dataref("sim/weather/temperature_ambient_c")
+simDR_external_temp = find_dataref("sim/weather/aircraft/temperature_ambient_deg_c")
 simDR_sealevel_baro = find_dataref("sim/weather/barometer_sealevel_inhg")
-simDR_TAT = find_dataref("sim/weather/temperature_le_c")
+simDR_sealevel_qnh_pas = find_dataref("sim/weather/aircraft/qnh_pas")
+simDR_TAT = find_dataref("sim/weather/aircraft/temperature_leadingedge_deg_c")
 
 simDR_fuel_flow_eng1 = find_dataref("sim/cockpit2/engine/indicators/fuel_flow_kg_sec[0]")
 simDR_fuel_flow_eng2 = find_dataref("sim/cockpit2/engine/indicators/fuel_flow_kg_sec[1]")
@@ -352,7 +353,7 @@ simDR_apu_fire = find_dataref("sim/operation/failures/rel_apu_fire")
 simDR_gen_on = find_dataref("sim/cockpit2/electrical/generator_on")
 simDR_gen1_fail = find_dataref("sim/operation/failures/rel_genera0")
 simDR_gen2_fail = find_dataref("sim/operation/failures/rel_genera1")
-simDR_EGT = find_dataref("sim/cockpit2/engine/indicators/EGT_deg_C")
+simDR_EGT = find_dataref("sim/cockpit2/engine/indicators/EGT_deg_cel")
 simDR_bus1_fail = find_dataref("sim/operation/failures/rel_esys")
 simDR_bus2_fail = find_dataref("sim/operation/failures/rel_esys2")
 
@@ -506,6 +507,8 @@ simDR_runway_status				= find_dataref("sim/cockpit2/autopilot/runway_status")
 simDR_rollout_status			= find_dataref("sim/cockpit2/autopilot/rollout_status")
 simDR_flare_status				= find_dataref("sim/cockpit2/autopilot/flare_status")
 
+simDR_windshear_mode			= find_dataref("sim/cockpit2/annunciators/windshear_warning_systems") -- 0 = no warning, 1 = predictive advisory, 2 = predictive caution, 3 = predictive warning t/o, 4 = predictive warning approach, 5 = reactive warning
+
 -- ND
 
 simDR_nav1_ID = find_dataref("sim/cockpit2/radios/indicators/nav3_nav_id")
@@ -559,7 +562,7 @@ simDR_glideslope_status = find_dataref("sim/cockpit2/autopilot/glideslope_status
 simDR_AP1_status = find_dataref("sim/cockpit2/autopilot/flight_director_mode")
 simDR_AP2_status = find_dataref("sim/cockpit2/autopilot/flight_director2_mode")
 
-simDR_flex_temp	= find_dataref("sim/flightmodel/engine/ENGN_assumed_temp[0]")
+simDR_flex_temp	= find_dataref("sim/flightmodel/engine/ENGN_assumed_temp")
 simDR_OAT = find_dataref("sim/cockpit2/temperature/outside_air_temp_degc")
 simDR_vnav_speed_window_open = find_dataref("sim/cockpit2/autopilot/vnav_speed_window_open") -- 1 = open, 0 = closed
 simDR_vnav_speed_status = find_dataref("sim/cockpit2/autopilot/vnav_speed_status")
@@ -595,6 +598,13 @@ simDR_capt_roll_ratio = find_dataref("sim/cockpit2/controls/yoke_roll_ratio")
 simDR_fo_pitch_ratio = find_dataref("sim/cockpit2/controls/yoke_pitch_ratio_copilot")
 simDR_fo_roll_ratio = find_dataref("sim/cockpit2/controls/yoke_roll_ratio_copilot")
 simDR_priority_side	= find_dataref("sim/joystick/priority_side") -- 0 = Normal, 1 = Priority Left, 2 = Priority Right
+
+
+simDR_barometer_setting_warn_pilot = find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_warn_pilot")
+simDR_barometer_setting_warn_copilot = find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_warn_copilot")
+
+
+
 
 --*************************************************************************************--
 --** 				              FIND CUSTOM DATAREFS             			    	 **--
@@ -722,6 +732,10 @@ A333_flight_phase = find_dataref("laminar/A333/data/flight_phase")
 
 A333_ls_bars_capt = find_dataref("laminar/A333/status/capt_ls_bars")
 A333_ls_bars_fo = find_dataref("laminar/A333/status/fo_ls_bars")
+
+
+
+
 
 --*************************************************************************************--
 --** 				        CREATE READ-ONLY CUSTOM DATAREFS               	         **--
@@ -950,11 +964,6 @@ A333_cabin_aft_temp_ind = create_dataref("laminar/A333/cabin_temp_aft", "number"
 A333_cargo_temp_ind = create_dataref("laminar/A333/cargo_temp", "number")
 A333_bulk_cargo_temp_ind = create_dataref("laminar/A333/bulk_cargo_temp", "number")
 
-A333_fuel_temp_left = create_dataref("laminar/A333/fuel_temp_left", "number")
-A333_fuel_temp_right = create_dataref("laminar/A333/fuel_temp_right", "number")
-A333_fuel_temp_trim = create_dataref("laminar/A333/fuel_temp_trim", "number")
-A333_fuel_temp_aux = create_dataref("laminar/A333/fuel_temp_aux", "number")
-
 -- ECAM DOORS OXY
 
 A333_cockpit_oxy_status = create_dataref("laminar/A333/ECAM/door/ckpt_oxy_status", "number")
@@ -983,6 +992,15 @@ A333_wheel_brake_temp5 = create_dataref("laminar/A333/ecam/wheel/brake_temp_5", 
 A333_wheel_brake_temp6 = create_dataref("laminar/A333/ecam/wheel/brake_temp_6", "number")
 A333_wheel_brake_temp7 = create_dataref("laminar/A333/ecam/wheel/brake_temp_7", "number")
 A333_wheel_brake_temp8 = create_dataref("laminar/A333/ecam/wheel/brake_temp_8", "number")
+
+A333_wheel_brake_temp_anim_1 = create_dataref("laminar/A333/wheel/brake_temp_anim_1", "number")
+A333_wheel_brake_temp_anim_2 = create_dataref("laminar/A333/wheel/brake_temp_anim_2", "number")
+A333_wheel_brake_temp_anim_3 = create_dataref("laminar/A333/wheel/brake_temp_anim_3", "number")
+A333_wheel_brake_temp_anim_4 = create_dataref("laminar/A333/wheel/brake_temp_anim_4", "number")
+A333_wheel_brake_temp_anim_5 = create_dataref("laminar/A333/wheel/brake_temp_anim_5", "number")
+A333_wheel_brake_temp_anim_6 = create_dataref("laminar/A333/wheel/brake_temp_anim_6", "number")
+A333_wheel_brake_temp_anim_7 = create_dataref("laminar/A333/wheel/brake_temp_anim_7", "number")
+A333_wheel_brake_temp_anim_8 = create_dataref("laminar/A333/wheel/brake_temp_anim_8", "number")
 
 A333_wheel_brake_warn = create_dataref("laminar/A333/ecam/wheel/brake_temp_exceed", "number")
 
@@ -1157,6 +1175,10 @@ A333_mda_altimeter_color_fo = create_dataref("laminar/A333/PFD/mda_alt_color_fo"
 A333_dh_flasher_capt = create_dataref("laminar/A333/PFD/DH_flasher_capt", "number")
 A333_dh_flasher_fo = create_dataref("laminar/A333/PFD/DH_flasher_fo", "number")
 
+A333_windshear_flasher = create_dataref("laminar/A333/PFD/windshear_flasher", "number")
+A333_ws_ahead_flasher = create_dataref("laminar/A333/PFD/ws_ahead_flasher", "number")
+
+
 
 -- VSPEEDS
 
@@ -1247,9 +1269,13 @@ A333_laminar_no_ref = create_dataref("laminar/no_ref", "number")
 
 
 -- Read initial values from PlaneMaker instead of hardcoding them... this fails on new flight start - we're writing to both of these targets in the script
-local LOW_IDLE_PLN_TARGET = 0.45 --vinci:change value from 0.56 to work with my new engine model
-local HIGH_IDLE_PLN_TARGET = 1.62 --vinci:change value from 1.3 to work with my new engine model
+local LOW_IDLE_PLN_TARGET = 0.56
+local HIGH_IDLE_PLN_TARGET = 1.3
 local STARTER_TORQUE_PLN_VALUE = simDR_starter_torque
+
+
+
+A333DR_baro_warning_brightness = create_dataref("laminar/A333/PFD/baro_warning_brightness", "number")
 
 
 
@@ -1862,7 +1888,7 @@ function A333_fuel_system()
 				end
 				if simDR_tank_level_aux_right >= 5 then
 					simDR_tank_pressure_right_aux = 50
-				elseif imDR_tank_level_aux_right < 5 then
+				elseif simDR_tank_level_aux_right < 5 then
 					simDR_tank_pressure_right_aux = 33
 				end
 			elseif simDR_tank_level_center < 75 then
@@ -2302,13 +2328,18 @@ function A333_control_surface_depress_droop()
 end
 
 
+
+--[[
 function A333_FADEC_limits_set()
 
 	-- FLEX CAN ONLY BE INITIATED ON THE GROUND, ONCE YOU PULL ANY ENGINE OUT OF FLEX DETENT, YOU WILL RETURN TO MCT
 
+    -- see A333_flex_mode()
+
+
 	if simDR_gear_on_ground == 1 then
 		takeoff_mode = 1
-		if simDR_flex_temp >= 30 and simDR_flex_temp > simDR_OAT then
+		if simDR_flex_temp > simDR_OAT then
 			flex_mode = 1
 		else flex_mode = 0
 		end
@@ -2316,11 +2347,20 @@ function A333_FADEC_limits_set()
 		if simDR_fadec_power_mode_eng1 <= 2 or simDR_fadec_power_mode_eng2 <= 2 then
 			takeoff_mode = 0
 		end
+
+		--[=[ The below logic corrected in the "A333_flex_mode()" function to match the
+		      FCOM as follows...
+		         After takeoff :
+                 The pilot can change from FLX to MCT by moving the thrust lever to TOGA or CL, then back to MCT.
+                 After that, he cannot use the FLX rating.
+        --]=]
 		if simDR_fadec_power_mode_eng1 ~= 2 or simDR_fadec_power_mode_eng2 ~= 2 then
 			flex_mode = 0
 		end
+
 	end
 
+    --[=[ takeoff_mode was replaced with different logic, see "A333_engine_limits()"
 	if takeoff_mode == 1 then
 		simDR_fadec_engine_limits_toga = A333DR_epr_limit_to
 	elseif takeoff_mode == 0 then
@@ -2334,17 +2374,105 @@ function A333_FADEC_limits_set()
 	end
 
 	simDR_fadec_engine_limits_clb = A333DR_epr_limit_mc * 0.97
+	--]=]
 
+
+    --[=[     See A333_starter_torque()
 	local starter_temp_multiplier = A333_rescale(-40, 1.18, 15, 1, simDR_external_temp)
-	local starter_baro_multiplier = A333_rescale(29.92, 1, 32, 1.05, simDR_sealevel_baro)
+	local starter_baro_multiplier = A333_rescale(29.92, 1, 32, 1.05, simDR_sealevel_baro)       -do not use simDR_sealevel_baro (replaced)
 
 	simDR_starter_torque = STARTER_TORQUE_PLN_VALUE * starter_temp_multiplier * starter_baro_multiplier
+    --]=]
+
+
+end
+--]]
+
+
+function A333_flex_mode()
+
+    -- Set the flex_mode flag prior to takeoff
+    if A333_flight_phase <= 4
+        and
+        flex_mode_is_available
+        and
+        ((simDR_flex_temp[0] >= 15 and simDR_flex_temp[0] <= 70)
+        or
+        (simDR_flex_temp[1] >= 15 and simDR_flex_temp[1] <= 70))
+    then
+        flex_mode = 1
+
+
+    -- After takeoff, Lockout FLX Mode if either Thrust Lever is moved to CL or TOGA
+    elseif A333_flight_phase > 4 then
+        if flex_mode == 1
+            and
+            ((simDR_fadec_power_mode_eng1 == 1 or simDR_fadec_power_mode_eng1 == 3)
+            or
+            (simDR_fadec_power_mode_eng2 == 1 or simDR_fadec_power_mode_eng2 == 3))
+        then
+            flex_mode_is_available = false
+            flex_mode = 0
+        end
+    end
+
+    -- Reset flex available flag after landing and MCDU init
+    if not flex_mode_is_available
+        and
+        A333_flight_phase >= 8    -- Touchdown
+        and
+        (simDR_flex_temp[0] == 0 or simDR_flex_temp[1] == 0)    -- MCDU init
+    then
+        flex_mode_is_available = true
+    end
+
+    return flex_mode
 
 end
 
+
+
+
+
+function A333_engine_limits()
+
+    if A333_flight_phase <= 4 then        -- Takeoff (on ground)
+        simDR_fadec_engine_limits_toga = A333DR_epr_limit_to
+    elseif A333_flight_phase == 7 then    -- Go-Around (Alt 0-800 ft)
+        simDR_fadec_engine_limits_toga = A333DR_epr_limit_ga
+    end
+
+    if flex_mode == 0 then
+        simDR_fadec_engine_limits_mct_flx = A333DR_epr_limit_mc
+    elseif flex_mode == 1 then
+        simDR_fadec_engine_limits_mct_flx = A333DR_epr_limit_flex
+    end
+
+    simDR_fadec_engine_limits_clb = A333DR_epr_limit_mc * 0.97
+
+end
+
+
+
+
+
+function A333_starter_torque()
+
+    local starter_temp_multiplier = A333_rescale(-40, 1.18, 15, 1, simDR_external_temp)
+
+    local sealevel_baro_inHg = simDR_sealevel_qnh_pas * 0.0002952998                    -- 1 Pa = 0.0002952998 inHg     (simDR_sealevel_baro replaced)
+    local starter_baro_multiplier = A333_rescale(29.92, 1, 32, 1.05, sealevel_baro_inHg)
+
+    simDR_starter_torque = STARTER_TORQUE_PLN_VALUE * starter_temp_multiplier * starter_baro_multiplier
+
+end
+
+
+
+
+
 local idle_flasher = 0
 local idle_timer = 0
-
 
 function A333_ECAM()
 
@@ -2355,6 +2483,7 @@ function A333_ECAM()
 	if sim_time_factor >= 0 and sim_time_factor <= 0.3 then
 		flasher = 1
 	end
+
 
 ----
 
@@ -2367,7 +2496,7 @@ function A333_ECAM()
 	end
 
 ----
-
+--[[
 	if simDR_starter_mode == 0 then
 		if simDR_eng1_N2 > 5 then
 			A333_ECAM_engine1_display = 1
@@ -2383,6 +2512,18 @@ function A333_ECAM()
 		A333_ECAM_engine1_display = 1
 		A333_ECAM_engine2_display = 1
 	end
+--]]
+
+    if simDR_starter_mode == 0 then
+        A333_ECAM_engine1_display = bool2num[simDR_eng1_N2 > 5]
+        A333_ECAM_engine2_display = bool2num[simDR_eng2_N2 > 5]
+    else
+        A333_ECAM_engine1_display = 1
+        A333_ECAM_engine2_display = 1
+    end
+
+
+
 
 	if simDR_flap_handle_request == 0 then
 		if simDR_flap_deg == 0 then
@@ -3607,10 +3748,6 @@ local cargo_mode = 0
 local bulk_rate = 0
 local cargo_temp_loop = 0
 
-local fuel_temp_left_target = 0
-local fuel_temp_right_target = 0
-local fuel_temp_trim_target = 0
-local fuel_temp_aux_target = 0
 
 function A333_interior_temps()
 
@@ -3631,11 +3768,6 @@ function A333_interior_temps()
 	local hot_air_factor = A333_rescale(0, 0, 1, 1, A333_switches_hot_air1_pos)
 
 	-- fuel temps
-
-	fuel_temp_left_target = simDR_TAT + 6 + fuel_tank_left_random_fac
-	fuel_temp_right_target = simDR_TAT + 7 + fuel_tank_right_random_fac
-	fuel_temp_trim_target = simDR_TAT + 10 + fuel_tank_trim_random_fac
-	fuel_temp_aux_target = simDR_TAT + 12 + fuel_tank_aux_random_fac
 
 	if A333_pack_flow1_ratio > 0.5 or A333_pack_flow2_ratio > 0.5 then
 		cockpit_temperature_target = cockpit_temperature_setting
@@ -3712,11 +3844,6 @@ function A333_interior_temps()
 	A333_cabin_mid_fwd_temp_ind = (0.333 * A333_cabin_fwd_temp_ind + 0.667 * A333_cabin_mid_temp_ind) + cabin_mid_fwd_random_fac2
 	A333_cabin_mid_aft_temp_ind = (0.5 * A333_cabin_mid_temp_ind + 0.5 * A333_cabin_aft_temp_ind) + cabin_aft_mid_random_fac2
 
-	A333_fuel_temp_left = A333_set_animation_position(A333_fuel_temp_left, fuel_temp_left_target, -40, 50, 0.1)
-	A333_fuel_temp_right = A333_set_animation_position(A333_fuel_temp_right, fuel_temp_right_target, -40, 50, 0.1)
-	A333_fuel_temp_trim = A333_set_animation_position(A333_fuel_temp_trim, fuel_temp_trim_target, -40, 50, 0.1)
-	A333_fuel_temp_aux = A333_set_animation_position(A333_fuel_temp_aux, fuel_temp_aux_target, -40, 50, 0.1)
-
 	if cargo_mode == 1 then
 		A333_cargo_temp_ind = A333_set_animation_position(A333_cargo_temp_ind, cargo_temperature_target, -40, 50, (0.0025 * pack_flow_factor * cargo_flow_factor))
 	elseif cargo_mode == 0 then
@@ -3789,6 +3916,17 @@ function A333_ecam_page_WHEELS_brake_temps()
 
 	wheel_brake_temp8 = A333_rescale(0, compensated_TAT_right, 1.5, 1100, simDR_brake_temp_right) + A333_rescale(0, wheel_brake_8_random_min_fac, 1.5, wheel_brake_8_random_max_fac, simDR_brake_temp_right)
 	A333_wheel_brake_temp8 = wheel_brake_temp8 - math.fmod(wheel_brake_temp8, 5)
+
+
+	A333_wheel_brake_temp_anim_1 = A333_rescale(500, 0, 1100, 1, wheel_brake_temp1)
+	A333_wheel_brake_temp_anim_2 = A333_rescale(500, 0, 1100, 1, wheel_brake_temp2)
+	A333_wheel_brake_temp_anim_5 = A333_rescale(500, 0, 1100, 1, wheel_brake_temp5)
+	A333_wheel_brake_temp_anim_6 = A333_rescale(500, 0, 1100, 1, wheel_brake_temp6)
+	
+	A333_wheel_brake_temp_anim_3 = A333_rescale(500, 0, 1100, 1, wheel_brake_temp3)
+	A333_wheel_brake_temp_anim_4 = A333_rescale(500, 0, 1100, 1, wheel_brake_temp4)
+	A333_wheel_brake_temp_anim_7 = A333_rescale(500, 0, 1100, 1, wheel_brake_temp7)
+	A333_wheel_brake_temp_anim_8 = A333_rescale(500, 0, 1100, 1, wheel_brake_temp8)
 
 
 end
@@ -4847,6 +4985,8 @@ function A333_engine_power_setting_indicator()
 
 	max_throttle_mode = math.max(simDR_fadec_power_mode_eng1, simDR_fadec_power_mode_eng2) -- 0 = NONE, 1 = CLB, 2 = MCT/FLX, 3 - TOGA
 
+    -- A333_ECAM_thrust_mode: -- 0 = climb, 1 = MCT, 2 = FLEX, 3 = TOGA
+
 	if simDR_gear_on_ground == 1 then
 
 		if max_throttle_mode < 3 then
@@ -4917,16 +5057,6 @@ function A333_ground_timer()
 
 end
 
-function A333_rev_timer() -- vinci: function for rev idle mode
-
-	if  simDR_engine1_reverse > 0.05 or simDR_engine2_reverse > 0.05 then
-	    rev_timer = rev_timer + SIM_PERIOD
-	else 
-		rev_timer = 0
-	end
-
-end
-
 function A333_idle_mode_logic()
 
 	local air_mode = 1
@@ -4938,8 +5068,9 @@ function A333_idle_mode_logic()
 		air_mode = 0
 	end
 
- if simDR_engine1_reverse < 0.5 and simDR_engine2_reverse < 0.5 then --vinci:add reverse idle
-	
+
+	--- ENGINE GROUND / FLIGHT IDLE ---
+
 	if air_mode == 0 then
 		simDR_low_idle = LOW_IDLE_PLN_TARGET
 		simDR_high_idle = LOW_IDLE_PLN_TARGET
@@ -4947,19 +5078,10 @@ function A333_idle_mode_logic()
 		simDR_low_idle = HIGH_IDLE_PLN_TARGET
 		simDR_high_idle = HIGH_IDLE_PLN_TARGET
 	end
- end
-  
- if simDR_engine1_reverse >= 0.5 and simDR_engine2_reverse >= 0.5 then --vinci: rev idle mode for 10 sec if no addtion to rev power
-    if rev_timer < 7 then
-       simDR_low_idle = 2.0
-		simDR_high_idle = 2.0
-	elseif rev_timer >=7 then
-		simDR_low_idle = LOW_IDLE_PLN_TARGET
-		simDR_high_idle = LOW_IDLE_PLN_TARGET
-    end
- end
-end
 
+
+
+end
 
 
 
@@ -5097,6 +5219,43 @@ function A333_PFD_indicators()
 		ils_flasher = 1
 	end
 
+	local windshear_flasher = 0
+	local ws_ahead_flasher = 0
+	local sim_time_factor5 = math.fmod(simDR_flight_time, 0.75)
+
+	if sim_time_factor5 >= 0 and sim_time_factor5 <= 0.3 then
+		ws_ahead_flasher = 1
+		windshear_flasher = 1
+	end
+
+	if simDR_windshear_mode < 3 then
+		windshear_timer = 0
+		ws_ahead_timer = 0
+	elseif simDR_windshear_mode == 3 or simDR_windshear_mode == 4 then
+		windshear_timer = 0
+		if ws_ahead_timer < 5 then
+			ws_ahead_timer = ws_ahead_timer + SIM_PERIOD
+		else ws_ahead_timer = 5
+		end
+	elseif simDR_windshear_mode == 5 then
+		ws_ahead_timer = 0
+		if windshear_timer < 5 then
+			windshear_timer = windshear_timer + SIM_PERIOD
+		else windshear_timer = 5
+		end
+	end
+
+	if ws_ahead_timer < 5 then
+		A333_ws_ahead_flasher = A333_set_animation_position(A333_ws_ahead_flasher, ws_ahead_flasher, 0, 1, 10)
+	elseif ws_ahead_timer == 5 then
+		A333_ws_ahead_flasher = 1
+	end
+
+	if windshear_timer < 5 then
+		A333_windshear_flasher = A333_set_animation_position(A333_windshear_flasher, windshear_flasher, 0, 1, 10)
+	elseif windshear_timer == 5 then
+		A333_windshear_flasher = 1
+	end
 
 
 	if simDR_AHARS_pitch_capt <= 17.5 then
@@ -5665,6 +5824,9 @@ function A333_FMAs()
 		end
 	end
 
+
+
+
 	-- VDEF STAR
 
 	if simDR_altitude_mode == 8 then										-- TIMER KILLED, REPLACED WITH ABSOLUTE VALUE OF VNAV DOTS PILOT / COPILOT
@@ -5688,6 +5850,10 @@ function A333_FMAs()
 	end
 
 	A333_gs_star_status = gsCaptured
+
+
+
+
 
 	-- HDEF STAR
 
@@ -5890,9 +6056,12 @@ function A333_FMAs()
 		end
 	end
 
+
+
 	-- AUTO THROTTLE FMAS
 
-	if simDR_throttle_loc_eng1 == 3 or simDR_throttle_loc_eng2 == 3 then
+    --[[
+    if simDR_throttle_loc_eng1 == 3 or simDR_throttle_loc_eng2 == 3 then
 		A333_man_toga = 1
 	elseif simDR_throttle_loc_eng1 ~= 3 and simDR_throttle_loc_eng2 ~= 3 then
 		A333_man_toga = 0
@@ -5915,8 +6084,32 @@ function A333_FMAs()
 			A333_man_flex = 0
 		end
 	end
+	--]]
 
-	-- ADD MAN THR HERE -- DEFER FOR NOW
+
+    local man_mct = 0
+    local man_flex = 0
+    local man_toga = 0
+
+    if simDR_fadec_power_mode_eng1 == 3 or simDR_fadec_power_mode_eng2 == 3 then	-- toga
+        man_toga = 1
+
+    elseif simDR_fadec_power_mode_eng1 == 2 or simDR_fadec_power_mode_eng2 == 2 then	-- mct/flex
+        man_mct = 1 - flex_mode
+        man_flex = flex_mode
+
+    end
+
+    A333_man_mct = man_mct
+    A333_man_flex = man_flex
+    A333_man_toga = man_toga
+
+
+
+
+
+
+    -- ADD MAN THR HERE -- DEFER FOR NOW
 
 	if single_engine_status == 1 then													-- ALL OF THESE NEED TO HAVE AUTOTHROTTLE ACTIVE CONDITION
 		if simDR_throttle_loc_eng1 == 2 or simDR_throttle_loc_eng2 == 2 then			-- sim/cockpit2/autopilot/autothrottle_enabled >= 1 (its set in Plane Maker)
@@ -6004,18 +6197,18 @@ function A333_FMAs()
 			if (simDR_throttle_loc_eng1 >= 2 and simDR_throttle_loc_eng2 >= 2) or simDR_throttle_loc_eng1 == 0 or simDR_throttle_loc_eng2 == 0 then
 				A333_lvr_clb_status = 1
 				A333_lvr_mct_status = 0
-			else 
+			else
 				A333_lvr_clb_status = 0
 			end
 		elseif single_engine_status == 1 then
 			if (simDR_throttle_loc_eng1 == 3 or simDR_throttle_loc_eng2 == 3) or simDR_throttle_loc_eng1 == 0 or simDR_throttle_loc_eng2 == 0 then
 				A333_lvr_mct_status = 1
 				A333_lvr_clb_status = 0
-			else 
+			else
 				A333_lvr_mct_status = 0
 			end
 		end
-	else 
+	else
 		A333_lvr_mct_status = 0
 		A333_lvr_clb_status = 0
 	end
@@ -6125,14 +6318,42 @@ function A333_sidestick_priority()
 		end
 	end
 
+
 end
+
+
+
+
+
+
+function A333_baro_warning_brightness()
+
+    local bright = false
+
+    if simDR_barometer_setting_warn_pilot == 1
+        or simDR_barometer_setting_warn_copilot == 1
+    then
+        local time = math.fmod(simDR_flight_time, 1.0)
+        bright = time > 0.5 and time <= 1.0
+    end
+    
+    A333DR_baro_warning_brightness = bool2num[bright]
+
+end
+
+
+
+
+
+
+
 
 
 ----- ND NAV RAD FREQ ID ----------------------------------------------------------------
 function A333_ND_nav_rad_ID()
 
 	-- VOR RADIOS
-	A333_nd_vor1_ID_flag_capt = 1
+	--[[A333_nd_vor1_ID_flag_capt = 1
 	if string.byte(simDR_nav1_ID) and string.byte(simDR_dme1_ID) == nil then
 		A333_nd_vor1_ID_flag_capt = 0
 	elseif string.byte(simDR_nav1_ID) or string.byte(simDR_dme1_ID) ~= nil then
@@ -6152,11 +6373,22 @@ function A333_ND_nav_rad_ID()
 		elseif simDR_nav2_type == 4 or simDR_nav2_type == 1024 then
 			A333_nd_vor2_ID_flag_capt = 1
 		end
-	end
+	end--]]
+
+	local vor1ID_is_valid = #simDR_nav1_ID > 0 and simDR_nav1_type == 4
+	local dme1ID_is_valid = #simDR_dme1_ID > 0 and simDR_nav1_type == 1024
+
+	local vor2ID_is_valid = #simDR_nav2_ID > 0 and simDR_nav2_type == 4
+	local dme2ID_is_valid = #simDR_dme2_ID > 0 and simDR_nav2_type == 1024
+
+	A333_nd_vor1_ID_flag_capt = bool2num[vor1ID_is_valid or dme1ID_is_valid]
+	A333_nd_vor2_ID_flag_capt = bool2num[vor2ID_is_valid or dme2ID_is_valid]
+
+
 
 
 	-- ADF RADIOS
-	A333_nd_adf1_ID_flag_capt = 1
+	--[[A333_nd_adf1_ID_flag_capt = 1
 	if string.byte(simDR_adf1_ID) == nil then
 		A333_nd_adf1_ID_flag_capt = 0
 	end
@@ -6164,9 +6396,15 @@ function A333_ND_nav_rad_ID()
 	A333_nd_adf2_ID_flag_capt = 1
 	if string.byte(simDR_adf2_ID) == nil then
 		A333_nd_adf2_ID_flag_capt = 0
-	end
+	end--]]
+
+	A333_nd_adf1_ID_flag_capt = bool2num[#simDR_adf1_ID > 0]
+	A333_nd_adf2_ID_flag_capt = bool2num[#simDR_adf2_ID > 0]
 
 end
+
+
+
 
 local total_gps_seconds = 0
 local total_gps2_seconds = 0
@@ -6266,11 +6504,6 @@ function A333_flight_start_systems()
 
 	A333_bulk_duct_temp = A333_bulk_cargo_temp_ind + 3
 
-	A333_fuel_temp_left = simDR_TAT + 6 + fuel_tank_left_random_fac
-	A333_fuel_temp_right = simDR_TAT + 7 + fuel_tank_right_random_fac
-	A333_fuel_temp_trim = simDR_TAT + 10 + fuel_tank_trim_random_fac
-	A333_fuel_temp_aux = simDR_TAT + 12 + fuel_tank_aux_random_fac
-
 	compensated_TAT_left = simDR_TAT
 	compensated_TAT_right = simDR_TAT
 
@@ -6313,7 +6546,10 @@ function A333_ALL_systems()
 	A333_ADIRS()
 	A333_anti_skid_auto_off()
 	A333_control_surface_depress_droop()
-	A333_FADEC_limits_set()
+	--A333_FADEC_limits_set()
+    A333_flex_mode()
+    A333_engine_limits()
+    A333_starter_torque()
 	A333_ECAM()
 	A333_engine_power_setting_indicator()
 	A333_interior_temps()
@@ -6339,9 +6575,9 @@ function A333_ALL_systems()
 	A333_fuel_totalizer_reset()
 	A333_vspeeds()
 	A333_ground_timer()
-	A333_rev_timer()--vinci: callback for rev timer function
 	A333_idle_mode_logic()
 	A333_sidestick_priority()
+    A333_baro_warning_brightness()
 
 end
 

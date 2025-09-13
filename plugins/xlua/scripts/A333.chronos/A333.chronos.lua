@@ -56,6 +56,9 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 
 simDR_et_running			= find_dataref("sim/cockpit2/clock_timer/elapsed_running[0]")
+simDR_startup_running       = find_dataref("sim/operation/prefs/startup_running")
+
+
 
 --*************************************************************************************--
 --** 				               FIND X-PLANE COMMANDS                   	    	 **--
@@ -80,20 +83,20 @@ simDR_et_running			= find_dataref("sim/cockpit2/clock_timer/elapsed_running[0]")
 --*************************************************************************************--
 
 A333DR_ET_run_stop_reset_pos			= create_dataref("laminar/A333/clock/ET_run_stop_reset_pos", "number")
-
+A333DR_current_year						= create_dataref("laminar/A333/clock/year", "number")
 A333DR_init_chrono_CD					= create_dataref("laminar/A333/init_CD/chrono", "number")
 
 --*************************************************************************************--
 --** 				       READ-WRITE CUSTOM DATAREF HANDLERS     	        	     **--
 --*************************************************************************************--
 
-function A333DR_current_year_DRhandler()end
+
 
 --*************************************************************************************--
 --** 				       CREATE READ-WRITE CUSTOM DATAREFS                         **--
 --*************************************************************************************--
 
-A333DR_current_year						= create_dataref("laminar/A333/clock/year", "number", A333DR_current_year_DRhandler) -- TEMP
+
 
 --*************************************************************************************--
 --** 				             CUSTOM COMMAND HANDLERS            			     **--
@@ -213,6 +216,22 @@ fraction).  Use this to normalize rates,  e.g. to add 3 units of fuel per second
 per-frame callback you’d do fuel = fuel + 3 * SIM_PERIOD.]]--
 
 
+
+function A333_chrono_year()
+
+	A333DR_current_year = string.sub(os.date('%Y'), 3, 4)
+
+end
+
+
+
+
+
+
+
+
+
+
 ----- MONITOR AI FOR AUTO-BOARD CALL ----------------------------------------------------
 function A333_chrono_monitor_AI()
 
@@ -256,8 +275,6 @@ function A333_flight_start_chrono()
     -- ALL MODES ------------------------------------------------------------------------
     A333_set_chrono_all_modes()
 
-	A333DR_current_year	= 2023
-
 	if simDR_et_running == 1 then
 		simCMD_timer_start_stop:once()
 	end
@@ -286,6 +303,7 @@ end
 
 function A333_ALL_chronos()
 
+	A333_chrono_year()
 	A333_chrono_monitor_AI()
 
 end

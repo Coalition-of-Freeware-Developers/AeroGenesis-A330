@@ -62,7 +62,7 @@ POINT_COUNTS	0	0	0	0
 	ANIM_rotate	0	1	0	-0.0074484513	-0.0074484513
 	ANIM_rotate	0	0	-1	0.0034377468	0.0034377468
 	ANIM_rotate	1	0	0	-179.99297	-179.99297
-	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[1]
+	ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_right
 	ANIM_rotate_key	-13	-0.99981131
 	ANIM_rotate_key	-12	-0.99981131
 	ANIM_rotate_key	-7	0
@@ -76,7 +76,7 @@ POINT_COUNTS	0	0	0	0
 		ANIM_rotate	0	1	0	-0.0022918312	-0.0022918312
 		ANIM_rotate	0	0	-1	0.0045836624	0.0045836624
 		ANIM_rotate	1	0	0	-1.058826	-1.058826
-		ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[1]
+		ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_right
 		ANIM_rotate_key	-13	-0.99981131
 		ANIM_rotate_key	-12	-0.99981131
 		ANIM_rotate_key	-7	0
@@ -89,7 +89,7 @@ POINT_COUNTS	0	0	0	0
 			ANIM_trans	3.2936599	-0.22876	-2.0325301	3.2936599	-0.22876	-2.0325301
 			ANIM_rotate	0	0	-1	-0.0017188734	-0.0017188734
 			ANIM_rotate	1	0	0	-0.034950426	-0.034950426
-			ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[1]
+			ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_right
 			ANIM_rotate_key	-13	-0.99981131
 			ANIM_rotate_key	-12	-0.99981131
 			ANIM_rotate_key	-7	0
@@ -103,7 +103,7 @@ POINT_COUNTS	0	0	0	0
 				ANIM_rotate	0	1	0	0.013750987	0.013750987
 				ANIM_rotate	0	0	-1	1.3894227	1.3894227
 				ANIM_rotate	1	0	0	0.57467667	0.57467667
-				ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[1]
+				ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_right
 				ANIM_rotate_key	-13	-0.99981131
 				ANIM_rotate_key	-12	-0.99981131
 				ANIM_rotate_key	-7	0
@@ -117,7 +117,7 @@ POINT_COUNTS	0	0	0	0
 					ANIM_rotate	0	1	0	-18.174794	-18.174794
 					ANIM_rotate	0	0	-1	-19.795119	-19.795119
 					ANIM_rotate	1	0	0	-1.4673449	-1.4673449
-					ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[1]
+					ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_right
 					ANIM_rotate_key	-13	-0.99981131
 					ANIM_rotate_key	-12	-0.99981131
 					ANIM_rotate_key	-7	0
@@ -126,25 +126,25 @@ POINT_COUNTS	0	0	0	0
 					ANIM_rotate_key	7	3.0000069
 					ANIM_rotate_key	11	3.0000069
 					ANIM_rotate_end
-							LIGHT_PARAM	airplane_strobe_bb 4.177393 -1.7048593 -5.459578 1 1 1 1 100000cd 0.90313929 -0.39466339 0.16905719 0.043619335
+							LIGHT_PARAM	airplane_strobe_bb 4.1841531 -1.7035853 -5.4548059 1 1 1 1 100000cd 0.90294546 -0.39466491 0.17008564 0.043619335
 							ANIM_begin
 							ANIM_hide	-0.5	1.5	laminar/a333/switches/nav_pos
-							LIGHT_PARAM	airplane_nav_bb 4.2201099 -1.7299366 -5.6856728 0.020288363 0.73791075 0.36130685 0 3000cd 0.90313929 -0.39466339 0.16905698 0.043619335
+							LIGHT_PARAM	airplane_nav_bb 4.2271495 -1.7286149 -5.6808534 0.020288363 0.73791075 0.36130685 0 3000cd 0.90294546 -0.39466488 0.17008543 0.043619335
 							ANIM_end
 							ANIM_begin
 							ANIM_hide	1.5	2.5	laminar/a333/switches/nav_pos
-							LIGHT_PARAM	airplane_nav_pm 4.2076254 -1.725998 -5.6086798 0.020288363 0.73791075 0.36130685 0 3000cd 0.90313929 -0.39466339 0.16905698 0.043619335
+							LIGHT_PARAM	airplane_nav_pm 4.2145705 -1.7246916 -5.6038742 0.020288363 0.73791075 0.36130685 0 3000cd 0.90294546 -0.39466488 0.17008543 0.043619335
 							ANIM_end
-							LIGHT_PARAM	airplane_strobe_pm 4.1694398 -1.7232068 -5.4599228 1 1 1 0 100000cd 0.90313929 -0.39466339 0.16905719 0.043619335
-							LIGHT_PARAM	airplane_strobe_pm 4.177393 -1.7048593 -5.459578 1 1 1 1 100000cd 0.90313929 -0.39466339 0.16905719 0.043619335
-							LIGHT_PARAM	airplane_strobe_bb 4.1694398 -1.7232068 -5.4599228 1 1 1 0 100000cd 0.90313929 -0.39466339 0.16905719 0.043619335
+							LIGHT_PARAM	airplane_strobe_pm 4.1762013 -1.7219329 -5.455164 1 1 1 0 100000cd 0.90294546 -0.39466491 0.17008564 0.043619335
+							LIGHT_PARAM	airplane_strobe_pm 4.1841531 -1.7035853 -5.4548059 1 1 1 1 100000cd 0.90294546 -0.39466491 0.17008564 0.043619335
+							LIGHT_PARAM	airplane_strobe_bb 4.1762013 -1.7219329 -5.455164 1 1 1 0 100000cd 0.90294546 -0.39466491 0.17008564 0.043619335
 							ANIM_begin
 							ANIM_hide	1.5	2.5	laminar/a333/switches/nav_pos
-							LIGHT_PARAM	airplane_nav_bb 4.2076254 -1.725998 -5.6086798 0.020288363 0.73791075 0.36130685 0 3000cd 0.90313929 -0.39466339 0.16905698 0.043619335
+							LIGHT_PARAM	airplane_nav_bb 4.2145705 -1.7246916 -5.6038742 0.020288363 0.73791075 0.36130685 0 3000cd 0.90294546 -0.39466488 0.17008543 0.043619335
 							ANIM_end
 							ANIM_begin
 							ANIM_hide	-0.5	1.5	laminar/a333/switches/nav_pos
-							LIGHT_PARAM	airplane_nav_pm 4.2201099 -1.7299366 -5.6856728 0.020288363 0.73791075 0.36130685 0 3000cd 0.90313929 -0.39466339 0.16905698 0.043619335
+							LIGHT_PARAM	airplane_nav_pm 4.2271495 -1.7286149 -5.6808534 0.020288363 0.73791075 0.36130685 0 3000cd 0.90294546 -0.39466488 0.17008543 0.043619335
 							ANIM_end
 					ANIM_end
 				ANIM_end
@@ -156,7 +156,7 @@ POINT_COUNTS	0	0	0	0
 	ANIM_rotate	0	1	0	0.0074484513	0.0074484513
 	ANIM_rotate	0	0	-1	-0.0034377468	-0.0034377468
 	ANIM_rotate	1	0	0	-179.99297	-179.99297
-	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+	ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_left
 	ANIM_rotate_key	-13	0.99981131
 	ANIM_rotate_key	-12	0.99981131
 	ANIM_rotate_key	-7	0
@@ -170,7 +170,7 @@ POINT_COUNTS	0	0	0	0
 		ANIM_rotate	0	1	0	0.0022918312	0.0022918312
 		ANIM_rotate	0	0	-1	-0.0022918312	-0.0022918312
 		ANIM_rotate	1	0	0	-1.058826	-1.058826
-		ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+		ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_left
 		ANIM_rotate_key	-13	0.99981131
 		ANIM_rotate_key	-12	0.99981131
 		ANIM_rotate_key	-7	0
@@ -182,7 +182,7 @@ POINT_COUNTS	0	0	0	0
 			ANIM_begin
 			ANIM_trans	-3.2936499	-0.22887	-2.0325301	-3.2936499	-0.22887	-2.0325301
 			ANIM_rotate	1	0	0	-0.034950426	-0.034950426
-			ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+			ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_left
 			ANIM_rotate_key	-13	0.99981131
 			ANIM_rotate_key	-12	0.99981131
 			ANIM_rotate_key	-7	0
@@ -195,7 +195,7 @@ POINT_COUNTS	0	0	0	0
 				ANIM_trans	-3.38468	-0.22739001	-2.0887301	-3.38468	-0.22739001	-2.0887301
 				ANIM_rotate	0	0	-1	0.002864789	0.002864789
 				ANIM_rotate	1	0	0	0.57467667	0.57467667
-				ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+				ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_left
 				ANIM_rotate_key	-13	0.99981131
 				ANIM_rotate_key	-12	0.99981131
 				ANIM_rotate_key	-7	0
@@ -209,7 +209,7 @@ POINT_COUNTS	0	0	0	0
 					ANIM_rotate	0	1	0	18.024679	18.024679
 					ANIM_rotate	0	0	-1	18.471586	18.471586
 					ANIM_rotate	1	0	0	-1.9251382	-1.9251382
-					ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+					ANIM_rotate_begin	0	0	-1	laminar/A333/math/wing_flex_left
 					ANIM_rotate_key	-13	0.99981131
 					ANIM_rotate_key	-12	0.99981131
 					ANIM_rotate_key	-7	0
@@ -220,23 +220,23 @@ POINT_COUNTS	0	0	0	0
 					ANIM_rotate_end
 							ANIM_begin
 							ANIM_hide	-0.5	1.5	laminar/a333/switches/nav_pos
-							LIGHT_PARAM	airplane_nav_pm -4.219974 -1.7299204 -5.6857672 0.89999998 0.1 0 0 3000cd -0.90314978 -0.39464915 0.16903444 0.043619335
+							LIGHT_PARAM	airplane_nav_pm -4.2271504 -1.7286139 -5.6808515 1 0 0 0 3000cd -0.90294564 -0.39466467 0.17008542 0.043619335
 							ANIM_end
 							ANIM_begin
 							ANIM_hide	1.5	2.5	laminar/a333/switches/nav_pos
-							LIGHT_PARAM	airplane_nav_pm -4.207489 -1.7259814 -5.6087732 0.89626974 0.099898659 0 0 3000cd -0.90314978 -0.39464915 0.16903444 0.043619335
+							LIGHT_PARAM	airplane_nav_pm -4.2145715 -1.7246906 -5.6038723 1 0 0 0 3000cd -0.90294564 -0.39466467 0.17008542 0.043619335
 							ANIM_end
-							LIGHT_PARAM	airplane_strobe_pm -4.1772623 -1.7048421 -5.4596734 1 1 1 1 100000cd -0.90314978 -0.39464915 0.16903444 0.043619335
-							LIGHT_PARAM	airplane_strobe_pm -4.1693096 -1.7231896 -5.4600182 1 1 1 0 100000cd -0.90314978 -0.39464915 0.16903444 0.043619335
-							LIGHT_PARAM	airplane_strobe_bb -4.1772623 -1.7048421 -5.4596734 1 1 1 1 100000cd -0.90314978 -0.39464915 0.16903444 0.043619335
-							LIGHT_PARAM	airplane_strobe_bb -4.1693096 -1.7231896 -5.4600182 1 1 1 0 100000cd -0.90314978 -0.39464915 0.16903444 0.043619335
+							LIGHT_PARAM	airplane_strobe_pm -4.184154 -1.7035841 -5.4548039 1 1 1 1 100000cd -0.90294564 -0.39466467 0.17008542 0.043619335
+							LIGHT_PARAM	airplane_strobe_pm -4.1762023 -1.7219318 -5.455162 1 1 1 0 100000cd -0.90294564 -0.39466467 0.17008542 0.043619335
+							LIGHT_PARAM	airplane_strobe_bb -4.184154 -1.7035841 -5.4548039 1 1 1 1 100000cd -0.90294564 -0.39466467 0.17008542 0.043619335
+							LIGHT_PARAM	airplane_strobe_bb -4.1762023 -1.7219318 -5.455162 1 1 1 0 100000cd -0.90294564 -0.39466467 0.17008542 0.043619335
 							ANIM_begin
 							ANIM_hide	1.5	2.5	laminar/a333/switches/nav_pos
-							LIGHT_PARAM	airplane_nav_bb -4.207489 -1.7259814 -5.6087732 0.89626974 0.099898659 0 0 3000cd -0.90314978 -0.39464915 0.16903444 0.043619335
+							LIGHT_PARAM	airplane_nav_bb -4.2145715 -1.7246906 -5.6038723 1 0 0 0 3000cd -0.90294564 -0.39466467 0.17008542 0.043619335
 							ANIM_end
 							ANIM_begin
 							ANIM_hide	-0.5	1.5	laminar/a333/switches/nav_pos
-							LIGHT_PARAM	airplane_nav_bb -4.219974 -1.7299204 -5.6857672 0.89626974 0.099898659 0 0 3000cd -0.90314978 -0.39464915 0.16903444 0.043619335
+							LIGHT_PARAM	airplane_nav_bb -4.2271504 -1.7286139 -5.6808515 1 0 0 0 3000cd -0.90294564 -0.39466467 0.17008542 0.043619335
 							ANIM_end
 					ANIM_end
 				ANIM_end
@@ -278,4 +278,4 @@ POINT_COUNTS	0	0	0	0
 	ANIM_end
 	LIGHT_PARAM	airplane_strobe_bb -0.00000016 1.7793348 62.812973 1 1 1 0 100000cd -0.00000004 -0 1 0.043619335
 
-# Build with Blender 2.83.4 (build b'c113af82881a'). Exported with XPlane2Blender 4.1.0-rc.2+118.20230102195024
+# Build with Blender 4.2.0 (build b'a51f293548ad'). Exported with XPlane2Blender 4.3.4-alpha.2+121.20241026121242

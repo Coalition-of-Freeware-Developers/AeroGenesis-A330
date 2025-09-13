@@ -53,6 +53,9 @@ local int, frac = math.modf(os.clock())
 local seed = math.random(1, frac*1000.0)
 math.randomseed(seed)
 
+local bool2num = {[true] = 1, [false] = 0}
+
+
 ----- BUTTON SWITCH COVER(S) ------------------------------------------------------------
 local A333_button_switch_cover_position_target = {}
 for i = 0, NUM_BTN_SW_COVERS-1 do
@@ -70,7 +73,8 @@ end
 
 local A333_guard_cover_CMDhandler = {}
 
-local seatbelt_smoking_auto_status = 0
+local seatbelt_auto_status = 0
+local smoking_auto_status = 0
 
 local engine1_starter_cutoff_sentinel = 0
 local engine2_starter_cutoff_sentinel = 0
@@ -88,8 +92,6 @@ local window_heat4_target = 75
 local apu_master_pos_when_bat_off = 0
 local AC_ESS_feed_pos = 0
 local bus_tie_pos = 0
-local Comm_PWR_pos = 0
-local Galley_PWR_pos = 0
 
 local hot_air1_pos = 0
 local hot_air2_pos = 0
@@ -179,6 +181,12 @@ local brake_fan_request = 0
 local annun_flag = 0
 local LE_temp_factor = 0
 
+local GCS_timer_init = 0
+local GCS_timer = 0
+
+local capt_baro_mem = 0
+local fo_baro_mem = 0
+
 --*************************************************************************************--
 --** 				                X-PLANE DATAREFS            			    	 **--
 --*************************************************************************************--
@@ -212,6 +220,25 @@ simDR_tru_north_fo					= find_dataref("sim/cockpit2/EFIS/true_north_copilot")
 
 simDR_weather_on_capt				= find_dataref("sim/cockpit2/EFIS/EFIS_weather_on")
 simDR_weather_on_fo					= find_dataref("sim/cockpit2/EFIS/EFIS_weather_on_copilot")
+simDR_weather_mode_capt				= find_dataref("sim/cockpit2/EFIS/EFIS_weather_mode")
+simDR_weather_mode_fo				= find_dataref("sim/cockpit2/EFIS/EFIS_weather_mode_copilot")
+
+simDR_weather_gain_capt				= find_dataref("sim/cockpit2/EFIS/EFIS_weather_gain")
+simDR_weather_gain_fo				= find_dataref("sim/cockpit2/EFIS/EFIS_weather_gain_copilot")
+
+simDR_weather_gcs_capt				= find_dataref("sim/cockpit2/EFIS/EFIS_weather_gcs")
+simDR_weather_gcs_fo				= find_dataref("sim/cockpit2/EFIS/EFIS_weather_gcs_copilot")
+
+simDR_weather_pws_capt				= find_dataref("sim/cockpit2/EFIS/EFIS_weather_pws")
+simDR_weather_windshear_warn		= find_dataref("sim/cockpit2/annunciators/windshear_warning_systems")
+
+simDR_weather_multiscan_capt		= find_dataref("sim/cockpit2/EFIS/EFIS_weather_multiscan")
+simDR_weather_multiscan_fo			= find_dataref("sim/cockpit2/EFIS/EFIS_weather_multiscan_copilot")
+
+simDR_weather_sector_brg			= find_dataref("sim/cockpit2/EFIS/EFIS_weather_sector_brg")
+simDR_weather_sector_width			= find_dataref("sim/cockpit2/EFIS/EFIS_weather_sector_width")
+simDR_weather_antenna_limit			= find_dataref("sim/cockpit2/EFIS/EFIS_weather_antenna_limit")
+simDR_weather_sweeps_sec			= find_dataref("sim/cockpit2/EFIS/EFIS_weather_sweeps_per_sec")
 
 simDR_seatbelt_signs				= find_dataref("sim/cockpit2/switches/fasten_seat_belts")
 simDR_smoking_signs					= find_dataref("sim/cockpit2/switches/no_smoking")
@@ -290,9 +317,12 @@ simDR_isol_valve_right				= find_dataref("sim/cockpit2/bleedair/actuators/isol_v
 simDR_engine1_starter_running		= find_dataref("sim/flightmodel2/engines/starter_is_running[0]")
 simDR_engine2_starter_running		= find_dataref("sim/flightmodel2/engines/starter_is_running[1]")
 
-simDR_parking_brake					= find_dataref("sim/cockpit2/controls/parking_brake_ratio")
+simDR_parking_brake					= find_dataref("sim/cockpit2/controls/park_brake_valve")
+simDR_brake_master_cylinder			= find_dataref("sim/cockpit2/controls/wheel_brake_ratio")
 
 simDR_auto_brake					= find_dataref("sim/cockpit2/switches/auto_brake_level")
+simDR_auto_brake_decel_low			= find_dataref("sim/aircraft/specialcontrols/acf_autofbrk_decels[2]")
+simDR_auto_brake_decel_med			= find_dataref("sim/aircraft/specialcontrols/acf_autofbrk_decels[3]")
 simDR_brake_fan						= find_dataref("sim/cockpit2/controls/brake_fan_on")
 
 simDR_engine1_hyd_green				= find_dataref("sim/cockpit2/hydraulics/actuators/engine_pumpA[0]")
@@ -317,6 +347,7 @@ simDR_adc1_fail_state				= find_dataref("sim/operation/failures/rel_adc_comp")
 simDR_adc2_fail_state				= find_dataref("sim/operation/failures/rel_adc_comp_2")
 
 simDR_cabin_fan_mode				= find_dataref("sim/cockpit2/pressurization/actuators/fan_setting")
+simDR_cabin_alt_alert				= find_dataref("sim/cockpit2/annunciators/cabin_altitude_12500")
 
 simDR_yaw_damper					= find_dataref("sim/cockpit2/switches/yaw_damper_on")
 
@@ -329,6 +360,8 @@ simDR_fo_wiper						= find_dataref("sim/cockpit2/switches/wiper_speed_switch[1]"
 
 simDR_captain_barometer				= find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot")
 simDR_first_officer_barometer		= find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")
+simDR_captain_baro_is_std			= find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot")
+simDR_first_officer_baro_is_std		= find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot")
 
 -- AUDIO VOLUME
 
@@ -404,6 +437,11 @@ A333DR_eng_mode_selector_pos		= find_dataref("sim/cockpit2/engine/actuators/eng_
 
 A333_ann_light_switch_pos			= find_dataref("laminar/a333/switches/ann_light_pos")
 
+-- FLIGHT PHASE
+
+A333_flight_phase 					= find_dataref("laminar/A333/data/flight_phase")
+A333_rad_alt						= find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
+
 --*************************************************************************************--
 --** 				        CREATE READ-ONLY CUSTOM DATAREFS               	         **--
 --*************************************************************************************--
@@ -437,6 +475,8 @@ A333_terr_on_nd_fo					= create_dataref("laminar/A333/buttons/EFIS_terr_on_nd_fo
 A333_tru_north_pos					= create_dataref("laminar/A333/buttons/EFIS_true_north_ref_pos", "number")
 
 A333_weather_radar_switch_pos		= create_dataref("laminar/A333/switches/weather_radar_pos", "number")
+A333_weather_radar_mode_pos			= create_dataref("laminar/A333/switches/weather_radar_mode", "number")
+A333_weather_radar_mode_anim		= create_dataref("laminar/A333/switches/weather_radar_mode_anim_pos", "number")
 
 A333_pfd_nd_swap_capt_pos			= create_dataref("laminar/A333/buttons/pfd_nd_swap_capt_pos", "number")
 A333_pfd_nd_swap_fo_pos				= create_dataref("laminar/A333/buttons/pfd_nd_swap_fo_pos", "number")
@@ -511,7 +551,8 @@ A333_buttons_extA_pos				= create_dataref("laminar/A333/buttons/ext_power_A_pos"
 A333_buttons_extB_pos				= create_dataref("laminar/A333/buttons/ext_power_B_pos", "number")
 
 A333_status_GPU_avail				= create_dataref("laminar/A333/status/GPU_avail", "number")
-
+A333_commercial_status				= create_dataref("laminar/A333/status/commercial", "number")
+A333_galley_status					= create_dataref("laminar/A333/status/galley", "number")
 
 ---- BLEED AIR --------------------------------------------------------------------------
 
@@ -582,6 +623,10 @@ A333_gpws_sys_status				= create_dataref("laminar/A333/buttons/gpws/system_statu
 A333_gpws_GS_status					= create_dataref("laminar/A333/buttons/gpws/glideslope_status", "number")
 A333_gpws_flap_status				= create_dataref("laminar/A333/buttons/gpws/flap_status", "number")
 
+A333_gpws_gs_canx_capt_pos			= create_dataref("laminar/A333/buttons/gpws/gs_canx_capt_pos", "number")
+A333_gpws_gs_canx_fo_pos			= create_dataref("laminar/A333/buttons/gpws/gs_canx_fo_pos", "number")
+
+
 ---- CALL BUTTONS -----------------------------------------------------------------------
 
 A333_call_mech_pos					= create_dataref("laminar/A333/buttons/call/mech_pos", "number")
@@ -615,6 +660,7 @@ A333_cvr_test_pos					= create_dataref("laminar/A333/buttons/cvr_test_pos", "num
 A333_pax_sys_pos					= create_dataref("laminar/A333/buttons/pax_sys_pos", "number")
 A333_pax_satcom_pos					= create_dataref("laminar/A333/buttons/pax_satcom_pos", "number")
 A333_pax_IFEC_pos					= create_dataref("laminar/A333/buttons/pax_IFEC_pos", "number")
+A333_IFEC_status					= create_dataref("laminar/A333/status/IFEC", "number")
 
 A333_cargo_cond_fwd_isol_valve_pos	= create_dataref("laminar/A333/buttons/cargo_cond/fwd_isol_valve_pos", "number")
 A333_cargo_cond_bulk_isol_valve_pos	= create_dataref("laminar/A333/buttons/cargo_cond/bulk_isol_valve_pos", "number")
@@ -718,15 +764,19 @@ A333_switches_park_brake_pos_tar	= create_dataref("laminar/A333/switches/park_br
 
 ---- BAROMETER --------------------------------------------------------------------------
 
-A333_capt_baro_knob_pos				= create_dataref("laminar/A333/barometer/capt_knob_pos", "number")
-A333_fo_baro_knob_pos				= create_dataref("laminar/A333/barometer/fo_knob_pos", "number")
-A333_capt_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/capt_inHg_hPa_pos", "number")
-A333_fo_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/fo_inHg_hPa_pos", "number")
-A333_capt_pull_std_pos				= create_dataref("laminar/A333/barometer/capt_pull_std_pos", "number")
-A333_fo_pull_std_pos				= create_dataref("laminar/A333/barometer/fo_pull_std_pos", "number")
-A333_capt_baro_mode					= create_dataref("laminar/A333/barometer/capt_mode", "number")
-A333_fo_baro_mode					= create_dataref("laminar/A333/barometer/fo_mode", "number")
+function cptBaroKnobDRhandler() end
+function foBaroKnobDRhandler() end
+function cptBaroInHgHPaDRhandler() end
+function foBaroInHgHPaDRhandler() end
+function cptBaroPullStdDRhandler() end
+function foBaroPullStdDRhandler() end
 
+A333_capt_baro_knob_pos				= create_dataref("laminar/A333/barometer/capt_knob_pos", "number", cptBaroKnobDRhandler)
+A333_fo_baro_knob_pos				= create_dataref("laminar/A333/barometer/fo_knob_pos", "number", foBaroKnobDRhandler)
+A333_capt_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/capt_inHg_hPa_pos", "number", cptBaroInHgHPaDRhandler)
+A333_fo_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/fo_inHg_hPa_pos", "number", foBaroInHgHPaDRhandler)
+A333_capt_pull_std_pos				= create_dataref("laminar/A333/barometer/capt_pull_std_pos", "number", cptBaroPullStdDRhandler)
+A333_fo_pull_std_pos				= create_dataref("laminar/A333/barometer/fo_pull_std_pos", "number", foBaroPullStdDRhandler)
 
 ---- AI ---------------------------------------------------------------------------------
 
@@ -1070,26 +1120,22 @@ end
 
 -- PARKING BRAKE
 
-function A333_parking_brake_beforeCMDhandler(phase, duration) end
-function A333_parking_brake_afterCMDhandler(phase, duration)
+function A333_parking_brake_CMDhandler(phase, duration)
 	if phase == 0 then
-		if A333_switches_park_brake_pos == 0 then
+		if A333_switches_park_brake_pos_tar < 1 then
 			A333_switches_park_brake_pos_tar = 1
-			A333_switches_park_brake_pos = 1
-		elseif A333_switches_park_brake_pos == 1 then
+		elseif A333_switches_park_brake_pos_tar > 0 then
 			A333_switches_park_brake_pos_tar = 0
-			A333_switches_park_brake_pos = 0
 		end
 	end
 end
 
-function A333_brakes_beforeCMDhandler(phase, duration) end
-function A333_brakes_afterCMDhandler(phase, duration)
-	if phase == 0 then
-		if A333_switches_park_brake_pos == 0 then
-		elseif A333_switches_park_brake_pos == 1 then
+function A333_brakes_beforeCMDhandler(phase, duration) end				-- THIS COMMAND IS HERE FOR LEGACY REASONS ONLY
+function A333_brakes_afterCMDhandler(phase, duration)					-- THE REAL 330 ONLY HAS ONE WAY TO RELEASE THE PARK BRAKE
+	if phase == 0 then													-- AND THAT IS WITH THE ACTUAL HANDLE, NOT A RUDDER PEDAL PUSH
+		if A333_switches_park_brake_pos_tar == 0 then
+		elseif A333_switches_park_brake_pos_tar == 1 then
 			A333_switches_park_brake_pos_tar = 0
-			A333_switches_park_brake_pos = 0
 		end
 	end
 end
@@ -1230,7 +1276,7 @@ function sim_bus_tie_afterCMDhandler(phase, duration)
 		A333_buttons_bus_tie_pos = bus_tie_pos
 	end
 
-	-- SEE A333_bus_tie_manager() FOR OPERATIONS
+	-- SEE A333_bus_tie_manager() for operations
 
 end
 
@@ -1416,9 +1462,10 @@ end
 
 function sim_auto_brake_low_CMDhandler(phase, duration)
 	if phase == 0 then
-		if simDR_auto_brake ~= 4 then						-- not the perfect choice, but the best choice - manual calls for 5.9ft/s2 - XP provides 6.75ft/s2
+		if simDR_auto_brake ~= 4 then
 			simDR_auto_brake = 4
 			A333_auto_brake_low_pos = 1
+			simDR_auto_brake_decel_low = 0.183378			-- manual calls for 5.9ft/s2 - this is that in g
 		elseif simDR_auto_brake == 4 then
 			simDR_auto_brake = 1
 			A333_auto_brake_low_pos = 1
@@ -1430,9 +1477,10 @@ end
 
 function sim_auto_brake_med_CMDhandler(phase, duration)
 	if phase == 0 then
-		if simDR_auto_brake ~= 5 then						--  not the perfect choice, but the best choice - manual calls for 9.8ft/s2 - XP provides 12.48ft/s2
+		if simDR_auto_brake ~= 5 then
 			simDR_auto_brake = 5
 			A333_auto_brake_med_pos = 1
+			simDR_auto_brake_decel_med = 0.304593	-- manual calls for 9.8ft/s2 - this is that in g
 		elseif simDR_auto_brake == 5 then
 			simDR_auto_brake = 1
 			A333_auto_brake_med_pos = 1
@@ -1514,11 +1562,29 @@ end
 function simCMD_capt_baro_up_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333_capt_baro_knob_pos = A333_capt_baro_knob_pos + 0.01
+
+		if simDR_captain_baro_is_std == 0 then
+			if A333_capt_baro_inHg_hPa_pos == 0 then
+				simDR_captain_barometer = simDR_captain_barometer + 0.01
+			else simDR_captain_barometer = simDR_captain_barometer + 0.02953
+			end
+		else
+		end
+
 		run_after_time(A333_phase1_gate, 0.5)
 	elseif phase == 1 then
 		if phase1_gate == 0 then
 		elseif phase1_gate == 1 then
 			A333_capt_baro_knob_pos = A333_capt_baro_knob_pos + 0.01
+			
+			if simDR_captain_baro_is_std == 0 then
+				if A333_capt_baro_inHg_hPa_pos == 0 then
+					simDR_captain_barometer = simDR_captain_barometer + 0.01
+				else simDR_captain_barometer = simDR_captain_barometer + 0.02953
+				end
+			else
+			end
+			
 		end
 	elseif phase == 2 then
 		phase1_gate = 0
@@ -1529,11 +1595,29 @@ end
 function simCMD_capt_baro_dn_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333_capt_baro_knob_pos = A333_capt_baro_knob_pos - 0.01
+		
+		if simDR_captain_baro_is_std == 0 then
+			if A333_capt_baro_inHg_hPa_pos == 0 then
+				simDR_captain_barometer = simDR_captain_barometer - 0.01
+			else simDR_captain_barometer = simDR_captain_barometer - 0.02953
+			end
+		else
+		end
+
 		run_after_time(A333_phase1_gate, 0.5)
 	elseif phase == 1 then
 		if phase1_gate == 0 then
 		elseif phase1_gate == 1 then
 			A333_capt_baro_knob_pos = A333_capt_baro_knob_pos - 0.01
+			
+			if simDR_captain_baro_is_std == 0 then
+				if A333_capt_baro_inHg_hPa_pos == 0 then
+					simDR_captain_barometer = simDR_captain_barometer - 0.01
+				else simDR_captain_barometer = simDR_captain_barometer - 0.02953
+				end
+			else
+			end
+			
 		end
 	elseif phase == 2 then
 		phase1_gate = 0
@@ -1544,11 +1628,29 @@ end
 function simCMD_fo_baro_up_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333_fo_baro_knob_pos = A333_fo_baro_knob_pos + 0.01
+		
+		if simDR_first_officer_baro_is_std == 0 then
+			if A333_fo_baro_inHg_hPa_pos == 0 then
+				simDR_first_officer_barometer = simDR_first_officer_barometer + 0.01
+			else simDR_first_officer_barometer = simDR_first_officer_barometer + 0.02953
+			end
+		else
+		end
+		
 		run_after_time(A333_phase1_gate, 0.5)
 	elseif phase == 1 then
 		if phase1_gate == 0 then
 		elseif phase1_gate == 1 then
 			A333_fo_baro_knob_pos = A333_fo_baro_knob_pos + 0.01
+			
+			if simDR_first_officer_baro_is_std == 0 then
+				if A333_fo_baro_inHg_hPa_pos == 0 then
+					simDR_first_officer_barometer = simDR_first_officer_barometer + 0.01
+				else simDR_first_officer_barometer = simDR_first_officer_barometer + 0.02953
+				end
+			else
+			end
+			
 		end
 	elseif phase == 2 then
 		phase1_gate = 0
@@ -1559,11 +1661,29 @@ end
 function simCMD_fo_baro_dn_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333_fo_baro_knob_pos = A333_fo_baro_knob_pos - 0.01
+		
+		if simDR_first_officer_baro_is_std == 0 then
+			if A333_fo_baro_inHg_hPa_pos == 0 then
+				simDR_first_officer_barometer = simDR_first_officer_barometer - 0.01
+			else simDR_first_officer_barometer = simDR_first_officer_barometer - 0.02953
+			end
+		else
+		end
+		
 		run_after_time(A333_phase1_gate, 0.5)
 	elseif phase == 1 then
 		if phase1_gate == 0 then
 		elseif phase1_gate == 1 then
 			A333_fo_baro_knob_pos = A333_fo_baro_knob_pos - 0.01
+					
+			if simDR_first_officer_baro_is_std == 0 then
+				if A333_fo_baro_inHg_hPa_pos == 0 then
+					simDR_first_officer_barometer = simDR_first_officer_barometer - 0.01
+				else simDR_first_officer_barometer = simDR_first_officer_barometer - 0.02953
+				end
+			else
+			end
+			
 		end
 	elseif phase == 2 then
 		phase1_gate = 0
@@ -1629,6 +1749,43 @@ function simCMD_fo_wiper_dn_CMDhandler(phase, duration)
 	end
 end
 
+function simCMD_EFIS_wxr_gcs_off_CMDhandler(phase, duration)
+	if phase == 0 then
+		simDR_weather_gcs_capt = 0
+		GCS_timer_init = 0
+		GCS_timer = 0
+	elseif phase == 2 then
+		GCS_timer_init = 1
+	end
+end
+
+function A333_capt_baro_tog_beforeCMDhandler(phase, duration) end
+function A333_capt_baro_tog_afterCMDhandler(phase, duration)
+     if phase == 0 then
+         if simDR_captain_baro_is_std == 0 then
+ 		    A333_capt_pull_std_pos = -1
+ 		else
+ 		    A333_capt_pull_std_pos = 1
+ 		end
+     elseif phase == 2 then
+ 		A333_capt_pull_std_pos = 0
+     end
+end
+
+function A333_fo_baro_tog_beforeCMDhandler(phase, duration) end
+function A333_fo_baro_tog_afterCMDhandler(phase, duration)
+     if phase == 0 then
+         if simDR_first_officer_baro_is_std == 0 then
+ 		    A333_fo_pull_std_pos = -1
+ 		else
+ 		    A333_fo_pull_std_pos = 1
+ 		end
+     elseif phase == 2 then
+ 		A333_fo_pull_std_pos = 0
+     end
+end
+
+
 --*************************************************************************************--
 --** 				               FIND X-PLANE COMMANDS                   	         **--
 --*************************************************************************************--
@@ -1657,6 +1814,8 @@ simCMD_auto_brake_off		= find_command("simCMD_auto_brakes_off")
 
 simCMD_gpu_on				= find_command("sim/electrical/GPU_on")
 simCMD_gpu_off				= find_command("sim/electrical/GPU_off")
+
+simCMD_brake_max			= find_command("sim/flight_controls/brakes_max")
 
 --*************************************************************************************--
 --** 				               REPLACE X-PLANE COMMANDS                   	     **--
@@ -1694,6 +1853,14 @@ simCMD_apu_bleed_toggle		= replace_command("sim/bleed_air/apu_toggle", sim_apu_b
 simCMD_eng1_bleed_toggle	= replace_command("sim/bleed_air/engine_1_toggle", sim_eng1_bleed_toggle_CMDhandler)
 simCMD_eng2_bleed_toggle	= replace_command("sim/bleed_air/engine_2_toggle", sim_eng2_bleed_toggle_CMDhandler)
 
+-- WX RADAR
+
+simCMD_GCS_OFF				= replace_command("sim/instruments/EFIS_wxr_gcs_off", simCMD_EFIS_wxr_gcs_off_CMDhandler)
+
+-- BRAKES
+
+simCMD_parking_brake		= replace_command("sim/flight_controls/park_brake_valve_toggle", A333_parking_brake_CMDhandler)
+
 --*************************************************************************************--
 --** 				               WRAP X-PLANE COMMANDS                   	     	 **--
 --*************************************************************************************--
@@ -1723,8 +1890,10 @@ simCMD_engine2_start_wrap	= wrap_command("sim/starters/engage_starter_2", A333_e
 simCMD_engine1_cutoff_wrap	= wrap_command("sim/starters/shut_down_1", A333_engine1_cutoff_wrap_beforeCMDhandler, A333_engine1_cutoff_wrap_afterCMDhandler)
 simCMD_engine2_cutoff_wrap	= wrap_command("sim/starters/shut_down_2", A333_engine2_cutoff_wrap_beforeCMDhandler, A333_engine2_cutoff_wrap_afterCMDhandler)
 
-simCMD_parking_brake		= wrap_command("sim/flight_controls/brakes_toggle_max", A333_parking_brake_beforeCMDhandler, A333_parking_brake_afterCMDhandler)
-simCMD_brakes				= wrap_command("sim/flight_controls/brakes_toggle_regular", A333_brakes_beforeCMDhandler, A333_brakes_afterCMDhandler)
+simCMD_brakes				= wrap_command("sim/flight_controls/brakes_regular", A333_brakes_beforeCMDhandler, A333_brakes_afterCMDhandler) -- here for legacy reasons
+
+simCMD_capt_baro_std_tog	= wrap_command("sim/instruments/barometer_std", A333_capt_baro_tog_beforeCMDhandler, A333_capt_baro_tog_afterCMDhandler) -- not used in model, added for usabilty
+simCMD_fo_baro_std_tog		= wrap_command("sim/instruments/barometer_copilot_std", A333_fo_baro_tog_beforeCMDhandler, A333_fo_baro_tog_afterCMDhandler) -- not used in model, added for usabilty)
 
 -- RUDDER TRIM
 
@@ -2303,15 +2472,15 @@ function A333_galley_pwr_toggle_CMDhandler(phase, duration)
 	if phase == 0 then
 		if A333_buttons_galley_pos == 0 then
 			A333_buttons_galley_pos = 1.2
-			Galley_PWR_pos = 1
+			A333_galley_status = 1
 		elseif A333_buttons_galley_pos == 1 then
 			A333_buttons_galley_pos = 1.2
-			Galley_PWR_pos = 0
+			A333_galley_status = 0
 		end
 	elseif phase == 2 then
-		if Galley_PWR_pos == 1 then
+		if A333_galley_status == 1 then
 			A333_buttons_galley_pos = 1
-		elseif Galley_PWR_pos == 0 then
+		elseif A333_galley_status == 0 then
 			A333_buttons_galley_pos = 0
 		end
 	end
@@ -2322,15 +2491,15 @@ function A333_commercial_pwr_toggle_CMDhandler(phase, duration)
 	if phase == 0 then
 		if A333_buttons_commercial_pos == 0 then
 			A333_buttons_commercial_pos = 1.2
-			Comm_PWR_pos = 1
+			A333_commercial_status = 1
 		elseif A333_buttons_commercial_pos == 1 then
 			A333_buttons_commercial_pos = 1.2
-			Comm_PWR_pos = 0
+			A333_commercial_status = 0
 		end
 	elseif phase == 2 then
-		if Comm_PWR_pos == 1 then
+		if A333_commercial_status == 1 then
 			A333_buttons_commercial_pos = 1
-		elseif Comm_PWR_pos == 0 then
+		elseif A333_commercial_status == 0 then
 			A333_buttons_commercial_pos = 0
 		end
 	end
@@ -2863,6 +3032,25 @@ function A333_gpws_flap_toggleCMDhandler(phase, duration)
 		end
 	end
 end
+
+function A333_gpws_gs_canx_capt_CMDhandler(phase, duration)
+	if phase == 0 then
+		A333_gpws_gs_canx_capt_pos = 1.0
+	elseif phase == 2 then
+		A333_gpws_gs_canx_capt_pos = 0.0
+	end
+end
+
+function A333_gpws_gs_canx_fo_CMDhandler(phase, duration)
+	if phase == 0 then
+		A333_gpws_gs_canx_fo_pos = 1.0
+	elseif phase == 2 then
+		A333_gpws_gs_canx_fo_pos = 0.0
+	end
+end
+
+
+-- CALL PUSH BUTTONS
 
 function A333_call_mech_pushCMDhandler(phase, duration)
 	if phase == 0 then
@@ -3761,10 +3949,6 @@ end
 
 
 
-
-
-
-
 -- EVAC
 
 function A333_evac_command_togCMDhandler(phase, duration)
@@ -3852,7 +4036,10 @@ end
 function A333_pull_std_capt_pushCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_capt_pull_std_pos = -1
-		A333_capt_baro_mode = 0
+		if simDR_captain_baro_is_std == 1 then
+			simDR_captain_barometer = capt_baro_mem
+		end
+		simDR_captain_baro_is_std = 0
 	elseif phase == 2 then
 		A333_capt_pull_std_pos = 0
 	end
@@ -3861,7 +4048,10 @@ end
 function A333_pull_std_capt_pullCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_capt_pull_std_pos = 1
-		A333_capt_baro_mode = 1
+		if simDR_captain_baro_is_std == 0 then
+			capt_baro_mem = simDR_captain_barometer
+		end
+		simDR_captain_baro_is_std = 1
 	elseif phase == 2 then
 		A333_capt_pull_std_pos = 0
 	end
@@ -3870,7 +4060,10 @@ end
 function A333_pull_std_fo_pushCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_fo_pull_std_pos = -1
-		A333_fo_baro_mode = 0
+		if simDR_first_officer_baro_is_std == 1 then
+			simDR_first_officer_barometer = fo_baro_mem
+		end
+		simDR_first_officer_baro_is_std = 0
 	elseif phase == 2 then
 		A333_fo_pull_std_pos = 0
 	end
@@ -3879,13 +4072,14 @@ end
 function A333_pull_std_fo_pullCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_fo_pull_std_pos = 1
-		A333_fo_baro_mode = 1
+		if simDR_first_officer_baro_is_std == 0 then
+			fo_baro_mem = simDR_first_officer_barometer
+		end
+		simDR_first_officer_baro_is_std = 1
 	elseif phase == 2 then
 		A333_fo_pull_std_pos = 0
 	end
 end
-
-
 
 function A333_capt_inHg_CMDhandler(phase, duration)
 	if phase == 0 then
@@ -3899,6 +4093,16 @@ function A333_capt_hPa_CMDhandler(phase, duration)
 	end
 end
 
+function A333_capt_inHg_hPa_CMDhandler(phase, duration)
+    if phase == 0 then
+        if A333_capt_baro_inHg_hPa_pos == 0 then
+            A333_capt_baro_inHg_hPa_pos = 1
+        else
+            A333_capt_baro_inHg_hPa_pos = 0
+        end
+    end
+end
+
 function A333_fo_inHg_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333_fo_baro_inHg_hPa_pos = 0
@@ -3909,6 +4113,16 @@ function A333_fo_hPa_CMDhandler(phase, duration)
 	if phase == 0 then
 		A333_fo_baro_inHg_hPa_pos = 1
 	end
+end
+
+function A333_fo_inHg_hPa_CMDhandler(phase, duration)
+    if phase == 0 then
+        if A333_fo_baro_inHg_hPa_pos == 0 then
+            A333_fo_baro_inHg_hPa_pos = 1
+        else
+            A333_fo_baro_inHg_hPa_pos = 0
+        end
+    end
 end
 
 function A333_capt_ils_bars_pushCMDhandler(phase, duration)
@@ -4022,6 +4236,23 @@ function A333_taxi_light_dn_CMDhandler(phase, duration)
 	end
 end
 
+function A333_taxi_light_off_CMDhandler(phase, duration)
+	if phase == 0 then
+    	simDR_landing_light_brightness[1] = 0
+	end
+end
+
+function A333_taxi_light_taxi_CMDhandler(phase, duration)
+	if phase == 0 then
+    	simDR_landing_light_brightness[1] = 0.5
+	end
+end
+
+function A333_taxi_light_to_CMDhandler(phase, duration)
+	if phase == 0 then
+    	simDR_landing_light_brightness[1] = 1
+	end
+end
 
 -- ENGINE MODE SELECTOR
 
@@ -4069,6 +4300,30 @@ function A333_ai_switches_quick_start_CMDhandler(phase, duration)
 	end
 end
 
+function A333_weather_radar_mode_left_CMDhander(phase, duration)
+	if phase == 0 then
+		if A333_weather_radar_mode_pos == 3 then
+			A333_weather_radar_mode_pos = 2
+		elseif A333_weather_radar_mode_pos == 2 then
+			A333_weather_radar_mode_pos = 1
+		elseif A333_weather_radar_mode_pos == 1 then
+			A333_weather_radar_mode_pos = 0
+		end
+	end
+end
+
+function A333_weather_radar_mode_right_CMDhander(phase, duration)
+	if phase == 0 then
+		if A333_weather_radar_mode_pos == 0 then
+			A333_weather_radar_mode_pos = 1
+		elseif A333_weather_radar_mode_pos == 1 then
+			A333_weather_radar_mode_pos = 2
+		elseif A333_weather_radar_mode_pos == 2 then
+			A333_weather_radar_mode_pos = 3
+		end
+	end
+end
+
 --*************************************************************************************--
 --** 				                 CUSTOM COMMANDS                			     **--
 --*************************************************************************************--
@@ -4106,6 +4361,8 @@ A333CMD_pfd_nd_fo_swap					= create_command("laminar/A333/buttons/pfd_nd_fo_swap
 A333CMD_capt_ils_bars_push				= create_command("laminar/A333/buttons/capt_ils_bars_push", "Captain LS Bars Toggle", A333_capt_ils_bars_pushCMDhandler)
 A333CMD_fo_ils_bars_push				= create_command("laminar/A333/buttons/fo_ils_bars_push", "F/O LS Bars Toggle", A333_fo_ils_bars_pushCMDhandler)
 
+A333CMD_weather_radar_mode_left			= create_command("laminar/A333/switches/weather_radar_mode_left", "Weather Radar Mode Left", A333_weather_radar_mode_left_CMDhander)
+A333CMD_weather_radar_mode_right		= create_command("laminar/A333/switches/weather_radar_mode_right", "Weather Radar Mode Right", A333_weather_radar_mode_right_CMDhander)
 
 ----- SMOKING/SEATBELTS -----
 
@@ -4197,6 +4454,9 @@ A333CMD_gpws_terr_tog					= create_command("laminar/A333/buttons/gpws/terr_toggl
 A333CMD_gpws_system_tog					= create_command("laminar/A333/buttons/gpws/sys_toggle","GPWS System ON/OFF", A333_gpws_sys_toggleCMDhandler)
 A333CMD_gpws_GS_mode_tog				= create_command("laminar/A333/buttons/gpws/gs_mode_toggle", "GPWS Glide Slope Mode ON/OFF", A333_gpws_GS_toggleCMDhandler)
 A333CMD_gpws_flap_mode_tog				= create_command("laminar/A333/buttons/gpws/flap_mode_toggle", "GPWS Flap Mode ON/OFF", A333_gpws_flap_toggleCMDhandler)
+
+A333CMD_gpws_gs_canx_capt				= create_command("laminar/A333/buttons/gpws/gs_canx_capt", "GPWS G/S Cancel - Capt", A333_gpws_gs_canx_capt_CMDhandler)
+A333CMD_gpws_gs_canx_fo					= create_command("laminar/A333/buttons/gpws/gs_canx_fo", "GPWS G/S Cancel - F/O", A333_gpws_gs_canx_fo_CMDhandler)
 
 -- CALL BUTTONS
 
@@ -4316,12 +4576,13 @@ A333CMD_pull_std_fo_push				= create_command("laminar/A333/push/baro/fo_std", "F
 A333CMD_pull_std_capt_pull				= create_command("laminar/A333/pull/baro/capt_std", "Captain Baro STANDARD PULL", A333_pull_std_capt_pullCMDhandler)
 A333CMD_pull_std_fo_pull				= create_command("laminar/A333/pull/baro/fo_std", "F/O Baro STANDARD PULL", A333_pull_std_fo_pullCMDhandler)
 
-
 A333CMD_capt_inHg						= create_command("laminar/A333/knob/baro/capt_inHg", "Captain Baro in Hg", A333_capt_inHg_CMDhandler)
 A333CMD_capt_hPa						= create_command("laminar/A333/knob/baro/capt_hPa", "Captain Baro hPa", A333_capt_hPa_CMDhandler)
+A333CMD_capt_inHg_hPa_toggle            = create_command("laminar/A333/knob/baro/capt_inHg_hPa_toggle", "Captain Toggle Baro Between inHg / hPa", A333_capt_inHg_hPa_CMDhandler )
 
 A333CMD_fo_inHg							= create_command("laminar/A333/knob/baro/fo_inHg", "F/O Baro in Hg", A333_fo_inHg_CMDhandler)
 A333CMD_fo_hPa							= create_command("laminar/A333/knob/baro/fo_hPa", "F/O Baro hPa", A333_fo_hPa_CMDhandler)
+A333CMD_fo_inHg_hPa_toggle              = create_command("laminar/A333/knob/baro/fo_inHg_hPa_toggle", "F/O Toggle Baro Between inHg / hPa", A333_fo_inHg_hPa_CMDhandler)
 
 -- THREE POSITION LIGHT SWITCHES
 
@@ -4329,8 +4590,13 @@ A333CMD_capt_console_light_up			= create_command("laminar/A333/switch/lighting/c
 A333CMD_capt_console_light_dn			= create_command("laminar/A333/switch/lighting/capt_console_light_dn", "Captain Console Light DOWN", A333_capt_console_light_dn_CMDhandler)
 A333CMD_fo_console_light_up				= create_command("laminar/A333/switch/lighting/fo_console_light_up", "First Officer Console Light UP", A333_fo_console_light_up_CMDhandler)
 A333CMD_fo_console_light_dn				= create_command("laminar/A333/switch/lighting/fo_console_light_dn", "First Officer Console Light DOWN", A333_fo_console_light_dn_CMDhandler)
+
 A333CMD_taxi_light_up					= create_command("laminar/A333/switch/lighting/taxi_light_up", "Taxi Light UP", A333_taxi_light_up_CMDhandler)
 A333CMD_taxi_light_dn					= create_command("laminar/A333/switch/lighting/taxi_light_dn", "Taxi Light DOWN", A333_taxi_light_dn_CMDhandler)
+
+A333CMD_taxi_light_off                  = create_command("laminar/A333/switch/lighting/taxi_light_off", "Taxi Light OFF", A333_taxi_light_off_CMDhandler)
+A333CMD_taxi_light_taxi                 = create_command("laminar/A333/switch/lighting/taxi_light_taxi", "Taxi Light TAXI", A333_taxi_light_taxi_CMDhandler)
+A333CMD_taxi_light_to                   = create_command("laminar/A333/switch/lighting/taxi_light_to", "Taxi Light TO", A333_taxi_light_to_CMDhandler)
 
 -- ENG MODE SELECTOR
 
@@ -4360,20 +4626,6 @@ A333CMD_ai_switches_quick_start		= create_command("laminar/A333/ai/switches_quic
 --*************************************************************************************--
 --** 				                  SYSTEM FUNCTIONS           	    			 **--
 --*************************************************************************************--
------| UTIL: TERNARY CONDITIONAL
-function ternary(condition, ifTrue, ifFalse)
-	if condition then return ifTrue else return ifFalse end
-end
-
-
------| UTIL:  BOOLEAN TO LOGIC NUMBER
-function bool2logic(bool)
-	return ternary(bool == true, 1, 0)
-end
-
-
-
-
 
 ----- ANIMATION UTILITY -----------------------------------------------------------------
 function A333_set_animation_position(current_value, target, min, max, speed)
@@ -4434,21 +4686,22 @@ function A333_knobs_switches()
 
 ---- PARKING BRAKE ----
 
-	if parking_brake_sentinel == 0 then
-		if A333_switches_park_brake_pos == 1 and A333_switches_park_brake_lift == 0 then
+	if A333_switches_park_brake_pos == 1 and A333_switches_park_brake_lift == 0 then
+		simCMD_brake_max:start()
+		if simDR_brake_master_cylinder > 0.95 then
 			simDR_parking_brake = 1
-			parking_brake_sentinel = 1
-		elseif A333_switches_park_brake_pos ~= 1 then
+			simCMD_brake_max:stop()
 		end
+	elseif A333_switches_park_brake_pos ~= 1 then
 	end
 
-	if parking_brake_sentinel == 1 then
-		if A333_switches_park_brake_pos == 0 and A333_switches_park_brake_lift == 0 then
-			simDR_parking_brake = 0
-			parking_brake_sentinel = 0
-		elseif A333_switches_park_brake_pos ~= 0 then
-		end
+
+	if A333_switches_park_brake_pos == 0 and A333_switches_park_brake_lift == 0 then
+		simDR_parking_brake = 0
+		simCMD_brake_max:stop()
+	elseif A333_switches_park_brake_pos ~= 0 then
 	end
+
 
 	A333_switches_park_brake_pos = A333_set_animation_position(A333_switches_park_brake_pos, A333_switches_park_brake_pos_tar, 0, 1, 5)
 
@@ -4462,35 +4715,58 @@ function A333_knobs_switches()
 
 ---- SMOKING / SEATBELTS ----
 
-	if simDR_flaps_status > 0 or simDR_gear_status1 > 0 or simDR_gear_status2 > 0 or simDR_gear_status3 > 0 then
-		seatbelt_smoking_auto_status = 1
-	elseif simDR_flaps_status == 0 and simDR_gear_status1 == 0 and simDR_gear_status2 == 0 and simDR_gear_status3 == 0 then
-		seatbelt_smoking_auto_status = 0
+
+
+	if simDR_flaps_status > 0 or simDR_gear_status2 > 0 or simDR_gear_status3 > 0 then
+		seatbelt_auto_status = 1
+	elseif simDR_flaps_status == 0 and simDR_gear_status2 == 0 and simDR_gear_status3 == 0 then
+		seatbelt_auto_status = 0
 	end
 
-	if A333_switches_seatbelts == 0 then
-		simDR_seatbelt_signs = 0
-	elseif A333_switches_seatbelts == 1 then
-		if seatbelt_smoking_auto_status == 0 then
+	if simDR_gear_status1 > 0 or simDR_gear_status2 > 0 or simDR_gear_status3 > 0 then
+		smoking_auto_status = 1
+	elseif simDR_gear_status1 == 0 and simDR_gear_status2 == 0 and simDR_gear_status3 == 0 then
+		smoking_auto_status = 0
+	end
+
+
+	if simDR_cabin_alt_alert == 0 then
+
+		if A333_switches_seatbelts == 0 then
 			simDR_seatbelt_signs = 0
-		elseif seatbelt_smoking_auto_status == 1 then
+		elseif A333_switches_seatbelts == 1 then
+			simDR_seatbelt_signs = seatbelt_auto_status
+		elseif A333_switches_seatbelts == 2 then
 			simDR_seatbelt_signs = 1
 		end
-	elseif A333_switches_seatbelts == 2 then
-		simDR_seatbelt_signs = 1
-	end
 
-	if A333_switches_no_smoking == 0 then
-		simDR_smoking_signs = 0
-	elseif A333_switches_no_smoking == 1 then
-		if seatbelt_smoking_auto_status == 0 then
+		if A333_switches_no_smoking == 0 then
 			simDR_smoking_signs = 0
-		elseif seatbelt_smoking_auto_status == 1 then
+		elseif A333_switches_no_smoking == 1 then
+			simDR_smoking_signs = smoking_auto_status 
+		elseif A333_switches_no_smoking == 2 then
 			simDR_smoking_signs = 1
 		end
-	elseif A333_switches_no_smoking == 2 then
+
+	elseif simDR_cabin_alt_alert == 1 then
+		simDR_seatbelt_signs = 1
 		simDR_smoking_signs = 1
 	end
+
+---- CABIN SYSTEMS ----
+
+	-- IFEC
+
+	if A333_commercial_status == 0 then
+		A333_IFEC_status = 0
+	elseif A333_commercial_status == 1 then
+		A333_IFEC_status = pax_IFEC_pos
+	end
+
+	-- GALLEYS
+	
+	
+
 
 ---- ANTI ICE ----
 
@@ -4727,25 +5003,38 @@ function A333_bus_tie_manager()
 
 	-- AUTO:
 	if bus_tie_pos == 1 then
-		if (((((simDR_generator1 == 1 and simDR_IDG1_disconnect == 6) or (simDR_generator1 == 0 and simDR_IDG1_disconnect < 6)) and (simDR_generator2 == 1 and simDR_IDG2_disconnect < 6))
-			and (simDR_APU_generator == 0 or (simDR_APU_generator == 1 and simDR_fail_apu == 6) or (simDR_APU_generator == 1 and simDR_APU_running == 0))
-			and (simDR_ext_a_status == 0))
-			or
-			((((simDR_generator2 == 1 and simDR_IDG2_disconnect == 6) or (simDR_generator2 == 0 and simDR_IDG2_disconnect < 6)) and (simDR_generator1 == 1 and simDR_IDG1_disconnect < 6))
-			and (simDR_APU_generator == 0 or (simDR_APU_generator == 1 and simDR_fail_apu == 6) or (simDR_APU_generator == 1 and simDR_APU_running == 0))
-			and (simDR_ext_a_status == 0)))
-
-			 or
-
-			((simDR_APU_generator == 1 and simDR_fail_apu < 6) and simDR_ext_a_status == 0)
-			and ((simDR_generator1 == 0 or (simDR_generator1 == 1 and simDR_IDG1_disconnect == 6))
-			and (simDR_generator2 == 0 or (simDR_generator2 == 1 and simDR_IDG2_disconnect == 6)))
+		if (
+			(
+				(((simDR_generator1 == 1 and simDR_IDG1_disconnect == 6) or (simDR_generator1 == 0 and simDR_IDG1_disconnect < 6)) and (simDR_generator2 == 1 and simDR_IDG2_disconnect < 6))
+				and (simDR_APU_generator == 0 or (simDR_APU_generator == 1 and simDR_fail_apu == 6) or (simDR_APU_generator == 1 and simDR_APU_running == 0))
+				and (simDR_ext_a_status == 0)
+			)
 
 			or
 
-			(simDR_ext_a_status == 1 and (simDR_APU_generator == 0 or (simDR_APU_generator == 1 and simDR_fail_apu == 6) or (simDR_APU_generator == 1 and simDR_APU_running == 0)))
-			and ((simDR_generator1 == 0 or (simDR_generator1 == 1 and simDR_IDG1_disconnect == 6))
-			and (simDR_generator2 == 0 or (simDR_generator2 == 1 and simDR_IDG2_disconnect == 6)))
+			(
+				(((simDR_generator2 == 1 and simDR_IDG2_disconnect == 6) or (simDR_generator2 == 0 and simDR_IDG2_disconnect < 6)) and (simDR_generator1 == 1 and simDR_IDG1_disconnect < 6))
+				and (simDR_APU_generator == 0 or (simDR_APU_generator == 1 and simDR_fail_apu == 6) or (simDR_APU_generator == 1 and simDR_APU_running == 0))
+				and (simDR_ext_a_status == 0)
+			)
+
+			or
+
+			(
+				((simDR_APU_generator == 1 and simDR_fail_apu < 6) and simDR_ext_a_status == 0)
+				and ((simDR_generator1 == 0 or (simDR_generator1 == 1 and simDR_IDG1_disconnect == 6))
+				and (simDR_generator2 == 0 or (simDR_generator2 == 1 and simDR_IDG2_disconnect == 6)))
+			)
+
+			or
+
+			(
+				(simDR_ext_a_status == 1 and (simDR_APU_generator == 0 or (simDR_APU_generator == 1 and simDR_fail_apu == 6) or (simDR_APU_generator == 1 and simDR_APU_running == 0)))
+				and ((simDR_generator1 == 0 or (simDR_generator1 == 1 and simDR_IDG1_disconnect == 6))
+				and (simDR_generator2 == 0 or (simDR_generator2 == 1 and simDR_IDG2_disconnect == 6)))
+			)
+
+		)
 
 		then
 			simDR_bus_tie = 1
@@ -4774,15 +5063,15 @@ end
 
 function A333_baro_memory()
 
-	if A333_capt_baro_mode == 0 then
+	if simDR_captain_baro_is_std == 0 then
 		simDR_captain_barometer = A333_capt_baro_knob_pos
-	elseif A333_capt_baro_mode == 1 then
+	elseif simDR_captain_baro_is_std == 1 then
 		simDR_captain_barometer = 29.92
 	end
 
-	if A333_fo_baro_mode == 0 then
+	if simDR_first_officer_baro_is_std == 0 then
 		simDR_first_officer_barometer = A333_fo_baro_knob_pos
-	elseif A333_fo_baro_mode == 1 then
+	elseif simDR_first_officer_baro_is_std == 1 then
 		simDR_first_officer_barometer = 29.92
 	end
 
@@ -4948,8 +5237,8 @@ function A333_terr_on_nd()
 	-- IT DOES NOT CONTROL THE TERRAIN 'PICTURE' ON THE ND
 	-- THE TERRAIN "PICTURE" ON THE ND IS ONLY CONTROLLED BY THE 'TERR ON ND' BUTTON
 
-	simDR_terr_on_nd_capt = A333_terr_on_nd_capt * ternary(simDR_EFIS_map_mode <= 3, 1, 0)
-	simDR_terr_on_nd_fo = A333_terr_on_nd_fo * ternary(simDR_EFIS_map_mode_fo <= 3, 1, 0)
+	simDR_terr_on_nd_capt = A333_terr_on_nd_capt * bool2num[simDR_EFIS_map_mode <= 3]
+	simDR_terr_on_nd_fo = A333_terr_on_nd_fo * bool2num[simDR_EFIS_map_mode_fo <= 3]
 
 end
 
@@ -4958,18 +5247,18 @@ function A333_EFIS_wxr_radar()
 
 	--[[
 	if A333_weather_radar_switch_pos == 0 then		-- laminar/A333/switches/weather_radar_pos
-		simDR_weather_on_capt = 0					-- sim/cockpit2/EFIS/EFIS_weather_on
-		simDR_weather_on_fo = 0						-- sim/cockpit2/EFIS/EFIS_weather_on_copilot
+		simDR_weather_mode_capt = 0					-- sim/cockpit2/EFIS/EFIS_weather_on
+		simDR_weather_mode_fo = 0						-- sim/cockpit2/EFIS/EFIS_weather_on_copilot
 	elseif A333_weather_radar_switch_pos ~= 0 then
 		if simDR_EFIS_map_mode ~= 4 then			-- sim/cockpit2/EFIS/map_mode  0=approach, 1=vor, 2=map, 3=nav, 4=plan
-			simDR_weather_on_capt = 1
+			simDR_weather_mode_capt = 1
 		elseif simDR_EFIS_map_mode == 4 then
-			simDR_weather_on_capt = 0
+			simDR_weather_mode_capt = 0
 		end
 		if simDR_EFIS_map_mode_fo ~= 4 then			-- sim/cockpit2/EFIS/map_mode_copilot
-			simDR_weather_on_fo = 1
+			simDR_weather_mode_fo = 1
 		elseif simDR_EFIS_map_mode_fo == 4 then
-			simDR_weather_on_fo = 0
+			simDR_weather_mode_fo = 0
 		end
 	end
 	--]]
@@ -4978,22 +5267,74 @@ function A333_EFIS_wxr_radar()
 	-- THE WEATHER RADAR CAN ONLY DISPLAYED WHEN THE 'TERR ON ND' BUTTON IS 'OFF'
 
 	local terr_on_nd_capt_off = 1 - simDR_terr_on_nd_capt
-	simDR_weather_on_capt = math.abs(A333_weather_radar_switch_pos) * terr_on_nd_capt_off * ternary(simDR_EFIS_map_mode <= 3, 1, 0)
+	local weather_on_capt = (math.abs(A333_weather_radar_switch_pos) + simDR_weather_windshear_warn)* terr_on_nd_capt_off * bool2num[simDR_EFIS_map_mode <= 3]
 
 	local terr_on_nd_fo_off = 1 - simDR_terr_on_nd_fo
-	simDR_weather_on_fo = math.abs(A333_weather_radar_switch_pos) * terr_on_nd_fo_off * ternary(simDR_EFIS_map_mode_fo <= 3, 1, 0)
+	local weather_on_fo = (math.abs(A333_weather_radar_switch_pos) + simDR_weather_windshear_warn) * terr_on_nd_fo_off * bool2num[simDR_EFIS_map_mode_fo <= 3]
+
+
+
+	if weather_on_capt == 0 then
+		simDR_weather_mode_capt = 0
+		simDR_weather_on_capt = 0
+	else
+		simDR_weather_on_capt = 1
+		if A333_weather_radar_mode_pos == 0 then
+			simDR_weather_mode_capt = 2
+		elseif A333_weather_radar_mode_pos == 1 then
+			simDR_weather_mode_capt = 3
+		elseif A333_weather_radar_mode_pos == 2 then
+			simDR_weather_mode_capt = 5
+		elseif A333_weather_radar_mode_pos == 3 then
+			simDR_weather_mode_capt = 4
+		end
+	end
+
+	if weather_on_fo == 0 then
+		simDR_weather_mode_fo = 0
+		simDR_weather_on_fo = 0
+	else
+		simDR_weather_on_fo = 1
+		if A333_weather_radar_mode_pos == 0 then
+			simDR_weather_mode_fo = 2
+		elseif A333_weather_radar_mode_pos == 1 then
+			simDR_weather_mode_fo = 3
+		elseif A333_weather_radar_mode_pos == 2 then
+			simDR_weather_mode_fo = 5
+		elseif A333_weather_radar_mode_pos == 3 then
+			simDR_weather_mode_fo = 4
+		end
+	end
+
+	A333_weather_radar_mode_anim = A333_set_animation_position(A333_weather_radar_mode_anim, A333_weather_radar_mode_pos, 0, 3, 12)
+
+	simDR_weather_gain_fo = simDR_weather_gain_capt
+	simDR_weather_multiscan_fo = simDR_weather_multiscan_capt
+	simDR_weather_gcs_fo = simDR_weather_gcs_capt
+
+	if GCS_timer_init == 1 then
+		GCS_timer = GCS_timer + SIM_PERIOD
+	end
+
+	if GCS_timer >= 5 then
+		simDR_weather_gcs_capt = 1
+		GCS_timer_init = 0
+	end
+
+	local PWS_active = bool2num[A333_flight_phase >= 3 and A333_flight_phase <= 8]
+
+	if simDR_weather_pws_capt == 1 then
+		if A333_rad_alt < 2300 and PWS_active == 1 then
+			simDR_weather_sector_width = 60
+			simDR_weather_sweeps_sec = 1.5
+		else simDR_weather_sector_width = 90
+			simDR_weather_sweeps_sec = 1
+		end
+	else simDR_weather_sector_width = 90
+		simDR_weather_sweeps_sec = 1
+	end
 
 end
-
-
-
-
-
-
-
-
-
-
 
 
 -- FLIGHT RECORDERS GROUND ON
@@ -5280,11 +5621,23 @@ function A333_set_switches_all_modes()
 	A333_buttons_APU_master = 0
 	A333_switches_apu_bleed_pos	= 0
 
-	simDR_terr_on_nd_capt = 0
+	simDR_terr_on_nd_capt = 00
 	simDR_terr_on_nd_fo = 0
-	A333_switches_park_brake_pos_tar = 1
-	simDR_parking_brake = 1
-	A333_switches_park_brake_pos = 1
+
+
+
+	if A333_rad_alt > 100.0 then	-- FLight Start in-air
+		A333_switches_park_brake_pos_tar = 0
+		simDR_parking_brake = 0
+		A333_switches_park_brake_pos = 0
+	else
+		A333_switches_park_brake_pos_tar = 1
+		simDR_parking_brake = 1
+		A333_switches_park_brake_pos = 1
+	end
+
+
+
 
 	simDR_elec_hyd_green = 0
 	simDR_elec_hyd_blue = 0
@@ -5337,6 +5690,24 @@ function A333_set_switches_all_modes()
 
 	A333_window1_rate = 75
 	A333_window2_rate = 75
+
+	simDR_weather_gcs_capt = 1
+	simDR_weather_gcs_fo = 1
+	simDR_weather_multiscan_capt = 1
+	simDR_weather_multiscan_fo = 1
+	
+	simDR_weather_sector_brg			= 0
+	simDR_weather_sector_width			= 90
+	simDR_weather_antenna_limit			= 90
+
+	if simDR_captain_barometer < 22 then
+		simDR_captain_barometer = 29.92
+	end
+	
+	if simDR_first_officer_barometer < 22 then
+		simDR_first_officer_barometer = 29.92
+	end
+
 
 end
 
@@ -5470,9 +5841,9 @@ function A333_set_switches_CD()
 	simDR_pack2 = 0
 
 	A333_buttons_galley_pos = 0
-	Galley_PWR_pos = 0
+	A333_galley_status = 0
 	A333_buttons_commercial_pos = 0
-	Comm_PWR_pos = 0
+	A333_commercial_status = 0
 
 	A333_pax_sys_pos = 0
 	A333_pax_satcom_pos = 0
@@ -5629,9 +6000,9 @@ function A333_set_switches_ER()
 	simDR_pack2 = 1
 
 	A333_buttons_galley_pos = 1
-	Galley_PWR_pos = 1
+	A333_galley_status = 1
 	A333_buttons_commercial_pos = 1
-	Comm_PWR_pos = 1
+	A333_commercial_status = 1
 
 	A333_pax_sys_pos = 1
 	A333_pax_satcom_pos = 1
@@ -5701,7 +6072,7 @@ function A333_ALL_switches()
 	A333_ESS_BUS_manager()
 	A333_bus_tie_manager()
 	A333_ditching_mode()
-	A333_baro_memory()
+--	A333_baro_memory()
 	A333_EFIS_mode()
 	A333_terr_on_nd()
 	A333_EFIS_wxr_radar()

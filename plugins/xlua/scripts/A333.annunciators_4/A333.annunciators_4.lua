@@ -50,7 +50,8 @@ NUM_OBS_LISTENING_LIGHTS = 16
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
 
-
+local com1_timer = 0
+local com2_timer = 0
 
 --*************************************************************************************--
 --** 				                X-PLANE DATAREFS            			    	 **--
@@ -60,12 +61,6 @@ simDR_flight_time					= find_dataref("sim/time/total_flight_time_sec")
 
 simDR_annun_brightness				= find_dataref("sim/cockpit2/electrical/instrument_brightness_ratio_manual[15]")
 simDR_annun_brightness2				= find_dataref("sim/cockpit2/electrical/instrument_brightness_ratio_manual[16]")
-
-simDR_com1_receive					= find_dataref("sim/atc/com1_rx")
-simDR_com2_receive					= find_dataref("sim/atc/com2_rx")
-simDR_com1_transmit					= find_dataref("sim/atc/com1_tx")
-simDR_com2_transmit					= find_dataref("sim/atc/com2_tx")
-
 
 --*************************************************************************************--
 --** 				              FIND CUSTOM DATAREFS             			    	 **--
@@ -209,11 +204,21 @@ A333DR_fo_priority_arrow_light_annun	= create_dataref("laminar/A333/annun/fo_sid
 --** 				       READ-WRITE CUSTOM DATAREF HANDLERS     	        	     **--
 --*************************************************************************************--
 
+function selcal_com1_receive_DLhandler() end
+function selcal_com2_receive_DLhandler() end
+function selcal_com1_transmit_DLhandler() end
+function selcal_com2_transmit_DLhandler() end
 
 --*************************************************************************************--
 --** 				       CREATE READ-WRITE CUSTOM DATAREFS                         **--
 --*************************************************************************************--
 
+-- SELCAL IN/OUT
+	
+A333DR_com1_receive					= create_dataref("laminar/A333/selcal/com1_receive", "number", selcal_com1_receive_DLhandler)
+A333DR_com2_receive					= create_dataref("laminar/A333/selcal/com2_receive", "number", selcal_com2_receive_DLhandler)
+A333DR_com1_acknowledge				= create_dataref("laminar/A333/selcal/com1_acknowledge", "number", selcal_com1_transmit_DLhandler)
+A333DR_com2_acknowledge				= create_dataref("laminar/A333/selcal/com2_acknowledge", "number", selcal_com2_transmit_DLhandler)
 
 --*************************************************************************************--
 --** 				             X-PLANE COMMAND HANDLERS               	    	 **--
@@ -416,32 +421,54 @@ local sim_time_factor = math.fmod(simDR_flight_time, 0.6)
 		if A333DR_capt_call_reset == 1 or A333DR_fo_call_reset == 1 or A333DR_obs_call_reset == 1 then
 			com1_activated = 0
 			com2_activated = 0
+			A333DR_com1_receive = 0
+			A333DR_com2_receive = 0
 		end
 
-		if simDR_com1_receive == 1 then
+		if A333DR_com1_receive == 1 then
 			com1_activated = 1
 		end
 
 		if com1_activated == 1 then
 			audio_panel_call_light_vhf1_target = flasher
-			if simDR_com1_transmit == 1 then
+			if A333DR_com1_acknowledge == 1 then
+			A333DR_com1_receive = 0
 			com1_activated = 0
 			end
 		elseif com1_activated == 0 then
 			audio_panel_call_light_vhf1_target = 0
 		end
 
-		if simDR_com2_receive == 1 then
+		if A333DR_com2_receive == 1 then
 			com2_activated = 1
 		end
 
 		if com2_activated == 1 then
 			audio_panel_call_light_vhf2_target = flasher
-			if simDR_com2_transmit == 1 then
+			if A333DR_com2_acknowledge == 1 then
+			A333DR_com2_receive = 0
 			com2_activated = 0
 			end
 		elseif com2_activated == 0 then
 			audio_panel_call_light_vhf2_target = 0
+		end
+
+		if A333DR_com1_acknowledge == 1 then
+			com1_timer = com1_timer + SIM_PERIOD
+		end
+
+		if com1_timer > 5 then
+			A333DR_com1_acknowledge = 0
+			com1_timer = 0
+		end
+		
+		if A333DR_com2_acknowledge == 1 then
+			com2_timer = com2_timer + SIM_PERIOD
+		end
+	
+		if com2_timer > 5 then
+			A333DR_com2_acknowledge = 0
+			com2_timer = 0
 		end
 
 		audio_panel_call_light_gen_target = 0

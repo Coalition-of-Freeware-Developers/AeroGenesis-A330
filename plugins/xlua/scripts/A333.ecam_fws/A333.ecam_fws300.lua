@@ -8,7 +8,7 @@ jit.off()
 *
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
-*
+* 10/09/2025   AG330 v1.2.0   add ADIRS ALIGN MSG to EWD
 *
 *
 *
@@ -54,6 +54,7 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
+local bool2num = {[true] = 1, [false] = 0}
 
 local logic = {}
 
@@ -196,6 +197,9 @@ logic.iceNotDetConf02 = newLeadingEdgeDelayedConfirmation('iceNotDetConf02', 60.
 logic.eng1RevUnlkConf01 = newFallingEdgeDelayedConfirmation('eng1RevUnlkConf01', 8.0)
 logic.eng2RevUnlkConf01 = newFallingEdgeDelayedConfirmation('eng2RevUnlkConf01', 8.0)
 
+logic.stdAltiDiscrepancyConf01 = newLeadingEdgeDelayedConfirmation('alti_discrepancy', 5.0)
+logic.stdAltiDiscrepancyConf02 = newLeadingEdgeDelayedConfirmation('alti_discrepancy', 5.0)
+
 logic.aiVlvClsdFltConf01 = newLeadingEdgeDelayedConfirmation('aiVlvClsdFltConf01', 15.0)
 logic.aiVlvClsdFltConf02 = newLeadingEdgeDelayedConfirmation('aiVlvClsdFltConf02', 25.0)
 logic.aiVlvClsdFltConf03 = newLeadingEdgeDelayedConfirmation('aiVlvClsdFltConf03', 2.0)
@@ -249,6 +253,8 @@ logic.eng2hungStrtSRR01 = newSRlatchResetPriority('eng2hungStrtSRR01')
 --*************************************************************************************--
 --** 				        CREATE READ-ONLY CUSTOM DATAREFS               	         **--
 --*************************************************************************************--
+-- PFD Messages
+A333_pfd_check_alt = create_dataref("laminar/A333/annun/pfd_check_alt", "number")
 
 
 
@@ -360,8 +366,8 @@ function A333_ewd_msg.FLAP_LEVER_NOT_ZERO.WarningMonitor()
 	local m = {E1 = k.S, E2 = WSFLPLVRNOT0, E3 = ZPH6, E4 = l.S}
 	m.S = bAND4(m.E1, m.E2, m.E3, m.E4)
 
-	A333_ewd_msg.FLAP_LEVER_NOT_ZERO.Monitor.audio.IN = bool2logic(m.S)
-	A333_ewd_msg.FLAP_LEVER_NOT_ZERO.Monitor.video.IN = bool2logic(m.S)
+	A333_ewd_msg.FLAP_LEVER_NOT_ZERO.Monitor.audio.IN = bool2num[m.S]
+	A333_ewd_msg.FLAP_LEVER_NOT_ZERO.Monitor.video.IN = bool2num[m.S]
 
 end
 
@@ -377,8 +383,8 @@ function A333_ewd_msg.OVER_SPEED_VFE1.WarningMonitor()	-- CONF FULL
 
 	NVFE1 = b.S
 
-	A333_ewd_msg.OVER_SPEED_VFE1.Monitor.audio.IN = bool2logic(b.S)
-	A333_ewd_msg.OVER_SPEED_VFE1.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.OVER_SPEED_VFE1.Monitor.audio.IN = bool2num[b.S]
+	A333_ewd_msg.OVER_SPEED_VFE1.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -391,8 +397,8 @@ function A333_ewd_msg.OVER_SPEED_VFE2.WarningMonitor()		-- CONF 3
 
 	NVFE2 = a.S
 
-	A333_ewd_msg.OVER_SPEED_VFE2.Monitor.audio.IN = bool2logic(a.S)
-	A333_ewd_msg.OVER_SPEED_VFE2.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.OVER_SPEED_VFE2.Monitor.audio.IN = bool2num[a.S]
+	A333_ewd_msg.OVER_SPEED_VFE2.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -411,8 +417,8 @@ function A333_ewd_msg.OVER_SPEED_VFE3.WarningMonitor()		-- CONF 2
 
 	NVFE3 = c.S
 
-	A333_ewd_msg.OVER_SPEED_VFE3.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.OVER_SPEED_VFE3.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.OVER_SPEED_VFE3.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.OVER_SPEED_VFE3.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -428,8 +434,8 @@ function A333_ewd_msg.OVER_SPEED_VFE4.WarningMonitor()	-- NEW LOGIC FOR A333 (CO
 
 	NVFE4 = b.S
 
-	A333_ewd_msg.OVER_SPEED_VFE4.Monitor.audio.IN = bool2logic(b.S)
-	A333_ewd_msg.OVER_SPEED_VFE4.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.OVER_SPEED_VFE4.Monitor.audio.IN = bool2num[b.S]
+	A333_ewd_msg.OVER_SPEED_VFE4.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -445,8 +451,8 @@ function A333_ewd_msg.OVER_SPEED_VFE5.WarningMonitor() 	-- A320 VFE4		(CONF 1+F)
 
 	NVFE5 = b.S
 
-	A333_ewd_msg.OVER_SPEED_VFE5.Monitor.audio.IN = bool2logic(b.S)
-	A333_ewd_msg.OVER_SPEED_VFE5.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.OVER_SPEED_VFE5.Monitor.audio.IN = bool2num[b.S]
+	A333_ewd_msg.OVER_SPEED_VFE5.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -462,8 +468,8 @@ function A333_ewd_msg.OVER_SPEED_VFE6.WarningMonitor()	 -- A320 VFE5		(CONF 1)
 
 	NVFE6 = b.S
 
-	A333_ewd_msg.OVER_SPEED_VFE6.Monitor.audio.IN = bool2logic(b.S)
-	A333_ewd_msg.OVER_SPEED_VFE6.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.OVER_SPEED_VFE6.Monitor.audio.IN = bool2num[b.S]
+	A333_ewd_msg.OVER_SPEED_VFE6.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -479,8 +485,8 @@ function A333_ewd_msg.OVER_SPEED_VLE.WarningMonitor()
 
 	WVLE = b.S
 
-	A333_ewd_msg.OVER_SPEED_VLE.Monitor.audio.IN = bool2logic(b.S)
-	A333_ewd_msg.OVER_SPEED_VLE.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.OVER_SPEED_VLE.Monitor.audio.IN = bool2num[b.S]
+	A333_ewd_msg.OVER_SPEED_VLE.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -513,8 +519,8 @@ function A333_ewd_msg.OVER_SPEED_VMO_MMO.WarningMonitor()
 
 	WVMOMMO = e.S
 
-	A333_ewd_msg.OVER_SPEED_VMO_MMO.Monitor.audio.IN = bool2logic(g.S)
-	A333_ewd_msg.OVER_SPEED_VMO_MMO.Monitor.video.IN = bool2logic(e.S)
+	A333_ewd_msg.OVER_SPEED_VMO_MMO.Monitor.audio.IN = bool2num[g.S]
+	A333_ewd_msg.OVER_SPEED_VMO_MMO.Monitor.video.IN = bool2num[e.S]
 
 end
 
@@ -529,8 +535,8 @@ function A333_ewd_msg.ENG_DUAL_FAULT.WarningMonitor()
 	WWJENGSDF	= JENGSOUTR
 	JENGSOUT	= JENGSOUTR
 
-	A333_ewd_msg.ENG_DUAL_FAULT.Monitor.audio.IN = bool2logic(JENGSOUTR)
-	A333_ewd_msg.ENG_DUAL_FAULT.Monitor.video.IN = bool2logic(JENGSOUTR)
+	A333_ewd_msg.ENG_DUAL_FAULT.Monitor.audio.IN = bool2num[JENGSOUTR]
+	A333_ewd_msg.ENG_DUAL_FAULT.Monitor.video.IN = bool2num[JENGSOUTR]
 
 end
 
@@ -568,8 +574,8 @@ function A333_ewd_msg.ENG_1_FIRE.WarningMonitor()
 	WWE1FI	= d.S
 	UE1FIRE	= d.S
 
-	A333_ewd_msg.ENG_1_FIRE.Monitor.audio.IN = bool2logic(f.S)
-	A333_ewd_msg.ENG_1_FIRE.Monitor.video.IN = bool2logic(g.S)
+	A333_ewd_msg.ENG_1_FIRE.Monitor.audio.IN = bool2num[f.S]
+	A333_ewd_msg.ENG_1_FIRE.Monitor.video.IN = bool2num[g.S]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_1_FIRE.Name)
 	A333_ewd_msg.ENG_1_FIRE.Monitor.video.INlast = A333_ewd_msg.ENG_1_FIRE.Monitor.video.IN
 
@@ -612,8 +618,8 @@ function A333_ewd_msg.ENG_2_FIRE.WarningMonitor()
 	WWE2FI	= d.S
 	UE2FIRE	= d.S
 
-	A333_ewd_msg.ENG_2_FIRE.Monitor.audio.IN = bool2logic(f.S)
-	A333_ewd_msg.ENG_2_FIRE.Monitor.video.IN = bool2logic(g.S)
+	A333_ewd_msg.ENG_2_FIRE.Monitor.audio.IN = bool2num[f.S]
+	A333_ewd_msg.ENG_2_FIRE.Monitor.video.IN = bool2num[g.S]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_2_FIRE.Name)
 	A333_ewd_msg.ENG_2_FIRE.Monitor.video.INlast = A333_ewd_msg.ENG_2_FIRE.Monitor.video.IN
 
@@ -656,8 +662,8 @@ function A333_ewd_msg.APU_FIRE.WarningMonitor()
 	WWAPUFI		= d.S
 	UAPUFIRE	= d.S
 
-	A333_ewd_msg.APU_FIRE.Monitor.audio.IN = bool2logic(f.S)
-	A333_ewd_msg.APU_FIRE.Monitor.video.IN = bool2logic(g.S)
+	A333_ewd_msg.APU_FIRE.Monitor.audio.IN = bool2num[f.S]
+	A333_ewd_msg.APU_FIRE.Monitor.video.IN = bool2num[g.S]
 	A333_fws_trigger_reset(A333_ewd_msg.APU_FIRE.Name)
 	A333_ewd_msg.APU_FIRE.Monitor.video.INlast = A333_ewd_msg.APU_FIRE.Monitor.video.IN
 
@@ -711,8 +717,8 @@ function A333_ewd_msg.SLATS_CONFIG.WarningMonitor()
 
 	SSLTNTO = g.S
 
-	A333_ewd_msg.SLATS_CONFIG.Monitor.audio.IN = bool2logic(h.S)
-	A333_ewd_msg.SLATS_CONFIG.Monitor.video.IN = bool2logic(i.S)
+	A333_ewd_msg.SLATS_CONFIG.Monitor.audio.IN = bool2num[h.S]
+	A333_ewd_msg.SLATS_CONFIG.Monitor.video.IN = bool2num[i.S]
 	A333_fws_trigger_reset(A333_ewd_msg.SLATS_CONFIG.Name)
 	A333_ewd_msg.SLATS_CONFIG.Monitor.video.INlast = A333_ewd_msg.SLATS_CONFIG.Monitor.video.IN
 
@@ -764,8 +770,8 @@ function A333_ewd_msg.FLAPS_CONFIG.WarningMonitor()
 
 	SFLPNTO = h.S
 
-	A333_ewd_msg.FLAPS_CONFIG.Monitor.audio.IN = bool2logic(i.S)
-	A333_ewd_msg.FLAPS_CONFIG.Monitor.video.IN = bool2logic(j.S)
+	A333_ewd_msg.FLAPS_CONFIG.Monitor.audio.IN = bool2num[i.S]
+	A333_ewd_msg.FLAPS_CONFIG.Monitor.video.IN = bool2num[j.S]
 	A333_fws_trigger_reset(A333_ewd_msg.FLAPS_CONFIG.Name)
 	A333_ewd_msg.FLAPS_CONFIG.Monitor.video.INlast = A333_ewd_msg.FLAPS_CONFIG.Monitor.video.IN
 
@@ -814,8 +820,8 @@ function A333_ewd_msg.SPD_BRK_CONFIG.WarningMonitor()
 
 	SSBNTO = g.S
 
-	A333_ewd_msg.SPD_BRK_CONFIG.Monitor.audio.IN = bool2logic(h.S)
-	A333_ewd_msg.SPD_BRK_CONFIG.Monitor.video.IN = bool2logic(i.S)
+	A333_ewd_msg.SPD_BRK_CONFIG.Monitor.audio.IN = bool2num[h.S]
+	A333_ewd_msg.SPD_BRK_CONFIG.Monitor.video.IN = bool2num[i.S]
 	A333_fws_trigger_reset(A333_ewd_msg.SPD_BRK_CONFIG.Name)
 	A333_ewd_msg.SPD_BRK_CONFIG.Monitor.video.INlast = A333_ewd_msg.SPD_BRK_CONFIG.Monitor.video.IN
 
@@ -864,8 +870,8 @@ function A333_ewd_msg.PITCH_TRIM_CONFIG.WarningMonitor()
 
 	SPTNTO = j.S
 
-	A333_ewd_msg.PITCH_TRIM_CONFIG.Monitor.audio.IN = bool2logic(k.S)
-	A333_ewd_msg.PITCH_TRIM_CONFIG.Monitor.video.IN = bool2logic(l.S)
+	A333_ewd_msg.PITCH_TRIM_CONFIG.Monitor.audio.IN = bool2num[k.S]
+	A333_ewd_msg.PITCH_TRIM_CONFIG.Monitor.video.IN = bool2num[l.S]
 	A333_fws_trigger_reset(A333_ewd_msg.PITCH_TRIM_CONFIG.Name)
 	A333_ewd_msg.PITCH_TRIM_CONFIG.Monitor.video.INlast = A333_ewd_msg.PITCH_TRIM_CONFIG.Monitor.video.IN
 
@@ -911,8 +917,8 @@ function A333_ewd_msg.RUDDER_TRIM_CONFIG.WarningMonitor()
 
 	SRUDTNTO = f.S
 
-	A333_ewd_msg.RUDDER_TRIM_CONFIG.Monitor.audio.IN = bool2logic(g.S)
-	A333_ewd_msg.RUDDER_TRIM_CONFIG.Monitor.video.IN = bool2logic(h.S)
+	A333_ewd_msg.RUDDER_TRIM_CONFIG.Monitor.audio.IN = bool2num[g.S]
+	A333_ewd_msg.RUDDER_TRIM_CONFIG.Monitor.video.IN = bool2num[h.S]
 	A333_fws_trigger_reset(A333_ewd_msg.RUDDER_TRIM_CONFIG.Name)
 	A333_ewd_msg.RUDDER_TRIM_CONFIG.Monitor.video.INlast = A333_ewd_msg.RUDDER_TRIM_CONFIG.Monitor.video.IN
 
@@ -938,8 +944,8 @@ function A333_ewd_msg.PARK_BRK_ON_CONFIG.WarningMonitor()
 
 	logic.prkBrkCfgSRS01:update(b.S, c.S)
 
-	A333_ewd_msg.PARK_BRK_ON_CONFIG.Monitor.audio.IN = bool2logic(b.S)
-	A333_ewd_msg.PARK_BRK_ON_CONFIG.Monitor.video.IN = bool2logic(logic.prkBrkCfgSRS01.Q)
+	A333_ewd_msg.PARK_BRK_ON_CONFIG.Monitor.audio.IN = bool2num[b.S]
+	A333_ewd_msg.PARK_BRK_ON_CONFIG.Monitor.video.IN = bool2num[logic.prkBrkCfgSRS01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.PARK_BRK_ON_CONFIG.Name)
 	A333_ewd_msg.PARK_BRK_ON_CONFIG.Monitor.video.INlast = A333_ewd_msg.PARK_BRK_ON_CONFIG.Monitor.video.IN
 
@@ -969,8 +975,8 @@ function A333_ewd_msg.EXCESS_CAB_ALT.WarningMonitor()
 
 	WWCABPR = logic.excessCabAltConf01.OUT
 
-	A333_ewd_msg.EXCESS_CAB_ALT.Monitor.audio.IN = bool2logic(logic.excessCabAltConf01.OUT)
-	A333_ewd_msg.EXCESS_CAB_ALT.Monitor.video.IN = bool2logic(logic.excessCabAltConf01.OUT)
+	A333_ewd_msg.EXCESS_CAB_ALT.Monitor.audio.IN = bool2num[logic.excessCabAltConf01.OUT]
+	A333_ewd_msg.EXCESS_CAB_ALT.Monitor.video.IN = bool2num[logic.excessCabAltConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.EXCESS_CAB_ALT.Name)
 	A333_ewd_msg.EXCESS_CAB_ALT.Monitor.video.INlast = A333_ewd_msg.EXCESS_CAB_ALT.Monitor.video.IN
 
@@ -990,8 +996,8 @@ function A333_ewd_msg.ENG_1_OIL_LO_PR.WarningMonitor()
 
 	logic.eng1oilLoPrFConf01:update(a.S)
 
-	A333_ewd_msg.ENG_1_OIL_LO_PR.Monitor.audio.IN = bool2logic(logic.eng1oilLoPrFConf01.OUT)
-	A333_ewd_msg.ENG_1_OIL_LO_PR.Monitor.video.IN = bool2logic(logic.eng1oilLoPrFConf01.OUT)
+	A333_ewd_msg.ENG_1_OIL_LO_PR.Monitor.audio.IN = bool2num[logic.eng1oilLoPrFConf01.OUT]
+	A333_ewd_msg.ENG_1_OIL_LO_PR.Monitor.video.IN = bool2num[logic.eng1oilLoPrFConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_1_OIL_LO_PR.Name)
 	A333_ewd_msg.ENG_1_OIL_LO_PR.Monitor.video.INlast = A333_ewd_msg.ENG_1_OIL_LO_PR.Monitor.video.IN
 
@@ -1010,8 +1016,8 @@ function A333_ewd_msg.ENG_2_OIL_LO_PR.WarningMonitor()
 
 	logic.eng2oilLoPrFConf01:update(a.S)
 
-	A333_ewd_msg.ENG_2_OIL_LO_PR.Monitor.audio.IN = bool2logic(logic.eng2oilLoPrFConf01.OUT)
-	A333_ewd_msg.ENG_2_OIL_LO_PR.Monitor.video.IN = bool2logic(logic.eng2oilLoPrFConf01.OUT)
+	A333_ewd_msg.ENG_2_OIL_LO_PR.Monitor.audio.IN = bool2num[logic.eng2oilLoPrFConf01.OUT]
+	A333_ewd_msg.ENG_2_OIL_LO_PR.Monitor.video.IN = bool2num[logic.eng2oilLoPrFConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_2_OIL_LO_PR.Name)
 	A333_ewd_msg.ENG_2_OIL_LO_PR.Monitor.video.INlast = A333_ewd_msg.ENG_2_OIL_LO_PR.Monitor.video.IN
 
@@ -1068,15 +1074,15 @@ function A333_ewd_msg.L_R_ELEV_FAULT.WarningMonitor()
 	m.S = bOR(m.E1, m.E2)
 
 	local n = {E1 = i.S, E2 = j.S, E3 = k.S, E4 = l.S, E5 = m.S}
-	n.S = bAND(n.E1, n.E2, n.E3, n.E4, n.E5)
+	n.S = bAND5(n.E1, n.E2, n.E3, n.E4, n.E5)
 
 	logic.lrElevFltConf01:update(n.S)
 
 	SLRELVFT = n.S
 	WWLRELVFT = n.S
 
-	A333_ewd_msg.L_R_ELEV_FAULT.Monitor.audio.IN = bool2logic(logic.lrElevFltConf01.OUT)
-	A333_ewd_msg.L_R_ELEV_FAULT.Monitor.video.IN = bool2logic(logic.lrElevFltConf01.OUT)
+	A333_ewd_msg.L_R_ELEV_FAULT.Monitor.audio.IN = bool2num[logic.lrElevFltConf01.OUT]
+	A333_ewd_msg.L_R_ELEV_FAULT.Monitor.video.IN = bool2num[logic.lrElevFltConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.L_R_ELEV_FAULT.Name)
 	A333_ewd_msg.L_R_ELEV_FAULT.Monitor.video.INlast = A333_ewd_msg.L_R_ELEV_FAULT.Monitor.video.IN
 
@@ -1177,8 +1183,8 @@ function A333_ewd_msg.GEAR_NOT_DOWN.WarningMonitor()
 	WRACSW_S	= w.S
 	GLGNDOWN	= r.S
 
-	A333_ewd_msg.GEAR_NOT_DOWN.Monitor.audio.IN = bool2logic(u.S)
-	A333_ewd_msg.GEAR_NOT_DOWN.Monitor.video.IN = bool2logic(u.S)
+	A333_ewd_msg.GEAR_NOT_DOWN.Monitor.audio.IN = bool2num[u.S]
+	A333_ewd_msg.GEAR_NOT_DOWN.Monitor.video.IN = bool2num[u.S]
 
 end
 
@@ -1200,8 +1206,8 @@ function A333_ewd_msg.GEAR_NOT_DOWNLOCKED.WarningMonitor()
 	WWGNDNLD	= logic.lgNotDnLckSRR01.Q
 	GGNDNLD		= logic.lgNotDnLckSRR01.Q
 
-	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.Monitor.audio.IN = bool2logic(logic.lgNotDnLckSRR01.Q)
-	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.Monitor.video.IN = bool2logic(logic.lgNotDnLckSRR01.Q)
+	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.Monitor.audio.IN = bool2num[logic.lgNotDnLckSRR01.Q]
+	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.Monitor.video.IN = bool2num[logic.lgNotDnLckSRR01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.GEAR_NOT_DOWNLOCKED.Name)
 	A333_ewd_msg.GEAR_NOT_DOWNLOCKED.Monitor.video.INlast = A333_ewd_msg.GEAR_NOT_DOWNLOCKED.Monitor.video.IN
 
@@ -1292,8 +1298,8 @@ function A333_ewd_msg.AP_OFF_UNVOLUNTARY.WarningMonitor()
 	KAPMW = logic.APoffUnvPulse05.OUT
 	WWKCCE = KCCE
 
-	A333_ewd_msg.AP_OFF_UNVOLUNTARY.Monitor.audio.IN = bool2logic(logic.APoffUnvSRr02.Q)
-	A333_ewd_msg.AP_OFF_UNVOLUNTARY.Monitor.video.IN = bool2logic(logic.APoffUnvSRr01.Q)
+	A333_ewd_msg.AP_OFF_UNVOLUNTARY.Monitor.audio.IN = bool2num[logic.APoffUnvSRr02.Q]
+	A333_ewd_msg.AP_OFF_UNVOLUNTARY.Monitor.video.IN = bool2num[logic.APoffUnvSRr01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.AP_OFF_UNVOLUNTARY.Name)
 	A333_ewd_msg.AP_OFF_UNVOLUNTARY.Monitor.video.INlast = A333_ewd_msg.AP_OFF_UNVOLUNTARY.Monitor.video.IN
 
@@ -1337,7 +1343,7 @@ end
 
 
 
-local AP_OFF_MW_VOLUNTARY_timeout = nil
+
 function AP_OFF_MW_VOLUNTARY_OFF()
 
 	if not KAPOMW then
@@ -1366,7 +1372,7 @@ end
 --| AP OFF AUDIO - VOLUNTARY
 function A333_ewd_msg.CAVALRY_CHARGE_VOLUNTARY_DISC.WarningMonitor()
 
-	A333_ewd_msg.CAVALRY_CHARGE_VOLUNTARY_DISC.Monitor.audio.IN = bool2logic(KAPOA)
+	A333_ewd_msg.CAVALRY_CHARGE_VOLUNTARY_DISC.Monitor.audio.IN = bool2num[KAPOA]
 
 	--see ecam_fws710 Ln 226 for control
 
@@ -1379,7 +1385,7 @@ end
 --| AP OFF TEXT - VOLUNTARY
 function A333_ewd_msg.AP_OFF_TEXT.WarningMonitor()
 
-	A333_ewd_msg.AP_OFF_TEXT.Monitor.video.IN = bool2logic(WAPOT)
+	A333_ewd_msg.AP_OFF_TEXT.Monitor.video.IN = bool2num[WAPOT]
 	WWAPOV = WAPOT
 
 end
@@ -1406,9 +1412,13 @@ function A333_ewd_msg.FWD_CARGO_SMOKE.WarningMonitor()
 
 	UFCSDI = b.S
 
-	A333_ewd_msg.FWD_CARGO_SMOKE.Monitor.audio.IN = bool2logic(d.S)
-	A333_ewd_msg.FWD_CARGO_SMOKE.Monitor.video.IN = bool2logic(d.S)
+	A333_ewd_msg.FWD_CARGO_SMOKE.Monitor.audio.IN = bool2num[d.S]
+	A333_ewd_msg.FWD_CARGO_SMOKE.Monitor.video.IN = bool2num[d.S]
 
+end
+
+function A333_ewd_msg.FWD_CARGO_SMOKE.Reset()
+	A333_ewd_msg.FWD_CARGO_SMOKE.ActionReset()
 end
 
 
@@ -1431,9 +1441,13 @@ function A333_ewd_msg.AFT_CARGO_SMOKE.WarningMonitor()
 
 	UACSDI = b.S
 
-	A333_ewd_msg.AFT_CARGO_SMOKE.Monitor.audio.IN = bool2logic(d.S)
-	A333_ewd_msg.AFT_CARGO_SMOKE.Monitor.video.IN = bool2logic(d.S)
+	A333_ewd_msg.AFT_CARGO_SMOKE.Monitor.audio.IN = bool2num[d.S]
+	A333_ewd_msg.AFT_CARGO_SMOKE.Monitor.video.IN = bool2num[d.S]
 
+end
+
+function A333_ewd_msg.AFT_CARGO_SMOKE.Reset()
+	A333_ewd_msg.AFT_CARGO_SMOKE.ActionReset()
 end
 
 
@@ -1473,11 +1487,8 @@ function A333_ewd_msg.ELEC_EMER_CONFIG.WarningMonitor()
 
 	EEMER = f.S
 
-	--A333_ewd_msg.ELEC_EMER_CONFIG.Monitor.audio.IN = bool2logic(g.S)
-	--A333_ewd_msg.ELEC_EMER_CONFIG.Monitor.video.IN = bool2logic(g.S)
-
-	A333_ewd_msg.ELEC_EMER_CONFIG.Monitor.audio.IN = bool2logic(g.S)
-	A333_ewd_msg.ELEC_EMER_CONFIG.Monitor.video.IN = bool2logic(g.S)
+	A333_ewd_msg.ELEC_EMER_CONFIG.Monitor.audio.IN = bool2num[g.S]
+	A333_ewd_msg.ELEC_EMER_CONFIG.Monitor.video.IN = bool2num[g.S]
 
 end
 
@@ -1494,8 +1505,8 @@ function A333_ewd_msg.HYD_BY_SYS_LO_PR.WarningMonitor()
 
 	HBYLP = a.S
 
-	A333_ewd_msg.HYD_BY_SYS_LO_PR.Monitor.audio.IN = bool2logic(a.S)
-	A333_ewd_msg.HYD_BY_SYS_LO_PR.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.HYD_BY_SYS_LO_PR.Monitor.audio.IN = bool2num[a.S]
+	A333_ewd_msg.HYD_BY_SYS_LO_PR.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -1511,8 +1522,8 @@ function A333_ewd_msg.HYD_GB_SYS_LO_PR.WarningMonitor()
 
 	HBGLP = a.S
 
-	A333_ewd_msg.HYD_GB_SYS_LO_PR.Monitor.audio.IN = bool2logic(a.S)
-	A333_ewd_msg.HYD_GB_SYS_LO_PR.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.HYD_GB_SYS_LO_PR.Monitor.audio.IN = bool2num[a.S]
+	A333_ewd_msg.HYD_GB_SYS_LO_PR.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -1528,8 +1539,8 @@ function A333_ewd_msg.HYD_GY_SYS_LO_PR.WarningMonitor()
 
 	HYGLP = a.S
 
-	A333_ewd_msg.HYD_GY_SYS_LO_PR.Monitor.audio.IN = bool2logic(a.S)
-	A333_ewd_msg.HYD_GY_SYS_LO_PR.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.HYD_GY_SYS_LO_PR.Monitor.audio.IN = bool2num[a.S]
+	A333_ewd_msg.HYD_GY_SYS_LO_PR.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -1538,7 +1549,6 @@ end
 
 
 
--- One reverser cowl not locked in stowed position, with no deploy order.
 function A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.WarningMonitor()
 
 	local aa = {E1 = GELLGCOMPR, E2 = EEMER}
@@ -1552,7 +1562,7 @@ function A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.WarningMonitor()
 	local a = {E1 = JR1IDLE_1A, E2 = JR1IDLE_1B}
 	a.S = bOR(a.E1, a.E2)
 
-	local b = {E1 = GW1SGT_1 > 72.0, E2 = GW1SGT_2 > 72.0}
+	local b = {E1 = GW1SGT_1, E2 = GW1SGT_2}
 	b.S = bOR(b.E1, b.E2)
 
 	local c = {E1 = a.S, E2 = bNOT(ZPH4)}
@@ -1575,10 +1585,14 @@ function A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.WarningMonitor()
 	JR1REVUNLK = g.S
 	JR1REVULK = f.S
 
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.Monitor.audio.IN = bool2logic(f.S)
-	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.Monitor.audio.IN = bool2num[f.S]
+	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.Monitor.video.IN = bool2num[f.S]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.Name)
 	A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.Monitor.video.INlast = A333_ewd_msg.ENG_1_REVERSE_UNLOCKED.Monitor.video.IN
+
+	if JR1TLA_1A < 0.0 and is_timer_scheduled(logic.eng1RevUnlkConf01.timerFunc) then -- TL in reverse and timer running
+		logic.eng1RevUnlkConf01:resetTimer()
+	end
 
 end
 
@@ -1591,12 +1605,14 @@ end
 
 
 
+
+
 function A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.WarningMonitor()
 
 	local a = {E1 = JR2IDLE_2A, E2 = JR2IDLE_2B}
 	a.S = bOR(a.E1, a.E2)
 
-	local b = {E1 = GW1SGT_1 > 72.0, E2 = GW1SGT_2 > 72.0}
+	local b = {E1 = GW1SGT_1, E2 = GW1SGT_2}
 	b.S = bOR(b.E1, b.E2)
 
 	local c = {E1 = a.S, E2 = bNOT(ZPH4)}
@@ -1619,19 +1635,21 @@ function A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.WarningMonitor()
 	JR2REVUNLK = g.S
 	JR2REVULK = f.S
 
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Monitor.audio.IN = bool2logic(f.S)
-	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Monitor.audio.IN = bool2num[f.S]
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Monitor.video.IN = bool2num[f.S]
+	A333_fws_trigger_reset(A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Name)
+	A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Monitor.video.INlast = A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Monitor.video.IN
+
+	if JR2TLA_2A < 0.0 and is_timer_scheduled(logic.eng2RevUnlkConf01.timerFunc) then -- TL in reverse and timer running
+		logic.eng2RevUnlkConf01:resetTimer()
+	end
+
 
 end
 
 function A333_ewd_msg.ENG_2_REVERSE_UNLOCKED.Reset()
 	logic.eng2RevUnlkConf01:resetTimer()
 end
-
-
-
-
-
 
 
 
@@ -1667,8 +1685,8 @@ function A333_ewd_msg.ENG_1_FAIL.WarningMonitor()
 
 	JR1FAIL	= logic.eng1failSRR02.Q
 
-	A333_ewd_msg.ENG_1_FAIL.Monitor.audio.IN = bool2logic(logic.eng1failSRR02.Q)
-	A333_ewd_msg.ENG_1_FAIL.Monitor.video.IN = bool2logic(logic.eng1failSRR02.Q)
+	A333_ewd_msg.ENG_1_FAIL.Monitor.audio.IN = bool2num[logic.eng1failSRR02.Q]
+	A333_ewd_msg.ENG_1_FAIL.Monitor.video.IN = bool2num[logic.eng1failSRR02.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_1_FAIL.Name)
 	A333_ewd_msg.ENG_1_FAIL.Monitor.video.INlast = A333_ewd_msg.ENG_1_FAIL.Monitor.video.IN
 
@@ -1679,6 +1697,7 @@ function A333_ewd_msg.ENG_1_FAIL.Reset()
 	logic.eng1failSRR01:reset()
 	logic.eng1failSRR02:reset()
 	A333_ewd_msg.ENG_1_FAIL.ActionReset()
+
 end
 
 
@@ -1700,8 +1719,8 @@ function A333_ewd_msg.ENG_1_OIL_HI_TEMP.WarningMonitor()
 
 	WE1OHT	= logic.eng1oilHiTempConf02.OUT
 
-	A333_ewd_msg.ENG_1_OIL_HI_TEMP.Monitor.audio.IN = bool2logic(logic.eng1oilHiTempSRR01.Q)
-	A333_ewd_msg.ENG_1_OIL_HI_TEMP.Monitor.video.IN = bool2logic(logic.eng1oilHiTempSRR01.Q)
+	A333_ewd_msg.ENG_1_OIL_HI_TEMP.Monitor.audio.IN = bool2num[logic.eng1oilHiTempSRR01.Q]
+	A333_ewd_msg.ENG_1_OIL_HI_TEMP.Monitor.video.IN = bool2num[logic.eng1oilHiTempSRR01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_1_OIL_HI_TEMP.Name)
 	A333_ewd_msg.ENG_1_OIL_HI_TEMP.Monitor.video.INlast = A333_ewd_msg.ENG_1_OIL_HI_TEMP.Monitor.video.IN
 
@@ -1744,8 +1763,8 @@ function A333_ewd_msg.ENG_1_SHUT_DOWN.WarningMonitor()
 	JR1SD	= f.S
 	JR1OUT	= JR1FAIL
 
-	A333_ewd_msg.ENG_1_SHUT_DOWN.Monitor.audio.IN = bool2logic(g.S)
-	A333_ewd_msg.ENG_1_SHUT_DOWN.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.ENG_1_SHUT_DOWN.Monitor.audio.IN = bool2num[g.S]
+	A333_ewd_msg.ENG_1_SHUT_DOWN.Monitor.video.IN = bool2num[f.S]
 
 end
 
@@ -1779,8 +1798,8 @@ function A333_ewd_msg.ENG_2_FAIL.WarningMonitor()
 
 	JR2FAIL	= logic.eng2failSRR02.Q
 
-	A333_ewd_msg.ENG_2_FAIL.Monitor.audio.IN = bool2logic(logic.eng2failSRR02.Q)
-	A333_ewd_msg.ENG_2_FAIL.Monitor.video.IN = bool2logic(logic.eng2failSRR02.Q)
+	A333_ewd_msg.ENG_2_FAIL.Monitor.audio.IN = bool2num[logic.eng2failSRR02.Q]
+	A333_ewd_msg.ENG_2_FAIL.Monitor.video.IN = bool2num[logic.eng2failSRR02.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_2_FAIL.Name)
 	A333_ewd_msg.ENG_2_FAIL.Monitor.video.INlast = A333_ewd_msg.ENG_2_FAIL.Monitor.video.IN
 
@@ -1813,8 +1832,8 @@ function A333_ewd_msg.ENG_2_OIL_HI_TEMP.WarningMonitor()
 
 	WE2OHT	= logic.eng2oilHiTempConf02.OUT
 
-	A333_ewd_msg.ENG_2_OIL_HI_TEMP.Monitor.audio.IN = bool2logic(logic.eng2oilHiTempSRR01.Q)
-	A333_ewd_msg.ENG_2_OIL_HI_TEMP.Monitor.video.IN = bool2logic(logic.eng2oilHiTempSRR01.Q)
+	A333_ewd_msg.ENG_2_OIL_HI_TEMP.Monitor.audio.IN = bool2num[logic.eng2oilHiTempSRR01.Q]
+	A333_ewd_msg.ENG_2_OIL_HI_TEMP.Monitor.video.IN = bool2num[logic.eng2oilHiTempSRR01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_2_OIL_HI_TEMP.Name)
 	A333_ewd_msg.ENG_2_OIL_HI_TEMP.Monitor.video.INlast = A333_ewd_msg.ENG_2_OIL_HI_TEMP.Monitor.video.IN
 
@@ -1857,8 +1876,8 @@ function A333_ewd_msg.ENG_2_SHUT_DOWN.WarningMonitor()
 	JR2SD	= f.S
 	JR2OUT	= JR2FAIL
 
-	A333_ewd_msg.ENG_2_SHUT_DOWN.Monitor.audio.IN = bool2logic(g.S)
-	A333_ewd_msg.ENG_2_SHUT_DOWN.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.ENG_2_SHUT_DOWN.Monitor.audio.IN = bool2num[g.S]
+	A333_ewd_msg.ENG_2_SHUT_DOWN.Monitor.video.IN = bool2num[f.S]
 
 end
 
@@ -1899,8 +1918,8 @@ function A333_ewd_msg.ENG_1_HUNG_START.WarningMonitor()
 
 	JR1START = h.S
 
-	A333_ewd_msg.ENG_1_HUNG_START.Monitor.audio.IN = bool2logic(logic.eng1hungStrtSRR01.Q)
-	A333_ewd_msg.ENG_1_HUNG_START.Monitor.video.IN = bool2logic(logic.eng1hungStrtSRR01.Q)
+	A333_ewd_msg.ENG_1_HUNG_START.Monitor.audio.IN = bool2num[logic.eng1hungStrtSRR01.Q]
+	A333_ewd_msg.ENG_1_HUNG_START.Monitor.video.IN = bool2num[logic.eng1hungStrtSRR01.Q]
 
 end
 
@@ -1939,8 +1958,8 @@ function A333_ewd_msg.ENG_2_HUNG_START.WarningMonitor()
 
 	JR2START = h.S
 
-	A333_ewd_msg.ENG_2_HUNG_START.Monitor.audio.IN = bool2logic(logic.eng2hungStrtSRR01.Q)
-	A333_ewd_msg.ENG_2_HUNG_START.Monitor.video.IN = bool2logic(logic.eng2hungStrtSRR01.Q)
+	A333_ewd_msg.ENG_2_HUNG_START.Monitor.audio.IN = bool2num[logic.eng2hungStrtSRR01.Q]
+	A333_ewd_msg.ENG_2_HUNG_START.Monitor.video.IN = bool2num[logic.eng2hungStrtSRR01.Q]
 
 end
 
@@ -1981,13 +2000,13 @@ function A333_ewd_msg.ENG_1_OIL_LO_TEMP.WarningMonitor()
 	g.S = bAND(g.E1, g.E2)
 
 	local h = {E1 = logic.eng1OilTmpSRS01.Q, E2 = g.S, E3 = logic.eng1OilTmpConf01.OUT}
-	h.S = bOR4(h.E1, h.E2, h.E3)
+	h.S = bOR3(h.E1, h.E2, h.E3)
 
 	local i = {E1 = h.S, E2 = bNOT(JR1NORUN), E3 = WRRT}
-	i.S = bAND(i.E1, i.E2, i.E3)
+	i.S = bAND3(i.E1, i.E2, i.E3)
 
-	A333_ewd_msg.ENG_1_OIL_LO_TEMP.Monitor.audio.IN = bool2logic(i.S)
-	A333_ewd_msg.ENG_1_OIL_LO_TEMP.Monitor.video.IN = bool2logic(i.S)
+	A333_ewd_msg.ENG_1_OIL_LO_TEMP.Monitor.audio.IN = bool2num[i.S]
+	A333_ewd_msg.ENG_1_OIL_LO_TEMP.Monitor.video.IN = bool2num[i.S]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_1_OIL_LO_TEMP.Name)
 	A333_ewd_msg.ENG_1_OIL_LO_TEMP.Monitor.video.INlast = A333_ewd_msg.ENG_1_OIL_LO_TEMP.Monitor.video.IN
 
@@ -2039,8 +2058,8 @@ function A333_ewd_msg.ENG_2_OIL_LO_TEMP.WarningMonitor()
 	local i = {E1 = h.S, E2 = bNOT(JR2NORUN), E3 = WRRT}
 	i.S = bAND3(i.E1, i.E2, i.E3)
 
-	A333_ewd_msg.ENG_2_OIL_LO_TEMP.Monitor.audio.IN = bool2logic(i.S)
-	A333_ewd_msg.ENG_2_OIL_LO_TEMP.Monitor.video.IN = bool2logic(i.S)
+	A333_ewd_msg.ENG_2_OIL_LO_TEMP.Monitor.audio.IN = bool2num[i.S]
+	A333_ewd_msg.ENG_2_OIL_LO_TEMP.Monitor.video.IN = bool2num[i.S]
 	A333_fws_trigger_reset(A333_ewd_msg.ENG_2_OIL_LO_TEMP.Name)
 	A333_ewd_msg.ENG_2_OIL_LO_TEMP.Monitor.video.INlast = A333_ewd_msg.ENG_2_OIL_LO_TEMP.Monitor.video.IN
 
@@ -2065,8 +2084,8 @@ function A333_ewd_msg.DC_EMER_CONFIG.WarningMonitor()
 
 	EDCEC	= a.S
 
-	A333_ewd_msg.DC_EMER_CONFIG.Monitor.audio.IN = bool2logic(a.S)
-	A333_ewd_msg.DC_EMER_CONFIG.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.DC_EMER_CONFIG.Monitor.audio.IN = bool2num[a.S]
+	A333_ewd_msg.DC_EMER_CONFIG.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -2088,8 +2107,8 @@ function A333_ewd_msg.DC_BUS_1_2_OFF.WarningMonitor()
 
 	EDC12OF	= logic.dcBus12OffConf01.OUT
 
-	A333_ewd_msg.DC_BUS_1_2_OFF.Monitor.audio.IN = bool2logic(logic.dcBus12OffConf01.OUT)
-	A333_ewd_msg.DC_BUS_1_2_OFF.Monitor.video.IN = bool2logic(logic.dcBus12OffConf01.OUT)
+	A333_ewd_msg.DC_BUS_1_2_OFF.Monitor.audio.IN = bool2num[logic.dcBus12OffConf01.OUT]
+	A333_ewd_msg.DC_BUS_1_2_OFF.Monitor.video.IN = bool2num[logic.dcBus12OffConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.DC_BUS_1_2_OFF.Name)
 	A333_ewd_msg.DC_BUS_1_2_OFF.Monitor.video.INlast = A333_ewd_msg.DC_BUS_1_2_OFF.Monitor.video.IN
 
@@ -2134,8 +2153,8 @@ function A333_ewd_msg.GEN_1_FAULT.WarningMonitor()
 	ENG1INOP = b.S
 	EG1FM = logic.gen1FaultSRR01.Q
 
-	A333_ewd_msg.GEN_1_FAULT.Monitor.audio.IN = bool2logic(logic.gen1FaultSRR01.Q)
-	A333_ewd_msg.GEN_1_FAULT.Monitor.video.IN = bool2logic(logic.gen1FaultSRR01.Q)
+	A333_ewd_msg.GEN_1_FAULT.Monitor.audio.IN = bool2num[logic.gen1FaultSRR01.Q]
+	A333_ewd_msg.GEN_1_FAULT.Monitor.video.IN = bool2num[logic.gen1FaultSRR01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.GEN_1_FAULT.Name)
 	A333_ewd_msg.GEN_1_FAULT.Monitor.video.INlast = A333_ewd_msg.GEN_1_FAULT.Monitor.video.IN
 
@@ -2177,8 +2196,8 @@ function A333_ewd_msg.GEN_2_FAULT.WarningMonitor()
 	ENG2INOP = b.S
 	EG2FM = logic.gen2FaultSRR01.Q
 
-	A333_ewd_msg.GEN_2_FAULT.Monitor.audio.IN = bool2logic(logic.gen2FaultSRR01.Q)
-	A333_ewd_msg.GEN_2_FAULT.Monitor.video.IN = bool2logic(logic.gen2FaultSRR01.Q)
+	A333_ewd_msg.GEN_2_FAULT.Monitor.audio.IN = bool2num[logic.gen2FaultSRR01.Q]
+	A333_ewd_msg.GEN_2_FAULT.Monitor.video.IN = bool2num[logic.gen2FaultSRR01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.GEN_2_FAULT.Name)
 	A333_ewd_msg.GEN_2_FAULT.Monitor.video.INlast = A333_ewd_msg.GEN_2_FAULT.Monitor.video.IN
 
@@ -2217,8 +2236,8 @@ function A333_ewd_msg.APU_GEN_FAULT.WarningMonitor()
 	ENG3INOP = a.S
 	EGAPUM = logic.apuGenFaultSRR01.Q
 
-	A333_ewd_msg.APU_GEN_FAULT.Monitor.audio.IN = bool2logic(logic.apuGenFaultSRR01.Q)
-	A333_ewd_msg.APU_GEN_FAULT.Monitor.video.IN = bool2logic(logic.apuGenFaultSRR01.Q)
+	A333_ewd_msg.APU_GEN_FAULT.Monitor.audio.IN = bool2num[logic.apuGenFaultSRR01.Q]
+	A333_ewd_msg.APU_GEN_FAULT.Monitor.video.IN = bool2num[logic.apuGenFaultSRR01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.APU_GEN_FAULT.Name)
 	A333_ewd_msg.APU_GEN_FAULT.Monitor.video.INlast = A333_ewd_msg.APU_GEN_FAULT.Monitor.video.IN
 
@@ -2230,6 +2249,37 @@ function A333_ewd_msg.APU_GEN_FAULT.Reset()
 	logic.apuGenFaultSRR01:reset()
 	A333_ewd_msg.APU_GEN_FAULT.ActionReset()
 end
+
+
+
+
+
+
+function A333_ewd_msg.ALTI_DISCREPANCY.WarningMonitor()
+
+	logic.stdAltiDiscrepancyConf01:update(NALTSTDD)
+	logic.stdAltiDiscrepancyConf02:update(NALTBD)
+
+	local a = {E1 = logic.stdAltiDiscrepancyConf01.OUT, E2 = logic.stdAltiDiscrepancyConf02.OUT}
+	a.S = bOR(a.E1, a.E2)
+
+	WWALTSTDD = logic.stdAltiDiscrepancyConf01.OUT
+	WWALTBD = logic.stdAltiDiscrepancyConf02.OUT
+
+	A333_ewd_msg.ALTI_DISCREPANCY.Monitor.audio.IN = bool2num[a.S]
+	A333_ewd_msg.ALTI_DISCREPANCY.Monitor.video.IN = bool2num[a.S]
+	A333_fws_trigger_reset(A333_ewd_msg.ALTI_DISCREPANCY.Name)
+	A333_ewd_msg.ALTI_DISCREPANCY.Monitor.video.INlast = A333_ewd_msg.ALTI_DISCREPANCY.Monitor.video.IN
+
+	A333_pfd_check_alt = bool2num[a.S]
+
+end
+
+function A333_ewd_msg.ALTI_DISCREPANCY.Reset()
+	logic.stdAltiDiscrepancyConf01:resetTimer()
+	logic.stdAltiDiscrepancyConf02:resetTimer()
+end
+
 
 
 
@@ -2306,8 +2356,8 @@ function A333_ewd_msg.DOORS_NOT_CLOSED.WarningMonitor()
 	GADNC	= t.S
 	GNDNU 	= p.S
 
-	A333_ewd_msg.DOORS_NOT_CLOSED.Monitor.audio.IN = bool2logic(logic.doorNotClsdSRR01.Q)
-	A333_ewd_msg.DOORS_NOT_CLOSED.Monitor.video.IN = bool2logic(logic.doorNotClsdSRR01.Q)
+	A333_ewd_msg.DOORS_NOT_CLOSED.Monitor.audio.IN = bool2num[logic.doorNotClsdSRR01.Q]
+	A333_ewd_msg.DOORS_NOT_CLOSED.Monitor.video.IN = bool2num[logic.doorNotClsdSRR01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.DOORS_NOT_CLOSED.Name)
 	A333_ewd_msg.DOORS_NOT_CLOSED.Monitor.video.INlast = A333_ewd_msg.DOORS_NOT_CLOSED.Monitor.video.IN
 
@@ -2337,8 +2387,8 @@ function A333_ewd_msg.GEAR_NOT_UPLOCKED.WarningMonitor()
 	GLGNUP	= b.S
 	GLGNUM	= logic.lgNotUpLckSRR01.Q
 
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.audio.IN = bool2logic(logic.lgNotUpLckSRR01.Q)
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.video.IN = bool2logic(logic.lgNotUpLckSRR01.Q)
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.audio.IN = bool2num[logic.lgNotUpLckSRR01.Q]
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.video.IN = bool2num[logic.lgNotUpLckSRR01.Q]
 	A333_fws_trigger_reset(A333_ewd_msg.GEAR_NOT_UPLOCKED.Name)
 	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.video.INlast = A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.video.IN
 
@@ -2368,8 +2418,8 @@ function A333_ewd_msg.GEAR_UPLOCK_FAULT.WarningMonitor()
 
 	GGUPENG	= d.S
 
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.audio.IN = bool2logic(d.S)
-	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.video.IN = bool2logic(d.S)
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.audio.IN = bool2num[d.S]
+	A333_ewd_msg.GEAR_NOT_UPLOCKED.Monitor.video.IN = bool2num[d.S]
 
 end
 
@@ -2415,8 +2465,8 @@ function A333_ewd_msg.SHOCK_ABSORBER_FAULT.WarningMonitor()
 
 	GSAF = j.S
 
-	A333_ewd_msg.SHOCK_ABSORBER_FAULT.Monitor.audio.IN = bool2logic(k.S)
-	A333_ewd_msg.SHOCK_ABSORBER_FAULT.Monitor.video.IN = bool2logic(k.S)
+	A333_ewd_msg.SHOCK_ABSORBER_FAULT.Monitor.audio.IN = bool2num[k.S]
+	A333_ewd_msg.SHOCK_ABSORBER_FAULT.Monitor.video.IN = bool2num[k.S]
 	A333_fws_trigger_reset(A333_ewd_msg.SHOCK_ABSORBER_FAULT.Name)
 	A333_ewd_msg.SHOCK_ABSORBER_FAULT.Monitor.video.INlast = A333_ewd_msg.SHOCK_ABSORBER_FAULT.Monitor.video.IN
 
@@ -2455,8 +2505,8 @@ function A333_ewd_msg.BRAKES_HOT.WarningMonitor()
 
 	GBRKOVHT = e.S
 
-	A333_ewd_msg.BRAKES_HOT.Monitor.audio.IN = bool2logic(f.S)
-	A333_ewd_msg.BRAKES_HOT.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.BRAKES_HOT.Monitor.audio.IN = bool2num[f.S]
+	A333_ewd_msg.BRAKES_HOT.Monitor.video.IN = bool2num[f.S]
 
 end
 
@@ -2475,8 +2525,8 @@ function A333_ewd_msg.L_R_WING_TK_LO_LVL.WarningMonitor()
 
 	FLRWLL = logic.lrWingLoLvlConf01.OUT
 
-	A333_ewd_msg.L_R_WING_TK_LO_LVL.Monitor.audio.IN = bool2logic(logic.lrWingLoLvlConf01.OUT)
-	A333_ewd_msg.L_R_WING_TK_LO_LVL.Monitor.video.IN = bool2logic(logic.lrWingLoLvlConf01.OUT)
+	A333_ewd_msg.L_R_WING_TK_LO_LVL.Monitor.audio.IN = bool2num[logic.lrWingLoLvlConf01.OUT]
+	A333_ewd_msg.L_R_WING_TK_LO_LVL.Monitor.video.IN = bool2num[logic.lrWingLoLvlConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.L_R_WING_TK_LO_LVL.Name)
 	A333_ewd_msg.L_R_WING_TK_LO_LVL.Monitor.video.INlast = A333_ewd_msg.L_R_WING_TK_LO_LVL.Monitor.video.IN
 
@@ -2506,8 +2556,8 @@ function A333_ewd_msg.L_WING_TK_LO_LVL.WarningMonitor()
 
 	FLWLL = c.S
 
-	A333_ewd_msg.L_WING_TK_LO_LVL.Monitor.audio.IN = bool2logic(logic.lWingLoLvlConf01.OUT)
-	A333_ewd_msg.L_WING_TK_LO_LVL.Monitor.video.IN = bool2logic(logic.lWingLoLvlConf01.OUT)
+	A333_ewd_msg.L_WING_TK_LO_LVL.Monitor.audio.IN = bool2num[logic.lWingLoLvlConf01.OUT]
+	A333_ewd_msg.L_WING_TK_LO_LVL.Monitor.video.IN = bool2num[logic.lWingLoLvlConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.L_WING_TK_LO_LVL.Name)
 	A333_ewd_msg.L_WING_TK_LO_LVL.Monitor.video.INlast = A333_ewd_msg.L_WING_TK_LO_LVL.Monitor.video.IN
 
@@ -2537,8 +2587,8 @@ function A333_ewd_msg.R_WING_TK_LO_LVL.WarningMonitor()
 
 	FRWLL = c.S
 
-	A333_ewd_msg.R_WING_TK_LO_LVL.Monitor.audio.IN = bool2logic(logic.rWingLoLvlConf01.OUT)
-	A333_ewd_msg.R_WING_TK_LO_LVL.Monitor.video.IN = bool2logic(logic.rWingLoLvlConf01.OUT)
+	A333_ewd_msg.R_WING_TK_LO_LVL.Monitor.audio.IN = bool2num[logic.rWingLoLvlConf01.OUT]
+	A333_ewd_msg.R_WING_TK_LO_LVL.Monitor.video.IN = bool2num[logic.rWingLoLvlConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.R_WING_TK_LO_LVL.Name)
 	A333_ewd_msg.R_WING_TK_LO_LVL.Monitor.video.INlast = A333_ewd_msg.R_WING_TK_LO_LVL.Monitor.video.IN
 
@@ -2591,8 +2641,8 @@ function A333_ewd_msg.X_BLEED_FAULT.WarningMonitor()
 	BXFDOD = g.S
 	BXFDOMD = e.S
 
-	A333_ewd_msg.X_BLEED_FAULT.Monitor.audio.IN = bool2logic(h.S)
-	A333_ewd_msg.X_BLEED_FAULT.Monitor.video.IN = bool2logic(h.S)
+	A333_ewd_msg.X_BLEED_FAULT.Monitor.audio.IN = bool2num[h.S]
+	A333_ewd_msg.X_BLEED_FAULT.Monitor.video.IN = bool2num[h.S]
 	A333_fws_trigger_reset(A333_ewd_msg.X_BLEED_FAULT.Name)
 	A333_ewd_msg.X_BLEED_FAULT.Monitor.video.INlast = A333_ewd_msg.X_BLEED_FAULT.Monitor.video.IN
 
@@ -2619,8 +2669,8 @@ function A333_ewd_msg.AI_ENG1_VALVE_CLOSED.WarningMonitor()
 
 	IE1NVNO = logic.eng1NacVlvClsdConf01.OUT
 
-	A333_ewd_msg.AI_ENG1_VALVE_CLOSED.Monitor.audio.IN = bool2logic(logic.eng1NacVlvClsdConf01.OUT)
-	A333_ewd_msg.AI_ENG1_VALVE_CLOSED.Monitor.video.IN = bool2logic(logic.eng1NacVlvClsdConf01.OUT)
+	A333_ewd_msg.AI_ENG1_VALVE_CLOSED.Monitor.audio.IN = bool2num[logic.eng1NacVlvClsdConf01.OUT]
+	A333_ewd_msg.AI_ENG1_VALVE_CLOSED.Monitor.video.IN = bool2num[logic.eng1NacVlvClsdConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.AI_ENG1_VALVE_CLOSED.Name)
 	A333_ewd_msg.AI_ENG1_VALVE_CLOSED.Monitor.video.INlast = A333_ewd_msg.AI_ENG1_VALVE_CLOSED.Monitor.video.IN
 
@@ -2646,8 +2696,8 @@ function A333_ewd_msg.AI_ENG2_VALVE_CLOSED.WarningMonitor()
 
 	IE2NVNO = logic.eng2NacVlvClsdConf01.OUT
 
-	A333_ewd_msg.AI_ENG2_VALVE_CLOSED.Monitor.audio.IN = bool2logic(logic.eng2NacVlvClsdConf01.OUT)
-	A333_ewd_msg.AI_ENG2_VALVE_CLOSED.Monitor.video.IN = bool2logic(logic.eng2NacVlvClsdConf01.OUT)
+	A333_ewd_msg.AI_ENG2_VALVE_CLOSED.Monitor.audio.IN = bool2num[logic.eng2NacVlvClsdConf01.OUT]
+	A333_ewd_msg.AI_ENG2_VALVE_CLOSED.Monitor.video.IN = bool2num[logic.eng2NacVlvClsdConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.AI_ENG2_VALVE_CLOSED.Name)
 	A333_ewd_msg.AI_ENG2_VALVE_CLOSED.Monitor.video.INlast = A333_ewd_msg.AI_ENG2_VALVE_CLOSED.Monitor.video.IN
 
@@ -2708,8 +2758,8 @@ function A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.WarningMonitor()
 
 	ILVCLSDF = logic.aiVlvClsdFltsrS01.Q
 
-	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.Monitor.audio.IN = bool2logic(j.S)
-	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.Monitor.video.IN = bool2logic(j.S)
+	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.Monitor.audio.IN = bool2num[j.S]
+	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.Monitor.video.IN = bool2num[j.S]
 	A333_fws_trigger_reset(A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.Name)
 	A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.Monitor.video.INlast = A333_ewd_msg.WING_ANTI_ICE_SYS_FAULT.Monitor.video.IN
 
@@ -2737,8 +2787,8 @@ function A333_ewd_msg.DOOR_L_FWD_CABIN.WarningMonitor()
 	local c = {E1 = b.S, E2 = DTOCTPH3}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.DOOR_L_FWD_CABIN.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.DOOR_L_FWD_CABIN.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.DOOR_L_FWD_CABIN.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.DOOR_L_FWD_CABIN.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -2758,8 +2808,8 @@ function A333_ewd_msg.DOOR_L_MID_CABIN.WarningMonitor()
 	local c = {E1 = b.S, E2 = DTOCTPH3}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.DOOR_L_MID_CABIN.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.DOOR_L_MID_CABIN.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.DOOR_L_MID_CABIN.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.DOOR_L_MID_CABIN.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -2779,8 +2829,8 @@ function A333_ewd_msg.DOOR_L_AFT_CABIN.WarningMonitor()
 	local c = {E1 = b.S, E2 = DTOCTPH3}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.DOOR_L_AFT_CABIN.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.DOOR_L_AFT_CABIN.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.DOOR_L_AFT_CABIN.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.DOOR_L_AFT_CABIN.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -2800,8 +2850,8 @@ function A333_ewd_msg.DOOR_R_FWD_CABIN.WarningMonitor()
 	local c = {E1 = b.S, E2 = DTOCTPH3}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.DOOR_R_FWD_CABIN.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.DOOR_R_FWD_CABIN.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.DOOR_R_FWD_CABIN.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.DOOR_R_FWD_CABIN.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -2821,8 +2871,8 @@ function A333_ewd_msg.DOOR_R_MID_CABIN.WarningMonitor()
 	local c = {E1 = b.S, E2 = DTOCTPH3}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.DOOR_R_MID_CABIN.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.DOOR_R_MID_CABIN.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.DOOR_R_MID_CABIN.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.DOOR_R_MID_CABIN.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -2842,8 +2892,8 @@ function A333_ewd_msg.DOOR_R_AFT_CABIN.WarningMonitor()
 	local c = {E1 = b.S, E2 = DTOCTPH3}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.DOOR_R_AFT_CABIN.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.DOOR_R_AFT_CABIN.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.DOOR_R_AFT_CABIN.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.DOOR_R_AFT_CABIN.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -2863,8 +2913,8 @@ function A333_ewd_msg.DOOR_L_EMER_EXIT.WarningMonitor()
 	local c = {E1 = b.S, E2 = DTOCTPH3}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.DOOR_L_EMER_EXIT.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.DOOR_L_EMER_EXIT.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.DOOR_L_EMER_EXIT.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.DOOR_L_EMER_EXIT.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -2884,8 +2934,8 @@ function A333_ewd_msg.DOOR_R_EMER_EXIT.WarningMonitor()
 	local c = {E1 = b.S, E2 = DTOCTPH3}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.DOOR_R_EMER_EXIT.Monitor.audio.IN = bool2logic(c.S)
-	A333_ewd_msg.DOOR_R_EMER_EXIT.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.DOOR_R_EMER_EXIT.Monitor.audio.IN = bool2num[c.S]
+	A333_ewd_msg.DOOR_R_EMER_EXIT.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -2917,8 +2967,8 @@ function A333_ewd_msg.DOOR_R_AVIONICS.WarningMonitor()		-- NOTE: THIS DOOR IS AC
 	DTOCTPH3 = bNOT(c.S)
 	WTOCT = logic.rAvioMtrig01.OUT
 
-	A333_ewd_msg.DOOR_R_AVIONICS.Monitor.audio.IN = bool2logic(d.S)
-	A333_ewd_msg.DOOR_R_AVIONICS.Monitor.video.IN = bool2logic(d.S)
+	A333_ewd_msg.DOOR_R_AVIONICS.Monitor.audio.IN = bool2num[d.S]
+	A333_ewd_msg.DOOR_R_AVIONICS.Monitor.video.IN = bool2num[d.S]
 
 end
 
@@ -2954,7 +3004,7 @@ function A333_ewd_msg.TO_MEMO.WarningMonitor()
 
 	ZTOMEMC = f.S
 
-	A333_ewd_msg.TO_MEMO.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.TO_MEMO.Monitor.video.IN = bool2num[f.S]
 	A333_fws_trigger_reset(A333_ewd_msg.TO_MEMO.Name)
 	A333_ewd_msg.TO_MEMO.Monitor.video.INlast = A333_ewd_msg.TO_MEMO.Monitor.video.IN
 
@@ -3035,9 +3085,11 @@ function A333_ewd_msg.LDG_MEMO.WarningMonitor()
 	local o = {E1 = m.S, E2 = ZTOMEMC}
 	o.S = bOR(o.E1, o.E2)
 
+	ZLDGMEM = m.S
 	ZCMEMC = o.S
 
-	A333_ewd_msg.LDG_MEMO.Monitor.video.IN = bool2logic(m.S)
+
+	A333_ewd_msg.LDG_MEMO.Monitor.video.IN = bool2num[m.S]
 	A333_fws_trigger_reset(A333_ewd_msg.LDG_MEMO.Name)
 	A333_ewd_msg.LDG_MEMO.Monitor.video.INlast = A333_ewd_msg.LDG_MEMO.Monitor.video.IN
 
@@ -3055,18 +3107,18 @@ function A333_ewd_msg.LDG_MEMO.FlightStart()
 	if alt_ft_agl > 100.0 then
 		run_after_time(A333_ewd_msg_LDG_MEMO_FlightStart1, 0.5)
 		run_after_time(A333_ewd_msg_LDG_MEMO_FlightStart2, 2.0)
-		run_after_time(A333_ewd_msg_LDG_MEMO_FlightStart3, 4.0)
+		--run_after_time(A333_ewd_msg_LDG_MEMO_FlightStart3, 4.0)
 	end
 end
 
 function A333_ewd_msg_LDG_MEMO_FlightStart1()
-	NRADH_1_APPR = 100.0
-	NRADH_2_APPR = 100.0
+	NRADH_1_APPR = 2300.00 --100.0
+	NRADH_2_APPR = 2300.00 --100.0
 end
 
 function A333_ewd_msg_LDG_MEMO_FlightStart2()
-	NRADH_1_APPR = 2300.0
-	NRADH_2_APPR = 2300.0
+	NRADH_1_APPR = nil --100.00 --2300.0
+	NRADH_2_APPR = nil --100.00 --2300.0
 end
 
 function A333_ewd_msg_LDG_MEMO_FlightStart3()
@@ -3094,10 +3146,19 @@ function A333_ewd_msg.GND_SPLRS_ARMED.WarningMonitor()
 	local c = {E1 = logic.gndSplrArmedConf01.OUT, E2 = bNOT(b.S)}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.GND_SPLRS_ARMED.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.GND_SPLRS_ARMED.Monitor.video.IN = bool2num[c.S]
 
 end
 
+
+
+
+	
+function A333_ewd_msg.ADIRS_ALIGN.WarningMonitor()
+	-- AG330 ADIRS ALIGN announcement
+	A333_ewd_msg.ADIRS_ALIGN.Monitor.video.IN = bool2num[ADRALGN]
+	A333_ewd_msg.ADIRS_ALIGN.WarningTitle = (ADRTIME .. " MN")
+end
 
 
 
@@ -3107,7 +3168,7 @@ function A333_ewd_msg.SEAT_BELTS.WarningMonitor()
 	local a = {E1 = CFSBLT, E2 = bNOT(ZCMEMC)}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_ewd_msg.SEAT_BELTS.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.SEAT_BELTS.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -3120,7 +3181,7 @@ function A333_ewd_msg.NO_SMOKING.WarningMonitor()
 	local a = {E1 = CNOSMOK, E2 = bNOT(ZCMEMC)}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_ewd_msg.NO_SMOKING.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.NO_SMOKING.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -3133,7 +3194,7 @@ function A333_ewd_msg.STROBE_LT_OFF.WarningMonitor()
 	local a = {E1 = LSLPBOF, E2 = bNOT(ZCMEMC), E3 = bNOT(ZGND)}
 	a.S = bAND3(a.E1, a.E2, a.E3)
 
-	A333_ewd_msg.STROBE_LT_OFF.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.STROBE_LT_OFF.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -3143,16 +3204,9 @@ end
 
 function A333_ewd_msg.GPWS_FLAP_MODE_OFF.WarningMonitor()
 
-	A333_ewd_msg.GPWS_FLAP_MODE_OFF.Monitor.video.IN = bool2logic(NGPWSFMOF)
+	A333_ewd_msg.GPWS_FLAP_MODE_OFF.Monitor.video.IN = bool2num[NGPWSFMOF]
 
 end
-
-
-
-
-
-
-
 
 
 
@@ -3168,7 +3222,7 @@ function A333_ewd_msg.TO_INHIBIT.WarningMonitor()
 
 	logic.toInhibConf01:update(b.S)
 
-	A333_ewd_msg.TO_INHIBIT.Monitor.video.IN = bool2logic(logic.toInhibConf01.OUT)
+	A333_ewd_msg.TO_INHIBIT.Monitor.video.IN = bool2num[logic.toInhibConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.TO_INHIBIT.Name)
 	A333_ewd_msg.TO_INHIBIT.Monitor.video.INlast = A333_ewd_msg.TO_INHIBIT.Monitor.video.IN
 
@@ -3183,14 +3237,14 @@ end
 function A333_ewd_msg.LDG_INHIBIT.WarningMonitor()
 
 	local a = {E1 = ZPH7, E2 = ZPH8}
-	a.S = bOR(a.E1, a.E2, a.E3)
+	a.S = bOR(a.E1, a.E2)
 
 	local b = {E1 = a.S, E2 = bNOT(ZFPION)}
 	b.S = bAND(b.E1, b.E2)
 
 	logic.ldgInhibConf01:update(b.S)
 
-	A333_ewd_msg.LDG_INHIBIT.Monitor.video.IN = bool2logic(logic.ldgInhibConf01.OUT)
+	A333_ewd_msg.LDG_INHIBIT.Monitor.video.IN = bool2num[logic.ldgInhibConf01.OUT]
 	A333_fws_trigger_reset(A333_ewd_msg.LDG_INHIBIT.Name)
 	A333_ewd_msg.LDG_INHIBIT.Monitor.video.INlast = A333_ewd_msg.LDG_INHIBIT.Monitor.video.IN
 
@@ -3242,7 +3296,7 @@ function A333_ewd_msg.LAND_ASAP_RED.WarningMonitor()
 
 	ZLAPR = l.S
 
-	A333_ewd_msg.LAND_ASAP_RED.Monitor.video.IN = bool2logic(l.S)
+	A333_ewd_msg.LAND_ASAP_RED.Monitor.video.IN = bool2num[l.S]
 
 end
 
@@ -3266,7 +3320,7 @@ function A333_ewd_msg.LAND_ASAP_AMBER.WarningMonitor()
 	local d = {E1 = bNOT(ZLAPR), E2 = bNOT(ZGND), E3 = c.S}
 	d.S = bAND3(d.E1, d.E2, d.E3)
 
-	A333_ewd_msg.LAND_ASAP_AMBER.Monitor.video.IN = bool2logic(d.S)
+	A333_ewd_msg.LAND_ASAP_AMBER.Monitor.video.IN = bool2num[d.S]
 
 end
 
@@ -3285,7 +3339,7 @@ function A333_ewd_msg.AIR_BLEED.WarningMonitor()
 	local b = {E1 = a.S, E2 = bNOT(EEMER)}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_ewd_msg.AIR_BLEED.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.AIR_BLEED.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -3316,7 +3370,7 @@ function A333_ewd_msg.CAB_PRESS.WarningMonitor()
 
 	PSCPR = e.S
 
-	A333_ewd_msg.CAB_PRESS.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.CAB_PRESS.Monitor.video.IN = bool2num[f.S]
 
 end
 
@@ -3342,7 +3396,7 @@ function A333_ewd_msg.AVNCS_VENT.WarningMonitor()
 	local g = {E1 = f.S, E2 = bNOT(PSCPR)}
 	g.S = bAND(g.E1, g.E2)
 
-	A333_ewd_msg.AVNCS_VENT.Monitor.video.IN = bool2logic(g.S)
+	A333_ewd_msg.AVNCS_VENT.Monitor.video.IN = bool2num[g.S]
 
 end
 
@@ -3360,7 +3414,7 @@ function A333_ewd_msg.ELEC.WarningMonitor()
 	local b = {E1 = a.S, E2 = bNOT(EEMER)}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_ewd_msg.ELEC.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.ELEC.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -3388,7 +3442,7 @@ function A333_ewd_msg.HYDB.WarningMonitor()
 	local e = {E1 = bNOT(a.S), E2 = b.S, E3 = c.S, E4 = bNOT(d.S), E5 = bNOT(EEMER)}
 	e.S = bAND5(e.E1, e.E2, e.E3, e.E4, e.E5)
 
-	A333_ewd_msg.HYDB.Monitor.video.IN = bool2logic(e.S)
+	A333_ewd_msg.HYDB.Monitor.video.IN = bool2num[e.S]
 
 end
 
@@ -3415,7 +3469,7 @@ function A333_ewd_msg.HYDY.WarningMonitor()
 	local e = {E1 = d.S, E2 = c.S}
 	e.S = bOR(e.E1, e.E2)
 
-	A333_ewd_msg.HYDY.Monitor.video.IN = bool2logic(e.S)
+	A333_ewd_msg.HYDY.Monitor.video.IN = bool2num[e.S]
 
 end
 
@@ -3433,7 +3487,7 @@ function A333_ewd_msg.HYDG.WarningMonitor()
 	local b = {E1 = bNOT(a.S), E2 = JR1OUT, E3 = HGPLP, E4 = bNOT(HGPPBOF), E5 = bNOT(EEMER)}
 	b.S = bAND5(b.E1, b.E2, b.E3, b.E4, b.E5)
 
-	A333_ewd_msg.HYDG.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.HYDG.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -3464,8 +3518,8 @@ function A333_ewd_msg.FUEL.WarningMonitor()
 	local f = {E1 = e.S, E2 = bNOT(EEMER)}
 	f.S = bAND(f.E1, f.E2)
 
-	A333_ewd_msg.FUEL.Monitor.audio.IN = bool2logic(f.S)
-	A333_ewd_msg.FUEL.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.FUEL.Monitor.audio.IN = bool2num[f.S]
+	A333_ewd_msg.FUEL.Monitor.video.IN = bool2num[f.S]
 
 end
 
@@ -3494,7 +3548,7 @@ function A333_ewd_msg.AIR_COND.WarningMonitor()
 	local f = {E1 = e.S, E2 = bNOT(EEMER)}
 	f.S = bAND(f.E1, f.E2)
 
-	A333_ewd_msg.AIR_COND.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.AIR_COND.Monitor.video.IN = bool2num[f.S]
 
 end
 
@@ -3521,7 +3575,7 @@ function A333_ewd_msg.BRAKES.WarningMonitor()
 
 	GEBF = d.S
 
-	A333_ewd_msg.BRAKES.Monitor.video.IN = bool2logic(e.S)
+	A333_ewd_msg.BRAKES.Monitor.video.IN = bool2num[e.S]
 
 end
 
@@ -3538,7 +3592,7 @@ function A333_ewd_msg.WHEEL.WarningMonitor()
 	local b = {E1 = HGSYSLP, E2 = a.S}
 	b.S = bOR(b.E1, b.E2)
 
-	A333_ewd_msg.WHEEL.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.WHEEL.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -3549,7 +3603,7 @@ end
 
 function A333_ewd_msg.FCTLG.WarningMonitor()
 
-	A333_ewd_msg.FCTLG.Monitor.video.IN = bool2logic(HGSYSLP)
+	A333_ewd_msg.FCTLG.Monitor.video.IN = bool2num[HGSYSLP]
 
 end
 
@@ -3560,7 +3614,7 @@ end
 
 function A333_ewd_msg.FCTLY.WarningMonitor()
 
-	A333_ewd_msg.FCTLY.Monitor.video.IN = bool2logic(HYSYSLP)
+	A333_ewd_msg.FCTLY.Monitor.video.IN = bool2num[HYSYSLP]
 
 end
 
@@ -3570,7 +3624,7 @@ end
 
 function A333_ewd_msg.FCTLB.WarningMonitor()
 
-	A333_ewd_msg.FCTLB.Monitor.video.IN = bool2logic(HBSYSLP)
+	A333_ewd_msg.FCTLB.Monitor.video.IN = bool2num[HBSYSLP]
 
 end
 
@@ -3583,7 +3637,7 @@ function A333_ewd_msg.FCTLDC2.WarningMonitor()
 	local a = {E1 = bNOT(EEMER), E2 = EDC2OF}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_ewd_msg.FCTLDC2.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.FCTLDC2.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -3612,13 +3666,13 @@ function A333_ewd_msg.SPEED_BRAKE.WarningMonitor()
 	local a = {E1 = SSPBR_1, E2 = SSPBR_2}
 	a.S = bOR(a.E1, a.E2)
 
-	local b = {E1 = ZPH1, E2 = ZPH8, E2 = ZPH9, E4 = ZPH10}
+	local b = {E1 = ZPH1, E2 = ZPH8, E3 = ZPH9, E4 = ZPH10}
 	bOR4(b.E1, b.E2, b.E3, b.E4)
 
 	local c = {E1 = a.S, E2 = bNOT(b.S)}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_ewd_msg.SPEED_BRAKE.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.SPEED_BRAKE.Monitor.video.IN = bool2num[c.S]
 
 
 
@@ -3670,7 +3724,7 @@ function A333_ewd_msg.PARK_BRAKE.WarningMonitor()
 	local a = {E1 = GPBRKON, E2 = bNOT(ZPH3)}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_ewd_msg.PARK_BRAKE.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.PARK_BRAKE.Monitor.video.IN = bool2num[a.S]
 
 	local b = {E1 = ZPH4, E2 = ZPH5, E3 = ZPH6, E4 = ZPH7, E5 = ZPH8}
 	b.S = bOR5(b.E1, b.E2, b.E3, b.E4, b.E5)
@@ -3690,7 +3744,7 @@ end
 
 function A333_ewd_msg.RAT_OUT.WarningMonitor()
 
-	A333_ewd_msg.RAT_OUT.Monitor.video.IN = bool2logic(HRATNFS)
+	A333_ewd_msg.RAT_OUT.Monitor.video.IN = bool2num[HRATNFS]
 
 	local a = {E1 = ZPH1, E2 = ZPH2}
 	a.S = bOR(a.E1, a.E2)
@@ -3711,7 +3765,7 @@ end
 
 function A333_ewd_msg.RAM_AIR_ON.WarningMonitor()
 
-	A333_ewd_msg.RAM_AIR_ON.Monitor.video.IN = bool2logic(ARAPBON)
+	A333_ewd_msg.RAM_AIR_ON.Monitor.video.IN = bool2num[ARAPBON]
 
 end
 
@@ -3729,7 +3783,7 @@ function A333_ewd_msg.IGNITION.WarningMonitor()
 	local b = {E1 = a.S, E2 = WRRT}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_ewd_msg.IGNITION.Monitor.video.IN = bool2logic(b.S)
+	A333_ewd_msg.IGNITION.Monitor.video.IN = bool2num[b.S]
 
 end
 
@@ -3759,7 +3813,7 @@ function A333_ewd_msg.CABIN_READY.WarningMonitor()
 
 	CCABR = a.S
 
-	A333_ewd_msg.CABIN_READY.Monitor.video.IN = bool2logic(e.S)
+	A333_ewd_msg.CABIN_READY.Monitor.video.IN = bool2num[e.S]
 
 	logic.cabRdyConf01:update(CCABR)
 
@@ -3796,6 +3850,21 @@ end
 
 
 
+function A333_ewd_msg.COMPANY_MSG.WarningMonitor()
+
+	local a = WATSUINS and CATSUMSGACT and CAOCMSG
+	
+	A333_ewd_msg.COMPANY_MSG.Monitor.video.IN = bool2num[a]
+
+end
+
+
+
+
+
+
+
+
 function A333_ewd_msg.ENG_A_ICE.WarningMonitor()
 
 	local a = {E1 = IE1AIPBON, E2 = IE2AIPBON}
@@ -3807,7 +3876,7 @@ function A333_ewd_msg.ENG_A_ICE.WarningMonitor()
 	local c = {E1 = a.S, E2 = b.S}
 	c.S = bOR(c.E1, c.E2)
 
-	A333_ewd_msg.ENG_A_ICE.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.ENG_A_ICE.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -3819,7 +3888,7 @@ end
 
 function A333_ewd_msg.WING_A_ICE.WarningMonitor()
 
-	A333_ewd_msg.WING_A_ICE.Monitor.video.IN = bool2logic(IWAIPBON)
+	A333_ewd_msg.WING_A_ICE.Monitor.video.IN = bool2num[IWAIPBON]
 
 end
 
@@ -3857,7 +3926,7 @@ function A333_ewd_msg.ICE_NOT_DET.WarningMonitor()
 	local h = {E1 = bNOT(a.S), E2 = logic.iceNotDetConf01.OUT, E3 = e.S}
 	h.S = bAND3(h.E1, h.E2, h.E3)
 
-	A333_ewd_msg.ICE_NOT_DET.Monitor.video.IN = bool2logic(h.S)
+	A333_ewd_msg.ICE_NOT_DET.Monitor.video.IN = bool2num[h.S]
 
 end
 
@@ -3887,7 +3956,7 @@ function A333_ewd_msg.APU_BLEED.WarningMonitor()
 
 	QBLEED = e.S
 
-	A333_ewd_msg.APU_BLEED.Monitor.video.IN = bool2logic(e.S)
+	A333_ewd_msg.APU_BLEED.Monitor.video.IN = bool2num[e.S]
 
 end
 
@@ -3901,7 +3970,7 @@ function A333_ewd_msg.APU_AVAIL.WarningMonitor()
 	local a = {E1 = QAVAIL, E2 = bNOT(QBLEED)}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_ewd_msg.APU_AVAIL.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.APU_AVAIL.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -3927,7 +3996,7 @@ function A333_ewd_msg.BRK_FAN.WarningMonitor()
 	local e = {E1 = c.S, E2 = d.S}
 	e.S = bAND(e.E1, e.E2)
 
-	A333_ewd_msg.BRK_FAN.Monitor.video.IN = bool2logic(e.S)
+	A333_ewd_msg.BRK_FAN.Monitor.video.IN = bool2num[e.S]
 
 end
 
@@ -3938,10 +4007,35 @@ end
 
 function A333_ewd_msg.GPWS_FLAP_3.WarningMonitor()
 
-	local a = {E1 = NFPBLDG3, E2 = bNOT(EEMER)}
+	local a = {E1 = NFFMSLDG3, E2 = bNOT(EEMER)}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_ewd_msg.GPWS_FLAP_3.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.GPWS_FLAP_3.Monitor.video.IN = bool2num[a.S]
+
+end
+
+
+
+
+
+
+
+function A333_ewd_msg.HF_VOICE.WarningMonitor()
+
+	local a = CATSUHF1VAL or CATSUHF2VAL
+	local b = CATSUHF1VF and CATSUHF1VAL
+	local c = CATSUHF2VAL and CATSUHF2VAL
+	local d = ZPH1 or ZPH2 or ZPH6 or ZPH9 or ZPH10
+	local e = WCHFDR1I and b and not WCHFDR2I
+	local f = WCHFDR1I and not WCHFDR1I and c
+	local g = WCHFDR2I and WCHFDR1I and CATSUHF1VF and CATSUHF2VF and a
+	local h = e or f or g
+	local i = h and WATSUINS and d
+
+	CHFDRVOICE = i
+	CATSUMSGACT = d
+
+	A333_ewd_msg.HF_VOICE.Monitor.video.IN = bool2num[i]
 
 end
 
@@ -3961,7 +4055,7 @@ function A333_ewd_msg.AUTO_BRK_LO.WarningMonitor()
 	local c = {E1 = a.S, E2 = b.S}
 	c.S = bOR(c.E1, c.E2)
 
-	A333_ewd_msg.AUTO_BRK_LO.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.AUTO_BRK_LO.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -3980,7 +4074,7 @@ function A333_ewd_msg.AUTO_BRK_MED.WarningMonitor()
 	local c = {E1 = a.S, E2 = b.S}
 	c.S = bOR(c.E1, c.E2)
 
-	A333_ewd_msg.AUTO_BRK_MED.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.AUTO_BRK_MED.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -4000,7 +4094,7 @@ function A333_ewd_msg.AUTO_BRK_MAX.WarningMonitor()
 	local c = {E1 = a.S, E2 = b.S}
 	c.S = bOR(c.E1, c.E2)
 
-	A333_ewd_msg.AUTO_BRK_MAX.Monitor.video.IN = bool2logic(c.S)
+	A333_ewd_msg.AUTO_BRK_MAX.Monitor.video.IN = bool2num[c.S]
 
 end
 
@@ -4014,7 +4108,7 @@ function A333_ewd_msg.AUTO_BRK_OFF.WarningMonitor()
 	local a = {E1 = GABRKF_1, E2 = GABRKF_2}
 	a.S = bOR(a.E1, a.E2)
 
-	A333_ewd_msg.AUTO_BRK_OFF.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.AUTO_BRK_OFF.Monitor.video.IN = bool2num[a.S]
 
 end
 
@@ -4043,7 +4137,7 @@ function A333_ewd_msg.CTR_TK_FEEDG.WarningMonitor()
 	local f = {E1 = bNOT(EAC1OF), E2 = bNOT(EAC2OF), E3 = b.S, E4 = e.S, E5 = bNOT(a.S)}
 	f.S = bAND5(f.E1, f.E2, f.E3, f.E4, f.E5)
 
-	A333_ewd_msg.CTR_TK_FEEDG.Monitor.video.IN = bool2logic(f.S)
+	A333_ewd_msg.CTR_TK_FEEDG.Monitor.video.IN = bool2num[f.S]
 
 end
 
@@ -4057,7 +4151,7 @@ function A333_ewd_msg.FUEL_X_FEED.WarningMonitor()
 	local a = {E1 = FXFVPBON, E2 = bNOT(FXFVFC)}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_ewd_msg.FUEL_X_FEED.Monitor.video.IN = bool2logic(a.S)
+	A333_ewd_msg.FUEL_X_FEED.Monitor.video.IN = bool2num[a.S]
 
 	local b = {E1 = ZPH3, E2 = ZPH4, E3 = ZPH5}
 	b.S = bOR3(b.E1, b.E2, b.E3)

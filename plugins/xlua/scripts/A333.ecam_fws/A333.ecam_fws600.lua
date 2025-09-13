@@ -278,7 +278,7 @@ function A333_sts_msg.AP_DUAL_HYD_LO_GB.Action()
 	g.S = bAND(g.E1, g.E2)
 
 	local h = {E1 = logic.apdualHydLoGB_srSS01.Q, E2 = e.S, E3 = logic.apdualHydLoGB_srSS02.Q, E4 = f.s, E5 = g.S}
-	h.S = bOR(h.E1, h.E2, h.E3, h.E4, h.E5)
+	h.S = bOR5(h.E1, h.E2, h.E3, h.E4, h.E5)
 
 	A333_sts_msg.AP_DUAL_HYD_LO_GB.Msg[1].Status = h.s
 	A333_sts_msg.AP_DUAL_HYD_LO_GB.Msg[2].Status = h.s
@@ -317,8 +317,8 @@ function A333_sts_msg.AP_DUAL_HYD_LO_BY.Action()
 	local g = {E1 = bNOT(HYRLL), E2 = HPRATPBOF}
 	g.S = bAND(g.E1, g.E2)
 
-	local h = {E1 = logic.apdualHydLoBY_srSS01.Q, E2 = e.S, E3 = logic.apdualHydLoBY_srSS02.Q, E4 = f.s, E5 = g.S}
-	h.S = bOR(h.E1, h.E2, h.E3, h.E4, h.E5)
+	local h = {E1 = logic.apdualHydLoBY_srSS01.Q, E2 = e.S, E3 = logic.apdualHydLoBY_srSS02.Q, E4 = f.S, E5 = g.S}
+	h.S = bOR5(h.E1, h.E2, h.E3, h.E4, h.E5)
 
 	A333_sts_msg.AP_DUAL_HYD_LO_BY.Msg[1].Status = h.S
 	A333_sts_msg.AP_DUAL_HYD_LO_BY.Msg[2].Status = h.S

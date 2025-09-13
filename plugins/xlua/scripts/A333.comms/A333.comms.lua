@@ -796,15 +796,6 @@ A333CMD_ai_comms_quick_start		= create_command("laminar/A333/ai/comms_quick_star
 --** 				                  SYSTEM FUNCTIONS           	    			 **--
 --*************************************************************************************--
 
------ TERNARY CONDITIONAL ---------------------------------------------------------------
-function A333_ternary(condition, ifTrue, ifFalse)
-    if condition then return ifTrue else return ifFalse end
-end
-
-
-
-
-
 ----- RESCALE ---------------------------------------------------------------------------
 function A333_rescale(in1, out1, in2, out2, x)
 

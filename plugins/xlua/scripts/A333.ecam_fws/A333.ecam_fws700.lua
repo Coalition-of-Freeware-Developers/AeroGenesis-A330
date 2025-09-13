@@ -56,6 +56,8 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
 
+local bool2num = {[true] = 1, [false] = 0}
+
 local dualInput1Switch01 = newAnalogSwitch2in1out('dualInput1Switch01')
 local dualInput1Switch02 = newAnalogSwitch2in1out('dualInput1Switch02')
 local dualInput1Switch03 = newAnalogSwitch2in1out('dualInput1Switch03')
@@ -387,7 +389,7 @@ function A333_fws_aco_dual_input2()
 	dualInput2mTrig02:update(f.S)
 	dualInput2Pulse01:update(f.S)
 
-	A333DR_fws_aco_dual_input = bool2logic(dualInput2Pulse01.OUT)
+	A333DR_fws_aco_dual_input = bool2num[dualInput2Pulse01.OUT]
 
 end
 
@@ -403,7 +405,7 @@ function A333_fws_aco_priority_left()
 	prioLeftConf01:update(a.S)
 	prioLeftPulse01:update(prioLeftConf01.OUT)
 
-	A333DR_fws_aco_priority_left = bool2logic(prioLeftPulse01.OUT)
+	A333DR_fws_aco_priority_left = bool2num[prioLeftPulse01.OUT]
 
 end
 
@@ -419,7 +421,7 @@ function A333_fws_aco_priority_right()
 	prioRightConf01:update(a.S)
 	prioRightPulse01:update(prioRightConf01.OUT)
 
-	A333DR_fws_aco_priority_right = bool2logic(prioRightPulse01.OUT)
+	A333DR_fws_aco_priority_right = bool2num[prioRightPulse01.OUT]
 
 end
 
@@ -439,8 +441,8 @@ function A333_fws_aco_altitude_threshold()
 	local b = {E1 = a.S, E2 = NRADH_2_INV}
 	b.S = bAND(b.E1, b.E2)
 
-	local altThreshold01 = ternary(altThresholdSwitch01.out > 50.0, true, false)
-	local altThreshold02 = ternary(altThresholdSwitch01.out >= 410.0, true, false)
+	local altThreshold01 = altThresholdSwitch01.out > 50.0
+	local altThreshold02 = altThresholdSwitch01.out >= 410.0
 
 	alt400_threshold:update(altThresholdSwitch01.out)
 	alt300_threshold:update(altThresholdSwitch01.out)
@@ -469,7 +471,7 @@ end
 
 function A333_fws_aco_altitude_threshold2()
 
-	local alt003_threshold = ternary(NRAH <= 3.0, true, false)
+	local alt003_threshold = NRAH <= 3.0
 
 	local meters = NRAH * 0.3048
 	altThreshold2dhInhib:update(meters)
@@ -758,7 +760,7 @@ function A333_fws_aco_windshear()
 
 	WWINDSDON = g.S
 
-	A333DR_fws_aco_windshear = bool2logic(WWINDSDON)
+	A333DR_fws_aco_windshear = bool2num[WWINDSDON]
 
 end
 
@@ -781,7 +783,7 @@ function A333_fws_aco_5ft_announce()
 	WACO5	= ann5ftPulse01.OUT
 	NA005	= ann5ftPulse01.OUT
 
-	A333DR_fws_aco_5 = bool2logic(WACO5)
+	A333DR_fws_aco_5 = bool2num[WACO5]
 
 end
 
@@ -820,7 +822,7 @@ function A333_fws_aco_10ft_announce()
 	WACO10	= g.S
 	NA010 	= g.S
 
-	A333DR_fws_aco_10 = bool2logic(WACO10)
+	A333DR_fws_aco_10 = bool2num[WACO10]
 
 end
 
@@ -855,7 +857,7 @@ function A333_fws_aco_20ft_announce()
 	WACO20	= e.S
 	NA020	= e.S
 
-	A333DR_fws_aco_20 = bool2logic(WACO20)
+	A333DR_fws_aco_20 = bool2num[WACO20]
 
 end
 
@@ -881,7 +883,7 @@ function A333_fws_aco_30ft_announce()
 	NA030		= b.S
 	WPULSE30	= a.S
 
-	A333DR_fws_aco_30 = bool2logic(WPULSE30)
+	A333DR_fws_aco_30 = bool2num[WPULSE30]
 
 end
 
@@ -907,7 +909,7 @@ function A333_fws_aco_40ft_announce()
 	NA040		= b.S
 	WPULSE40	= a.S
 
-	A333DR_fws_aco_40 = bool2logic(WPULSE40)
+	A333DR_fws_aco_40 = bool2num[WPULSE40]
 
 end
 
@@ -932,7 +934,7 @@ function A333_fws_aco_50ft_announce()
 	WACO50		= b.S
 	NA050		= b.S
 
-	A333DR_fws_aco_50 = bool2logic(b.S)
+	A333DR_fws_aco_50 = bool2num[b.S]
 
 end
 
@@ -954,7 +956,7 @@ function A333_fws_aco_100ft_announce()
 	WACO100		= a.S
 	WPREC100	= ann100ftMtrig01.OUT
 
-	A333DR_fws_aco_100 = bool2logic(WACO100)
+	A333DR_fws_aco_100 = bool2num[WACO100]
 
 end
 
@@ -976,7 +978,7 @@ function A333_fws_aco_200ft_announce()
 	WACO200		= a.S
 	WPREC200	= ann200ftMtrig01.OUT
 
-	A333DR_fws_aco_200 = bool2logic(WACO200)
+	A333DR_fws_aco_200 = bool2num[WACO200]
 
 end
 
@@ -998,7 +1000,7 @@ function A333_fws_aco_300ft_announce()
 	WACO300		= a.S
 	WPREC300	= ann300ftMtrig01.OUT
 
-	A333DR_fws_aco_300 = bool2logic(WACO300)
+	A333DR_fws_aco_300 = bool2num[WACO300]
 
 end
 
@@ -1014,13 +1016,13 @@ function A333_fws_aco_400ft_announce()
 	ann400ftPulse01:update(NS400)
 
 	local a = {E1 = bNOT(NACOINIB), E2 = ann400ftPulse01.OUT, E3 = bNOT(ann400ftMtrig01.OUT)}
-	a.S = bAND(a.E1, a.E2, a.E3)
+	a.S = bAND3(a.E1, a.E2, a.E3)
 
 	ann400ftMtrig01:update(a.S)
 
 	WACO400 = a.S
 
-	A333DR_fws_aco_400 = bool2logic(WACO400)
+	A333DR_fws_aco_400 = bool2num[WACO400]
 
 end
 
@@ -1037,7 +1039,7 @@ function A333_fws_aco_500ft_announce()
 
 	ann500ftMtrig01:update(a.S)
 
-	A333DR_fws_aco_500 = bool2logic(a.S)
+	A333DR_fws_aco_500 = bool2num[a.S]
 
 end
 
@@ -1057,7 +1059,7 @@ function A333_fws_aco_1000ft_announce()
 
 	ann1000ftPulse02:update(a.S)
 
-	A333DR_fws_aco_1000 = bool2logic(a.S)
+	A333DR_fws_aco_1000 = bool2num[a.S]
 
 end
 
@@ -1079,7 +1081,7 @@ function A333_fws_aco_2000ft_announce()
 
 	ann2000ftPulse02:update(a.S)
 
-	A333DR_fws_aco_2000 = bool2logic(a.S)
+	A333DR_fws_aco_2000 = bool2num[a.S]
 
 end
 
@@ -1101,7 +1103,7 @@ function A333_fws_aco_2500ft_announce()
 
 	ann2500ftPulse02:update(a.S)
 
-	A333DR_fws_aco_2500 = bool2logic(a.S)
+	A333DR_fws_aco_2500 = bool2num[a.S]
 
 end
 
@@ -1123,7 +1125,7 @@ function A333_fws_aco_2500Bft_announce()
 
 	ann2500BftPulse02:update(a.S)
 
-	A333DR_fws_aco_2500B = bool2logic(a.S)
+	A333DR_fws_aco_2500B = bool2num[a.S]
 
 end
 
@@ -1195,7 +1197,7 @@ function A333_fws_aco_20_retard_announce()
 	WJTOGA		= j.S
 	W20RETARD	= m.S
 
-	A333DR_fws_aco_20_retard = bool2logic(ann20RETARDpulse01.OUT)
+	A333DR_fws_aco_20_retard = bool2num[ann20RETARDpulse01.OUT]
 
 end
 
@@ -1259,7 +1261,7 @@ function A333_fws_aco_10_retard_announce()
 
 	W10RETARD = f.S
 
-	A333DR_fws_aco_10_retard = bool2logic(W10RETARD)
+	A333DR_fws_aco_10_retard = bool2num[W10RETARD]
 
 end
 
@@ -1362,7 +1364,7 @@ function A333_fws_aco_retard_announce()
 	local q = {E1 = bNOT(JTLAINH), E2 = o.S, E3 = h.S}
 	q.S = bAND3(q.E1, q.E2, q.E3)
 
-	local r = {E1 = q.S, E2 = annRETARDpulse01.out}
+	local r = {E1 = q.S, E2 = annRETARDpulse01.OUT}
 	r.S = bOR(r.E1, r.E2)
 
 	local s = {E1 = r.S, E2 = bNOT(j.S)}
@@ -1372,7 +1374,7 @@ function A333_fws_aco_retard_announce()
 	NRDINH		= q.S
 	WRETARD		= s.S
 
-	A333DR_fws_aco_retard = bool2logic(WRETARD)
+	A333DR_fws_aco_retard = bool2num[WRETARD]
 
 end
 

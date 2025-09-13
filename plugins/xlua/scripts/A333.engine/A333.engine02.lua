@@ -327,7 +327,7 @@ function A333_epr_FLEX()
 	for i = 1, 2 do
 
 		-- ADJUST TEMP FOR ENGINE NACELLE AND WING ANTI-ICE ON
-		oatAdjusted[i] 		= simDR_flex_temp +
+		oatAdjusted[i] 		= simDR_flex_temp[i-1] +
 							  (simDR_engine_inlet_heat[i-1] * oatAdjAInacelle) +
 							  (simDR_wing_surface_heat * oatAdjAIwing)
 

@@ -48,6 +48,8 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
 
+local bool2num = {[true] = 1, [false] = 0}
+
 
 
 --*************************************************************************************--
@@ -68,9 +70,6 @@ simDR_master_warning_anunn		= find_dataref("sim/cockpit2/annunciators/master_war
 
 simDR_crew_oxy					= find_dataref("sim/cockpit2/oxygen/actuators/o2_valve_on")
 simDR_pax_oxy_fail				= find_dataref("sim/operation/failures/rel_pass_o2_on")
-
-simDR_com1_incoming				= find_dataref("sim/atc/com1_rx")
-simDR_com2_incoming				= find_dataref("sim/atc/com2_rx")
 
 simDR_gpws_warn_annun			= find_dataref("sim/cockpit2/annunciators/GPWS")
 
@@ -268,6 +267,9 @@ A333_hyd_eng2_yellow_pump_fault 	= find_dataref("laminar/A333/hyd/eng2_yellow_pu
 
 A333_buttons_bus_tie_pos			= find_dataref("laminar/A333/buttons/bus_tie_pos")
 
+A333DR_gpws_mode5 					= find_dataref('laminar/A333/gpws/mode5')
+
+
 
 
 --*************************************************************************************--
@@ -402,11 +404,13 @@ A333_toilet_random_wait					= create_dataref("laminar/A333/toilet/wait_between_r
 --** 				       READ-WRITE CUSTOM DATAREF HANDLERS     	        	     **--
 --*************************************************************************************--
 
+function CPDLC_incoming_DRhandler() end
 
 --*************************************************************************************--
 --** 				       CREATE READ-WRITE CUSTOM DATAREFS                         **--
 --*************************************************************************************--
 
+A333DR_CPDLC_incoming			= create_dataref("laminar/A333/CPDLC_incoming", "number", CPDLC_incoming_DRhandler)
 
 --*************************************************************************************--
 --** 				             X-PLANE COMMAND HANDLERS               	    	 **--
@@ -486,11 +490,6 @@ function A333_rescale(in1, out1, in2, out2, x)
 
 end
 
-
------ TERNARY CONDITIONAL ---------------------------------------------------------------
-function A333_ternary(condition, ifTrue, ifFalse)
-    if condition then return ifTrue else return ifFalse end
-end
 
 
 
@@ -748,19 +747,13 @@ local sim_time_factor3 = math.fmod(simDR_flight_time, 0.50)
 		annun_atc_comm_target = 0
 	end
 
-	local below_gs = 0
-		if simDR_nav1_vert_signal == 1
-		and simDR_gs_flag == 0
-		and simDR_nav1_vdef_dots < -1
-		and simDR_aircraft_on_ground == 0 then
-			below_gs = 1
-		end
+
 
 	if A333_ann_light_switch_pos <= 1 then
 
 		annun_master_caution_target = simDR_master_caution_anunn
 		annun_GPWS_warn_target = simDR_gpws_warn_annun
-		annun_GS_warn_target = below_gs
+		annun_GS_warn_target = bool2num[A333DR_gpws_mode5 > 0]
 
 		annun_capt_flight_director_on_target = simDR_flight_director_capt
 		annun_fo_flight_director_on_target = simDR_flight_director_fo
@@ -814,11 +807,12 @@ local sim_time_factor3 = math.fmod(simDR_flight_time, 0.50)
 
 		annun_oxygen_tmr_reset_fault_target = A333_tmr_reset_fault
 
-		if simDR_com1_incoming == 1 or simDR_com2_incoming == 1 then
+		if A333DR_CPDLC_incoming == 1 then
 			annun_atc_comm_target = 1
-		elseif simDR_com1_incoming == 0 and simDR_com2_incoming == 0 then
+			A333DR_CPDLC_incoming = 0
+		elseif A333DR_CPDLC_incoming == 0 then
 			if annun_atc_comm_target == 1 then
-				run_after_time(A333_atc_comm_off, 1.5)
+				run_after_time(A333_atc_comm_off, 5)
 			end
 		end
 
@@ -1303,14 +1297,9 @@ function A333_annunciators_ELEC()
 			annun_elec_apu_gen_off_reset_target = 1
 		end
 
-		--[[
-		if simDR_bus_tie == 1 then
-			annun_elec_bus_tie_off_target = 0
-		elseif simDR_bus_tie == 0 then
-			annun_elec_bus_tie_off_target = 1
-		end
-		--]]
-		annun_elec_bus_tie_off_target = ternary(A333_buttons_bus_tie_pos == 1.0, 0.0, 1.0)
+
+		annun_elec_bus_tie_off_target = bool2num[A333_buttons_bus_tie_pos == 0.0]
+
 
 		if A333_buttons_ACESS_FEED_pos == 0 then
 			annun_elec_ac_ess_feed_altn_target = 0
@@ -1727,8 +1716,8 @@ function A333_annunciators_AIR()
 	A333_annun_hot_air2_off = annun_hot_air2_off * simDR_annun_brightness
 
 	-- ECAM WARNING
-	A333DR_pack1_fault = ternary(annun_pack1_fault > 0.5, 1, 0)
-	A333DR_pack2_fault = ternary(annun_pack2_fault > 0.5, 1, 0)
+	A333DR_pack1_fault = bool2num[annun_pack1_fault > 0.5]
+	A333DR_pack2_fault = bool2num[annun_pack2_fault > 0.5]
 
 end
 
@@ -1817,10 +1806,6 @@ end
 
 
 
------| UTIL: TERNARY CONDITIONAL
-function ternary(condition, ifTrue, ifFalse)
-	if condition then return ifTrue else return ifFalse end
-end
 
 
 

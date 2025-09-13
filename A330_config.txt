@@ -2,12 +2,6 @@ A
 1100
 ACF_CONFIG
 
-CMND_PRED laminar/A333/push/baro/capt_std laminar/A333/barometer/capt_mode == 0
-CMND_PRED laminar/A333/pull/baro/capt_std laminar/A333/barometer/capt_mode == 1
-
-CMND_PRED laminar/A333/push/baro/fo_std laminar/A333/barometer/fo_mode == 0
-CMND_PRED laminar/A333/pull/baro/fo_std laminar/A333/barometer/fo_mode == 1
-
 CMND_PRED laminar/A333/autopilot/speed_knob_pull laminar/A333/autopilot/knobs/speed_push_pos == 1
 CMND_PRED laminar/A333/autopilot/speed_knob_push laminar/A333/autopilot/knobs/speed_push_pos == -1
 

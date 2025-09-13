@@ -1,0 +1,28 @@
+FLT Number	Airline		From / To		Local Time (Dep / Arr)		Planned Flight Time
+
+LX5022		Swiss		LSZH / LSGG		09:15 / 10:00			0:45
+LH9921		Lufthansa	EDDF / EDDL		07:30 / 08:30			1
+LH9925		Lufthansa	EDDL / EDDF		09:00 / 10:00			1
+DL1213		Delta		KATL / KMCO		08:15 / 09:15			1
+VS571		Virgin Atlantic	EGLL / EBBR		07:10 / 09:15			1:05
+VS574		Virgin Atlantic	EBBR / EGLL		10:15 / 10:25			1:10
+4Y4087		Discover	LFLX / EDDF		17:30 / 19:00			1:30
+AC664		Air Canada	CYUL / CYHZ		13:25 / 16:01			1:34
+4Y4086		Discover	EDDF / LFLX		09:35 / 11:13			1:38
+AC667		Air Canada	CYHZ / CYUL		17:25 / 18:07			1:42
+KL777		KLM		TNCM / TTPT		16:25 / 18:10			1:45
+4Y512		Discover	EDDF / LEPA		10:20 / 12:25			2:05
+DL9970		Delta		KATL / KJFK		12:15 / 14:32			2:17
+4Y513		Discover	LEPA / EDDF		13:25 / 15:45			2:20
+LX2111		Swiss		LEMG / LSZH		13:20 / 15:55			2:35
+LX2110		Swiss		LSZH / LEMG		09:10 / 12:00			2:50
+EI492		Aer Lingus	EIDW / LPFR		07:35 / 10:40			3:05
+4Y302		Discover	EDDF / GCLP		12:15 / 15:45			4:30
+DL934		Delta		KLAX / KJFK		06:00 / 14:35			5:35
+EI136		Aer Lingus	KBOS / EIDW		21:25 / 08:35			6:10
+EI106		Aer Lingus	KJFK / EIDW		21:05 / 08:50			6:45
+KL672		KLM		CYUL / EHAM		19:05 / 08:05			7
+LH423		Lufthansa	KBOS / EDDF		16:25 / 05:50			7:25
+LH422		Lufthansa	EDDF / KBOS		10:55 / 13:25			8:30
+KL777		KLM		EHAM / TNCM		10:50 / 14:55			9:05
+LX67		Swiss		KMIA / LSZH		16:40 / 07:50			9:10

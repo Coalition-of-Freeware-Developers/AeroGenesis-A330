@@ -3,9 +3,11 @@ jit.off()
 -- Simple GPWS implementation (according to Honeywell MK VIII)
 -- Daniela Rodríguez Careri <daniela@x-plane.com>
 -- Laminar Research
+-- This started as GPWS and then we added other Airbus specific alerts
+-- because they have priority over other aural alerts.
 -- *******************************************************************
 
-DR_gs_annun = find_dataref("sim/cockpit/warnings/annunciators/glideslope")
+--DR_gs_annun = find_dataref("sim/cockpit/warnings/annunciators/glideslope")
 DR_pull_up_annun = find_dataref("sim/cockpit2/annunciators/GPWS")
 DR_rad_alt = find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
 DR_vario = find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_pilot")
@@ -14,16 +16,27 @@ DR_windshear_annun = find_dataref("sim/cockpit2/annunciators/windshear_warning")
 DR_roll_indicator = find_dataref("sim/cockpit2/gauges/indicators/roll_AHARS_deg_pilot")
 DR_autopilot_on = find_dataref("sim/cockpit2/autopilot/autopilot_on")
 
---DR_flap_ratio = find_dataref("sim/flightmodel2/controls/flap_handle_deploy_ratio")    -- deprecated
 DR_flap_ratio = find_dataref("sim/cockpit2/controls/flap_system_deploy_ratio")
 
-DR_gear_ratio = find_dataref("sim/flightmodel2/gear/deploy_ratio[0]") -- FIXME: should do for now
+DR_gear_ratio = find_dataref("sim/flightmodel2/gear/deploy_ratio")
 DR_airspeed = find_dataref("sim/flightmodel/position/indicated_airspeed2")
 DR_on_ground = find_dataref("sim/flightmodel/failures/onground_any")
 DR_throttle_lever_1 = find_dataref("sim/cockpit2/engine/actuators/throttle_ratio[0]")
 DR_throttle_lever_2 = find_dataref("sim/cockpit2/engine/actuators/throttle_ratio[1]")
 DR_running_time = find_dataref("sim/time/total_running_time_sec")
 DR_flap_CONF = find_dataref('sim/cockpit2/controls/flap_config')
+DR_nav_vert_signal = find_dataref("sim/cockpit2/radios/indicators/nav_display_vertical")
+DR_nav_type = find_dataref("sim/cockpit2/radios/indicators/nav_type")
+DR_vdef_dots_capt = find_dataref("sim/cockpit2/radios/indicators/nav1_vdef_dots_pilot")
+
+DR_windshear_ws = find_dataref('sim/cockpit2/annunciators/windshear_warning_systems')
+A333DR_windshear_ws = create_dataref('laminar/A333/windshear_warning_systems', 'number', function()  end)
+
+A333DR_gpws_mode5 = create_dataref('laminar/A333/gpws/mode5', 'number')
+A333DR_gpws_sys_tog_pos = find_dataref("laminar/A333/buttons/gpws/system_toggle_pos")
+A333DR_gpws_GS_tog_pos = find_dataref("laminar/A333/buttons/gpws/glideslope_toggle_pos")
+A333DR_gpws_gs_canx_capt_pos = find_dataref("laminar/A333/buttons/gpws/gs_canx_capt_pos")
+A333DR_gpws_gs_canx_fo_pos = find_dataref("laminar/A333/buttons/gpws/gs_canx_fo_pos")
 
 A333DR_fws_aco_5 = find_dataref("laminar/A333/fws/aco_5")
 A333DR_fws_aco_10 = find_dataref("laminar/A333/fws/aco_10")
@@ -54,8 +67,6 @@ A333DR_fws_aco_priority_right = find_dataref("laminar/A333/fws/aco_priority_righ
 A333DR_fws_aco_dual_input = find_dataref("laminar/A333/fws/aco_dual_input")
 
 A333DR_fws_aco_ap_off = find_dataref("laminar/A333/fws/aco_ap_off")
-
-
 
 A333DR_fws_aco_5_playing = create_dataref("laminar/A333/aco_5_playing", "number")
 A333DR_fws_aco_10_playing = create_dataref("laminar/A333/aco_10_playing", "number")
@@ -94,21 +105,129 @@ DR_gpws_message_debug = create_dataref("laminar/gpws/message_debug", "string")
 -- Be sure to sync the ids with the FMOD event names (and durations)
 -- This list establishes message priority as per the Honeywell MK VI & VIII manual
 -- FIXME: made local because of https://github.com/X-Plane/XLua/issues/4
+
 local messages
-local message_count
+local max_index
+local keys
 local is_bank_angle_played
 local is_sinkrate_played
 local is_mode4a_2lowgear_played
 local is_mode4a_2lowterrain_played
 local is_mode4b_2lowflaps_played
 local is_mode4b_2lowterrain_played
+local is_mode5_played
+local is_mode5_loud_played
 
 local is_replay_initialized
 local last_time
+local last_windshear
 
-function bool2logic(bool)
-	return ternary(bool == true, 1, 0)
+local bool2num = {[true] = 1, [false] = 0}
+
+
+
+
+
+function rescale(in1, out1, in2, out2, x)
+
+    if x < in1 then return out1 end
+    if x > in2 then return out2 end
+    return out1 + (out2 - out1) * (x - in1) / (in2 - in1)
+
 end
+
+
+-- Check if a point (px, py) is inside an envelope (polygon) defined by vertices
+local function isInEnvelope(px, py, vertices)
+
+    local intersections = 0
+    local n = #vertices
+
+    for i = 1, n do
+        -- Get the current vertex and the next vertex (wrap around at the end)
+        local v1 = vertices[i]
+        local v2 = vertices[i % n + 1]
+
+        -- Check if the ray intersects the edge (v1 to v2)
+        if ((v1.y > py) ~= (v2.y > py)) then
+            local intersectX = v1.x + (py - v1.y) * (v2.x - v1.x) / (v2.y - v1.y)
+            if px < intersectX then
+                intersections = intersections + 1
+            end
+        end
+    end
+
+    -- The point is inside if the number of intersections is odd
+    return intersections % 2 == 1
+
+end
+
+
+
+
+-- Determine if nav radio is tuned to a certain nav type
+local function receiving_nav(index, n_type)
+
+    -- navaid enums
+    --[1]	0		=	UNKNOWN,
+    --[2]	1		=	AIRPORT,
+    --[3]	2		=	NDB,
+    --[4]	4		=	VOR,
+    --[5]	8		=	ILS,
+    --[6]	16		=	LOCALIZER,
+    --[7]	32		=	GLIDESLOPE,
+    --[8]	64		=	OUTER MARKER,
+    --[9]	128		=	MIDDLE MARKER,
+    --[10]	256		=	INNER MARKER,
+    --[11]	512		=	FIX,
+    --[12]	1024	=	DME,
+    --[13]	2048	=	LATLON
+
+    local enum = DR_nav_type[index]
+    local t = {}
+    local r = {}
+
+    for i=14,-1,-1 do
+        t[#t+1] = math.floor(enum / 2^i)
+        enum = enum % 2^i
+    end
+
+    for i = #t, 1, -1 do
+        table.insert(r, t[i])
+    end
+
+    if n_type then
+        if		n_type	==	"vor"	and		r[4]	==	1	then
+            return true
+        elseif	n_type	==	"gs"	and		r[7]	==	1	then
+            return true
+        elseif	n_type	==	"dme"	and		r[12]	==	1	then
+            return true
+        elseif	n_type	==	"ndb"	and		r[2]	==	1	then
+            return true
+        elseif	n_type	==	"om"	and		r[8]	==	1	then
+            return true
+        elseif	n_type	==	"mm"	and		r[9]	==	1	then
+            return true
+        elseif	n_type	==	"im"	and		r[10]	==	1	then
+            return true
+        elseif	n_type	==	"loc"	and		r[6]	==	1	then
+            return true
+        elseif	n_type	==	"ils"	and		r[5]	==	1	then
+            return true
+        elseif	n_type	==	"fix"	and		r[11]	==	1	then
+            return true
+        elseif	n_type	==	"ll"	and		r[13]	==	1	then
+            return true
+        else
+            return false
+        end
+    end
+end
+
+
+
+
 
 function initialize()
     messages = {
@@ -125,67 +244,82 @@ function initialize()
         [9] = { id = 'too_low_terrain', is_playing = false, wants_play = false, duration = 1400 },
 
         -- Airbus
-        [10] = { id = 'stall', is_playing = false, wants_play = false, duration = 2400 },
-        [11] = { id = 'windshear', is_playing = false, wants_play = false, duration = 2100 },
-        [12] = { id = 'speed', is_playing = false, wants_play = false, duration = 3000 },
-        [13] = { id = 'hundred_above', is_playing = false, wants_play = false, duration = 900 },
-        [14] = { id = 'minimums', is_playing = false, wants_play = false, duration = 720 },
+        [100] = { id = 'stall', is_playing = false, wants_play = false, duration = 2400 },
+        [110] = { id = 'windshear', is_playing = false, wants_play = false, duration = 2100 },
+        [111] = { id = 'monitor_radar_display', is_playing = false, wants_play = false, duration = 1700 },
+        [112] = { id = 'windshear_ahead', is_playing = false, wants_play = false, duration = 2600 },
+        [113] = { id = 'go_around_windshear_ahead', is_playing = false, wants_play = false, duration = 2200 },
+        [120] = { id = 'speed', is_playing = false, wants_play = false, duration = 3000 },
+        [130] = { id = 'hundred_above', is_playing = false, wants_play = false, duration = 900 },
+        [140] = { id = 'minimums', is_playing = false, wants_play = false, duration = 720 },
 
-        [15] = { id = '50ft', is_playing = false, wants_play = false, duration = 600 },
-        [16] = { id = '5ft', is_playing = false, wants_play = false, duration = 420 },
-        [17] = { id = '10ft', is_playing = false, wants_play = false, duration = 650 },
-        [18] = { id = '20ft', is_playing = false, wants_play = false, duration = 650 },
-        [19] = { id = '30ft', is_playing = false, wants_play = false, duration = 650 },
-        [20] = { id = '40ft', is_playing = false, wants_play = false, duration = 650 },
-        [21] = { id = '100ft', is_playing = false, wants_play = false, duration = 750 },
-        [22] = { id = '200ft', is_playing = false, wants_play = false, duration = 800 },
-        [23] = { id = '300ft', is_playing = false, wants_play = false, duration = 800 },
-        [24] = { id = '400ft', is_playing = false, wants_play = false, duration = 800 },
-        [25] = { id = '500ft', is_playing = false, wants_play = false, duration = 800 },
-        [26] = { id = '1000ft', is_playing = false, wants_play = false, duration = 900 },
-        [27] = { id = '2000ft', is_playing = false, wants_play = false, duration = 900 },
-        [28] = { id = '2500Bft', is_playing = false, wants_play = false, duration = 1500 },
-        [29] = { id = '2500ft', is_playing = false, wants_play = false, duration = 1500 },
-        [30] = { id = '10ft_retard', is_playing = false, wants_play = false, duration = 1300 },
-        [31] = { id = '20ft_retard', is_playing = false, wants_play = false, duration = 1400 },
-        [32] = { id = 'retard', is_playing = false, wants_play = false, duration = 1400 },
+        [150] = { id = '50ft', is_playing = false, wants_play = false, duration = 600 },
+        [160] = { id = '5ft', is_playing = false, wants_play = false, duration = 420 },
+        [170] = { id = '10ft', is_playing = false, wants_play = false, duration = 650 },
+        [180] = { id = '20ft', is_playing = false, wants_play = false, duration = 650 },
+        [190] = { id = '30ft', is_playing = false, wants_play = false, duration = 650 },
+        [200] = { id = '40ft', is_playing = false, wants_play = false, duration = 650 },
+        [210] = { id = '100ft', is_playing = false, wants_play = false, duration = 750 },
+        [220] = { id = '200ft', is_playing = false, wants_play = false, duration = 800 },
+        [230] = { id = '300ft', is_playing = false, wants_play = false, duration = 800 },
+        [240] = { id = '400ft', is_playing = false, wants_play = false, duration = 800 },
+        [250] = { id = '500ft', is_playing = false, wants_play = false, duration = 800 },
+        [260] = { id = '1000ft', is_playing = false, wants_play = false, duration = 900 },
+        [270] = { id = '2000ft', is_playing = false, wants_play = false, duration = 900 },
+        [280] = { id = '2500Bft', is_playing = false, wants_play = false, duration = 1500 },
+        [290] = { id = '2500ft', is_playing = false, wants_play = false, duration = 1500 },
+        [300] = { id = '10ft_retard', is_playing = false, wants_play = false, duration = 1300 },
+        [310] = { id = '20ft_retard', is_playing = false, wants_play = false, duration = 1400 },
+        [320] = { id = 'retard', is_playing = false, wants_play = false, duration = 1400 },
 
         -- Honeywell
-        [33] = { id = 'too_low_flaps', is_playing = false, wants_play = false, duration = 1800 },
-        [34] = { id = 'too_low_gear', is_playing = false, wants_play = false, duration = 1800 },
-        [35] = { id = 'sinkrate', is_playing = false, wants_play = false, duration = 1800 },
-        [36] = { id = 'dont_sink', is_playing = false, wants_play = false, duration = 2000 }, -- TODO
-        [37] = { id = 'glideslope', is_playing = false, wants_play = false, duration = 800 },
-        [38] = { id = 'bank_angle', is_playing = false, wants_play = false, duration = 1800 },
-        [39] = { id = 'bank_angle_x2', is_playing = false, wants_play = false, duration = 2000 }, -- TODO
+        [330] = { id = 'too_low_flaps', is_playing = false, wants_play = false, duration = 1800 },
+        [340] = { id = 'too_low_gear', is_playing = false, wants_play = false, duration = 1800 },
+        [350] = { id = 'sinkrate', is_playing = false, wants_play = false, duration = 1800 },
+        [360] = { id = 'dont_sink', is_playing = false, wants_play = false, duration = 2000 }, -- TODO
+        [370] = { id = 'glideslope', is_playing = false, wants_play = false, duration = 2000 },
+        [375] = { id = 'glideslope_loud', is_playing = false, wants_play = false, duration = 1500 },
+        [380] = { id = 'bank_angle', is_playing = false, wants_play = false, duration = 1800 },
+        [390] = { id = 'bank_angle_x2', is_playing = false, wants_play = false, duration = 2000 }, -- TODO
 
         -- Airbus
-        [40] = { id = 'priority_left', is_playing = false, wants_play = false, duration = 1400 },
-        [41] = { id = 'priority_right', is_playing = false, wants_play = false, duration = 1400 },
-        [42] = { id = 'dual_input', is_playing = false, wants_play = false, duration = 1400 },
+        [400] = { id = 'priority_left', is_playing = false, wants_play = false, duration = 1400 },
+        [410] = { id = 'priority_right', is_playing = false, wants_play = false, duration = 1400 },
+        [420] = { id = 'dual_input', is_playing = false, wants_play = false, duration = 1400 },
+        [430] = { id = 'ap_off', is_playing = false, wants_play = false, duration = 1400 },
 
-        [43] = { id = 'ap_off', is_playing = false, wants_play = false, duration = 1400 }
+
+
     }
 
-    message_count = #messages
+    keys = {}
+    for key in pairs(messages) do
+        table.insert(keys, key)
+    end
+    table.sort(keys)
+
+    max_index = keys[#keys]
     is_bank_angle_played = false
     is_sinkrate_played = false
     is_mode4a_2lowgear_played = false
     is_mode4a_2lowterrain_played = false
     is_mode4b_2lowflaps_played = false
     is_mode4b_2lowterrain_played = false
+    is_mode5_played = false
+    is_mode5_loud_played = false
+
     is_replay_initialized = false
     last_time = 0
+    last_windshear = 0
 
-    --print('[GPWS] Init: Total messages', message_count)
 end
 
 function set_gpws_message()
 
-    local highest_playing = message_count + 1
+    local highest_playing = max_index + 1
     local clear_rest = false
 
-    for i = 1, message_count do
+    for _, i in ipairs(keys) do
         local cur_message = messages[i]
 
         if clear_rest then
@@ -199,7 +333,6 @@ function set_gpws_message()
         end
 
         if (cur_message.wants_play and highest_playing > i) then
-
             if (not cur_message.is_playing) then
                 --print('[GPWS] Triggering now:', cur_message.id)
                 cur_message.is_playing = true
@@ -218,6 +351,7 @@ function set_gpws_message()
             end
         end
     end
+
     if (messages[highest_playing] ~= nil and messages[highest_playing].is_playing) then
         DR_gpws_message = highest_playing
         DR_gpws_message_debug = messages[highest_playing].id
@@ -228,12 +362,12 @@ function set_gpws_message()
 end
 
 function get_message_by_id(id)
-    for i = 1, message_count do
-        local message = messages[i]
-        if ( message['id'] == id ) then
+    for _, message in pairs(messages) do
+        if message.id == id then
             return message
         end
     end
+    --error('Message id not found: ' .. id)
     return nil
 end
 
@@ -253,11 +387,9 @@ function play_message(id, val)
     end
 end
 
-function mode_5_glideslope()
-    if DR_gs_annun == 1 then
-        play_message('glideslope', true)
-    end
-end
+
+
+
 
 function mode_1_pull_up()
     if DR_pull_up_annun == 1 and DR_vario < 0 then
@@ -265,12 +397,29 @@ function mode_1_pull_up()
     end
 end
 
+function predictive_windshear()
+    -- We use an internal dataref to store the warning code for a single frame and trigger the alerts
+    -- because the one provided by X-Plane stays at the selected code for some time,
+    -- and that would block other sounds from playing.
+    if (DR_windshear_ws ~= last_windshear) then
+        last_windshear = DR_windshear_ws
+        A333DR_windshear_ws = DR_windshear_ws
+        if A333DR_windshear_ws == 2 then play_message('monitor_radar_display', true) end
+        if A333DR_windshear_ws == 3 then play_message('windshear_ahead', true) end
+        if A333DR_windshear_ws == 4 then play_message('go_around_windshear_ahead', true) end
+        if A333DR_windshear_ws == 5 then play_message('windshear', true) end
+        A333DR_windshear_ws = 0
+    end
+end
 
 function airbus_overrides()
 
     -- ORDERED ACCORDING TO AIRBUS DOCS
     if A333DR_fws_aco_stall == 1 then play_message('stall', true) end                   -- 'STALL'
-    if A333DR_fws_aco_windshear == 1 then play_message('windshear', true) end           -- 'WINDSHEAR, WINDSHEAR, WINDSHEAR'
+
+    --Commented out because we now get this from the updated windshear system.
+    --if A333DR_fws_aco_windshear == 1 then play_message('windshear', true) end         -- 'WINDSHEAR, WINDSHEAR, WINDSHEAR'
+
     if A333DR_fws_aco_speed == 1 then play_message('speed', true) end                   -- 'SPEED, SPEED, SPEED'
     if A333DR_fws_aco_hndrd_abv == 1 then play_message('hundred_above', true) end       -- 'HUNDRED ABOVE'
     if A333DR_fws_aco_minimum == 1 then play_message('minimums', true) end              -- 'MINIMUM'
@@ -299,44 +448,38 @@ function airbus_overrides()
     if A333DR_fws_aco_priority_right == 1 then play_message('priority_right', true) end -- 'PRIORITY RIGHT'
     if A333DR_fws_aco_dual_input == 1 then play_message('dual_input', true) end         -- 'DUAL INPUT'
 
-    A333DR_fws_aco_stall_playing = bool2logic(messages[10].is_playing)
-    A333DR_fws_aco_windshear_playing = bool2logic(messages[11].is_playing)
-    A333DR_fws_aco_speed_playing = bool2logic(messages[12].is_playing)
-    A333DR_fws_aco_hundred_above_playing = bool2logic(messages[13].is_playing)
-    A333DR_fws_aco_minimum_playing = bool2logic(messages[14].is_playing)
+    A333DR_fws_aco_stall_playing = bool2num[messages[100].is_playing]
+    A333DR_fws_aco_windshear_playing = bool2num[messages[110].is_playing]
+    A333DR_fws_aco_speed_playing = bool2num[messages[120].is_playing]
+    A333DR_fws_aco_hundred_above_playing = bool2num[messages[130].is_playing]
+    A333DR_fws_aco_minimum_playing = bool2num[messages[140].is_playing]
 
-    A333DR_fws_aco_50_playing = bool2logic(messages[15].is_playing)
-    A333DR_fws_aco_5_playing = bool2logic(messages[16].is_playing)
-    A333DR_fws_aco_10_playing = bool2logic(messages[17].is_playing)
-    A333DR_fws_aco_20_playing = bool2logic(messages[18].is_playing)
-    A333DR_fws_aco_30_playing = bool2logic(messages[19].is_playing)
-    A333DR_fws_aco_40_playing = bool2logic(messages[20].is_playing)
-    A333DR_fws_aco_100_playing = bool2logic(messages[21].is_playing)
-    A333DR_fws_aco_200_playing = bool2logic(messages[22].is_playing)
-    A333DR_fws_aco_300_playing = bool2logic(messages[23].is_playing)
-    A333DR_fws_aco_400_playing = bool2logic(messages[24].is_playing)
-    A333DR_fws_aco_500_playing = bool2logic(messages[25].is_playing)
-    A333DR_fws_aco_1000_playing = bool2logic(messages[26].is_playing)
-    A333DR_fws_aco_2000_playing = bool2logic(messages[27].is_playing)
-    A333DR_fws_aco_2500B_playing = bool2logic(messages[28].is_playing)
-    A333DR_fws_aco_2500_playing = bool2logic(messages[29].is_playing)
+    A333DR_fws_aco_50_playing = bool2num[messages[150].is_playing]
+    A333DR_fws_aco_5_playing = bool2num[messages[160].is_playing]
+    A333DR_fws_aco_10_playing = bool2num[messages[170].is_playing]
+    A333DR_fws_aco_20_playing = bool2num[messages[180].is_playing]
+    A333DR_fws_aco_30_playing = bool2num[messages[190].is_playing]
+    A333DR_fws_aco_40_playing = bool2num[messages[200].is_playing]
+    A333DR_fws_aco_100_playing = bool2num[messages[210].is_playing]
+    A333DR_fws_aco_200_playing = bool2num[messages[220].is_playing]
+    A333DR_fws_aco_300_playing = bool2num[messages[230].is_playing]
+    A333DR_fws_aco_400_playing = bool2num[messages[240].is_playing]
+    A333DR_fws_aco_500_playing = bool2num[messages[250].is_playing]
+    A333DR_fws_aco_1000_playing = bool2num[messages[260].is_playing]
+    A333DR_fws_aco_2000_playing = bool2num[messages[270].is_playing]
+    A333DR_fws_aco_2500B_playing = bool2num[messages[280].is_playing]
+    A333DR_fws_aco_2500_playing = bool2num[messages[290].is_playing]
 
-    A333DR_fws_aco_10_retard_playing = bool2logic(messages[30].is_playing)
-    A333DR_fws_aco_20_retard_playing = bool2logic(messages[31].is_playing)
-    A333DR_fws_aco_retard_playing = bool2logic(messages[32].is_playing)
+    A333DR_fws_aco_10_retard_playing = bool2num[messages[300].is_playing]
+    A333DR_fws_aco_20_retard_playing = bool2num[messages[310].is_playing]
+    A333DR_fws_aco_retard_playing = bool2num[messages[320].is_playing]
 
-    A333DR_fws_aco_priority_left_playing = bool2logic(messages[40].is_playing)
-    A333DR_fws_aco_priority_right_playing = bool2logic(messages[41].is_playing)
-    A333DR_fws_aco_dual_input_playing = bool2logic(messages[42].is_playing)
+    A333DR_fws_aco_priority_left_playing = bool2num[messages[400].is_playing]
+    A333DR_fws_aco_priority_right_playing = bool2num[messages[410].is_playing]
+    A333DR_fws_aco_dual_input_playing = bool2num[messages[420].is_playing]
 
 
 end
-
-
-
-
-
-
 
 -- TODO: Make it insist at 20% increase & additional 20% increase.
 function mode_6_bank_angle()
@@ -431,7 +574,11 @@ function mode_4_too_low()
 --    local flaps_not_in_landing_config = (A333DR_cs_CONF == '1' or A333DR_cs_CONF == '1+F' or A333DR_cs_CONF == '1s' or A333DR_cs_CONF == '2' or A333DR_cs_CONF == '2s')
 
     -- Mode 4a
-    if DR_gear_ratio < 1 and DR_on_ground == 0 then
+    if DR_gear_ratio[0] < 0.01
+        and DR_gear_ratio[1] < 0.01
+        and DR_gear_ratio[2] < 0.01
+        and DR_on_ground == 0
+    then
 
         if DR_airspeed < 190 and DR_rad_alt < 500 and DR_vario < -300 then
             if not is_mode4a_2lowgear_played then
@@ -468,8 +615,16 @@ function mode_4_too_low()
             end
         end
 
-        -- Mode 4b
-    elseif DR_gear_ratio == 1 and --[[DR_flap_ratio < 0.625--]] --[[flaps_not_in_landing_config--]] DR_flap_CONF <= 5 and DR_on_ground == 0 and DR_vario < -300 then
+
+    -- Mode 4b
+    --[[DR_flap_ratio < 0.625--]] --[[flaps_not_in_landing_config--]]
+    elseif DR_gear_ratio[0] == 1
+        and DR_gear_ratio[1] == 1
+        and DR_gear_ratio[2] == 1
+        and DR_flap_CONF <= 5
+        and DR_on_ground == 0
+        and DR_vario < -300
+    then
 
 
         if DR_airspeed < 150 and (DR_rad_alt < 245 and DR_rad_alt > 30) then
@@ -502,6 +657,122 @@ function mode_4_too_low()
 
 end
 
+
+
+
+
+--[[ OLD "GLIDESLOPE"
+function mode_5_glideslope()
+    if DR_gs_annun == 1 then
+        play_message('glideslope', true)
+    end
+end
+--]]
+
+
+--[ GPWS MODE 5 (DESCENT BELOW GLIDESLOPE ]--
+
+-- In both envelopes (soft/hard), the alert is a repeated "GLIDESLOPE" aural message, and both GPWS lights come on.
+-- The loudness and the repetition rate of the aural message increases (+6db) when the aircraft enters the hard warning envelope.
+
+local mode5_soft_warning_envelope = {
+    {x = 1.3, y =  150.0},
+    {x = 1.3, y = 1000.0},
+    {x = 4.0, y = 1000.0},
+    {x = 4.0, y =   30.0},
+    {x = 3.0, y =   30.0}
+}
+
+local mode5_hard_warning_envelope = {
+    {x = 2.0, y = 150.0},
+    {x = 2.0, y = 350.0},
+    {x = 4.0, y = 350.0},
+    {x = 4.0, y =  30.0},
+    {x = 3.3, y =  30.0}
+}
+
+local mode5_canx_envelope = 0
+
+function mode_5_below_glideslope()
+
+    local mode5_isArmed = false
+    local mode5 = 0
+
+    if A333DR_gpws_sys_tog_pos == 1
+        and A333DR_gpws_GS_tog_pos == 1
+        and receiving_nav(0, 'ils')
+        and DR_nav_vert_signal[0] == 1
+    then
+        mode5_isArmed = true
+    end
+
+    if mode5_isArmed
+        and DR_rad_alt >= 30.0
+        and DR_rad_alt <= 1000.0
+        and DR_gear_ratio[0] > 0.99
+        and DR_gear_ratio[1] > 0.99
+        and DR_gear_ratio[2] > 0.99
+    then
+
+        local dots_below_gs = math.abs(rescale(-2.5, -4.0, 0.0, 0.0, DR_vdef_dots_capt))
+        if isInEnvelope(dots_below_gs, DR_rad_alt, mode5_hard_warning_envelope) then
+            mode5 = 2
+        elseif isInEnvelope(dots_below_gs, DR_rad_alt, mode5_soft_warning_envelope) then
+            mode5 = 1
+        end
+    end
+
+
+    --| MODE5 CANCEL
+    -- Pressing the GPWS-G/S pushbutton cancels the warning.  This is temporary and the mode is automatically
+    -- reactivated for a new envelope penetration.
+    if A333DR_gpws_gs_canx_capt_pos == 1 or A333DR_gpws_gs_canx_fo_pos == 1 then    -- Pushbutton signal
+        if mode5 > 0                            -- Warning is active (envelope penetration)
+            and mode5_canx_envelope == 0        -- Cancellation is NOT active
+        then
+            mode5_canx_envelope = mode5         -- Activate canx with current envelope value
+        end
+    end
+
+    if mode5 > 0 then                           -- Warning is active (envelope penetration)
+        if mode5_canx_envelope > 0              -- Canx is active
+            and mode5 == mode5_canx_envelope    -- No NEW mode5 envelope penetration...
+        then
+            mode5 = 0                           -- Warning remains cancelled
+        end
+    else -- (Mode5 == 0)                        -- No Mode5 envelope penetration
+        mode5_canx_envelope = 0                 -- Reset canx envelope
+    end
+
+
+
+    if mode5 == 0 then                          -- No warning
+        is_mode5_played = false
+        is_mode5_loud_played = false
+    end
+
+    if mode5 == 1 then                          -- Soft warning
+        play_message('glideslope', true)
+        is_mode5_loud_played = false
+        is_mode5_played = true
+    end
+
+    if mode5 == 2 then                          -- Hard warning
+        play_message('glideslope_loud', true)
+        is_mode5_played = false
+        is_mode5_loud_played = true
+    end
+
+    A333DR_gpws_mode5 = mode5                   -- GS button annunciator light
+
+end
+
+
+
+
+
+
+
 function save_current_time()
     last_time = DR_running_time;
 end
@@ -526,9 +797,6 @@ function update_replay_status()
 end
 
 
-function ternary(condition, ifTrue, ifFalse)
-	if condition then return ifTrue else return ifFalse end
-end
 
 
 -- *******************************************************************
@@ -539,9 +807,11 @@ function update_datarefs()
     mode_1_pull_up()
     mode_1_sinkrate()
     mode_4_too_low()
-    mode_5_glideslope()
+    --mode_5_glideslope()
+    mode_5_below_glideslope()
     mode_6_bank_angle()
     airbus_overrides()
+    predictive_windshear()
     set_gpws_message()
     update_replay_status()
     save_current_time() -- must always be last

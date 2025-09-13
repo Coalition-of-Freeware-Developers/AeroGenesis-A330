@@ -1121,6 +1121,7 @@ function loadModule(fileName, panelWidth, panelHeight, popupWidth, popupHeight)
     popups.size = { popupWidth, popupHeight }
 
     contextWindows = private.createComponent("contextWindows")
+    avionicsDevices = private.createComponent("avionicsDevices")
     private.loadState()
 
     local c = loadComponent("module", fileName, isRoot)
@@ -1130,6 +1131,7 @@ function loadModule(fileName, panelWidth, panelHeight, popupWidth, popupHeight)
     panel = c({ position = { 0, 0, panelWidth, panelHeight } })
     popups._P = panel
     contextWindows._P = panel
+    avionicsDevices._P = panel
     return panel
 end
 

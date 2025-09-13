@@ -68,6 +68,7 @@ A333_aural_alert = { -- TYPE: 1=CONTINUOUS PLAY, 2=SINGLE PLAY
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
 
+local bool2num = {[true] = 1, [false] = 0}
 
 
 --*************************************************************************************--
@@ -165,7 +166,7 @@ A333_aural_alert = { -- TYPE: 1=CONTINUOUS PLAY, 2=SINGLE PLAY
 
 function A333_fws_aural_alert_monitor()
 
-	local fwc_power = bool2logic(bOR(bNOT(EACSOF), bNOT(EAC2OF)))
+	local fwc_power = bool2num[bOR(bNOT(EACSOF), bNOT(EAC2OF))]
 
 	resetAudioOut()
 	resetMasterAnnunciator()
@@ -314,7 +315,7 @@ function A333_fws_general_audio_attenuation()
 	a.S = bAND3(a.E1, a.E2, a.E3)
 
 	AUDIOATT = a.S
-	A333DR_audio_attenuation = bool2logic(AUDIOATT)
+	A333DR_audio_attenuation = bool2num[AUDIOATT]
 
 end
 

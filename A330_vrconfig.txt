@@ -46,10 +46,6 @@ BEGIN_MANIP command_knob laminar/A333/knob/baro/capt_hPa laminar/A333/knob/baro/
 	DEG_PER_ACTION 45
 END_MANIP
 
-BEGIN_MANIP command_switch_up_down laminar/A333/push/baro/capt_std laminar/A333/pull/baro/capt_std
-	ACTION command_axis 0.0 0.0 0.2 laminar/A333/push/baro/capt_std laminar/A333/pull/baro/capt_std
-	HOLD_MANIP
-END_MANIP
 
 BEGIN_MANIP command_knob laminar/A333/knobs/capt_EFIS_knob_right laminar/A333/knobs/capt_EFIS_knob_left
 	DEG_PER_ACTION 40
@@ -110,11 +106,6 @@ BEGIN_MANIP command_knob laminar/A333/knob/baro/fo_hPa laminar/A333/knob/baro/fo
 END_MANIP
 
 BEGIN_MANIP command_knob sim/instruments/barometer_copilot_up sim/instruments/barometer_copilot_down
-END_MANIP
-
-BEGIN_MANIP command_switch_up_down laminar/A333/push/baro/fo_std laminar/A333/pull/baro/fo_std
-	ACTION command_axis 0.0 0.0 0.2 laminar/A333/push/baro/fo_std laminar/A333/pull/baro/fo_std
-	HOLD_MANIP
 END_MANIP
 
 BEGIN_MANIP command_knob laminar/A333/clock/ET_run_stop_reset_dn laminar/A333/clock/ET_run_stop_reset_up

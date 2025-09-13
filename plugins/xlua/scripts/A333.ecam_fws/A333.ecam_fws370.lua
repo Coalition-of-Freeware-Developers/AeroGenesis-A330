@@ -54,6 +54,7 @@ IN_REPLAY: evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
+local bool2num = {[true] = 1, [false] = 0}
 
 
 
@@ -158,7 +159,7 @@ function A333_sts_msg.MIN_RAT_SPEED.Monitor()
 	local b = {E1 = a.S, E2 = HRATNFS}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_sts_msg.MIN_RAT_SPEED.Video.IN = bool2logic(b.S)
+	A333_sts_msg.MIN_RAT_SPEED.Video.IN = bool2num[b.S]
 
 end
 
@@ -178,7 +179,7 @@ function A333_sts_msg.MAX_SPEED_280.Monitor()
 	local d = {E1 = c.S, E2 = bNOT(GDNC), E3 = bNOT(ZGND)}
 	d.S = bAND3(d.E1, d.E2, d.E3)
 
-	A333_sts_msg.MAX_SPEED_280.Video.IN = bool2logic(d.S)
+	A333_sts_msg.MAX_SPEED_280.Video.IN = bool2num[d.S]
 
 end
 
@@ -192,7 +193,7 @@ function A333_sts_msg.MAX_SPEED_300.Monitor()
 	local b = {E1 = bNOT(ZGND), E2 = a.S}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_sts_msg.MAX_SPEED_300.Video.IN = bool2logic(b.S)
+	A333_sts_msg.MAX_SPEED_300.Video.IN = bool2num[b.S]
 
 end
 
@@ -206,7 +207,7 @@ function A333_sts_msg.IF_BUFFET.Monitor()
 	local b = {E1 = bNOT(ZGND), E2 = a.S}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_sts_msg.IF_BUFFET.Video.IN = bool2logic(b.S)
+	A333_sts_msg.IF_BUFFET.Video.IN = bool2num[b.S]
 
 end
 
@@ -220,7 +221,7 @@ function A333_sts_msg.MAX_SPEED_240.Monitor()
 	local b = {E1 = bNOT(ZGND), E2 = a.S}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_sts_msg.MAX_SPEED_240.Video.IN = bool2logic(b.S)
+	A333_sts_msg.MAX_SPEED_240.Video.IN = bool2num[b.S]
 
 end
 
@@ -245,7 +246,7 @@ end
 
 function A333_sts_msg.DOORS_NOT_CLOSED.Monitor()
 
-	A333_sts_msg.DOORS_NOT_CLOSED.Video.IN = bool2logic(GDNC)
+	A333_sts_msg.DOORS_NOT_CLOSED.Video.IN = bool2num[GDNC]
 
 
 end
@@ -257,7 +258,7 @@ function A333_sts_msg.LG_KEEP_DOWN.Monitor()
 	local a = {E1 = GGUPENG, E2 = GBGFT, E3 = GSAF}
 	a.S = bOR3(a.E1, a.E2, a.E3)
 
-	A333_sts_msg.LG_KEEP_DOWN.Video.IN = bool2logic(a.S)
+	A333_sts_msg.LG_KEEP_DOWN.Video.IN = bool2num[a.S]
 
 end
 
@@ -279,7 +280,7 @@ function A333_sts_msg.AVOID_ICING_CONDITIONS.Monitor()
 
 	IWAIC = c.S
 
-	A333_sts_msg.AVOID_ICING_CONDITIONS.Video.IN = bool2logic(d.S)
+	A333_sts_msg.AVOID_ICING_CONDITIONS.Video.IN = bool2num[d.S]
 
 end
 
@@ -306,7 +307,7 @@ function A333_sts_msg.MAX_BRK_PR.Monitor()
 	local b = {E1 = GASF, E2 = GASKDOFF, E3 = EEMER, E4 = EDC12OF, E5 = a.S}
 	b.S = bOR5(b.E1, b.E2, b.E3, b.E4, b.E5)
 
-	A333_sts_msg.MAX_BRK_PR.Video.IN = bool2logic(b.S)
+	A333_sts_msg.MAX_BRK_PR.Video.IN = bool2num[b.S]
 
 end
 
@@ -319,7 +320,7 @@ function A333_sts_msg.L_R_FUEL_GRVTY_FEED.Monitor()
 
 	FLRGFEED = a.S
 
-	A333_sts_msg.L_R_FUEL_GRVTY_FEED.Video.IN = bool2logic(a.S)
+	A333_sts_msg.L_R_FUEL_GRVTY_FEED.Video.IN = bool2num[a.S]
 
 end
 
@@ -335,7 +336,7 @@ function A333_sts_msg.AVOID_ADVERSE_CONDITIONS.Monitor()
 	local a = {E1 = JR1IFT, E2 = JR2IFT}
 	a.S = bOR4(a.E1, a.E2)
 
-	A333_sts_msg.AVOID_ADVERSE_CONDITIONS.Video.IN = bool2logic(a.S)
+	A333_sts_msg.AVOID_ADVERSE_CONDITIONS.Video.IN = bool2num[a.S]
 
 end
 
@@ -360,10 +361,10 @@ function A333_sts_msg.AP_DUAL_HYD_LO_GB.Monitor()
 	local d = {E1 = a.S, E2 = b.S}
 	d.S = bAND(d.E1, d.E2)
 
-	local e = {E1 = bNOT(ZDGND), E2 = c.S, E3 = bNOT(d.S)}
+	local e = {E1 = bNOT(ZGND), E2 = c.S, E3 = bNOT(d.S)}
 	e.S = bAND3(e.E1, e.E2, e.E3)
 
-	A333_sts_msg.AP_DUAL_HYD_LO_GB.Video.IN = bool2logic(e.S)
+	A333_sts_msg.AP_DUAL_HYD_LO_GB.Video.IN = bool2num[e.S]
 
 end
 
@@ -386,7 +387,7 @@ function A333_sts_msg.AP_DUAL_HYD_LO_BY.Monitor()
 	local e = {E1 = bNOT(ZGND), E2 = c.S, E3 = bNOT(d.S)}
 	e.S = bAND3(e.E1, e.E2, e.E3)
 
-	A333_sts_msg.AP_DUAL_HYD_LO_BY.Video.IN = bool2logic(e.S)
+	A333_sts_msg.AP_DUAL_HYD_LO_BY.Video.IN = bool2num[e.S]
 
 end
 
@@ -423,7 +424,7 @@ function A333_sts_msg.L_TK_GRVTY_FEED_ONLY.Monitor()
 
 	FLGFEED = e.S
 
-	A333_sts_msg.L_TK_GRVTY_FEED_ONLY.Video.IN = bool2logic(f.S)
+	A333_sts_msg.L_TK_GRVTY_FEED_ONLY.Video.IN = bool2num[f.S]
 
 end
 
@@ -452,7 +453,7 @@ function A333_sts_msg.R_TK_GRVTY_FEED_ONLY.Monitor()
 
 	FRGFEED = e.S
 
-	A333_sts_msg.R_TK_GRVTY_FEED_ONLY.Video.IN = bool2logic(f.S)
+	A333_sts_msg.R_TK_GRVTY_FEED_ONLY.Video.IN = bool2num[f.S]
 
 end
 
@@ -467,7 +468,7 @@ function A333_sts_msg.PITCH_MECH_BACK_UP.Monitor()
 	local b = {E1 = SLRELVFT, E2 = bNOT(a.S)}
 	b.S = bAND(b.E1, b.E2)
 
-	A333_sts_msg.PITCH_MECH_BACK_UP.Video.IN = bool2logic(b.S)
+	A333_sts_msg.PITCH_MECH_BACK_UP.Video.IN = bool2num[b.S]
 
 end
 
@@ -475,7 +476,7 @@ end
 
 function A333_sts_msg.ROLL_DIRECT_LAW.Monitor()
 
-	A333_sts_msg.ROLL_DIRECT_LAW.Video.IN = bool2logic(SLRELVFT)
+	A333_sts_msg.ROLL_DIRECT_LAW.Video.IN = bool2num[SLRELVFT]
 
 end
 
@@ -492,7 +493,7 @@ function A333_sts_msg.BAT_ONLY.Monitor()
 	local b = {E1 = bNOT(WENA330EMERC), E2 = EEMER, E3 = WA330, E4 = bNOT(a.S)}
 	b.S = bAND4(b.E1, b.E2, b.E3, b.E4)
 
-	A333_sts_msg.BAT_ONLY.Video.IN = bool2logic(b.S)
+	A333_sts_msg.BAT_ONLY.Video.IN = bool2num[b.S]
 
 
 end
@@ -528,7 +529,7 @@ function A333_sts_msg.ONE_PACK_ONLY_IF_WAI_ON.Monitor()
 	local f = {E1 = bNOT(IWAIC), E2 = d.S, E3 = bNOT(e.S), E4 = bNOT(ZGND)}
 	f.S = bAND4(f.E1, f.E2, f.E3, f.E4)
 
-	A333_sts_msg.ONE_PACK_ONLY_IF_WAI_ON.Video.IN = bool2logic(f.S)
+	A333_sts_msg.ONE_PACK_ONLY_IF_WAI_ON.Video.IN = bool2num[f.S]
 
 end
 
@@ -544,7 +545,7 @@ function A333_sts_msg.HYD_GY_SYS_INOP.Monitor()
 	local a = {E1 = HYSYSLP, E2 = HGSYSLP}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_sts_msg.HYD_GY_SYS_INOP.Video.IN = bool2logic(a.S)
+	A333_sts_msg.HYD_GY_SYS_INOP.Video.IN = bool2num[a.S]
 
 end
 
@@ -554,7 +555,7 @@ function A333_sts_msg.HYD_GB_SYS_INOP.Monitor()
 	local a = {E1 = HBSYSLP, E2 = HGSYSLP}
 	a.S = bAND(a.E1, a.E2)
 
-	A333_sts_msg.HYD_GB_SYS_INOP.Video.IN = bool2logic(a.S)
+	A333_sts_msg.HYD_GB_SYS_INOP.Video.IN = bool2num[a.S]
 
 end
 
@@ -564,7 +565,7 @@ function A333_sts_msg.HYD_G_SYS_INOP.Monitor()
 	local a = {E1 = HGSYSLP, E2 = bNOT(HYSYSLP), E3 = bNOT(HBSYSLP)}
 	a.S = bAND3(a.E1, a.E2, a.E3)
 
-	A333_sts_msg.HYD_G_SYS_INOP.Video.IN = bool2logic(a.S)
+	A333_sts_msg.HYD_G_SYS_INOP.Video.IN = bool2num[a.S]
 
 end
 
@@ -574,7 +575,7 @@ function A333_sts_msg.HYD_B_SYS_INOP.Monitor()
 	local a = {E1 = HBSYSLP, E2 = bNOT(HGSYSLP), E3 = bNOT(HYSYSLP)}
 	a.S = bAND3(a.E1, a.E2, a.E3)
 
-	A333_sts_msg.HYD_B_SYS_INOP.Video.IN = bool2logic(a.S)
+	A333_sts_msg.HYD_B_SYS_INOP.Video.IN = bool2num[a.S]
 
 end
 
@@ -584,7 +585,7 @@ function A333_sts_msg.HYD_Y_SYS_INOP.Monitor()
 	local a = {E1 = HYSYSLP, E2 = bNOT(HBSYSLP), E3 = bNOT(HGSYSLP)}
 	a.S = bAND3(a.E1, a.E2, a.E3)
 
-	A333_sts_msg.HYD_Y_SYS_INOP.Video.IN = bool2logic(a.S)
+	A333_sts_msg.HYD_Y_SYS_INOP.Video.IN = bool2num[a.S]
 
 end
 
@@ -605,14 +606,14 @@ function A333_sts_msg.STABILIZER_INOP.Monitor()
 
 	STHSJAM = d.S
 
-	A333_sts_msg.STABILIZER_INOP.Video.IN = bool2logic(d.S)
+	A333_sts_msg.STABILIZER_INOP.Video.IN = bool2num[d.S]
 
 end
 
 
 function A333_sts_msg.L_R_ELEV.Monitor()
 
-	A333_sts_msg.L_R_ELEV.Video.IN = bool2logic(SLRELVFT)
+	A333_sts_msg.L_R_ELEV.Video.IN = bool2num[SLRELVFT]
 
 end
 
@@ -654,7 +655,7 @@ function A333_sts_msg.L_ELEV.Monitor()
 
 	SLELNA = j.S
 
-	A333_sts_msg.L_ELEV.Video.IN = bool2logic(k.S)
+	A333_sts_msg.L_ELEV.Video.IN = bool2num[k.S]
 
 end
 
@@ -696,7 +697,7 @@ function A333_sts_msg.R_ELEV.Monitor()
 
 	SRELNA = j.S
 
-	A333_sts_msg.R_ELEV.Video.IN = bool2logic(k.S)
+	A333_sts_msg.R_ELEV.Video.IN = bool2num[k.S]
 
 end
 
@@ -714,7 +715,7 @@ function A333_sts_msg.PACK_1_2.Monitor()
 
 	AP12INOP = a.S
 
-	A333_sts_msg.PACK_1_2.Video.IN = bool2logic(a.S)
+	A333_sts_msg.PACK_1_2.Video.IN = bool2num[a.S]
 
 end
 
@@ -746,7 +747,7 @@ function A333_sts_msg.PACK_1.Monitor()
 
 	AP1I = g.S
 
-	A333_sts_msg.PACK_1.Video.IN = bool2logic(h.S)
+	A333_sts_msg.PACK_1.Video.IN = bool2num[h.S]
 
 end
 
@@ -775,7 +776,7 @@ function A333_sts_msg.PACK_2.Monitor()
 
 	AP2I = e.S
 
-	A333_sts_msg.PACK_2.Video.IN = bool2logic(g.S)
+	A333_sts_msg.PACK_2.Video.IN = bool2num[g.S]
 
 end
 
@@ -788,13 +789,13 @@ end
 
 function A333_sts_msg.BAT_1.Monitor()
 
-	A333_sts_msg.BAT_1.Video.IN = bool2logic(EBAT1F)
+	A333_sts_msg.BAT_1.Video.IN = bool2num[EBAT1F]
 
 end
 
 function A333_sts_msg.BAT_2.Monitor()
 
-	A333_sts_msg.BAT_2.Video.IN = bool2logic(EBAT2F)
+	A333_sts_msg.BAT_2.Video.IN = bool2num[EBAT2F]
 
 end
 
@@ -811,7 +812,7 @@ function A333_sts_msg.GEN_1.Monitor()
 	local c = {E1 = b.S, E2 = bNOT(EEMER)}
 	c.S = bAND(c.E1, c.E2)
 
-	A333_sts_msg.GEN_1.Video.IN = bool2logic(c.S)
+	A333_sts_msg.GEN_1.Video.IN = bool2num[c.S]
 
 end
 
@@ -832,7 +833,7 @@ end
 
 function A333_sts_msg.APU_GEN.Monitor()
 
-	A333_sts_msg.APU_GEN.Video.IN = bool2logic(ENG3INOP)
+	A333_sts_msg.APU_GEN.Video.IN = bool2num[ENG3INOP]
 
 end
 
@@ -859,7 +860,7 @@ end
 
 function A333_sts_msg.Y_ELEC_PUMP.Monitor()
 
-	A333_sts_msg.Y_ELEC_PUMP.Video.IN = bool2logic(HNVMYEPF)
+	A333_sts_msg.Y_ELEC_PUMP.Video.IN = bool2num[HNVMYEPF]
 
 end
 

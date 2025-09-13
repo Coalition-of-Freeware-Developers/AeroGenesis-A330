@@ -7,6 +7,8 @@ TEXTURE	A330_fuselage_b_ALB.png
 TEXTURE_MAP normal	A330_fuselage_b_NRM.png
 TEXTURE_MAP material_gloss	A330_fuselage_b_MAT.png
 NORMAL_METALNESS
+NORMAL_DECAL_PARAMS	25	0	0	0	0	1	0	orange_skin.png	0.90234139
+TEXTURE_MODULATOR	decal_mod2.png
 GLOBAL_specular	1
 POINT_COUNTS	11157	0	0	43068
 
@@ -15492,7 +15494,6 @@ IDX	11013
 		ANIM_rotate_key	0.1	-0
 		ANIM_rotate_key	0	-85.00001
 		ANIM_rotate_end
-			ATTR_shadow_blend	0.5
 			TRIS	9162 600
 		ANIM_end
 		ANIM_begin
