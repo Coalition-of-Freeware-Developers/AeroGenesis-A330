@@ -1,7 +1,13 @@
 # AeroGenesis A330 For X-Plane 12
 
-## Pending
-- Updated GPWS sounds (#27)
+## Version 1.2.0-b1
+- Laminar Research A330 improvements
+- BARO Sync feature
+- ISIS now working when you only have battery power
+- IRS Align message on ECAM fixed
+- Chocks are no longer visible during replay. 
+- Ground Handling has been reworked
+- Optimized internal code to make it more flexible for future development.  
 
 ---
 
