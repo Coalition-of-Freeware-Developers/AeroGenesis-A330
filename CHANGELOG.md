@@ -1,5 +1,9 @@
 # AeroGenesis A330 For X-Plane 12
 
+## Version 1.2.0-b2
+- Fixed and enhanced GPWS alerts
+- Fixed chocks now holding aircraft in position again
+  
 ## Version 1.2.0-b1
 - Laminar Research A330 improvements
 - BARO Sync feature
