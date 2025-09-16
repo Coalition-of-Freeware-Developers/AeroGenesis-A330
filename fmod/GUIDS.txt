@@ -1,3 +1,4 @@
+{db2abc64-01ba-4b23-9ff6-5e3ef5e6fbbf} bank:/AG_GPWS
 {1772c137-86b0-4228-8d0e-83c4479f4880} bank:/Master Bank
 {8f6fe1e3-f7cb-0e6a-0b47-093ab66c4e18} bank:/Master Bank.strings
 {84d3cac3-05d7-47db-98e9-ab3606ed11ac} bank:/AeroGenesis
@@ -260,3 +261,4 @@
 {164fc5dc-28d7-44ff-9991-ec77785fa35e} snapshot:/ducker
 {77bdd48b-b2ad-45b0-806f-b90d87ac2750} snapshot:/in_cabin
 {bf838054-fce0-4ea3-a877-51cdacb731f2} snapshot:/in_cockpit
+{b7640bf5-7be2-43a5-893e-61c2f1a6b70e} event:/AG330/GPWS/bank_angle

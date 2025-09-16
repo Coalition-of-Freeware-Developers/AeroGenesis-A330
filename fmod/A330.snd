@@ -22,6 +22,7 @@ DISABLE_LEGACY_ALERT_SOUNDS
 ##################################################
 
 REQUIRES_BANK AeroGenesis.bank
+REQUIRES_BANK AG_GPWS.bank
 
 ##################################################
 ##################################################
@@ -1674,11 +1675,11 @@ END_SOUND_ATTACHMENT
 
 # -------------------- Callout: bank_angle ---------------------
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /a330/equipment/egpws/bank_angle
+	EVENT_NAME /AG330/GPWS/bank_angle
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 380
-	EVENT_END_COND laminar/gpws/message != 380
+	EVENT_START_COND laminar/gpws/bank_angle == 1
+	EVENT_END_COND laminar/gpws/bank_angle != 1
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: prio_left ---------------------
