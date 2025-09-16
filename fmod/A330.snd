@@ -22,6 +22,7 @@ DISABLE_LEGACY_ALERT_SOUNDS
 ##################################################
 
 REQUIRES_BANK AeroGenesis.bank
+REQUIRES_BANK AG_GPWS.bank
 
 ##################################################
 ##################################################
@@ -50,7 +51,7 @@ END_SOUND_ATTACHMENT
 
 # -------------------- Cockpit ---------------------
 BEGIN_SOUND_ATTACHMENT
-	SNAPSHOT_NAME /in_cabin
+	SNAPSHOT_NAME /in_cockpit
 	VEH_XYZ 0.000 2.320 -25.080
 	PARAM_DREF_IDX 0
 	EVENT_START_COND sim/operation/sound/inside_ratio[0] != 0
@@ -922,14 +923,34 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[0] == 0
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /a330/equipment/levers/throttle_lever_idle
+	EVENT_NAME /a330/equipment/levers/throttle_lever_detent
 	VEH_XYZ 0.000 1.333 -26.662
-	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[1] == 0
+	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[0] == 0.53
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/levers/throttle_lever_detent
+	VEH_XYZ 0.000 1.333 -26.662
+	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[0] == 0.76
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/levers/throttle_lever_full
 	VEH_XYZ 0.000 1.333 -26.662
 	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[0] == 1
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/levers/throttle_lever_idle
+	VEH_XYZ 0.000 1.333 -26.662
+	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[1] == 0
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/levers/throttle_lever_detent
+	VEH_XYZ 0.000 1.333 -26.662
+	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[1] == 0.53
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/levers/throttle_lever_detent
+	VEH_XYZ 0.000 1.333 -26.662
+	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[1] == 0.76
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/levers/throttle_lever_full
@@ -1387,8 +1408,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/stall
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 10
-	EVENT_END_COND laminar/gpws/message != 10
+	EVENT_START_COND laminar/gpws/message == 100
+	EVENT_END_COND laminar/gpws/message != 100
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: windshear ---------------------
@@ -1396,8 +1417,35 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/windshear
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 11
-	EVENT_END_COND laminar/gpws/message != 11
+	EVENT_START_COND laminar/gpws/message == 110
+	EVENT_END_COND laminar/gpws/message != 110
+END_SOUND_ATTACHMENT
+
+# -------------------- Callout: monitor_radar_display ---------------------
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/egpws/monitor_radar_display
+	VEH_PART cockpit 0
+	PARAM_DREF_IDX 0
+	EVENT_START_COND laminar/gpws/message == 111
+	EVENT_END_COND laminar/gpws/message != 111
+END_SOUND_ATTACHMENT
+
+# -------------------- Callout: windshear_ahead ---------------------
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/egpws/windshear_ahead
+	VEH_PART cockpit 0
+	PARAM_DREF_IDX 0
+	EVENT_START_COND laminar/gpws/message == 112
+	EVENT_END_COND laminar/gpws/message != 112
+END_SOUND_ATTACHMENT
+
+# -------------------- Callout: go_around_windshear_ahead ---------------------
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/egpws/go_around_windshear_ahead
+	VEH_PART cockpit 0
+	PARAM_DREF_IDX 0
+	EVENT_START_COND laminar/gpws/message == 113
+	EVENT_END_COND laminar/gpws/message != 113
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: speed ---------------------
@@ -1405,8 +1453,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/speed
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 12
-	EVENT_END_COND laminar/gpws/message != 12
+	EVENT_START_COND laminar/gpws/message == 120
+	EVENT_END_COND laminar/gpws/message != 120
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: hundred_above ---------------------
@@ -1414,8 +1462,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/hundred_above
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 13
-	EVENT_END_COND laminar/gpws/message != 13
+	EVENT_START_COND laminar/gpws/message == 130
+	EVENT_END_COND laminar/gpws/message != 130
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: minimums ---------------------
@@ -1423,8 +1471,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/minimums
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 14
-	EVENT_END_COND laminar/gpws/message != 14
+	EVENT_START_COND laminar/gpws/message == 140
+	EVENT_END_COND laminar/gpws/message != 140
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 50ft ---------------------
@@ -1432,8 +1480,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/50ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 15
-	EVENT_END_COND laminar/gpws/message != 15
+	EVENT_START_COND laminar/gpws/message == 150
+	EVENT_END_COND laminar/gpws/message != 150
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 5ft ---------------------
@@ -1441,8 +1489,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/5ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 16
-	EVENT_END_COND laminar/gpws/message != 16
+	EVENT_START_COND laminar/gpws/message == 160
+	EVENT_END_COND laminar/gpws/message != 160
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 10ft ---------------------
@@ -1450,8 +1498,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/10ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 17
-	EVENT_END_COND laminar/gpws/message != 17
+	EVENT_START_COND laminar/gpws/message == 170
+	EVENT_END_COND laminar/gpws/message != 170
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 20ft ---------------------
@@ -1459,8 +1507,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/20ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 18
-	EVENT_END_COND laminar/gpws/message != 18
+	EVENT_START_COND laminar/gpws/message == 180
+	EVENT_END_COND laminar/gpws/message != 180
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 30ft ---------------------
@@ -1468,8 +1516,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/30ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 19
-	EVENT_END_COND laminar/gpws/message != 19
+	EVENT_START_COND laminar/gpws/message == 190
+	EVENT_END_COND laminar/gpws/message != 190
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 40ft ---------------------
@@ -1477,8 +1525,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/40ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 20
-	EVENT_END_COND laminar/gpws/message != 20
+	EVENT_START_COND laminar/gpws/message == 200
+	EVENT_END_COND laminar/gpws/message != 200
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 100ft ---------------------
@@ -1486,8 +1534,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/100ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 21
-	EVENT_END_COND laminar/gpws/message != 21
+	EVENT_START_COND laminar/gpws/message == 210
+	EVENT_END_COND laminar/gpws/message != 210
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 200ft ---------------------
@@ -1495,8 +1543,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/200ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 22
-	EVENT_END_COND laminar/gpws/message != 22
+	EVENT_START_COND laminar/gpws/message == 220
+	EVENT_END_COND laminar/gpws/message != 220
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 300ft ---------------------
@@ -1504,8 +1552,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/300ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 23
-	EVENT_END_COND laminar/gpws/message != 23
+	EVENT_START_COND laminar/gpws/message == 230
+	EVENT_END_COND laminar/gpws/message != 230
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 400ft ---------------------
@@ -1513,8 +1561,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/400ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 24
-	EVENT_END_COND laminar/gpws/message != 24
+	EVENT_START_COND laminar/gpws/message == 240
+	EVENT_END_COND laminar/gpws/message != 240
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 500ft ---------------------
@@ -1522,8 +1570,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/500ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 25
-	EVENT_END_COND laminar/gpws/message != 25
+	EVENT_START_COND laminar/gpws/message == 250
+	EVENT_END_COND laminar/gpws/message != 250
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 1000ft ---------------------
@@ -1531,8 +1579,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/1000ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 26
-	EVENT_END_COND laminar/gpws/message != 26
+	EVENT_START_COND laminar/gpws/message == 260
+	EVENT_END_COND laminar/gpws/message != 260
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 2000ft ---------------------
@@ -1540,8 +1588,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/2000ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 27
-	EVENT_END_COND laminar/gpws/message != 27
+	EVENT_START_COND laminar/gpws/message == 270
+	EVENT_END_COND laminar/gpws/message != 270
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 2500ft ---------------------
@@ -1549,8 +1597,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/2500ft
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 29
-	EVENT_END_COND laminar/gpws/message != 29
+	EVENT_START_COND laminar/gpws/message == 290
+	EVENT_END_COND laminar/gpws/message != 290
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 10ft_retard ---------------------
@@ -1558,8 +1606,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/10ft_retard
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 30
-	EVENT_END_COND laminar/gpws/message != 30
+	EVENT_START_COND laminar/gpws/message == 300
+	EVENT_END_COND laminar/gpws/message != 300
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: 20ft_retard ---------------------
@@ -1567,8 +1615,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/20ft_retard
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 31
-	EVENT_END_COND laminar/gpws/message != 31
+	EVENT_START_COND laminar/gpws/message == 310
+	EVENT_END_COND laminar/gpws/message != 310
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: retard ---------------------
@@ -1576,8 +1624,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/retard
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 32
-	EVENT_END_COND laminar/gpws/message != 32
+	EVENT_START_COND laminar/gpws/message == 320
+	EVENT_END_COND laminar/gpws/message != 320
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: too_low_flaps ---------------------
@@ -1585,8 +1633,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/too_low_flaps
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 33
-	EVENT_END_COND laminar/gpws/message != 33
+	EVENT_START_COND laminar/gpws/message == 330
+	EVENT_END_COND laminar/gpws/message != 330
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: too_low_gear ---------------------
@@ -1594,8 +1642,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/too_low_gear
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 34
-	EVENT_END_COND laminar/gpws/message != 34
+	EVENT_START_COND laminar/gpws/message == 340
+	EVENT_END_COND laminar/gpws/message != 340
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: sinkrate ---------------------
@@ -1603,8 +1651,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/sinkrate
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 35
-	EVENT_END_COND laminar/gpws/message != 35
+	EVENT_START_COND laminar/gpws/message == 350
+	EVENT_END_COND laminar/gpws/message != 350
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: glideslope ---------------------
@@ -1612,17 +1660,26 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/glideslope
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 37
-	EVENT_END_COND laminar/gpws/message != 37
+	EVENT_START_COND laminar/gpws/message == 370
+	EVENT_END_COND laminar/gpws/message != 370
+END_SOUND_ATTACHMENT
+
+# -------------------- Callout: glideslope_loud ---------------------
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/egpws/glideslope_loud
+	VEH_PART cockpit 0
+	PARAM_DREF_IDX 0
+	EVENT_START_COND laminar/gpws/message == 375
+	EVENT_END_COND laminar/gpws/message != 375
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: bank_angle ---------------------
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /a330/equipment/egpws/bank_angle
+	EVENT_NAME /AG330/GPWS/bank_angle
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 38
-	EVENT_END_COND laminar/gpws/message != 38
+	EVENT_START_COND laminar/gpws/bank_angle == 1
+	EVENT_END_COND laminar/gpws/bank_angle != 1
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: prio_left ---------------------
@@ -1630,8 +1687,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/prio_left
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 40
-	EVENT_END_COND laminar/gpws/message != 40
+	EVENT_START_COND laminar/gpws/message == 400
+	EVENT_END_COND laminar/gpws/message != 400
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: prio_right ---------------------
@@ -1639,8 +1696,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/prio_right
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 41
-	EVENT_END_COND laminar/gpws/message != 41
+	EVENT_START_COND laminar/gpws/message == 410
+	EVENT_END_COND laminar/gpws/message != 410
 END_SOUND_ATTACHMENT
 
 # -------------------- Callout: dual_input ---------------------
@@ -1648,8 +1705,8 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /a330/equipment/egpws/dual_input
 	VEH_PART cockpit 0
 	PARAM_DREF_IDX 0
-	EVENT_START_COND laminar/gpws/message == 42
-	EVENT_END_COND laminar/gpws/message != 42
+	EVENT_START_COND laminar/gpws/message == 420
+	EVENT_END_COND laminar/gpws/message != 420
 END_SOUND_ATTACHMENT
 
 # Switches: Overhead: Upper left 
@@ -5090,792 +5147,812 @@ END_SOUND_ATTACHMENT
 # Switches: FMC / ECAM 
 #############################################################################################
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_1l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_2l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_3l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_4l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_5l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_6l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_1r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_2r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_3r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_4r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_5r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/ls_6r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/index
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/fpln
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/clb
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/crz
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/dir_intc
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/legs
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/dep_arr
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/hold
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/prog
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/des
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/perf
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/data
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/exec
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/fix
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/navrad
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/prev
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/next
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_clear
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_slash
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_delete
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_space
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/fuel_pred
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/menu
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/airport
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/up
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/down
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_overfly
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
+	VEH_XYZ -0.179 1.385 -27.012
+	EVENT_CMND_HOLD_CUE sim/FMS/sec_fpln
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
+	VEH_XYZ -0.179 1.385 -27.012
+	EVENT_CMND_HOLD_CUE sim/FMS/atc_comm
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_0
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_1
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_2
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_3
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_4
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_5
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_6
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_7
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_8
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_9
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_minus
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_period
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_A
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_B
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_C
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_D
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_E
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_F
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_G
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_H
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_I
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_J
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_K
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_L
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_M
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_N
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_O
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_P
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_Q
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_R
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_S
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_T
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_U
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_V
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_W
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_X
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_Y
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS/key_Z
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_vert_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE laminar/A333/buttons/fms1_brightness_dn
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_vert_hold
 	VEH_XYZ -0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE laminar/A333/buttons/fms1_brightness_up
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_1l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_2l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_3l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_4l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_5l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_6l
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_1r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_2r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_3r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_4r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_5r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_lat_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/ls_6r
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/index
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/fpln
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/clb
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/crz
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/dir_intc
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/legs
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/dep_arr
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/hold
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/prog
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/des
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/perf
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/data
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/exec
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/fix
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/navrad
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/prev
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/next
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_clear
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_slash
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_delete
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_space
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/fuel_pred
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/menu
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/airport
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/up
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/down
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_overfly
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
+	VEH_XYZ 0.179 1.385 -27.012
+	EVENT_CMND_HOLD_CUE sim/FMS2/sec_fpln
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
+	VEH_XYZ 0.179 1.385 -27.012
+	EVENT_CMND_HOLD_CUE sim/FMS2/atc_comm
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_0
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_1
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_2
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_3
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_4
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_5
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_6
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_7
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_8
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_9
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_minus
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_round_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_period
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_A
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_B
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_C
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_D
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_E
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_F
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_G
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_H
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_I
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_J
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_K
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_L
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_M
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_N
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_O
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_P
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_Q
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_R
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_S
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_T
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_U
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_V
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_W
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_X
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_Y
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_fmc_main_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE sim/FMS2/key_Z
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_vert_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE laminar/A333/buttons/fms2_brightness_dn
 END_SOUND_ATTACHMENT
 BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /AG_MCDU
+	EVENT_NAME /a330/equipment/switches/pb_vert_hold
 	VEH_XYZ 0.179 1.385 -27.012
 	EVENT_CMND_HOLD_CUE laminar/A333/buttons/fms2_brightness_up
 END_SOUND_ATTACHMENT
@@ -7005,6 +7082,44 @@ BEGIN_SOUND_ATTACHMENT
 	VEH_XYZ 0.013 1.381 -26.325
 	EVENT_START_COND DELTA=laminar/A333/buttons/rudder_trim_reset > 0
 	CUE_TRIGGER_COND DELTA=laminar/A333/buttons/rudder_trim_reset < 0
+END_SOUND_ATTACHMENT
+
+# ------------------------------ weather radar ------------------------------------
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/switch_metal_small
+	VEH_XYZ -0.184 1.326 -26.649
+	EVENT_CMND_DOWN sim/instruments/EFIS_wxr_pws_on
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/switch_metal_small
+	VEH_XYZ -0.184 1.326 -26.649
+	EVENT_CMND_DOWN sim/instruments/EFIS_wxr_pws_off
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/switch_metal_small
+	VEH_XYZ -0.184 1.326 -26.649
+	EVENT_CMND_DOWN sim/instruments/EFIS_wxr_multiscan_auto
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/switch_metal_small
+	VEH_XYZ -0.184 1.326 -26.649
+	EVENT_CMND_DOWN sim/instruments/EFIS_wxr_multiscan_off
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/switch_metal_small
+	VEH_XYZ -0.184 1.326 -26.649
+	EVENT_CMND_DOWN sim/instruments/EFIS_wxr_gcs_off
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/switch_metal_small
+	VEH_XYZ -0.184 1.326 -26.649
+	EVENT_CMND_DOWN sim/instruments/EFIS_wxr_gcs_on
+END_SOUND_ATTACHMENT
+BEGIN_SOUND_ATTACHMENT
+	EVENT_NAME /a330/equipment/switches/sel_small
+	VEH_XYZ -0.184 1.326 -26.649
+	EVENT_POLYPHONIC
+	EVENT_START_COND ABS_DELTA=laminar/A333/switches/weather_radar_mode > 0
 END_SOUND_ATTACHMENT
 
 #############################################################################################

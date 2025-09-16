@@ -99,6 +99,7 @@ A333DR_fws_aco_dual_input_playing = create_dataref("laminar/A333/aco_dual_input_
 
 A333DR_fws_aco_ap_off_playing = create_dataref("laminar/A333/fws/aco_ap_off_playing", "number")
 
+DR_gpws_bank_angle = create_dataref("laminar/gpws/bank_angle", "number")
 DR_gpws_message = create_dataref("laminar/gpws/message", "number")
 DR_gpws_message_debug = create_dataref("laminar/gpws/message_debug", "string")
 
@@ -109,7 +110,6 @@ DR_gpws_message_debug = create_dataref("laminar/gpws/message_debug", "string")
 local messages
 local max_index
 local keys
-local is_bank_angle_played
 local is_sinkrate_played
 local is_mode4a_2lowgear_played
 local is_mode4a_2lowterrain_played
@@ -279,8 +279,6 @@ function initialize()
         [360] = { id = 'dont_sink', is_playing = false, wants_play = false, duration = 2000 }, -- TODO
         [370] = { id = 'glideslope', is_playing = false, wants_play = false, duration = 2000 },
         [375] = { id = 'glideslope_loud', is_playing = false, wants_play = false, duration = 1500 },
-        [380] = { id = 'bank_angle', is_playing = false, wants_play = false, duration = 1800 },
-        [390] = { id = 'bank_angle_x2', is_playing = false, wants_play = false, duration = 2000 }, -- TODO
 
         -- Airbus
         [400] = { id = 'priority_left', is_playing = false, wants_play = false, duration = 1400 },
@@ -299,7 +297,6 @@ function initialize()
     table.sort(keys)
 
     max_index = keys[#keys]
-    is_bank_angle_played = false
     is_sinkrate_played = false
     is_mode4a_2lowgear_played = false
     is_mode4a_2lowterrain_played = false
@@ -489,33 +486,29 @@ function mode_6_bank_angle()
 
         if DR_rad_alt > 5 and DR_rad_alt < 30 then
             if roll_angle >= 10 then
-                if not is_bank_angle_played then
-                    play_message('bank_angle', true)
-                    is_bank_angle_played = true
-                end
+                DR_gpws_bank_angle = 1
+            else
+                DR_gpws_bank_angle = 0
             end
         elseif DR_rad_alt >= 30 and DR_rad_alt < 150 then
             local min_alt = 4 * roll_angle - 10;
             if roll_angle >= 10 and roll_angle < 40 and DR_rad_alt < min_alt then
-                if not is_bank_angle_played then
-                    play_message('bank_angle', true)
-                    is_bank_angle_played = true
-                end
+                DR_gpws_bank_angle = 1
+            else
+                DR_gpws_bank_angle = 0
             end
         elseif DR_rad_alt >= 150 and DR_rad_alt < 2450 then
             local min_alt = 153.333 * roll_angle - 5983.33;
             if roll_angle >= 40 and roll_angle < 55 and DR_rad_alt < min_alt then
-                if not is_bank_angle_played then
-                    play_message('bank_angle', true)
-                    is_bank_angle_played = true
-                end
+                DR_gpws_bank_angle = 1
+            else
+                DR_gpws_bank_angle = 0
             end
         elseif DR_rad_alt >= 2450 then
             if roll_angle >= 55 then
-                if not is_bank_angle_played then
-                    play_message('bank_angle', true)
-                    is_bank_angle_played = true
-                end
+                DR_gpws_bank_angle = 1
+            else
+                DR_gpws_bank_angle = 0
             end
         end
 
@@ -523,33 +516,25 @@ function mode_6_bank_angle()
 
         if DR_rad_alt > 5 and DR_rad_alt < 30 then
             if roll_angle >= 10 then
-                if not is_bank_angle_played then
-                    play_message('bank_angle', true)
-                    is_bank_angle_played = true
-                end
+                DR_gpws_bank_angle = 1
+            else
+                DR_gpws_bank_angle = 0
             end
         elseif DR_rad_alt >= 30 and DR_rad_alt < 122 then
             local min_alt = 4 * roll_angle - 10;
             if roll_angle >= 10 and roll_angle < 33 and DR_rad_alt < min_alt then
-                if not is_bank_angle_played then
-                    play_message('bank_angle', true)
-                    is_bank_angle_played = true
-                end
+                DR_gpws_bank_angle = 1
+            else
+                DR_gpws_bank_angle = 0
             end
         elseif DR_rad_alt >= 122 then
             if roll_angle >= 33 then
-                if not is_bank_angle_played then
-                    play_message('bank_angle', true)
-                    is_bank_angle_played = true
-                end
+                DR_gpws_bank_angle = 1
+            else
+                DR_gpws_bank_angle = 0
             end
         end
 
-    end
-
-    -- Reset if bank angle is recentered
-    if is_bank_angle_played and roll_angle < 10 then
-        is_bank_angle_played = false
     end
 end
 
