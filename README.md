@@ -40,3 +40,19 @@ Due to security settings on latest MacOS releases, some additional steps are req
   [91P72 Guide on X-Plane.org Forum](https://forums.x-plane.org/index.php?/forums/topic/241705-is-current-version-of-x-plane-11-working-with-mac-os-big-sur-now-ive-been-waiting-to-upgrade-the-os/#findComment-2158446)
 
   [Stratosphere Studios - Readme Section Mac, 2nd bullet point "MacOS will block the plugins ..."](https://github.com/Stratosphere-Studios/777-300ER?tab=readme-ov-file#mac)
+
+---
+<div align="center">
+  <ul>
+    <a style="text-align: center, font-style: bold">Copyright © 2025 Coalition of Freeware Developers</a>
+    <a style="text-align: center, font-style: bold, padding: 12">&ensp;&#10072;&ensp;</a>
+    <a style="text-align: center, font-style: bold">Copyright © 2025 AeroGenesis</a>
+    <a style="text-align: center, font-style: bold, padding: 12">&ensp;&#10072;&ensp;</a>
+    <a style="text-align: center, font-style: bold">All Rights Reserved</a>
+    <a style="text-align: center, font-style: bold, padding: 12">&ensp;&#10072;&ensp;</a>
+    <a style="text-align: center, font-style: bold">GPL-3.0 license</a>
+  </ul>
+</div>
+<div align="center">
+<img src=https://github.com/user-attachments/assets/1d752157-ed53-4f5e-80f9-21c2fdcb2537 width=40%>
+</div>
