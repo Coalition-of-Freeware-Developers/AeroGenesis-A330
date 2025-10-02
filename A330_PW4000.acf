@@ -143344,9 +143344,9 @@ GROUP MFDcapt
             gen_rotary Tilt Pos Neg 2
               POS 972.000000 371.000000
               IMAGE ND/wx_green_pos_neg
-              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
-              SHOW_LESS 10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
-              SHOW_GREATER -10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
+              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
+              SHOW_LESS 10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
+              SHOW_GREATER -10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
               HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 1
@@ -143369,8 +143369,8 @@ GROUP MFDcapt
             gen_rotary Tilt Neg 10s 2
               POS 962.000000 371.000000
               IMAGE ND/wx_green_pos_neg
-              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
-              SHOW_LESS -10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
+              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
+              SHOW_LESS -10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
               HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 1
@@ -143393,8 +143393,8 @@ GROUP MFDcapt
             gen_rotary Tilt Pos 10s 2
               POS 962.000000 371.000000
               IMAGE ND/wx_green_pos_neg
-              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
-              SHOW_GREATER 10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
+              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
+              SHOW_GREATER 10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
               HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 1
@@ -143417,10 +143417,10 @@ GROUP MFDcapt
             gen_LED Radar Tilt 2
               POS 987.000000 371.000000
               IMAGE LED/airbus_display_LED_16_green_all_zeros_xtk
-              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot[3]
-              SHOW_LESS 10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
+              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna[3]
+              SHOW_LESS 10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
               SHOW_EQUAL 1.000000 [2]
-              SHOW_GREATER -10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot[3]
+              SHOW_GREATER -10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna[3]
               HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 1
@@ -143434,10 +143434,10 @@ GROUP MFDcapt
               ROUNDING ROUND_DOWN
 
             gen_LED Radar Tilt 10s neg
-              POS 982.500000 371.500000
+              POS 982.500000 371.000000
               IMAGE LED/airbus_display_LED_16_green_all_zeros_xtk
-              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot[3]
-              SHOW_LESS -10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot
+              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna[3]
+              SHOW_LESS -10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna
               SHOW_EQUAL 1.000000 [2]
               SHOW_GREATER 10.000000 [3]
               HIDE
@@ -143453,11 +143453,11 @@ GROUP MFDcapt
               ROUNDING ROUND_DOWN
 
             gen_LED Radar Tilt 10s pos
-              POS 982.500000 371.500000
+              POS 982.500000 371.000000
               IMAGE LED/airbus_display_LED_16_green_all_zeros_xtk
-              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot[3]
+              DATAREF sim/cockpit2/EFIS/EFIS_weather_tilt_antenna[3]
               SHOW_EQUAL 1.000000 [2]
-              SHOW_GREATER 10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna_copilot[3]
+              SHOW_GREATER 10.000000 sim/cockpit2/EFIS/EFIS_weather_tilt_antenna[3]
               HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 1
