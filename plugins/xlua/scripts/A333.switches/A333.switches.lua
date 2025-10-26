@@ -1,4 +1,3 @@
-jit.off()
 --[[
 *****************************************************************************************
 * Program Script Name	:	A333.switches
@@ -78,9 +77,10 @@ local smoking_auto_status = 0
 
 local engine1_starter_cutoff_sentinel = 0
 local engine2_starter_cutoff_sentinel = 0
-local parking_brake_sentinel = 0
 local engine1_starter_lift_flag = 0
 local engine2_starter_lift_flag = 0
+
+local park_brake_switch_pos_target = 0
 
 local A333_rudder_trim_sel_dial_position_target = 0
 
@@ -316,9 +316,6 @@ simDR_isol_valve_right				= find_dataref("sim/cockpit2/bleedair/actuators/isol_v
 
 simDR_engine1_starter_running		= find_dataref("sim/flightmodel2/engines/starter_is_running[0]")
 simDR_engine2_starter_running		= find_dataref("sim/flightmodel2/engines/starter_is_running[1]")
-
-simDR_parking_brake					= find_dataref("sim/cockpit2/controls/park_brake_valve")
-simDR_brake_master_cylinder			= find_dataref("sim/cockpit2/controls/wheel_brake_ratio")
 
 simDR_auto_brake					= find_dataref("sim/cockpit2/switches/auto_brake_level")
 simDR_auto_brake_decel_low			= find_dataref("sim/aircraft/specialcontrols/acf_autofbrk_decels[2]")
@@ -760,23 +757,15 @@ A333DR_ecp_pushbutton_process_step = create_dataref("laminar/A333/ecp/pb_process
 A333_switches_park_brake_pos		= create_dataref("laminar/A333/switches/park_brake_pos", "number")
 A333_switches_park_brake_lift		= create_dataref("laminar/A333/switches/park_brake_lift", "number")
 
-A333_switches_park_brake_pos_tar	= create_dataref("laminar/A333/switches/park_brake_pos_target", "number")
-
 ---- BAROMETER --------------------------------------------------------------------------
-
-function cptBaroKnobDRhandler() end
-function foBaroKnobDRhandler() end
-function cptBaroInHgHPaDRhandler() end
-function foBaroInHgHPaDRhandler() end
-function cptBaroPullStdDRhandler() end
-function foBaroPullStdDRhandler() end
-
-A333_capt_baro_knob_pos				= create_dataref("laminar/A333/barometer/capt_knob_pos", "number", cptBaroKnobDRhandler)
-A333_fo_baro_knob_pos				= create_dataref("laminar/A333/barometer/fo_knob_pos", "number", foBaroKnobDRhandler)
-A333_capt_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/capt_inHg_hPa_pos", "number", cptBaroInHgHPaDRhandler)
-A333_fo_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/fo_inHg_hPa_pos", "number", foBaroInHgHPaDRhandler)
-A333_capt_pull_std_pos				= create_dataref("laminar/A333/barometer/capt_pull_std_pos", "number", cptBaroPullStdDRhandler)
-A333_fo_pull_std_pos				= create_dataref("laminar/A333/barometer/fo_pull_std_pos", "number", foBaroPullStdDRhandler)
+A333_capt_baro_knob_pos				= create_dataref("laminar/A333/barometer/capt_knob_pos", "number")
+A333_fo_baro_knob_pos				= create_dataref("laminar/A333/barometer/fo_knob_pos", "number")
+A333_capt_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/capt_inHg_hPa_pos", "number")
+A333_fo_baro_inHg_hPa_pos			= create_dataref("laminar/A333/barometer/fo_inHg_hPa_pos", "number")
+A333_capt_pull_std_pos				= create_dataref("laminar/A333/barometer/capt_pull_std_pos", "number")
+A333_fo_pull_std_pos				= create_dataref("laminar/A333/barometer/fo_pull_std_pos", "number")
+--A333_capt_baro_mode				= create_dataref("laminar/A333/barometer/capt_mode", "number")
+--A333_fo_baro_mode					= create_dataref("laminar/A333/barometer/fo_mode", "number")
 
 ---- AI ---------------------------------------------------------------------------------
 
@@ -1118,24 +1107,23 @@ function A333_engine2_cutoff_wrap_afterCMDhandler(phase, duration)
 	end
 end
 
--- PARKING BRAKE
-
-function A333_parking_brake_CMDhandler(phase, duration)
+function A333_brakes_hold_beforeCMDhandler(phase, duration) end			-- THIS COMMAND IS HERE FOR USER CONVENIENCE
+function A333_brakes_hold_afterCMDhandler(phase, duration)				-- a user pressing the B key on the keyboard gets the brakes release
 	if phase == 0 then
-		if A333_switches_park_brake_pos_tar < 1 then
-			A333_switches_park_brake_pos_tar = 1
-		elseif A333_switches_park_brake_pos_tar > 0 then
-			A333_switches_park_brake_pos_tar = 0
+		if park_brake_switch_pos_target == 0 then
+		elseif park_brake_switch_pos_target == 1 then
+			park_brake_switch_pos_target = 0
 		end
 	end
 end
 
-function A333_brakes_beforeCMDhandler(phase, duration) end				-- THIS COMMAND IS HERE FOR LEGACY REASONS ONLY
-function A333_brakes_afterCMDhandler(phase, duration)					-- THE REAL 330 ONLY HAS ONE WAY TO RELEASE THE PARK BRAKE
-	if phase == 0 then													-- AND THAT IS WITH THE ACTUAL HANDLE, NOT A RUDDER PEDAL PUSH
-		if A333_switches_park_brake_pos_tar == 0 then
-		elseif A333_switches_park_brake_pos_tar == 1 then
-			A333_switches_park_brake_pos_tar = 0
+function A333_brakes_toggle_beforeCMDhandler(phase, duration) end		-- THIS COMMAND IS HERE FOR USER CONVENIENCE
+function A333_brakes_toggle_afterCMDhandler(phase, duration)			-- a user pressing the V key on the keyboard toggles the parking brake handle as expected
+	if phase == 0 then
+		if park_brake_switch_pos_target == 0 then
+			park_brake_switch_pos_target = 1
+		elseif park_brake_switch_pos_target == 1 then
+			park_brake_switch_pos_target = 0
 		end
 	end
 end
@@ -1815,7 +1803,8 @@ simCMD_auto_brake_off		= find_command("simCMD_auto_brakes_off")
 simCMD_gpu_on				= find_command("sim/electrical/GPU_on")
 simCMD_gpu_off				= find_command("sim/electrical/GPU_off")
 
-simCMD_brake_max			= find_command("sim/flight_controls/brakes_max")
+simCMD_park_brake_on		= find_command("sim/flight_controls/park_brake_set")
+simCMD_park_brake_off		= find_command("sim/flight_controls/park_brake_release")
 
 --*************************************************************************************--
 --** 				               REPLACE X-PLANE COMMANDS                   	     **--
@@ -1857,10 +1846,6 @@ simCMD_eng2_bleed_toggle	= replace_command("sim/bleed_air/engine_2_toggle", sim_
 
 simCMD_GCS_OFF				= replace_command("sim/instruments/EFIS_wxr_gcs_off", simCMD_EFIS_wxr_gcs_off_CMDhandler)
 
--- BRAKES
-
-simCMD_parking_brake		= replace_command("sim/flight_controls/park_brake_valve_toggle", A333_parking_brake_CMDhandler)
-
 --*************************************************************************************--
 --** 				               WRAP X-PLANE COMMANDS                   	     	 **--
 --*************************************************************************************--
@@ -1890,7 +1875,8 @@ simCMD_engine2_start_wrap	= wrap_command("sim/starters/engage_starter_2", A333_e
 simCMD_engine1_cutoff_wrap	= wrap_command("sim/starters/shut_down_1", A333_engine1_cutoff_wrap_beforeCMDhandler, A333_engine1_cutoff_wrap_afterCMDhandler)
 simCMD_engine2_cutoff_wrap	= wrap_command("sim/starters/shut_down_2", A333_engine2_cutoff_wrap_beforeCMDhandler, A333_engine2_cutoff_wrap_afterCMDhandler)
 
-simCMD_brakes				= wrap_command("sim/flight_controls/brakes_regular", A333_brakes_beforeCMDhandler, A333_brakes_afterCMDhandler) -- here for legacy reasons
+simCMD_brakes_hold			= wrap_command("sim/flight_controls/brakes_regular", A333_brakes_hold_beforeCMDhandler, A333_brakes_hold_afterCMDhandler)			-- 'B' on the keyboard since 12.2
+simCMD_brakes_toggle		= wrap_command("sim/flight_controls/brakes_toggle_max", A333_brakes_toggle_beforeCMDhandler, A333_brakes_toggle_afterCMDhandler)	-- 'V' on the keyboard since forever
 
 simCMD_capt_baro_std_tog	= wrap_command("sim/instruments/barometer_std", A333_capt_baro_tog_beforeCMDhandler, A333_capt_baro_tog_afterCMDhandler) -- not used in model, added for usabilty
 simCMD_fo_baro_std_tog		= wrap_command("sim/instruments/barometer_copilot_std", A333_fo_baro_tog_beforeCMDhandler, A333_fo_baro_tog_afterCMDhandler) -- not used in model, added for usabilty)
@@ -4277,20 +4263,18 @@ function A333_eng_mode_right_CMDhandler(phase, duration)
 end
 
 -- PARKING BRAKE
-
 function A333_parking_brake_left_CMDhandler(phase, duration)
 	if phase == 0 then
-		A333_switches_park_brake_pos_tar = 0
+		park_brake_switch_pos_target = 0
 	end
 end
 
 function A333_parking_brake_right_CMDhandler(phase, duration)
 	if phase == 0 then
-		A333_switches_park_brake_pos_tar = 1
+		park_brake_switch_pos_target = 1
 	end
 end
 
--- AI
 
 function A333_ai_switches_quick_start_CMDhandler(phase, duration)
     if phase == 0 then
@@ -4671,6 +4655,9 @@ end
 
 function A333_knobs_switches()
 
+	local park_brake_switch_pos = A333_switches_park_brake_pos
+	local park_brake_switch_lift = A333_switches_park_brake_lift
+
 ---- GUARD COVER LOCKS ----
 
 	if A333_guard_cover_pos[6] < 0.9 then
@@ -4681,40 +4668,30 @@ function A333_knobs_switches()
 		A333_gear_gravity_extension_pos = 0
 	end
 
-
-
-
 ---- PARKING BRAKE ----
 
-	if A333_switches_park_brake_pos == 1 and A333_switches_park_brake_lift == 0 then
-		simCMD_brake_max:start()
-		if simDR_brake_master_cylinder > 0.95 then
-			simDR_parking_brake = 1
-			simCMD_brake_max:stop()
-		end
-	elseif A333_switches_park_brake_pos ~= 1 then
+	local brakeswitch_diff = A333_switches_park_brake_pos - park_brake_switch_pos_target
+	park_brake_switch_pos = A333_set_animation_position(park_brake_switch_pos, park_brake_switch_pos_target, 0, 1, 5)
+	if brakeswitch_diff > 0.05 and park_brake_switch_pos - park_brake_switch_pos_target <= 0.05 then
+		simCMD_park_brake_off:once()
+	elseif brakeswitch_diff < -0.05 and park_brake_switch_pos - park_brake_switch_pos_target >= -0.05 then
+		simCMD_park_brake_on:once()
 	end
 
+	A333_switches_park_brake_pos = park_brake_switch_pos
 
-	if A333_switches_park_brake_pos == 0 and A333_switches_park_brake_lift == 0 then
-		simDR_parking_brake = 0
-		simCMD_brake_max:stop()
-	elseif A333_switches_park_brake_pos ~= 0 then
+
+	if park_brake_switch_pos < 0.1 then
+		park_brake_switch_lift = A333_rescale(0, 0, 0.1, 0.005, park_brake_switch_pos)
+	elseif park_brake_switch_pos >= 0.1 and park_brake_switch_pos < 0.9 then
+		park_brake_switch_lift = A333_rescale(0.1, 0.005, 0.9, 0.005, park_brake_switch_pos)
+	elseif park_brake_switch_pos >= 0.9 then
+		park_brake_switch_lift = A333_rescale(0.9, 0.005, 1, 0, park_brake_switch_pos)
 	end
+	A333_switches_park_brake_lift = park_brake_switch_lift
 
-
-	A333_switches_park_brake_pos = A333_set_animation_position(A333_switches_park_brake_pos, A333_switches_park_brake_pos_tar, 0, 1, 5)
-
-	if A333_switches_park_brake_pos < 0.1 then
-		A333_switches_park_brake_lift = A333_rescale(0, 0, 0.1, 0.005, A333_switches_park_brake_pos)
-	elseif A333_switches_park_brake_pos >= 0.1 and A333_switches_park_brake_pos < 0.9 then
-		A333_switches_park_brake_lift = A333_rescale(0.1, 0.005, 0.9, 0.005, A333_switches_park_brake_pos)
-	elseif A333_switches_park_brake_pos >= 0.9 then
-		A333_switches_park_brake_lift = A333_rescale(0.9, 0.005, 1, 0, A333_switches_park_brake_pos)
-	end
 
 ---- SMOKING / SEATBELTS ----
-
 
 
 	if simDR_flaps_status > 0 or simDR_gear_status2 > 0 or simDR_gear_status3 > 0 then
@@ -5624,20 +5601,15 @@ function A333_set_switches_all_modes()
 	simDR_terr_on_nd_capt = 00
 	simDR_terr_on_nd_fo = 0
 
-
-
 	if A333_rad_alt > 100.0 then	-- FLight Start in-air
-		A333_switches_park_brake_pos_tar = 0
-		simDR_parking_brake = 0
+		park_brake_switch_pos_target = 0
+		simCMD_park_brake_off:once()
 		A333_switches_park_brake_pos = 0
 	else
-		A333_switches_park_brake_pos_tar = 1
-		simDR_parking_brake = 1
+		park_brake_switch_pos_target = 1
+		simCMD_park_brake_on:once()
 		A333_switches_park_brake_pos = 1
 	end
-
-
-
 
 	simDR_elec_hyd_green = 0
 	simDR_elec_hyd_blue = 0
