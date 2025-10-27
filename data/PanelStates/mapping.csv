@@ -1,4 +1,10 @@
-DataRef;Command
+DataRef;Command 1 (value up);Command 2 (value down)
+# This file maps DataRefs to their respective Commands. Please refer to the manual for further information.
+#
+################################################
+# automatically created DataRef/CMD mapping:
+################################################
+
 laminar/A333/buttons/ecam/clr_fo;
 laminar/A333/buttons/ecam/fuel_pos;laminar/A333/button/ecam/fuel_mode
 laminar/A333/buttons/ecam/hyd_pos;laminar/A333/button/ecam/hyd_mode
@@ -75,13 +81,13 @@ laminar/A330/buttons/hyd/rat_deploy_pos;laminar/A330/buttons/hyd/ram_air_turbine
 laminar/A330/buttons/hyd/eng2_pump_green_pos;sim/flight_controls/hydraulic_eng2A_tog
 laminar/A330/buttons/hyd/eng2_pump_yellow_pos;sim/flight_controls/hydraulic_eng2B_tog
 laminar/A330/buttons/hyd/elec_yellow_tog_pos;laminar/A330/buttons/hyd/elec_yellow_toggle
-laminar/A330/buttons/hyd/elec_yellow_on;laminar/A330/buttons/hyd/elec_yellow_on
+laminar/A330/buttons/hyd/elec_yellow_on_pos;laminar/A330/buttons/hyd/elec_yellow_on
 laminar/A330/buttons/hyd/eng1_pump_blue_pos;sim/flight_controls/hydraulic_eng1C_tog
 laminar/A330/buttons/hyd/elec_blue_tog_pos;laminar/A330/buttons/hyd/elec_blue_toggle
-laminar/A330/buttons/hyd/elec_blue_on;laminar/A330/buttons/hyd/elec_blue_on
+laminar/A330/buttons/hyd/elec_blue_on_pos;laminar/A330/buttons/hyd/elec_blue_on
 laminar/A330/buttons/hyd/eng1_pump_green_pos;sim/flight_controls/hydraulic_eng1A_tog
 laminar/A330/buttons/hyd/elec_green_tog_pos;laminar/A330/buttons/hyd/elec_green_toggle
-laminar/A330/buttons/hyd/elec_green_on;laminar/A330/buttons/hyd/elec_green_on
+laminar/A330/buttons/hyd/elec_green_on_pos;laminar/A330/buttons/hyd/elec_green_on
 laminar/A333/fire/buttons/eng2_agent1_pos;laminar/A333/fire/buttons/eng2_agent1_push
 laminar/A333/fire/buttons/eng2_agent2_pos;laminar/A333/fire/buttons/eng2_agent2_push
 laminar/A333/fire/buttons/eng1_agent2_pos;laminar/A333/fire/buttons/eng1_agent2_push
@@ -141,8 +147,8 @@ laminar/A333/comm/push_button/rtp_C_vhf_3_pos;laminar/A333/rtp_C/vhf_3/sel_switc
 laminar/A333/comm/push_button/rtp_C_hf_2_pos;laminar/A333/rtp_C/hf_2/sel_switch
 laminar/A333/comm/push_button/rtp_C_am_pos;laminar/A333/rtp_C/am/sel_switch
 laminar/A333/comm/push_button/rtp_C_hf_1_pos;laminar/A333/rtp_C/hf_1/sel_switch
-sim/flightmodel2/misc/door_open_ratio[6];sim/flight_controls/door_open_7
 sim/flightmodel2/misc/door_open_ratio[7];sim/flight_controls/door_open_8
+sim/flightmodel2/misc/door_open_ratio[6];sim/flight_controls/door_open_7
 sim/flightmodel2/misc/door_open_ratio[5];sim/flight_controls/door_open_6
 sim/flightmodel2/misc/door_open_ratio[4];sim/flight_controls/door_open_5
 sim/flightmodel2/misc/door_open_ratio[3];sim/flight_controls/door_open_4
@@ -155,3 +161,13 @@ laminar/A333/barometer/fo_pull_std_pos;sim/cockpit2/gauges/barometer_std_fo
 laminar/A333/autopilot/knobs/vertical_push_pos;sim/autopilot/altitude_up
 laminar/A333/autopilot/knobs/altitude_push_pos;sim/autopilot/altitude_dn
 laminar/A333/autopilot/knobs/heading_push_pos;sim/autopilot/heading_up
+
+################################################
+# Manually added DataRef/CMD mapping:
+################################################
+
+laminar/A333/buttons/adirs/ir1_knob_pos;laminar/A333/knobs/adirs/ir1_knob_right;laminar/A333/knobs/adirs/ir1_knob_left
+laminar/A333/buttons/adirs/ir2_knob_pos;laminar/A333/knobs/adirs/ir2_knob_right;laminar/A333/knobs/adirs/ir2_knob_left
+laminar/A333/buttons/adirs/ir3_knob_pos;laminar/A333/knobs/adirs/ir3_knob_right;laminar/A333/knobs/adirs/ir3_knob_left
+laminar/A333/comm/rtp_C/off_status;laminar/A333/rtp_C/off_switch
+
