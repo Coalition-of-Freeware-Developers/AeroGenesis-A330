@@ -192,3 +192,7 @@ sim/cockpit2/switches/instrument_brightness_ratio[7]                            
 sim/cockpit2/switches/instrument_brightness_ratio[8]                                                             ;                                                    ;                                                    ; 
 sim/cockpit2/switches/instrument_brightness_ratio[9]                                                             ;                                                    ;                                                    ; 
 sim/cockpit2/switches/instrument_brightness_ratio[10]                                                            ;                                                    ;                                                    ; 
+AG330/ADIRS/isAligned;AG330/ADIRS/skipIRS;AG330/ADIRS/skipIRS;
+sim/cockpit/engine/APU_running;
+sim/flightmodel/engine/ENGN_running[1];
+sim/flightmodel/engine/ENGN_running[2];
