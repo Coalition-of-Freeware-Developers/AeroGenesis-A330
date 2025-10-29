@@ -130792,7 +130792,7 @@ GROUP PFDcapt
       IMAGE LED/airbus_display_LED_24_green
       DATAREF sim/cockpit2/gauges/indicators/mach_pilot
       SHOW_EQUAL 0.000000 laminar/A333/status/capt_ls_bars
-      SHOW_GREATER 0.500000 sim/cockpit2/gauges/indicators/mach_pilot
+      SHOW_GREATER 28000.000000 sim/cockpit/pressure/cabin_altitude_actual_ft 
       LOCKED
       HIDE
       LIGHT_MODE GLASS_AUTO
@@ -136392,6 +136392,7 @@ GROUP PFDfo
     SHOW_EQUAL 1.000000 AG330/Displays/PFDfo/normalOperation
     LOCKED
     HIDE
+    GROUP_OPEN
     GROUP Horizon ROLL 2
       LOCKED
       HIDE
@@ -137812,7 +137813,7 @@ GROUP PFDfo
       IMAGE LED/airbus_display_LED_24_green
       DATAREF sim/cockpit2/gauges/indicators/mach_copilot
       SHOW_EQUAL 0.000000 laminar/A333/status/fo_ls_bars
-      SHOW_GREATER 0.500000 sim/cockpit2/gauges/indicators/mach_copilot
+      SHOW_GREATER 28000.000000 sim/cockpit/pressure/cabin_altitude_actual_ft 
       LOCKED
       HIDE
       LIGHT_MODE GLASS_AUTO
