@@ -1,4 +1,12 @@
 # AeroGenesis A330 For X-Plane 12
+## Version 1.3.0-b1 (as is on 29/10/25)
+- Fixed GroundHandling behaviour
+- Fixed IRS not aligned when using "start with engines running" option
+- Fixed IAS/MACH convertion behaviour
+- Corrected EMPTY WEIGHT
+- Added experimental PanelState save/load feature
+
+---
 
 ## Version 1.2.0-r1
 - Added Laminar Research's XP12.3.0-b4 & -rc1 changes to the A333
@@ -7,7 +15,7 @@
 ## Version 1.2.0-b2
 - Fixed and enhanced GPWS alerts
 - Fixed chocks now holding aircraft in position again
-  
+
 ## Version 1.2.0-b1
 - Laminar Research A330 improvements
 - BARO Sync feature
