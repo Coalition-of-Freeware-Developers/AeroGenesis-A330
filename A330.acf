@@ -40161,7 +40161,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.054000001
 P acf/_ff_rat_idle_PRP 0.100000001
 P acf/_ff_rat_idle_turbo 0.100000001
-P acf/_file_writer_version 123003
+P acf/_file_writer_version 123014
 P acf/_fixed_max/0 2E4
 P acf/_fixed_max/1 2E4
 P acf/_fixed_max/2 2E4
@@ -40620,7 +40620,7 @@ P acf/_lock_n2 30.000000000
 P acf/_lock_with_elev_EQ 0
 P acf/_m_displaced 0.000000000
 P acf/_m_displaced_Y 0.000000000
-P acf/_m_empty 2.8527803E5
+P acf/_m_empty 2.6676E5
 P acf/_m_fuel_max_tot 2.4071205E5
 P acf/_m_fuel_xfer_start 61.200000763
 P acf/_m_fuel_xfer_stop 1.000000000
