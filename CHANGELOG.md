@@ -1,8 +1,11 @@
 # AeroGenesis A330 For X-Plane 12
-## Version 1.3.0-b1 (as is on 29/10/25)
+
+
+## Version 1.3.0-b1 (as is on 01/11/25)
 - Fixed GroundHandling behaviour
 - Fixed IRS not aligned when using "start with engines running" option
 - Fixed IAS/MACH convertion behaviour
+- Fixed PW4000 engines not casting shadows on ground
 - Corrected EMPTY WEIGHT
 - Added experimental PanelState save/load feature
 
