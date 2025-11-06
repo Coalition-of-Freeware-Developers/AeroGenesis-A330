@@ -1,0 +1,198 @@
+DataRef                                                                                                          ; Command 1 (increase value)                         ; Command 2 (decrease value)                         ; Comments
+# This file maps DataRefs to their respective Commands.
+# The order of those datasets is not relevant.
+#
+# -> If a DataRef can be set directly, you don't need to provide any CMD and leave those coulms blank.
+#
+# -> However, for some DataRefs you need to rund a CMD, in this case you need to PROVIDE TWO COMMANDS.
+#    One CMD to increase the DataRef value, and one to decrese it.
+#    (EXCEPT if you only want to add a command for increasing that value, but not for decreasing (or vice versa),
+#    but that would be rocket science lol)
+#
+# -> If there only is one CMD available (toggle) you need to put that CMD into both columns.
+#
+#
+# FOR MORE INFORMATION REFER TO THE PROVIDED MANUAL.
+
+#
+# !automatically generated:
+#
+
+laminar/A333/buttons/ecam/fuel_pos                                                                               ; laminar/A333/button/ecam/fuel_mode                 ; laminar/A333/button/ecam/fuel_mode                 ; 
+laminar/A333/buttons/ecam/hyd_pos                                                                                ; laminar/A333/button/ecam/hyd_mode                  ; laminar/A333/button/ecam/hyd_mode                  ; 
+laminar/A333/buttons/ecam/el_dc_pos                                                                              ; laminar/A333/button/ecam/el_dc_mode                ; laminar/A333/button/ecam/el_dc_mode                ; 
+laminar/A333/buttons/ecam/f_ctl_pos                                                                              ; laminar/A333/button/ecam/f_ctl_mode                ; laminar/A333/button/ecam/f_ctl_mode                ; 
+laminar/A333/buttons/ecam/el_ac_pos                                                                              ; laminar/A333/button/ecam/el_ac_mode                ; laminar/A333/button/ecam/el_ac_mode                ; 
+laminar/A333/buttons/ecam/wheel_pos                                                                              ; laminar/A333/button/ecam/wheel_mode                ; laminar/A333/button/ecam/wheel_mode                ; 
+laminar/A333/buttons/ecam/rcl_pos                                                                                ; laminar/A333/button/ecam/rcl_mode                  ; laminar/A333/button/ecam/rcl_mode                  ; 
+laminar/A333/buttons/ecam/sts_pos                                                                                ; laminar/A333/button/ecam/sts_mode                  ; laminar/A333/button/ecam/sts_mode                  ; 
+laminar/A333/buttons/ecam/door_pos                                                                               ; laminar/A333/button/ecam/door_mode                 ; laminar/A333/button/ecam/door_mode                 ; 
+laminar/A333/buttons/ecam/press_pos                                                                              ; laminar/A333/button/ecam/press_mode                ; laminar/A333/button/ecam/press_mode                ; 
+laminar/A333/buttons/ecam/bleed_pos                                                                              ; laminar/A333/button/ecam/bleed_mode                ; laminar/A333/button/ecam/bleed_mode                ; 
+laminar/A333/buttons/ecam/to_config_pos                                                                          ; laminar/A333/button/ecam/to_config_test            ; laminar/A333/button/ecam/to_config_test            ; 
+laminar/A333/buttons/ecam/cond_pos                                                                               ; laminar/A333/button/ecam/cond_mode                 ; laminar/A333/button/ecam/cond_mode                 ; 
+laminar/A333/buttons/ecam/clr_capt_pos                                                                           ; laminar/A333/button/ecam/clr_capt                  ; laminar/A333/button/ecam/clr_capt                  ; 
+laminar/A333/buttons/ecam/apu_pos                                                                                ; laminar/A333/button/ecam/apu_mode                  ; laminar/A333/button/ecam/apu_mode                  ; 
+laminar/A333/buttons/cvr_erase_pos                                                                               ; laminar/A333/buttons/rcdr/cvr_erase_push           ; laminar/A333/buttons/rcdr/cvr_erase_push           ; 
+laminar/A333/buttons/cvr_test_pos                                                                                ; laminar/A333/buttons/rcdr/cvr_test_push            ; laminar/A333/buttons/rcdr/cvr_test_push            ; 
+laminar/A333/buttons/misc/rain_repellent_fo_pos                                                                  ; laminar/A333/buttons/misc/rain_repellent_fo        ; laminar/A333/buttons/misc/rain_repellent_fo        ; 
+laminar/A333/fire/buttons/cargo_test_pos                                                                         ; laminar/A333/fire/buttons/cargo_fire_test_push     ; laminar/A333/fire/buttons/cargo_fire_test_push     ; 
+laminar/A333/buttons/misc/rain_repellent_capt_pos                                                                ; laminar/A333/buttons/misc/rain_repellent_capt      ; laminar/A333/buttons/misc/rain_repellent_capt      ; 
+laminar/A333/buttons/call/aft_pos                                                                                ; laminar/A333/buttons/call/aft_push                 ; laminar/A333/buttons/call/aft_push                 ; 
+laminar/A333/buttons/call/exit_pos                                                                               ; laminar/A333/buttons/call/exit_push                ; laminar/A333/buttons/call/exit_push                ; 
+laminar/A333/buttons/call/mid_pos                                                                                ; laminar/A333/buttons/call/mid_push                 ; laminar/A333/buttons/call/mid_push                 ; 
+laminar/A333/buttons/call/fwd_pos                                                                                ; laminar/A333/buttons/call/fwd_push                 ; laminar/A333/buttons/call/fwd_push                 ; 
+laminar/A333/buttons/call/purs_pos                                                                               ; laminar/A333/buttons/call/purs_push                ; laminar/A333/buttons/call/purs_push                ; 
+laminar/A333/buttons/call/all_pos                                                                                ; laminar/A333/buttons/call/all_push                 ; laminar/A333/buttons/call/all_push                 ; 
+laminar/A333/buttons/call/cab_rest_pos                                                                           ; laminar/A333/buttons/call/cab_rest_push            ; laminar/A333/buttons/call/cab_rest_push            ; 
+laminar/A333/buttons/call/flt_rest_pos                                                                           ; laminar/A333/buttons/call/flt_rest_push            ; laminar/A333/buttons/call/flt_rest_push            ; 
+laminar/A333/buttons/call/mech_pos                                                                               ; laminar/A333/buttons/call/mech_push                ; laminar/A333/buttons/call/mech_push                ; 
+laminar/A333/buttons/evac_horn_off_pos                                                                           ; laminar/A333/buttons/evac_horn_off_push            ; laminar/A333/buttons/evac_horn_off_push            ; 
+laminar/A333/buttons/APU_master                                                                                  ; laminar/A333/buttons/APU_master                    ; laminar/A333/buttons/APU_master                    ; 
+laminar/A333/buttons/APU_start                                                                                   ; laminar/A333/buttons/APU_start                     ; laminar/A333/buttons/APU_start                     ; 
+laminar/A333/buttons/wing_anti_ice                                                                               ; sim/ice/wing_heat_tog                              ; sim/ice/wing_heat_tog                              ; 
+laminar/A333/buttons/engine_anti_ice1                                                                            ; sim/ice/inlet_heat0_tog                            ; sim/ice/inlet_heat0_tog                            ; 
+laminar/A333/buttons/engine_anti_ice2                                                                            ; sim/ice/inlet_heat1_tog                            ; sim/ice/inlet_heat1_tog                            ; 
+laminar/A333/buttons/window_probe_ice                                                                            ; laminar/A333/buttons/probe_window_heat_toggle      ; laminar/A333/buttons/probe_window_heat_toggle      ; 
+laminar/A333/buttons/ditching_pos                                                                                ; laminar/A333/buttons/ditching_tog                  ; laminar/A333/buttons/ditching_tog                  ; 
+laminar/A333/buttons/eng_bleed_1_pos                                                                             ; sim/bleed_air/engine_1_toggle                      ; sim/bleed_air/engine_1_toggle                      ; 
+laminar/A333/buttons/hot_air1_pos                                                                                ; laminar/A333/switches/hot_air1_toggle              ; laminar/A333/switches/hot_air1_toggle              ; 
+laminar/A333/buttons/apu_bleed_pos                                                                               ; sim/bleed_air/apu_toggle                           ; sim/bleed_air/apu_toggle                           ; 
+laminar/A333/buttons/hot_air2_pos                                                                                ; laminar/A333/switches/hot_air2_toggle              ; laminar/A333/switches/hot_air2_toggle              ; 
+laminar/A333/buttons/eng_bleed_2_pos                                                                             ; sim/bleed_air/engine_2_toggle                      ; sim/bleed_air/engine_2_toggle                      ; 
+laminar/A333/buttons/pack_2_pos                                                                                  ; sim/bleed_air/pack_right_toggle                    ; sim/bleed_air/pack_right_toggle                    ; 
+laminar/A333/buttons/pack_1_pos                                                                                  ; sim/bleed_air/pack_left_toggle                     ; sim/bleed_air/pack_left_toggle                     ; 
+laminar/A333/buttons/ram_air_pos                                                                                 ; laminar/A333/switches/ram_air_toggle               ; laminar/A333/switches/ram_air_toggle               ; 
+laminar/A333/buttons/ext_power_B_pos                                                                             ; laminar/A333/buttons/external_powerB_toggle        ; laminar/A333/buttons/external_powerB_toggle        ; 
+laminar/A333/buttons/ext_power_A_pos                                                                             ; laminar/A333/buttons/external_powerA_toggle        ; laminar/A333/buttons/external_powerA_toggle        ; 
+laminar/A333/buttons/gen_apu_pos                                                                                 ; laminar/A333/buttons/APU_gen_toggle                ; laminar/A333/buttons/APU_gen_toggle                ; 
+laminar/A333/buttons/gen1_pos                                                                                    ; sim/electrical/generator_1_toggle                  ; sim/electrical/generator_1_toggle                  ; 
+laminar/A333/buttons/IDG1_discon_pos                                                                             ; laminar/A333/buttons/IDG1_disconnect               ; laminar/A333/buttons/IDG1_disconnect               ; 
+laminar/A333/buttons/bus_tie_pos                                                                                 ; sim/electrical/cross_tie_toggle                    ; sim/electrical/cross_tie_toggle                    ; 
+laminar/A333/buttons/gen2_pos                                                                                    ; sim/electrical/generator_2_toggle                  ; sim/electrical/generator_2_toggle                  ; 
+laminar/A333/buttons/IDG2_discon_pos                                                                             ; laminar/A333/buttons/IDG2_disconnect               ; laminar/A333/buttons/IDG2_disconnect               ; 
+laminar/A333/buttons/galley_pos                                                                                  ; laminar/A333/buttons/galley_toggle                 ; laminar/A333/buttons/galley_toggle                 ; 
+laminar/A333/buttons/commercial_pos                                                                              ; laminar/A333/buttons/commercial_toggle             ; laminar/A333/buttons/commercial_toggle             ; 
+laminar/A333/buttons/APU_batt_pos                                                                                ; laminar/A333/buttons/APU_batt_toggle               ; laminar/A333/buttons/APU_batt_toggle               ; 
+laminar/A333/buttons/battery2_pos                                                                                ; sim/electrical/battery_2_toggle                    ; sim/electrical/battery_2_toggle                    ; 
+laminar/A333/buttons/battery1_pos                                                                                ; sim/electrical/battery_1_toggle                    ; sim/electrical/battery_1_toggle                    ; 
+laminar/A333/buttons/AC_ESS_FEED_pos                                                                             ; laminar/A333/buttons/ACESSFeed_toggle              ; laminar/A333/buttons/ACESSFeed_toggle              ; 
+laminar/A333/fuel/buttons/left_stby_pump_pos                                                                     ; laminar/A333/switches/left_stby_pump_toggle        ; laminar/A333/switches/left_stby_pump_toggle        ; 
+laminar/A333/fuel/buttons/left2_pump_pos                                                                         ; laminar/A333/switches/left2_pump_toggle            ; laminar/A333/switches/left2_pump_toggle            ; 
+laminar/A333/fuel/buttons/left1_pump_pos                                                                         ; laminar/A333/switches/left1_pump_toggle            ; laminar/A333/switches/left1_pump_toggle            ; 
+laminar/A333/fuel/buttons/center_left_pump_pos                                                                   ; laminar/A333/switches/center_left_pump_toggle      ; laminar/A333/switches/center_left_pump_toggle      ; 
+laminar/A333/fuel/buttons/trim_xfr_pos                                                                           ; laminar/A333/switches/trim_xfr_toggle              ; laminar/A333/switches/trim_xfr_toggle              ; 
+laminar/A333/fuel/buttons/center_xfr_pos                                                                         ; laminar/A333/switches/center_xfr_toggle            ; laminar/A333/switches/center_xfr_toggle            ; 
+laminar/A333/fuel/buttons/center_right_pump_pos                                                                  ; laminar/A333/switches/center_right_pump_toggle     ; laminar/A333/switches/center_right_pump_toggle     ; 
+laminar/A333/fuel/buttons/wing_x_feed_pos                                                                        ; laminar/A333/switches/wing_x_feed_toggle           ; laminar/A333/switches/wing_x_feed_toggle           ; 
+laminar/A333/fuel/buttons/outer_tank_xfr_pos                                                                     ; laminar/A333/switches/outer_tank_xfr_toggle        ; laminar/A333/switches/outer_tank_xfr_toggle        ; 
+laminar/A333/fuel/buttons/right2_pump_pos                                                                        ; laminar/A333/switches/right2_pump_toggle           ; laminar/A333/switches/right2_pump_toggle           ; 
+laminar/A333/fuel/buttons/right1_pump_pos                                                                        ; laminar/A333/switches/right1_pump_toggle           ; laminar/A333/switches/right1_pump_toggle           ; 
+laminar/A333/fuel/buttons/right_stby_pump_pos                                                                    ; laminar/A333/switches/right_stby_pump_toggle       ; laminar/A333/switches/right_stby_pump_toggle       ; 
+laminar/A330/buttons/hyd/rat_deploy_pos                                                                          ; laminar/A330/buttons/hyd/ram_air_turbine_deploy    ; laminar/A330/buttons/hyd/ram_air_turbine_deploy    ; 
+laminar/A330/buttons/hyd/eng2_pump_green_pos                                                                     ; sim/flight_controls/hydraulic_eng2A_tog            ; sim/flight_controls/hydraulic_eng2A_tog            ; 
+laminar/A330/buttons/hyd/eng2_pump_yellow_pos                                                                    ; sim/flight_controls/hydraulic_eng2B_tog            ; sim/flight_controls/hydraulic_eng2B_tog            ; 
+laminar/A330/buttons/hyd/elec_yellow_tog_pos                                                                     ; laminar/A330/buttons/hyd/elec_yellow_toggle        ; laminar/A330/buttons/hyd/elec_yellow_toggle        ; 
+laminar/A330/buttons/hyd/elec_yellow_on_pos                                                                      ; laminar/A330/buttons/hyd/elec_yellow_on            ; laminar/A330/buttons/hyd/elec_yellow_on            ; 
+laminar/A330/buttons/hyd/eng1_pump_blue_pos                                                                      ; sim/flight_controls/hydraulic_eng1C_tog            ; sim/flight_controls/hydraulic_eng1C_tog            ; 
+laminar/A330/buttons/hyd/elec_blue_tog_pos                                                                       ; laminar/A330/buttons/hyd/elec_blue_toggle          ; laminar/A330/buttons/hyd/elec_blue_toggle          ; 
+laminar/A330/buttons/hyd/elec_blue_on_pos                                                                        ; laminar/A330/buttons/hyd/elec_blue_on              ; laminar/A330/buttons/hyd/elec_blue_on              ; 
+laminar/A330/buttons/hyd/eng1_pump_green_pos                                                                     ; sim/flight_controls/hydraulic_eng1A_tog            ; sim/flight_controls/hydraulic_eng1A_tog            ; 
+laminar/A330/buttons/hyd/elec_green_tog_pos                                                                      ; laminar/A330/buttons/hyd/elec_green_toggle         ; laminar/A330/buttons/hyd/elec_green_toggle         ; 
+laminar/A330/buttons/hyd/elec_green_on_pos                                                                       ; laminar/A330/buttons/hyd/elec_green_on             ; laminar/A330/buttons/hyd/elec_green_on             ; 
+laminar/A333/fire/buttons/eng2_agent1_pos                                                                        ; laminar/A333/fire/buttons/eng2_agent1_push         ; laminar/A333/fire/buttons/eng2_agent1_push         ; 
+laminar/A333/fire/buttons/eng2_agent2_pos                                                                        ; laminar/A333/fire/buttons/eng2_agent2_push         ; laminar/A333/fire/buttons/eng2_agent2_push         ; 
+laminar/A333/fire/buttons/eng1_agent2_pos                                                                        ; laminar/A333/fire/buttons/eng1_agent2_push         ; laminar/A333/fire/buttons/eng1_agent2_push         ; 
+laminar/A333/fire/buttons/eng1_agent1_pos                                                                        ; laminar/A333/fire/buttons/eng1_agent1_push         ; laminar/A333/fire/buttons/eng1_agent1_push         ; 
+laminar/A333/buttons/oxy/pax_oxy_maint_reset_pos                                                                 ; laminar/A333/buttons/oxygen/pax_reset_toggle       ; laminar/A333/buttons/oxygen/pax_reset_toggle       ; 
+laminar/A333/buttons/cabin_fan_pos                                                                               ; laminar/A333/buttons/cabin_fan_tog                 ; laminar/A333/buttons/cabin_fan_tog                 ; 
+laminar/A333/buttons/ventilation_extract_ovrd_pos                                                                ; laminar/A333/buttons/ventilation_extract_ovrd_tog  ; laminar/A333/buttons/ventilation_extract_ovrd_tog  ; 
+laminar/A333/buttons/cargo_cond/hot_air_pos                                                                      ; laminar/A333/buttons/cargo_cond/hot_air_tog        ; laminar/A333/buttons/cargo_cond/hot_air_tog        ; 
+laminar/A333/buttons/cargo_cond/bulk_isol_valve_pos                                                              ; laminar/A333/buttons/cargo_cond/bulk_isol_valve_tog; laminar/A333/buttons/cargo_cond/bulk_isol_valve_tog; 
+laminar/A333/buttons/fcc_prim3_pos                                                                               ; laminar/A333/buttons/fcc/prim3_toggle              ; laminar/A333/buttons/fcc/prim3_toggle              ; 
+laminar/A333/buttons/fcc_sec2_pos                                                                                ; laminar/A333/buttons/fcc/sec2_toggle               ; laminar/A333/buttons/fcc/sec2_toggle               ; 
+laminar/A333/buttons/fcc_prim2_pos                                                                               ; laminar/A333/buttons/fcc/prim2_toggle              ; laminar/A333/buttons/fcc/prim2_toggle              ; 
+laminar/A333/buttons/cargo_cond/fwd_isol_valve_pos                                                               ; laminar/A333/buttons/cargo_cond/fwd_isol_valve_tog ; laminar/A333/buttons/cargo_cond/fwd_isol_valve_tog ; 
+laminar/A333/buttons/pax_IFEC_pos                                                                                ; laminar/A333/buttons/pax_IFEC_toggle               ; laminar/A333/buttons/pax_IFEC_toggle               ; 
+laminar/A333/buttons/pax_sys_pos                                                                                 ; laminar/A333/buttons/pax_sys_toggle                ; laminar/A333/buttons/pax_sys_toggle                ; 
+laminar/A333/buttons/pax_satcom_pos                                                                              ; laminar/A333/buttons/pax_satcom_toggle             ; laminar/A333/buttons/pax_satcom_toggle             ; 
+laminar/A333/buttons/oxy/crew_valve_pos                                                                          ; sim/oxy/crew_valve_toggle                          ; sim/oxy/crew_valve_toggle                          ; 
+laminar/A333/buttons/oxy/pax_masks_pos                                                                           ; sim/oxy/passenger_o2_on                            ; sim/oxy/passenger_o2_on                            ; 
+laminar/A333/buttons/call/emergency_pos                                                                          ; laminar/A333/buttons/call/emergency_toggle         ; laminar/A333/buttons/call/emergency_toggle         ; 
+laminar/A333/buttons/rcdr/ground_control_pos                                                                     ; laminar/A333/buttons/rcdr/ground_control_push      ; laminar/A333/buttons/rcdr/ground_control_push      ; 
+laminar/A333/buttons/gpws/flap_toggle_pos                                                                        ; laminar/A333/buttons/gpws/flap_mode_toggle         ; laminar/A333/buttons/gpws/flap_mode_toggle         ; 
+laminar/A333/buttons/gpws/glideslope_toggle_pos                                                                  ; laminar/A333/buttons/gpws/gs_mode_toggle           ; laminar/A333/buttons/gpws/gs_mode_toggle           ; 
+laminar/A333/buttons/gpws/system_toggle_pos                                                                      ; laminar/A333/buttons/gpws/sys_toggle               ; laminar/A333/buttons/gpws/sys_toggle               ; 
+laminar/A333/buttons/gpws/terrain_toggle_pos                                                                     ; laminar/A333/buttons/gpws/terr_toggle              ; laminar/A333/buttons/gpws/terr_toggle              ; 
+laminar/A333/buttons/evac_command_pos                                                                            ; laminar/A333/buttons/evac_command_tog              ; laminar/A333/buttons/evac_command_tog              ; 
+laminar/A333/buttons/fcc_turb_damp_pos                                                                           ; sim/systems/yaw_damper_toggle                      ; sim/systems/yaw_damper_toggle                      ; 
+laminar/A333/buttons/fcc_prim1_pos                                                                               ; laminar/A333/buttons/fcc/prim1_toggle              ; laminar/A333/buttons/fcc/prim1_toggle              ; 
+laminar/A333/buttons/fcc_sec1_pos                                                                                ; laminar/A333/buttons/fcc/sec1_toggle               ; laminar/A333/buttons/fcc/sec1_toggle               ; 
+laminar/A333/fire/buttons/apu_agent_pos                                                                          ; laminar/A333/fire/buttons/apu_agent_push           ; laminar/A333/fire/buttons/apu_agent_push           ; 
+laminar/A333/buttons/adirs/adr2_pos                                                                              ; laminar/A333/buttons/adirs/adr2_toggle             ; laminar/A333/buttons/adirs/adr2_toggle             ; 
+laminar/A333/buttons/adirs/adr3_pos                                                                              ; laminar/A333/buttons/adirs/adr3_toggle             ; laminar/A333/buttons/adirs/adr3_toggle             ; 
+laminar/A333/buttons/adirs/adr1_pos                                                                              ; laminar/A333/buttons/adirs/adr1_toggle             ; laminar/A333/buttons/adirs/adr1_toggle             ; 
+laminar/A333/buttons/adirs/ir1_pos                                                                               ; laminar/A333/buttons/adirs/ir1_toggle              ; laminar/A333/buttons/adirs/ir1_toggle              ; 
+laminar/A333/buttons/adirs/ir3_pos                                                                               ; laminar/A333/buttons/adirs/ir3_toggle              ; laminar/A333/buttons/adirs/ir3_toggle              ; 
+laminar/A333/buttons/adirs/ir2_pos                                                                               ; laminar/A333/buttons/adirs/ir2_toggle              ; laminar/A333/buttons/adirs/ir2_toggle              ; 
+laminar/A333/buttons/gear/brake_fans_pos                                                                         ; sim/flight_controls/brakes_rto_auto                ; sim/flight_controls/brakes_rto_auto                ; 
+laminar/A333/buttons/gear/auto_brake_max_pos                                                                     ; sim/flight_controls/brakes_2_auto                  ; sim/flight_controls/brakes_2_auto                  ; 
+laminar/A333/buttons/gear/auto_brake_med_pos                                                                     ; sim/flight_controls/brakes_1_auto                  ; sim/flight_controls/brakes_1_auto                  ; 
+laminar/A333/buttons/gear/auto_brake_low_pos                                                                     ; sim/instruments/EFIS_copilot_terr                  ; sim/instruments/EFIS_copilot_terr                  ; 
+laminar/A333/buttons/EFIS_terr_on_nd_fo                                                                          ; sim/instruments/EFIS_terr                          ; sim/instruments/EFIS_terr                          ; 
+laminar/A333/buttons/EFIS_terr_on_nd_capt                                                                        ; laminar/A333/buttons/pfd_nd_capt_swap              ; laminar/A333/buttons/pfd_nd_capt_swap              ; 
+laminar/A333/buttons/pfd_nd_swap_capt_pos                                                                        ; laminar/A333/buttons/pfd_nd_capt_swap              ; laminar/A333/buttons/pfd_nd_capt_swap              ; 
+laminar/A333/buttons/pfd_nd_swap_fo_pos                                                                          ; laminar/A333/buttons/pfd_nd_fo_swap                ; laminar/A333/buttons/pfd_nd_fo_swap                ; 
+laminar/A333/buttons/EFIS_true_north_ref_pos                                                                     ; laminar/A333/buttons/EFIS_tru_north                ; laminar/A333/buttons/EFIS_tru_north                ; 
+laminar/a333/misc/capt_visor                                                                                     ;                                                    ;                                                    ; 
+laminar/a333/misc/fo_visor                                                                                       ;                                                    ;                                                    ; 
+laminar/A333/fire/switches/eng1_handle                                                                           ; laminar/A333/fire/switches/engine1_fire_push       ; laminar/A333/fire/switches/engine1_fire_push       ; 
+laminar/A333/fire/switches/eng2_handle                                                                           ; laminar/A333/fire/switches/engine2_fire_push       ; laminar/A333/fire/switches/engine2_fire_push       ; 
+laminar/A333/fire/switches/apu_handle                                                                            ; laminar/A333/fire/switches/apu_fire_push           ; laminar/A333/fire/switches/apu_fire_push           ; 
+laminar/A333/comm/push_button/rtp_C_freq_swap                                                                    ; laminar/A333/rtp_C/freq_txfr/sel_switch            ; laminar/A333/rtp_C/freq_txfr/sel_switch            ; 
+laminar/A333/comm/push_button/rtp_C_vhf_1_pos                                                                    ; laminar/A333/rtp_C/vhf_1/sel_switch                ; laminar/A333/rtp_C/vhf_1/sel_switch                ; 
+laminar/A333/comm/push_button/rtp_C_vhf_2_pos                                                                    ; laminar/A333/rtp_C/vhf_2/sel_switch                ; laminar/A333/rtp_C/vhf_2/sel_switch                ; 
+laminar/A333/comm/push_button/rtp_C_vhf_3_pos                                                                    ; laminar/A333/rtp_C/vhf_3/sel_switch                ; laminar/A333/rtp_C/vhf_3/sel_switch                ; 
+laminar/A333/comm/push_button/rtp_C_hf_2_pos                                                                     ; laminar/A333/rtp_C/hf_2/sel_switch                 ; laminar/A333/rtp_C/hf_2/sel_switch                 ; 
+laminar/A333/comm/push_button/rtp_C_am_pos                                                                       ; laminar/A333/rtp_C/am/sel_switch                   ; laminar/A333/rtp_C/am/sel_switch                   ; 
+laminar/A333/comm/push_button/rtp_C_hf_1_pos                                                                     ; laminar/A333/rtp_C/hf_1/sel_switch                 ; laminar/A333/rtp_C/hf_1/sel_switch                 ; 
+sim/flightmodel2/misc/door_open_ratio[7]                                                                         ; sim/flight_controls/door_open_8                    ; sim/flight_controls/door_open_8                    ; 
+sim/flightmodel2/misc/door_open_ratio[6]                                                                         ; sim/flight_controls/door_open_7                    ; sim/flight_controls/door_open_7                    ; 
+sim/flightmodel2/misc/door_open_ratio[5]                                                                         ; sim/flight_controls/door_open_6                    ; sim/flight_controls/door_open_6                    ; 
+sim/flightmodel2/misc/door_open_ratio[4]                                                                         ; sim/flight_controls/door_open_5                    ; sim/flight_controls/door_open_5                    ; 
+sim/flightmodel2/misc/door_open_ratio[3]                                                                         ; sim/flight_controls/door_open_4                    ; sim/flight_controls/door_open_4                    ; 
+sim/flightmodel2/misc/door_open_ratio[2]                                                                         ; sim/flight_controls/door_open_3                    ; sim/flight_controls/door_open_3                    ; 
+sim/flightmodel2/misc/door_open_ratio[1]                                                                         ; sim/flight_controls/door_open_2                    ; sim/flight_controls/door_open_2                    ; 
+sim/flightmodel2/misc/door_open_ratio[0]                                                                         ; sim/flight_controls/door_open_1                    ; sim/flight_controls/door_open_1                    ; 
+laminar/A333/switches/park_brake_lift                                                                            ; sim/flight_controls/parking_brake                  ; sim/flight_controls/parking_brake                  ; 
+laminar/A333/barometer/capt_pull_std_pos                                                                         ; sim/cockpit2/gauges/barometer_std_capt             ; sim/cockpit2/gauges/barometer_std_capt             ; 
+laminar/A333/barometer/fo_pull_std_pos                                                                           ; sim/cockpit2/gauges/barometer_std_fo               ; sim/cockpit2/gauges/barometer_std_fo               ; 
+laminar/A333/autopilot/knobs/vertical_push_pos                                                                   ; sim/autopilot/altitude_up                          ; sim/autopilot/altitude_up                          ; 
+laminar/A333/autopilot/knobs/altitude_push_pos                                                                   ; sim/autopilot/altitude_dn                          ; sim/autopilot/altitude_dn                          ; 
+laminar/A333/autopilot/knobs/heading_push_pos                                                                    ; sim/autopilot/heading_up                           ; sim/autopilot/heading_up                           ; 
+
+#
+# Manually added DataRef/CMD mapping:
+#
+
+laminar/A333/buttons/adirs/ir1_knob_pos                                                                          ; laminar/A333/knobs/adirs/ir1_knob_right            ; laminar/A333/knobs/adirs/ir1_knob_left             ; OVERHEAD: ADIRS Knob 1
+laminar/A333/buttons/adirs/ir2_knob_pos                                                                          ; laminar/A333/knobs/adirs/ir2_knob_right            ; laminar/A333/knobs/adirs/ir2_knob_left             ; OVERHEAD: ADIRS Knob 2
+laminar/A333/buttons/adirs/ir3_knob_pos                                                                          ; laminar/A333/knobs/adirs/ir3_knob_right            ; laminar/A333/knobs/adirs/ir3_knob_left             ; OVERHEAD: ADIRS Knob 3
+laminar/A333/comm/rtp_C/off_status                                                                               ; laminar/A333/rtp_C/off_switch                      ; laminar/A333/rtp_C/off_switch                      ; OVERHEAD: radio panel
+laminar/A333/comm/rtp_L/off_status                                                                               ; laminar/A333/rtp_L/off_switch                      ; laminar/A333/rtp_L/off_switch                      ; PEDESTAL: radio panel CAPT
+laminar/A333/comm/rtp_R/off_status                                                                               ; laminar/A333/rtp_R/off_switch                      ; laminar/A333/rtp_R/off_switch                      ; PEDESTAL: radio panel F/O
+sim/cockpit2/switches/instrument_brightness_ratio[0]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[1]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[2]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[3]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[4]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[5]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[6]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[7]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[8]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[9]                                                             ;                                                    ;                                                    ; 
+sim/cockpit2/switches/instrument_brightness_ratio[10]                                                            ;                                                    ;                                                    ; 
+AG330/ADIRS/isAligned;AG330/ADIRS/skipIRS;AG330/ADIRS/skipIRS;
+sim/cockpit/engine/APU_running;
+sim/flightmodel/engine/ENGN_running[1];
+sim/flightmodel/engine/ENGN_running[2];

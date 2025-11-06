@@ -40161,7 +40161,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.054000001
 P acf/_ff_rat_idle_PRP 0.100000001
 P acf/_ff_rat_idle_turbo 0.100000001
-P acf/_file_writer_version 123003
+P acf/_file_writer_version 123014
 P acf/_fixed_max/0 2E4
 P acf/_fixed_max/1 2E4
 P acf/_fixed_max/2 2E4
@@ -40620,7 +40620,7 @@ P acf/_lock_n2 30.000000000
 P acf/_lock_with_elev_EQ 0
 P acf/_m_displaced 0.000000000
 P acf/_m_displaced_Y 0.000000000
-P acf/_m_empty 2.8527803E5
+P acf/_m_empty 2.6676E5
 P acf/_m_fuel_max_tot 2.4071205E5
 P acf/_m_fuel_xfer_start 61.200000763
 P acf/_m_fuel_xfer_stop 1.000000000
@@ -41276,7 +41276,7 @@ P acf/_vect_min_nace 0.000000000
 P acf/_vect_power_aft 1.000000000
 P acf/_vect_power_for 1.000000000
 P acf/_vect_rate 15.000000000
-P acf/_version 1.2.0
+P acf/_version 1.3.0-b1
 P acf/_vnav_descend_auto_arm 0
 P acf/_vor_mode_has_dead_reckon 1
 P acf/_vvi_but_adjusts_pitch 0
@@ -127005,7 +127005,6 @@ GROUP Standby
 END_GROUP
 GROUP PFDcapt
   HIDE
-  GROUP_OPEN
   gen_rotary ATT
     POS 251.000000 509.500000
     IMAGE AeroGenesis/PFDcapt/PFD_ATT
@@ -129359,6 +129358,7 @@ GROUP PFDcapt
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/normalOperation
     LOCKED
     HIDE
+    GROUP_OPEN
     GROUP Horizon ROLL
       LOCKED
       HIDE
@@ -130779,7 +130779,7 @@ GROUP PFDcapt
       IMAGE LED/airbus_display_LED_24_green
       DATAREF sim/cockpit2/gauges/indicators/mach_pilot
       SHOW_EQUAL 0.000000 laminar/A333/status/capt_ls_bars
-      SHOW_GREATER 0.500000 sim/cockpit2/gauges/indicators/mach_pilot
+      SHOW_GREATER 28000.000000 sim/cockpit/pressure/cabin_altitude_actual_ft 
       LOCKED
       HIDE
       LIGHT_MODE GLASS_AUTO
@@ -136379,6 +136379,7 @@ GROUP PFDfo
     SHOW_EQUAL 1.000000 AG330/Displays/PFDfo/normalOperation
     LOCKED
     HIDE
+    GROUP_OPEN
     GROUP Horizon ROLL 2
       LOCKED
       HIDE
@@ -137799,7 +137800,7 @@ GROUP PFDfo
       IMAGE LED/airbus_display_LED_24_green
       DATAREF sim/cockpit2/gauges/indicators/mach_copilot
       SHOW_EQUAL 0.000000 laminar/A333/status/fo_ls_bars
-      SHOW_GREATER 0.500000 sim/cockpit2/gauges/indicators/mach_copilot
+      SHOW_GREATER 28000.000000 sim/cockpit/pressure/cabin_altitude_actual_ft 
       LOCKED
       HIDE
       LIGHT_MODE GLASS_AUTO

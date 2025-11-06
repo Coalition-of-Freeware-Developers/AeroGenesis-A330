@@ -248,6 +248,9 @@ A333_capt_mast_warn_pos					= find_dataref("laminar/A333/buttons/capt_master_war
 --** 				              FIND CUSTOM COMMANDS              			     **--
 --*************************************************************************************--
 
+-- AG C&D
+AG330_set_cold_dark                     = find_command("AG330/plugin/PanelState/set_ColdAndDark")
+
 -- AI
 
 A333CMD_ai_audio_quick_start			= find_command("laminar/A333/ai/audio_quick_start")
@@ -358,6 +361,8 @@ A333CMD_ventilation_extract_ovrd_tog	= find_command("laminar/A333/buttons/ventil
 A333CMD_cabin_fan_tog					= find_command("laminar/A333/buttons/cabin_fan_tog")
 
 A333CMD_clear_ECAM_warn					= find_command("laminar/A333/button/ecam/clr_capt")
+
+A333CMD_IRS_align_skip                  = find_command("AG330/ADIRS/skipIRS")
 
 --*************************************************************************************--
 --** 				        CREATE READ-ONLY CUSTOM DATAREFS               	         **--
@@ -4896,13 +4901,14 @@ function A333_flight_start_ai()
     if simDR_startup_running == 0 then
 
     	A333_set_ai_CD()
+        AG330_set_cold_dark:once()
 
 
     -- ENGINES RUNNING ------------------------------------------------------------------
     elseif simDR_startup_running == 1 then
 
     	A333_set_ai_ER()
-
+        A333CMD_IRS_align_skip:once()
 
     end
 

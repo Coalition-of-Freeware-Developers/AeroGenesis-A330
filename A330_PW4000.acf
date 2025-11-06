@@ -10123,7 +10123,7 @@ P _obja/39/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/39/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/39/_v10_is_internal 0
 P _obja/39/_v10_steers_with_gear 0
-P _obja/4/_obj_flags 0
+P _obja/4/_obj_flags 24
 P _obja/4/_v10_att_body -1
 P _obja/4/_v10_att_file_stl A330PW_Pylon_L.obj
 P _obja/4/_v10_att_gear -1
@@ -10163,7 +10163,7 @@ P _obja/41/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/41/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/41/_v10_is_internal 0
 P _obja/41/_v10_steers_with_gear 0
-P _obja/42/_obj_flags 0
+P _obja/42/_obj_flags 24
 P _obja/42/_v10_att_body -1
 P _obja/42/_v10_att_file_stl A330PW_Pylon_R.obj
 P _obja/42/_v10_att_gear -1
@@ -10176,7 +10176,7 @@ P _obja/42/_v10_att_y_acf_prt_ref -7.699999809
 P _obja/42/_v10_att_z_acf_prt_ref 81.269996643
 P _obja/42/_v10_is_internal 0
 P _obja/42/_v10_steers_with_gear 0
-P _obja/43/_obj_flags 0
+P _obja/43/_obj_flags 24
 P _obja/43/_v10_att_body -1
 P _obja/43/_v10_att_file_stl A330PW_L.obj
 P _obja/43/_v10_att_gear -1
@@ -10189,7 +10189,7 @@ P _obja/43/_v10_att_y_acf_prt_ref -7.699999809
 P _obja/43/_v10_att_z_acf_prt_ref 81.269996643
 P _obja/43/_v10_is_internal 0
 P _obja/43/_v10_steers_with_gear 0
-P _obja/44/_obj_flags 0
+P _obja/44/_obj_flags 24
 P _obja/44/_v10_att_body -1
 P _obja/44/_v10_att_file_stl A330PW_R.obj
 P _obja/44/_v10_att_gear -1
@@ -40200,7 +40200,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.054000001
 P acf/_ff_rat_idle_PRP 0.100000001
 P acf/_ff_rat_idle_turbo 0.100000001
-P acf/_file_writer_version 123003
+P acf/_file_writer_version 123014
 P acf/_fixed_max/0 2E4
 P acf/_fixed_max/1 2E4
 P acf/_fixed_max/2 2E4
@@ -40659,7 +40659,7 @@ P acf/_lock_n2 30.000000000
 P acf/_lock_with_elev_EQ 0
 P acf/_m_displaced 0.000000000
 P acf/_m_displaced_Y 0.000000000
-P acf/_m_empty 2.8527803E5
+P acf/_m_empty 2.6676E5
 P acf/_m_fuel_max_tot 2.4071205E5
 P acf/_m_fuel_xfer_start 61.200000763
 P acf/_m_fuel_xfer_stop 1.000000000
@@ -41315,7 +41315,7 @@ P acf/_vect_min_nace 0.000000000
 P acf/_vect_power_aft 1.000000000
 P acf/_vect_power_for 1.000000000
 P acf/_vect_rate 15.000000000
-P acf/_version 1.2.0
+P acf/_version 1.3.0-b1
 P acf/_vnav_descend_auto_arm 0
 P acf/_vor_mode_has_dead_reckon 1
 P acf/_vvi_but_adjusts_pitch 0
@@ -124696,7 +124696,6 @@ GROUP Standby
   END_GROUP
 END_GROUP
 GROUP PFDcapt
-  HIDE
   GROUP_OPEN
   gen_rotary ATT
     POS 251.000000 509.500000
@@ -124704,7 +124703,6 @@ GROUP PFDcapt
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/showATT
     LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 8
@@ -124727,7 +124725,6 @@ GROUP PFDcapt
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/showSelfTestmsg
     LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 8
@@ -124750,7 +124747,6 @@ GROUP PFDcapt
     DATAREF 
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/showDisplayFlicker
     LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 8
@@ -124770,16 +124766,13 @@ GROUP PFDcapt
   GROUP FMAs Captain
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/normalOperation
     LOCKED
-    HIDE
     GROUP Capt multi
       LOCKED
-      HIDE
       gen_rotary FMA line tall
         POS 109.000000 728.000000
         IMAGE PFD/FMA/multi/FMA_divider
         DATAREF laminar/A333/PFD/FMAs/col1_col2_divider
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -124800,7 +124793,6 @@ GROUP PFDcapt
       GROUP FMA line hide
         SHOW_EQUAL 0.000000 laminar/A333/PFD/FMAs/final_app_status
         LOCKED
-        HIDE
         gen_rotary FMA line short
           POS 214.000000 728.000000
           IMAGE PFD/FMA/multi/FMA_divider
@@ -124808,7 +124800,6 @@ GROUP PFDcapt
           SHOW_LESS 0.000000 sim/cockpit2/autopilot/rollout_status
           SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -124832,7 +124823,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/final_app_status
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -124853,14 +124843,12 @@ GROUP PFDcapt
         SHOW_LESS 400.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
         SHOW_GREATER 1.000000 sim/cockpit2/autopilot/rollout_status
         LOCKED
-        HIDE
         gen_rotary LAND
           POS 214.000000 750.000000
           IMAGE PFD/FMA/multi/land
           DATAREF 
           SHOW_LESS 1.000000 sim/cockpit2/autopilot/flare_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -124885,7 +124873,6 @@ GROUP PFDcapt
         SHOW_LESS 1.000000 sim/cockpit2/autopilot/rollout_status
         SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/flare_status
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -124908,7 +124895,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/rollout_status
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -124931,7 +124917,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/man_pitch_trim_only
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -124951,7 +124936,6 @@ GROUP PFDcapt
       GROUP Vertical Messages
         SHOW_EQUAL 0.000000 laminar/A333/PFD/FMAs/man_pitch_trim_only
         LOCKED
-        HIDE
         gen_rotary SET GREEN DOT SPEED
           POS 220.000000 704.000000
           IMAGE PFD/FMA/multi/set_green_dot_spd
@@ -124959,7 +124943,6 @@ GROUP PFDcapt
           SHOW_LESS 0.000000 sim/cockpit2/radios/indicators/fms_vertical_msg_pilot
           SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/set_green_dot_spd
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -124981,7 +124964,6 @@ GROUP PFDcapt
           IMAGE PFD/FMA/multi/fms_vert_msg
           DATAREF sim/cockpit2/radios/indicators/fms_vertical_msg_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125004,13 +124986,11 @@ GROUP PFDcapt
       GROUP Speed Mach
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/speed_mach_status
         LOCKED
-        HIDE
         gen_LED Mach
           POS 164.000000 704.000000
           IMAGE LED/airbus_display_LED_20_zeros_cyan
           DATAREF sim/cockpit2/autopilot/airspeed_dial_kts_mach
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125027,7 +125007,6 @@ GROUP PFDcapt
           IMAGE PFD/FMA/multi/mach_sel
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125048,13 +125027,11 @@ GROUP PFDcapt
       GROUP Speed IAS
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/speed_ias_status
         LOCKED
-        HIDE
         gen_LED IAS
           POS 170.000000 704.000000
           IMAGE LED/airbus_display_LED_20_zeros_cyan
           DATAREF sim/cockpit2/autopilot/airspeed_dial_kts_mach
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125071,7 +125048,6 @@ GROUP PFDcapt
           IMAGE PFD/FMA/multi/speed_sel
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125092,22 +125068,18 @@ GROUP PFDcapt
     END_GROUP
     GROUP Capt column 1
       LOCKED
-      HIDE
       GROUP Row 1
         LOCKED
-        HIDE
         GROUP Manual Thrust
           SHOW_LESS 0.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
           SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/autothrottle_enabled
           LOCKED
-          HIDE
           gen_rotary MAN TOGA
             POS 57.000000 739.000000
             IMAGE PFD/FMA/column 1/man_toga
             DATAREF 
             SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/man_toga_status
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125127,13 +125099,11 @@ GROUP PFDcapt
           GROUP FLEX
             SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/man_flex_status
             LOCKED
-            HIDE
             gen_rotary MAN FLEX
               POS 57.000000 739.000000
               IMAGE PFD/FMA/column 1/man_flex
               DATAREF 
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125155,7 +125125,6 @@ GROUP PFDcapt
               IMAGE PFD/FMA/cyan_plus
               DATAREF 
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125177,7 +125146,6 @@ GROUP PFDcapt
               IMAGE LED/airbus_display_LED_20_zeros_cyan
               DATAREF sim/flightmodel/engine/ENGN_assumed_temp[0]
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125196,7 +125164,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/man_mct_status
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125219,7 +125186,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 1.000000 laminar/no_ref
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125239,19 +125205,16 @@ GROUP PFDcapt
         END_GROUP
         GROUP Thrust Mode Cond
           SHOW_LESS 0.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
-          HIDE
           GROUP Thrust Mode 1
             SHOW_LESS 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
             SHOW_GREATER 0.000000 sim/cockpit2/autopilot/autothrottle_enabled
             LOCKED
-            HIDE
             gen_rotary THR LVR
               POS 56.000000 750.000000
               IMAGE PFD/FMA/column 1/thr_lvr
               DATAREF 
               SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/thr_lvr_status
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125272,14 +125235,12 @@ GROUP PFDcapt
           GROUP Thrust Mode 2
             SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/autothrottle_enabled
             LOCKED
-            HIDE
             gen_rotary THR MCT
               POS 56.000000 750.000000
               IMAGE PFD/FMA/column 1/thr_mct
               DATAREF 
               SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/thr_mct_status
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125302,7 +125263,6 @@ GROUP PFDcapt
               DATAREF 
               SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/thr_clb_status
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125325,7 +125285,6 @@ GROUP PFDcapt
               DATAREF 
               SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/thr_lvr_status
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125346,14 +125305,12 @@ GROUP PFDcapt
           GROUP Thrust Mode 3
             SHOW_GREATER 3.000000 sim/cockpit2/autopilot/autothrottle_enabled
             LOCKED
-            HIDE
             gen_rotary THR LVR 2
               POS 56.000000 750.000000
               IMAGE PFD/FMA/column 1/thr_lvr
               DATAREF 
               SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/thr_lvr_status
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125379,7 +125336,6 @@ GROUP PFDcapt
           SHOW_LESS 0.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
           SHOW_GREATER 3.000000 sim/cockpit2/autopilot/autothrottle_enabled
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125403,7 +125359,6 @@ GROUP PFDcapt
           SHOW_LESS 0.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125426,7 +125381,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 1.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125449,7 +125403,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 2.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125469,14 +125422,12 @@ GROUP PFDcapt
       END_GROUP
       GROUP Row 2
         LOCKED
-        HIDE
         gen_rotary LVR CLB
           POS 56.000000 704.000000
           IMAGE PFD/FMA/column 1/lvr_clb
           DATAREF laminar/A333/PFD/FMAs/lvr_clb_mct_flasher
           SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/lvr_clb_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125499,7 +125450,6 @@ GROUP PFDcapt
           DATAREF laminar/A333/PFD/FMAs/lvr_clb_mct_flasher
           SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/lvr_mct_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125519,14 +125469,12 @@ GROUP PFDcapt
       END_GROUP
       GROUP Row 3
         LOCKED
-        HIDE
         gen_rotary LVR ASYM
           POS 56.000000 704.000000
           IMAGE PFD/FMA/column 1/lvr_asym
           DATAREF 
           SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/lvr_assym_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125549,7 +125497,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 1.000000 laminar/no_ref
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125571,17 +125518,14 @@ GROUP PFDcapt
     GROUP Capt column 2
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
-      HIDE
       GROUP Row 1
         LOCKED
-        HIDE
         gen_rotary SRS
           POS 163.000000 750.000000
           IMAGE PFD/FMA/column 2/srs
           DATAREF 
           SHOW_EQUAL 10.000000 sim/cockpit2/autopilot/altitude_mode
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -125601,14 +125545,12 @@ GROUP PFDcapt
         GROUP Climb
           SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/climb_descend
           LOCKED
-          HIDE
           gen_rotary CLB
             POS 162.000000 750.000000
             IMAGE PFD/FMA/column 2/clb
             DATAREF 
             SHOW_EQUAL 20.000000 sim/cockpit2/autopilot/altitude_mode
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125631,7 +125573,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 5.000000 sim/cockpit2/autopilot/altitude_mode
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125652,14 +125593,12 @@ GROUP PFDcapt
         GROUP ALT STAR
           SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/alt_star_status
           LOCKED
-          HIDE
           gen_rotary ALT* (ALTS)
             POS 163.000000 750.000000
             IMAGE PFD/FMA/column 2/alt_star
             DATAREF 
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/alts_captured
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125679,7 +125618,6 @@ GROUP PFDcapt
           GROUP ALT* (No ALTS/V)
             SHOW_LESS 0.000000 sim/cockpit2/autopilot/altv_captured
             LOCKED
-            HIDE
             gen_rotary ALT* (Hold)
               POS 163.000000 750.000000
               IMAGE PFD/FMA/column 2/alt_star
@@ -125687,7 +125625,6 @@ GROUP PFDcapt
               SHOW_LESS 0.000000 sim/cockpit2/autopilot/alts_captured
               SHOW_EQUAL 6.000000 sim/cockpit2/autopilot/altitude_mode
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125711,7 +125648,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/altv_captured
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125732,18 +125668,15 @@ GROUP PFDcapt
         GROUP Soft condition
           SHOW_EQUAL 0.000000 sim/cockpit2/annunciators/autopilot_soft_ride
           LOCKED
-          HIDE
           GROUP ALT
             SHOW_EQUAL 0.000000 laminar/A333/PFD/FMAs/alt_star_status
             LOCKED
-            HIDE
             gen_rotary ALT (ALTS)
               POS 163.000000 750.000000
               IMAGE PFD/FMA/column 2/alt
               DATAREF 
               SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/alts_captured
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125763,7 +125696,6 @@ GROUP PFDcapt
             GROUP ALT (No ALTS/V)
               SHOW_LESS 0.000000 sim/cockpit2/autopilot/altv_captured
               LOCKED
-              HIDE
               gen_rotary ALT (Hold)
                 POS 163.000000 750.000000
                 IMAGE PFD/FMA/column 2/alt
@@ -125771,7 +125703,6 @@ GROUP PFDcapt
                 SHOW_LESS 0.000000 sim/cockpit2/autopilot/alts_captured
                 SHOW_EQUAL 6.000000 sim/cockpit2/autopilot/altitude_mode
                 LOCKED
-                HIDE
                 LIGHT_MODE GLASS_AUTO
                 LIGHT_RHEOSTAT 0
                 BUS_SRC 8
@@ -125795,7 +125726,6 @@ GROUP PFDcapt
               DATAREF 
               SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/altv_captured
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125817,19 +125747,16 @@ GROUP PFDcapt
         GROUP NAV condition
           SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/gpss_status
           LOCKED
-          HIDE
           GROUP Soft condition
             SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/alt_star_status
             SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/autopilot_soft_ride
             LOCKED
-            HIDE
             gen_rotary ALT CRZ
               POS 162.000000 750.000000
               IMAGE PFD/FMA/column 2/alt_crz
               DATAREF 
               SHOW_EQUAL 6.000000 sim/cockpit2/autopilot/altitude_mode
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -125851,14 +125778,12 @@ GROUP PFDcapt
         GROUP Descent
           SHOW_EQUAL -1.000000 laminar/A333/PFD/FMAs/climb_descend
           LOCKED
-          HIDE
           gen_rotary DES
             POS 163.000000 750.000000
             IMAGE PFD/FMA/column 2/des
             DATAREF 
             SHOW_EQUAL 20.000000 sim/cockpit2/autopilot/altitude_mode
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125881,7 +125806,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 9.000000 sim/cockpit2/autopilot/altitude_mode
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125904,7 +125828,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 5.000000 sim/cockpit2/autopilot/altitude_mode
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125925,7 +125848,6 @@ GROUP PFDcapt
         GROUP no integratedappnav
           SHOW_LESS 0.000000 sim/cockpit2/radios/indicators/ian_mode
           LOCKED
-          HIDE
           gen_rotary G/S*
             POS 163.000000 750.000000
             IMAGE PFD/FMA/column 2/glide_slope_star
@@ -125933,7 +125855,6 @@ GROUP PFDcapt
             SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/gs_star_status
             SHOW_EQUAL 8.000000 sim/cockpit2/autopilot/altitude_mode
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125957,7 +125878,6 @@ GROUP PFDcapt
             SHOW_EQUAL 8.000000 sim/cockpit2/autopilot/altitude_mode
             SHOW_GREATER 1.000000 laminar/A333/PFD/FMAs/gs_star_status
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -125978,13 +125898,11 @@ GROUP PFDcapt
         GROUP V/S
           SHOW_EQUAL 4.000000 sim/cockpit2/autopilot/altitude_mode
           LOCKED
-          HIDE
           gen_LED VVI
             POS 187.000000 750.000000
             IMAGE LED/airbus_display_LED_20_zeros_cyan
             DATAREF sim/cockpit2/autopilot/vvi_dial_fpm
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126002,7 +125920,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_GREATER 0.500000 sim/cockpit2/autopilot/vvi_dial_fpm
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126024,7 +125941,6 @@ GROUP PFDcapt
             IMAGE PFD/FMA/column 2/vertical_speed
             DATAREF 
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126045,13 +125961,11 @@ GROUP PFDcapt
         GROUP FPA
           SHOW_EQUAL 19.000000 sim/cockpit2/autopilot/altitude_mode
           LOCKED
-          HIDE
           gen_LED FPA deg
             POS 178.000000 750.000000
             IMAGE LED/airbus_display_LED_20_zeros_cyan_dec
             DATAREF sim/cockpit2/autopilot/fpa
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126069,7 +125983,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_GREATER 0.010000 sim/cockpit2/autopilot/fpa
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126091,7 +126004,6 @@ GROUP PFDcapt
             IMAGE PFD/FMA/column 2/flight_path_angle
             DATAREF 
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126112,14 +126024,12 @@ GROUP PFDcapt
       END_GROUP
       GROUP Row 2
         LOCKED
-        HIDE
         gen_rotary CLB arm
           POS 151.000000 727.000000
           IMAGE PFD/FMA/column 2/clb_arm
           DATAREF 
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/vnav_speed_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126139,7 +126049,6 @@ GROUP PFDcapt
         GROUP Alt Arm
           SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/alt_arm_status
           LOCKED
-          HIDE
           gen_rotary ALT arm cyan
             POS 131.000000 727.000000
             IMAGE PFD/FMA/column 2/alt_arm_cyan
@@ -126147,7 +126056,6 @@ GROUP PFDcapt
             SHOW_LESS 0.000000 sim/cockpit2/autopilot/vnav_speed_status
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/altitude_hold_status
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126171,7 +126079,6 @@ GROUP PFDcapt
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/altitude_hold_status
             SHOW_GREATER 2.000000 sim/cockpit2/autopilot/vnav_speed_status
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126192,14 +126099,12 @@ GROUP PFDcapt
         GROUP VNAV ALT arm
           SHOW_EQUAL 20.000000 sim/cockpit2/autopilot/altitude_mode
           LOCKED
-          HIDE
           gen_rotary ALT arm cyan
             POS 131.000000 727.000000
             IMAGE PFD/FMA/column 2/alt_arm_cyan
             DATAREF 
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/alts_armed
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126222,7 +126127,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/altv_armed
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126243,14 +126147,12 @@ GROUP PFDcapt
         GROUP VNAV ALT Path
           SHOW_EQUAL 9.000000 sim/cockpit2/autopilot/altitude_mode
           LOCKED
-          HIDE
           gen_rotary ALT arm cyan 2
             POS 131.000000 727.000000
             IMAGE PFD/FMA/column 2/alt_arm_cyan
             DATAREF 
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/alts_armed
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126273,7 +126175,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/altv_armed
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126297,7 +126198,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/vnav_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126321,7 +126221,6 @@ GROUP PFDcapt
           SHOW_LESS 0.000000 sim/cockpit2/radios/indicators/ian_mode
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/glideslope_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126345,7 +126244,6 @@ GROUP PFDcapt
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/glideslope_status
           SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/ian_mode
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126368,17 +126266,14 @@ GROUP PFDcapt
     GROUP Capt column 3
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
-      HIDE
       GROUP Row 1
         LOCKED
-        HIDE
         gen_rotary RWY
           POS 273.000000 750.000000
           IMAGE PFD/FMA/column 3/rwy
           DATAREF 
           SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/runway_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126401,7 +126296,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/runway_track_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126424,7 +126318,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/heading_mode
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126447,7 +126340,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 14.000000 sim/cockpit2/autopilot/heading_mode
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126471,7 +126363,6 @@ GROUP PFDcapt
           SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/ga_trk_status
           SHOW_EQUAL 18.000000 sim/cockpit2/autopilot/heading_mode
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126495,7 +126386,6 @@ GROUP PFDcapt
           SHOW_LESS 1.000000 sim/cockpit2/autopilot/backcourse_status
           SHOW_EQUAL 13.000000 sim/cockpit2/autopilot/heading_mode
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126515,11 +126405,9 @@ GROUP PFDcapt
         GROUP no integratedappnav
           SHOW_LESS 1.000000 sim/cockpit2/radios/indicators/ian_mode
           LOCKED
-          HIDE
           GROUP LOC STAR
             SHOW_EQUAL 0.000000 laminar/A333/PFD/FMAs/loc_star_status
             LOCKED
-            HIDE
             gen_rotary LOC*
               POS 273.000000 750.000000
               IMAGE PFD/FMA/column 3/loc_star
@@ -126527,7 +126415,6 @@ GROUP PFDcapt
               SHOW_LESS 1.000000 sim/cockpit2/autopilot/backcourse_status
               SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_mode
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -126550,7 +126437,6 @@ GROUP PFDcapt
               DATAREF 
               SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/backcourse_status
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -126571,7 +126457,6 @@ GROUP PFDcapt
           GROUP LOC CAPTURED
             SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/loc_star_status
             LOCKED
-            HIDE
             gen_rotary LOC
               POS 273.000000 750.000000
               IMAGE PFD/FMA/column 3/loc
@@ -126579,7 +126464,6 @@ GROUP PFDcapt
               SHOW_LESS 1.000000 sim/cockpit2/autopilot/backcourse_status
               SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_mode
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -126602,7 +126486,6 @@ GROUP PFDcapt
               DATAREF 
               SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/backcourse_status
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -126624,7 +126507,6 @@ GROUP PFDcapt
         GROUP integrated app nav
           SHOW_GREATER 2.000000 sim/cockpit2/radios/indicators/ian_mode
           LOCKED
-          HIDE
           gen_rotary APP NAV
             POS 272.000000 750.000000
             IMAGE PFD/FMA/column 3/app_nav
@@ -126632,7 +126514,6 @@ GROUP PFDcapt
             SHOW_LESS 1.000000 sim/cockpit2/autopilot/glideslope_status
             SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/approach_status
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126656,7 +126537,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/ga_trk_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126676,7 +126556,6 @@ GROUP PFDcapt
       END_GROUP
       GROUP Row 2
         LOCKED
-        HIDE
         gen_rotary NAV armed
           POS 273.000000 727.000000
           IMAGE PFD/FMA/column 3/nav_arm
@@ -126684,7 +126563,6 @@ GROUP PFDcapt
           SHOW_LESS 4.000000 sim/cockpit/radios/gps_cdi_sensitivity
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/gpss_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126707,7 +126585,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/nav_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126727,7 +126604,6 @@ GROUP PFDcapt
         GROUP Integrated app nav
           SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/ian_mode
           LOCKED
-          HIDE
           GROUP_OPEN
           gen_rotary APP NAV armed
             POS 272.000000 727.000000
@@ -126735,7 +126611,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/approach_status
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126759,7 +126634,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/backcourse_status
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126780,13 +126654,11 @@ GROUP PFDcapt
     END_GROUP
     GROUP Capt column 4
       LOCKED
-      HIDE
       gen_rotary Landing Cat
         POS 378.000000 750.000000
         IMAGE PFD/FMA/column 4/cat_123
         DATAREF laminar/A333/PFD/FMAs/landing_cat_enum
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -126811,7 +126683,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/landing_single_dual
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -126834,7 +126705,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/landing_single_dual
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -126854,14 +126724,12 @@ GROUP PFDcapt
       GROUP DH/MDA
         SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/dh_mda_status
         LOCKED
-        HIDE
         gen_rotary NO DH
           POS 378.000000 704.000000
           IMAGE PFD/FMA/column 4/no_DH
           DATAREF 
           SHOW_EQUAL -1.000000 sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -126880,14 +126748,12 @@ GROUP PFDcapt
 
         GROUP MDA
           LOCKED
-          HIDE
           gen_LED Height
             POS 400.000000 704.000000
             IMAGE LED/airbus_display_LED_18_cyan_nozeros
             DATAREF sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot[0]
             SHOW_GREATER -999.000000 sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126905,7 +126771,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_GREATER -999.000000 sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126925,14 +126790,12 @@ GROUP PFDcapt
         END_GROUP
         GROUP DH
           LOCKED
-          HIDE
           gen_LED Height
             POS 394.000000 704.000000
             IMAGE LED/airbus_display_LED_18_cyan_nozeros
             DATAREF sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot[0]
             SHOW_GREATER 0.500000 sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126950,7 +126813,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_GREATER 0.500000 sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -126972,13 +126834,11 @@ GROUP PFDcapt
     END_GROUP
     GROUP Capt column 5
       LOCKED
-      HIDE
       gen_rotary AP mode
         POS 464.000000 750.000000
         IMAGE PFD/FMA/ap12_mode
         DATAREF laminar/A333/PFD/FMAs/autopilot_12_status
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -127002,7 +126862,6 @@ GROUP PFDcapt
         IMAGE PFD/FMA/flight_director_status
         DATAREF laminar/A333/PFD/FMAs/flight_dir_12_status
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -127026,7 +126885,6 @@ GROUP PFDcapt
         IMAGE PFD/FMA/auto_thro_status
         DATAREF sim/cockpit2/autopilot/autothrottle_enabled
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -127050,10 +126908,8 @@ GROUP PFDcapt
   GROUP PFD captain
     SHOW_EQUAL 1.000000 AG330/Displays/PFDcapt/normalOperation
     LOCKED
-    HIDE
     GROUP Horizon ROLL
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE ROTATE
       GROUP_WIDTH 240
       GROUP_HEIGHT 274
@@ -127066,7 +126922,6 @@ GROUP PFDcapt
       ROTATE_OFFSET_Y 0.000000
       GROUP Horizon PITCH
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 240
         GROUP_HEIGHT 274
@@ -127088,7 +126943,6 @@ GROUP PFDcapt
           IMAGE PFD/Horizon/horizon_pfd_bg
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127104,7 +126958,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_GREATER 1.000000 sim/flightmodel2/controls/airbus_law
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127120,7 +126973,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_EQUAL 0.000000 sim/flightmodel2/controls/airbus_law
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127133,7 +126985,6 @@ GROUP PFDcapt
       END_GROUP
       GROUP Ladder Mask
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 10
         GROUP_HEIGHT 10
@@ -127155,7 +127006,6 @@ GROUP PFDcapt
           IMAGE PFD/Horizon/ladder_mask
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127169,12 +127019,10 @@ GROUP PFDcapt
           SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flight_director_master_pilot
           SHOW_GREATER 1.000000 laminar/A333/PFD/tick_mark_pitch_capt_mode
           LOCKED
-          HIDE
           GROUP HDG AP pointer 2
             SHOW_LESS 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             LOCKED
-            HIDE
             GROUP_ANIMATE_MODE TRANSLATE
             GROUP_WIDTH 300
             GROUP_HEIGHT 30
@@ -127189,7 +127037,6 @@ GROUP PFDcapt
               IMAGE PFD/autopilot_heading_horizon_ind
               DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
               LOCKED
-              HIDE
               KF_WRAP_BOTTOM
               KF_WRAP_TOP
               LIGHT_MODE GLASS_AUTO
@@ -127205,7 +127052,6 @@ GROUP PFDcapt
           GROUP TRK AP pointer 2 2
             SHOW_LESS 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             LOCKED
-            HIDE
             GROUP_ANIMATE_MODE TRANSLATE
             GROUP_WIDTH 300
             GROUP_HEIGHT 30
@@ -127224,7 +127070,6 @@ GROUP PFDcapt
               IMAGE PFD/autopilot_heading_horizon_ind
               DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
               LOCKED
-              HIDE
               KF_WRAP_BOTTOM
               KF_WRAP_TOP
               LIGHT_MODE GLASS_AUTO
@@ -127244,7 +127089,6 @@ GROUP PFDcapt
           GROUP TRK AP pointer 3 2
             SHOW_GREATER 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             LOCKED
-            HIDE
             GROUP_ANIMATE_MODE TRANSLATE
             GROUP_WIDTH 300
             GROUP_HEIGHT 30
@@ -127263,7 +127107,6 @@ GROUP PFDcapt
               IMAGE PFD/autopilot_heading_horizon_ind
               DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
               LOCKED
-              HIDE
               KF_WRAP_BOTTOM
               KF_WRAP_TOP
               LIGHT_MODE GLASS_AUTO
@@ -127287,7 +127130,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           SHOW_EQUAL 1.000000 laminar/A333/PFD/tick_mark_pitch_capt_mode
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           LIGHT_MODE GLASS_AUTO
@@ -127304,7 +127146,6 @@ GROUP PFDcapt
       GROUP Horizon Tick Marks
         SHOW_EQUAL 0.000000 laminar/A333/PFD/tick_mark_pitch_capt_mode
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 240
         GROUP_HEIGHT 274
@@ -127324,12 +127165,10 @@ GROUP PFDcapt
         GROUP HDG AP pointer ALL
           SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flight_director_master_pilot
           LOCKED
-          HIDE
           GROUP HDG AP pointer 2 2
             SHOW_LESS 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             LOCKED
-            HIDE
             GROUP_ANIMATE_MODE TRANSLATE
             GROUP_WIDTH 300
             GROUP_HEIGHT 30
@@ -127344,7 +127183,6 @@ GROUP PFDcapt
               IMAGE PFD/autopilot_heading_horizon_ind
               DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
               LOCKED
-              HIDE
               KF_WRAP_BOTTOM
               KF_WRAP_TOP
               LIGHT_MODE GLASS_AUTO
@@ -127360,7 +127198,6 @@ GROUP PFDcapt
           GROUP TRK AP pointer 2 2
             SHOW_LESS 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             LOCKED
-            HIDE
             GROUP_ANIMATE_MODE TRANSLATE
             GROUP_WIDTH 300
             GROUP_HEIGHT 30
@@ -127379,7 +127216,6 @@ GROUP PFDcapt
               IMAGE PFD/autopilot_heading_horizon_ind
               DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
               LOCKED
-              HIDE
               KF_WRAP_BOTTOM
               KF_WRAP_TOP
               LIGHT_MODE GLASS_AUTO
@@ -127399,7 +127235,6 @@ GROUP PFDcapt
           GROUP TRK AP pointer 3 2
             SHOW_GREATER 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             LOCKED
-            HIDE
             GROUP_ANIMATE_MODE TRANSLATE
             GROUP_WIDTH 300
             GROUP_HEIGHT 30
@@ -127418,7 +127253,6 @@ GROUP PFDcapt
               IMAGE PFD/autopilot_heading_horizon_ind
               DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
               LOCKED
-              HIDE
               KF_WRAP_BOTTOM
               KF_WRAP_TOP
               LIGHT_MODE GLASS_AUTO
@@ -127441,7 +127275,6 @@ GROUP PFDcapt
           IMAGE PFD/Horizon/heading_tickmarks
           DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           LIGHT_MODE GLASS_AUTO
@@ -127460,7 +127293,6 @@ GROUP PFDcapt
         IMAGE PFD/Horizon/roll_indicator
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -127482,7 +127314,6 @@ GROUP PFDcapt
         IMAGE PFD/Horizon/slip_indicator
         DATAREF sim/cockpit2/gauges/indicators/slip_deg
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -127498,7 +127329,6 @@ GROUP PFDcapt
         DATAREF laminar/A333/PFD/DH_flasher_capt
         SHOW_EQUAL 1.000000 sim/cockpit2/gauges/indicators/radio_altimeter_dh_lit_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -127517,7 +127347,6 @@ GROUP PFDcapt
 
       GROUP Radio ALT
         LOCKED
-        HIDE
         gen_LED Radio Alt 1000s
           POS 225.000000 393.000000
           IMAGE LED/airbus_display_LED_22_green
@@ -127525,7 +127354,6 @@ GROUP PFDcapt
           SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           SHOW_GREATER 1000.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127545,7 +127373,6 @@ GROUP PFDcapt
           SHOW_EQUAL 0.000000 laminar/A333/PFD/radio_altimeter_color_capt
           SHOW_GREATER 100.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127565,7 +127392,6 @@ GROUP PFDcapt
           SHOW_EQUAL 1.000000 laminar/A333/PFD/radio_altimeter_color_capt
           SHOW_GREATER 100.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127584,7 +127410,6 @@ GROUP PFDcapt
           SHOW_LESS 100.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           SHOW_GREATER 50.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127603,7 +127428,6 @@ GROUP PFDcapt
           SHOW_LESS 50.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           SHOW_GREATER 10.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127622,7 +127446,6 @@ GROUP PFDcapt
           SHOW_LESS 10.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           SHOW_GREATER -10.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127641,7 +127464,6 @@ GROUP PFDcapt
           SHOW_LESS -10.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           SHOW_GREATER -50.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127660,7 +127482,6 @@ GROUP PFDcapt
       IMAGE PFD/Horizon/flight_director_blank_square
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -127683,7 +127504,6 @@ GROUP PFDcapt
       DATAREF laminar/A333/PFD/windshear_flasher
       SHOW_EQUAL 5.000000 sim/cockpit2/annunciators/windshear_warning_systems
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -127707,7 +127527,6 @@ GROUP PFDcapt
       SHOW_LESS 4.000000 sim/cockpit2/annunciators/windshear_warning_systems
       SHOW_GREATER 3.000000 sim/cockpit2/annunciators/windshear_warning_systems
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -127727,7 +127546,6 @@ GROUP PFDcapt
     GROUP Horizon ROLL FPV
       SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/trk_fpa
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE ROTATE
       GROUP_WIDTH 240
       GROUP_HEIGHT 274
@@ -127740,7 +127558,6 @@ GROUP PFDcapt
       ROTATE_OFFSET_Y 0.000000
       GROUP Horizon PITCH FPV
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 240
         GROUP_HEIGHT 274
@@ -127759,7 +127576,6 @@ GROUP PFDcapt
         OFFSET 0.000000
         GROUP Birdie pitch offset
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/flight_director_command_bars_pilot
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 240
           GROUP_HEIGHT 274
@@ -127777,7 +127593,6 @@ GROUP PFDcapt
           IS_VERTICAL 1
           OFFSET 0.000000
           GROUP Birdie drift offset
-            HIDE
             GROUP_ANIMATE_MODE TRANSLATE
             GROUP_WIDTH 10
             GROUP_HEIGHT 10
@@ -127791,7 +127606,6 @@ GROUP PFDcapt
               POS 225.000000 509.000000
               IMAGE PFD/fpv_director
               DATAREF sim/cockpit2/autopilot/flight_director_roll_deg
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -127803,7 +127617,6 @@ GROUP PFDcapt
           END_GROUP
         END_GROUP
         GROUP FPV pitch offset
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 240
           GROUP_HEIGHT 274
@@ -127821,7 +127634,6 @@ GROUP PFDcapt
           IS_VERTICAL 1
           OFFSET 0.000000
           GROUP FPV drift offset
-            HIDE
             GROUP_ANIMATE_MODE TRANSLATE
             GROUP_WIDTH 10
             GROUP_HEIGHT 10
@@ -127835,7 +127647,6 @@ GROUP PFDcapt
               POS 225.000000 509.000000
               IMAGE PFD/fpv
               DATAREF sim/cockpit2/gauges/indicators/roll_AHARS_deg_pilot
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -127851,11 +127662,9 @@ GROUP PFDcapt
     GROUP Flight Director
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/trk_fpa
       SHOW_GREATER 3.000000 laminar/A333/data/flight_phase
-      HIDE
       GROUP FD LAT correction
         SHOW_EQUAL 1.000000 laminar/A333/PFD/flight_director_vis_lat_status_capt
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 10
         GROUP_HEIGHT 10
@@ -127873,7 +127682,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/autopilot/flight_director_roll_deg
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/flight_director_command_bars_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127889,7 +127697,6 @@ GROUP PFDcapt
       GROUP FD VRT correction
         SHOW_EQUAL 1.000000 laminar/A333/PFD/flight_director_vis_vrt_status_capt
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 0
         GROUP_HEIGHT 0
@@ -127907,7 +127714,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/autopilot/flight_director_pitch_deg
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/flight_director_command_bars_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127923,14 +127729,12 @@ GROUP PFDcapt
       GROUP FD Bar show cond
         SHOW_EQUAL 1.000000 laminar/A333/PFD/flight_director_vis_bar_status_capt
         LOCKED
-        HIDE
         gen_pointer Flight Director Yaw
           POS 225.000000 486.000000
           IMAGE PFD/Horizon/yaw_bar
           DATAREF sim/cockpit2/autopilot/flight_director_roll_deg
           SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/flight_director_command_bars_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -127949,7 +127753,6 @@ GROUP PFDcapt
       IMAGE PFD/Horizon/horizon_mask
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -127969,18 +127772,15 @@ GROUP PFDcapt
     GROUP VDEV
       SHOW_EQUAL 0.000000 laminar/A333/status/capt_ls_bars
       SHOW_GREATER -998.000000 sim/cockpit2/radios/indicators/fms_fpta_pilot
-      HIDE
       GROUP vdev indicators
         SHOW_GREATER 5.000000 sim/cockpit/radios/gps_cdi_sensitivity
         LOCKED
-        HIDE
         gen_rotary Out of range up 2
           POS 355.000000 603.000000
           IMAGE PFD/VDEV_brick_pos
           DATAREF 
           SHOW_GREATER 200.000000 sim/cockpit2/radios/indicators/fms_vtk_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128003,7 +127803,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_LESS -200.000000 sim/cockpit2/radios/indicators/fms_vtk_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128027,7 +127826,6 @@ GROUP PFDcapt
           SHOW_LESS 200.000000 sim/cockpit2/radios/indicators/fms_vtk_pilot
           SHOW_GREATER -200.000000 sim/cockpit2/radios/indicators/fms_vtk_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128046,7 +127844,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_GREATER 5.000000 sim/cockpit/radios/gps_cdi_sensitivity
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128069,7 +127866,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_GREATER 5.000000 sim/cockpit/radios/gps_cdi_sensitivity
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128090,19 +127886,16 @@ GROUP PFDcapt
     GROUP HSI dots
       SHOW_EQUAL 1.000000 laminar/A333/status/capt_ls_bars
       LOCKED
-      HIDE
       GROUP Lat Indicator
         SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/hsi_display_horizontal_pilot
         SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_flag_from_to_pilot
         LOCKED
-        HIDE
         gen_rotary Out of range right
           POS 323.000000 353.000000
           IMAGE PFD/lat_dots_magenta_ind_right
           DATAREF 
           SHOW_GREATER 2.000000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128125,7 +127918,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_LESS -2.000000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128149,7 +127941,6 @@ GROUP PFDcapt
           SHOW_LESS 2.000000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
           SHOW_GREATER -2.000000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128166,14 +127957,12 @@ GROUP PFDcapt
         SHOW_LESS 0.000000 sim/cockpit2/radios/indicators/hsi_flag_glideslope_pilot
         SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_display_vertical_pilot
         LOCKED
-        HIDE
         gen_rotary Out of range up
           POS 355.000000 607.000000
           IMAGE PFD/vrt_dots_magenta_ind_up
           DATAREF 
           SHOW_LESS -2.000000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128196,7 +127985,6 @@ GROUP PFDcapt
           DATAREF 
           SHOW_GREATER 2.000000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128220,7 +128008,6 @@ GROUP PFDcapt
           SHOW_LESS 2.000000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
           SHOW_GREATER -2.000000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128238,7 +128025,6 @@ GROUP PFDcapt
         IMAGE PFD/lat_dots
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128260,7 +128046,6 @@ GROUP PFDcapt
         IMAGE PFD/vrt_dots
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128279,7 +128064,6 @@ GROUP PFDcapt
 
       GROUP VDEV_flasher cond
         SHOW_GREATER -998.000000 sim/cockpit2/radios/indicators/fms_fpta_pilot
-        HIDE
         gen_rotary VDEV_flasher
           POS 335.000000 621.000000
           IMAGE PFD/VDEV_flasher
@@ -128287,7 +128071,6 @@ GROUP PFDcapt
           SHOW_EQUAL 1.000000 laminar/A333/PDF/vdev_flasher_status_capt
           SHOW_GREATER 5.000000 sim/cockpit/radios/gps_cdi_sensitivity
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128311,7 +128094,6 @@ GROUP PFDcapt
       IMAGE PFD/Horizon/normal_law_wings
       DATAREF sim/flightmodel2/controls/airbus_law
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -128332,12 +128114,10 @@ GROUP PFDcapt
     GROUP HDG AP pointer ALL
       SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_heading_mode
       LOCKED
-      HIDE
       GROUP HDG AP pointer
         SHOW_LESS 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 228
         GROUP_HEIGHT 20
@@ -128352,7 +128132,6 @@ GROUP PFDcapt
           IMAGE PFD/autopilot_heading_ind
           DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           LIGHT_MODE GLASS_AUTO
@@ -128368,7 +128147,6 @@ GROUP PFDcapt
       GROUP TRK AP pointer 2
         SHOW_LESS 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 228
         GROUP_HEIGHT 20
@@ -128387,7 +128165,6 @@ GROUP PFDcapt
           IMAGE PFD/autopilot_heading_ind
           DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           LIGHT_MODE GLASS_AUTO
@@ -128407,7 +128184,6 @@ GROUP PFDcapt
       GROUP TRK AP pointer 3
         SHOW_GREATER 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 228
         GROUP_HEIGHT 20
@@ -128426,7 +128202,6 @@ GROUP PFDcapt
           IMAGE PFD/autopilot_heading_ind
           DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           LIGHT_MODE GLASS_AUTO
@@ -128449,7 +128224,6 @@ GROUP PFDcapt
       IMAGE PFD/PFD_background
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -128471,9 +128245,8 @@ GROUP PFDcapt
       IMAGE LED/airbus_display_LED_24_green
       DATAREF sim/cockpit2/gauges/indicators/mach_pilot
       SHOW_EQUAL 0.000000 laminar/A333/status/capt_ls_bars
-      SHOW_GREATER 0.500000 sim/cockpit2/gauges/indicators/mach_pilot
+      SHOW_GREATER 28000.000000 sim/cockpit/pressure/cabin_altitude_actual_ft 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -128490,7 +128263,6 @@ GROUP PFDcapt
       IMAGE PFD/vertical_speed_scale
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -128509,7 +128281,6 @@ GROUP PFDcapt
 
     GROUP ALT markings
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 90
       GROUP_HEIGHT 266
@@ -128527,7 +128298,6 @@ GROUP PFDcapt
         SHOW_LESS 8.000000 laminar/A333/data/flight_phase
         SHOW_GREATER 7.000000 laminar/A333/data/flight_phase
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128540,13 +128310,11 @@ GROUP PFDcapt
     END_GROUP
     GROUP Speed Tapes
       LOCKED
-      HIDE
       gen_pointer Speed Tape
         POS 38.000000 509.000000
         IMAGE PFD/Tapes/airspeed_tape1
         DATAREF sim/cockpit2/gauges/indicators/airspeed_kts_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -128563,7 +128331,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/airspeed_tape2
         DATAREF sim/cockpit2/gauges/indicators/airspeed_kts_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -128576,7 +128343,6 @@ GROUP PFDcapt
         OFFSET 0.000000
 
       GROUP Speed needles
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 50
         GROUP_HEIGHT 262
@@ -128590,7 +128356,6 @@ GROUP PFDcapt
         OFFSET 0.000000
         GROUP S Speed Hide
           SHOW_GREATER 0.000000 sim/cockpit2/gauges/actuators/airspeed_bugs[4]
-          HIDE
           gen_pointer S Speed
             POS 83.000000 509.000000
             IMAGE PFD/Tapes/S_speed_ind
@@ -128598,7 +128363,6 @@ GROUP PFDcapt
             SHOW_LESS 0.260000 sim/cockpit2/controls/flap_handle_request_ratio
             SHOW_GREATER 0.240000 sim/cockpit2/controls/flap_handle_request_ratio
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -128612,7 +128376,6 @@ GROUP PFDcapt
         END_GROUP
         GROUP F Speed Hide
           SHOW_GREATER 0.000000 sim/cockpit2/gauges/actuators/airspeed_bugs[3]
-          HIDE
           gen_pointer F Speed
             POS 83.000000 509.000000
             IMAGE PFD/Tapes/F_speed_ind
@@ -128620,7 +128383,6 @@ GROUP PFDcapt
             SHOW_LESS 0.760000 sim/cockpit2/controls/flap_handle_request_ratio
             SHOW_GREATER 0.490000 sim/cockpit2/controls/flap_handle_request_ratio
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -128637,7 +128399,6 @@ GROUP PFDcapt
           IMAGE PFD/Tapes/overspeed_ind
           DATAREF laminar/A333/PFD/airspeed_ind/over_speed
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128654,7 +128415,6 @@ GROUP PFDcapt
           DATAREF laminar/A333/PFD/airspeed_ind/next_flap_speed
           SHOW_LESS 15000.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128670,7 +128430,6 @@ GROUP PFDcapt
           IMAGE PFD/Tapes/Vmax_tape
           DATAREF laminar/A333/PFD/airspeed_ind/vmo_mmo
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128687,7 +128446,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/gauges/actuators/airspeed_bugs[7]
           SHOW_GREATER 1.000000 laminar/A333/PFD/airspeed_ind/off_ground_timer
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128704,7 +128462,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/gauges/actuators/airspeed_bugs[8]
           SHOW_GREATER 5.000000 laminar/A333/PFD/airspeed_ind/off_ground_timer
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128721,7 +128478,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/gauges/actuators/airspeed_bugs[9]
           SHOW_GREATER 5.000000 laminar/A333/PFD/airspeed_ind/off_ground_timer
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -128736,13 +128492,11 @@ GROUP PFDcapt
     END_GROUP
     GROUP ALT Tape Tick Marks
       LOCKED
-      HIDE
       gen_pointer Alt Tape 1
         POS 416.000000 509.000000
         IMAGE PFD/Tapes/alt_tape2
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         KF_WRAP_BOTTOM
         KF_WRAP_TOP
         CLIP
@@ -128760,7 +128514,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tape2
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         KF_WRAP_BOTTOM
         KF_WRAP_TOP
         CLIP
@@ -128778,7 +128531,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tape2
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         KF_WRAP_BOTTOM
         KF_WRAP_TOP
         CLIP
@@ -128796,7 +128548,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tape2
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         KF_WRAP_BOTTOM
         KF_WRAP_TOP
         CLIP
@@ -128814,7 +128565,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tape2
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         KF_WRAP_BOTTOM
         KF_WRAP_TOP
         CLIP
@@ -128830,7 +128580,6 @@ GROUP PFDcapt
     END_GROUP
     GROUP ALT Tape Numbers
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 42
       GROUP_HEIGHT 266
@@ -128846,7 +128595,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tapeA
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128861,7 +128609,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tapeB
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128876,7 +128623,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tapeC
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128891,7 +128637,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tapeD
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128906,7 +128651,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tapeE
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128921,7 +128665,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/alt_tapeF
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -128934,13 +128677,11 @@ GROUP PFDcapt
     END_GROUP
     GROUP Heading Tapes
       LOCKED
-      HIDE
       gen_pointer Heading Tape1
         POS 225.000000 289.000000
         IMAGE PFD/Tapes/heading_tape1
         DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -128956,7 +128697,6 @@ GROUP PFDcapt
         IMAGE PFD/Tapes/heading_tape2
         DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -128971,14 +128711,12 @@ GROUP PFDcapt
     GROUP VS needle
       SHOW_EQUAL 0.000000 laminar/A333/PFD/vertical_speed_amber_capt
       LOCKED
-      HIDE
       gen_needle VS needle
         POS 493.500000 509.000000
         IMAGE PFD/vertical_speed_needle
         DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         SHOW_GREATER 0.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -129001,7 +128739,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         SHOW_LESS -0.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -129022,14 +128759,12 @@ GROUP PFDcapt
     GROUP VS needle amb
       SHOW_EQUAL 1.000000 laminar/A333/PFD/vertical_speed_amber_capt
       LOCKED
-      HIDE
       gen_needle VS needle amb
         POS 493.500000 509.000000
         IMAGE PFD/vertical_speed_needle_amb
         DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         SHOW_GREATER 0.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -129052,7 +128787,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         SHOW_LESS -0.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -129073,7 +128807,6 @@ GROUP PFDcapt
     GROUP VS digital
       SHOW_GREATER 200.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 22
       GROUP_HEIGHT 340
@@ -129095,7 +128828,6 @@ GROUP PFDcapt
         IMAGE PFD/vvi_digital_square
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129118,7 +128850,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         SHOW_EQUAL 1.000000 laminar/A333/PFD/vertical_speed_amber_capt
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129136,7 +128867,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         SHOW_EQUAL 0.000000 laminar/A333/PFD/vertical_speed_amber_capt
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129152,7 +128882,6 @@ GROUP PFDcapt
     GROUP VS digital neg
       SHOW_LESS -200.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 22
       GROUP_HEIGHT 340
@@ -129174,7 +128903,6 @@ GROUP PFDcapt
         IMAGE PFD/vvi_digital_square
         DATAREF 
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129197,7 +128925,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         SHOW_EQUAL 1.000000 laminar/A333/PFD/vertical_speed_amber_capt
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129215,7 +128942,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
         SHOW_EQUAL 0.000000 laminar/A333/PFD/vertical_speed_amber_capt
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129232,7 +128958,6 @@ GROUP PFDcapt
       SHOW_LESS 0.000000 laminar/A333/PFD/ap_alt_ind_color
       SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 70
       GROUP_HEIGHT 288
@@ -129244,7 +128969,6 @@ GROUP PFDcapt
       OFFSET 0.000000
       GROUP Autopilot ALT ind
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 20
         GROUP_HEIGHT 20
@@ -129259,7 +128983,6 @@ GROUP PFDcapt
           IMAGE PFD/autopilot_alt_setting_box
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -129281,7 +129004,6 @@ GROUP PFDcapt
           IMAGE PFD/autopilot_alt_setting_pointer
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -129303,7 +129025,6 @@ GROUP PFDcapt
           IMAGE LED/airbus_display_LED_21_cyan
           DATAREF sim/cockpit2/autopilot/altitude_dial_ft
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -129321,7 +129042,6 @@ GROUP PFDcapt
       SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
       SHOW_GREATER 1.000000 laminar/A333/PFD/ap_alt_ind_color
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 70
       GROUP_HEIGHT 288
@@ -129333,7 +129053,6 @@ GROUP PFDcapt
       OFFSET 0.000000
       GROUP Autopilot ALT ind 2
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 20
         GROUP_HEIGHT 20
@@ -129348,7 +129067,6 @@ GROUP PFDcapt
           IMAGE PFD/autopilot_alt_setting_box
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -129370,7 +129088,6 @@ GROUP PFDcapt
           IMAGE PFD/autopilot_alt_setting_pointer_mag
           DATAREF 
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -129392,7 +129109,6 @@ GROUP PFDcapt
           IMAGE LED/airbus_display_LED_21_magenta
           DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -129409,7 +129125,6 @@ GROUP PFDcapt
     GROUP Speed Tape AP inds
       SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 30
       GROUP_HEIGHT 262
@@ -129426,7 +129141,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/autopilot/airspeed_dial_kts
         SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/vnav_speed_window_open
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129443,7 +129157,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/autopilot/airspeed_dial_kts
         SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/vnav_speed_window_open
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129458,7 +129171,6 @@ GROUP PFDcapt
     GROUP Managed des spd rng
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/vnav_speed_window_open
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 30
       GROUP_HEIGHT 262
@@ -129476,7 +129188,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/autopilot/airspeed_dial_kts
         SHOW_GREATER 1.000000 sim/cockpit2/autopilot/vnav_descent_speed_range
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129493,7 +129204,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/autopilot/airspeed_dial_kts
         SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/vnav_descent_speed_range
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129510,7 +129220,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/autopilot/airspeed_dial_kts
         SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/vnav_descent_speed_range
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129526,7 +129235,6 @@ GROUP PFDcapt
       SHOW_EQUAL 0.000000 [5]
       SHOW_GREATER 0.000000 sim/cockpit2/gauges/actuators/airspeed_bugs[5]
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 30
       GROUP_HEIGHT 262
@@ -129544,7 +129252,6 @@ GROUP PFDcapt
         SHOW_LESS 0.010000 sim/cockpit2/controls/flap_handle_request_ratio
         SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_green_dot_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129557,13 +129264,11 @@ GROUP PFDcapt
 
     END_GROUP
     GROUP Takeoff V speeds
-      HIDE
       GROUP Vr Translate
         SHOW_LESS 1.000000 laminar/A333/PFD/airspeed_ind/off_ground_timer
         SHOW_EQUAL 0.000000 [5]
         SHOW_GREATER 0.000000 sim/cockpit2/gauges/actuators/airspeed_bugs[1]
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 30
         GROUP_HEIGHT 262
@@ -129580,7 +129285,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/gauges/actuators/airspeed_bugs[1]
           SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_Vr_mode
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -129597,7 +129301,6 @@ GROUP PFDcapt
         SHOW_EQUAL 0.000000 [5]
         SHOW_GREATER 0.000000 sim/cockpit2/gauges/actuators/airspeed_bugs[0]
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 30
         GROUP_HEIGHT 262
@@ -129614,7 +129317,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/gauges/actuators/airspeed_bugs[0]
           SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_V1_mode
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -129634,7 +129336,6 @@ GROUP PFDcapt
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_V1_mode
         SHOW_GREATER 0.000000 sim/cockpit2/gauges/actuators/airspeed_bugs[0]
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129650,7 +129351,6 @@ GROUP PFDcapt
     GROUP Cyan ASPD Target
       SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/vnav_speed_window_open
       LOCKED
-      HIDE
       gen_LED cyan autopilot kts
         POS 54.000000 651.000000
         IMAGE LED/airbus_display_LED_21_cyan
@@ -129658,7 +129358,6 @@ GROUP PFDcapt
         SHOW_LESS 0.000000 sim/cockpit2/autopilot/airspeed_is_mach
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129677,7 +129376,6 @@ GROUP PFDcapt
         SHOW_LESS 0.000000 sim/cockpit2/autopilot/airspeed_is_mach
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129696,7 +129394,6 @@ GROUP PFDcapt
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
         SHOW_GREATER 1.000000 sim/cockpit2/autopilot/airspeed_is_mach
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129715,7 +129412,6 @@ GROUP PFDcapt
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
         SHOW_GREATER 1.000000 sim/cockpit2/autopilot/airspeed_is_mach
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129731,7 +129427,6 @@ GROUP PFDcapt
     GROUP Magenta ASPD Target
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/vnav_speed_window_open
       LOCKED
-      HIDE
       gen_LED cyan autopilot kts
         POS 54.000000 651.000000
         IMAGE LED/airbus_display_LED_21_magenta
@@ -129739,7 +129434,6 @@ GROUP PFDcapt
         SHOW_LESS 0.000000 sim/cockpit2/autopilot/airspeed_is_mach
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129758,7 +129452,6 @@ GROUP PFDcapt
         SHOW_LESS 0.000000 sim/cockpit2/autopilot/airspeed_is_mach
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129777,7 +129470,6 @@ GROUP PFDcapt
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
         SHOW_GREATER 1.000000 sim/cockpit2/autopilot/airspeed_is_mach
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129796,7 +129488,6 @@ GROUP PFDcapt
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_speed_display_mode
         SHOW_GREATER 1.000000 sim/cockpit2/autopilot/airspeed_is_mach
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129811,14 +129502,12 @@ GROUP PFDcapt
     END_GROUP
     GROUP Magenta ALT INDs
       SHOW_EQUAL 1.000000 laminar/A333/PFD/ap_alt_ind_color
-      HIDE
       gen_LED magenta autopilot a
         POS 410.000000 653.000000
         IMAGE LED/airbus_display_LED_21_magenta
         DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129836,7 +129525,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129851,14 +129539,12 @@ GROUP PFDcapt
     END_GROUP
     GROUP Cyan ALT INDs
       SHOW_EQUAL 0.000000 laminar/A333/PFD/ap_alt_ind_color
-      HIDE
       gen_LED cyan autopilot abov
         POS 410.000000 653.000000
         IMAGE LED/airbus_display_LED_21_cyan
         DATAREF sim/cockpit2/autopilot/altitude_dial_ft
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129876,7 +129562,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/autopilot/altitude_dial_ft
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129894,7 +129579,6 @@ GROUP PFDcapt
       IMAGE PFD/check_alt_flag
       DATAREF 
       SHOW_EQUAL 1.000000 laminar/A333/annun/pfd_check_alt
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -129913,7 +129597,6 @@ GROUP PFDcapt
 
     GROUP ALT markings_mda
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 16
       GROUP_HEIGHT 266
@@ -129930,7 +129613,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot
         SHOW_GREATER -998.000000 sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129946,7 +129628,6 @@ GROUP PFDcapt
       IMAGE PFD/alt_window2
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -129965,7 +129646,6 @@ GROUP PFDcapt
 
     GROUP ALT marking window
       LOCKED
-      HIDE
       GROUP_ANIMATE_MODE TRANSLATE
       GROUP_WIDTH 42
       GROUP_HEIGHT 26
@@ -129983,7 +129663,6 @@ GROUP PFDcapt
         SHOW_LESS 8.000000 laminar/A333/data/flight_phase
         SHOW_GREATER 7.000000 laminar/A333/data/flight_phase
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -129996,13 +129675,11 @@ GROUP PFDcapt
     END_GROUP
     GROUP Alt Readout Green
       SHOW_EQUAL 0.000000 laminar/A333/PFD/mda_alt_color_capt
-      HIDE
       gen_rolling Altitude Rolling GR
         POS 414.000000 509.000000
         IMAGE PFD/altitude_scrolling
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130012,14 +129689,12 @@ GROUP PFDcapt
 
       GROUP Rolling 20s GR
         LOCKED
-        HIDE
         gen_pointer rolling 20s pos
           POS 433.000000 509.000000
           IMAGE PFD/rolling_20s_pos
           DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
           SHOW_GREATER 20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           CLIP
@@ -130039,7 +129714,6 @@ GROUP PFDcapt
           SHOW_LESS 20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           SHOW_GREATER -20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           LOCKED
-          HIDE
           CLIP
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
@@ -130056,7 +129730,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
           SHOW_LESS -20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           CLIP
@@ -130073,13 +129746,11 @@ GROUP PFDcapt
     END_GROUP
     GROUP Alt Readout Amber
       SHOW_EQUAL 1.000000 laminar/A333/PFD/mda_alt_color_capt
-      HIDE
       gen_rolling Altitude Rolling AM
         POS 414.000000 509.000000
         IMAGE PFD/altitude_scrolling_amber
         DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130089,14 +129760,12 @@ GROUP PFDcapt
 
       GROUP Rolling 20s AMB
         LOCKED
-        HIDE
         gen_pointer rolling 20s pos 2
           POS 433.000000 509.000000
           IMAGE PFD/rolling_20s_pos_amber
           DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
           SHOW_GREATER 20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           CLIP
@@ -130116,7 +129785,6 @@ GROUP PFDcapt
           SHOW_LESS 20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           SHOW_GREATER -20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           LOCKED
-          HIDE
           CLIP
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
@@ -130133,7 +129801,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/gauges/indicators/altitude_ft_pilot
           SHOW_LESS -20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
           LOCKED
-          HIDE
           KF_WRAP_BOTTOM
           KF_WRAP_TOP
           CLIP
@@ -130153,7 +129820,6 @@ GROUP PFDcapt
       IMAGE PFD/Tapes/rad_alt_0_point
       DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       LOCKED
-      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -130170,7 +129836,6 @@ GROUP PFDcapt
       DATAREF 
       SHOW_LESS -0.010000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -130190,12 +129855,10 @@ GROUP PFDcapt
     GROUP Sidestick Indicator
       SHOW_EQUAL 1.000000 laminar/A333/PFD/engines_running
       LOCKED
-      HIDE
       GROUP Sidestick Pitch
         SHOW_LESS 1.000000 laminar/A333/PFD/airspeed_ind/off_ground_timer
         SHOW_EQUAL 1.000000 [0]
         LOCKED
-        HIDE
         GROUP_ANIMATE_MODE TRANSLATE
         GROUP_WIDTH 10
         GROUP_HEIGHT 10
@@ -130210,7 +129873,6 @@ GROUP PFDcapt
           IMAGE PFD/sidestick_input
           DATAREF laminar/A333/sidestick/composite_roll_ratio
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -130228,7 +129890,6 @@ GROUP PFDcapt
         SHOW_LESS 1.000000 laminar/A333/PFD/airspeed_ind/off_ground_timer
         SHOW_EQUAL 1.000000 [0]
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130251,7 +129912,6 @@ GROUP PFDcapt
       IMAGE PFD/alt_window
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -130273,7 +129933,6 @@ GROUP PFDcapt
       IMAGE PFD/heading_indicator
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -130293,23 +129952,18 @@ GROUP PFDcapt
     GROUP ILS
       SHOW_EQUAL 1.000000 laminar/A333/status/capt_ls_bars
       LOCKED
-      HIDE
       GROUP ILS1 CAPT
         LOCKED
-        HIDE
         GROUP ACTIVE NAV1
           SHOW_EQUAL 0.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
           LOCKED
-          HIDE
           GROUP NAV1 FREQ
             SHOW_GREATER 40000.000000 sim/cockpit/radios/nav1_freq_hz
-            HIDE
             gen_LED Nav1 Active Mhz
               POS 28.000000 292.000000
               IMAGE LED/airbus_display_LED_20_zeros_magenta
               DATAREF sim/cockpit2/radios/actuators/nav1_frequency_Mhz
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -130326,7 +129980,6 @@ GROUP PFDcapt
               IMAGE LED/airbus_display_LED_16_magenta
               DATAREF sim/cockpit2/radios/actuators/nav1_frequency_khz
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -130341,13 +129994,11 @@ GROUP PFDcapt
           END_GROUP
           GROUP NAV1 FREQ
             SHOW_LESS 20000.000000 sim/cockpit/radios/nav1_freq_hz
-            HIDE
             gen_LED Nav1 Active Mhz 2
               POS 28.000000 292.000000
               IMAGE LED/airbus_display_LED_20_zeros_magenta
               DATAREF sim/cockpit2/radios/actuators/nav1_frequency_Mhz
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -130364,7 +130015,6 @@ GROUP PFDcapt
               IMAGE LED/airbus_display_LED_16_magenta
               DATAREF sim/cockpit2/radios/actuators/nav1_frequency_khz
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -130384,7 +130034,6 @@ GROUP PFDcapt
             SHOW_LESS 39999.000000 sim/cockpit/radios/nav1_freq_hz
             SHOW_GREATER 20001.000000 sim/cockpit/radios/nav1_freq_hz
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -130401,7 +130050,6 @@ GROUP PFDcapt
             IMAGE Text/airbus_display_20_magenta2
             DATAREF sim/cockpit2/radios/indicators/fas_id
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -130416,7 +130064,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/fas_has_dme
             LOCKED
-            HIDE
             LIGHT_MODE BACK_LIT_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -130440,7 +130087,6 @@ GROUP PFDcapt
             SHOW_LESS 10.000000 sim/cockpit2/radios/indicators/ltp_dist_nm
             SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/fas_has_dme
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -130459,7 +130105,6 @@ GROUP PFDcapt
             SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/fas_has_dme
             SHOW_GREATER 10.000000 sim/cockpit2/radios/indicators/ltp_dist_nm
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -130476,12 +130121,10 @@ GROUP PFDcapt
       GROUP ILS pointer
         SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_ils_mode
         LOCKED
-        HIDE
         GROUP HDG AP pointer 2
           SHOW_LESS 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 34
@@ -130496,7 +130139,6 @@ GROUP PFDcapt
             IMAGE PFD/ISL_crs_needle
             DATAREF sim/cockpit2/radios/indicators/fac
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -130512,7 +130154,6 @@ GROUP PFDcapt
         GROUP TRK AP pointer 2 2
           SHOW_LESS 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 34
@@ -130531,7 +130172,6 @@ GROUP PFDcapt
             IMAGE PFD/ISL_crs_needle
             DATAREF sim/cockpit2/radios/indicators/fac
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -130551,7 +130191,6 @@ GROUP PFDcapt
         GROUP TRK AP pointer 3 2
           SHOW_GREATER 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 34
@@ -130570,7 +130209,6 @@ GROUP PFDcapt
             IMAGE PFD/ISL_crs_needle
             DATAREF sim/cockpit2/radios/indicators/fac
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -130594,7 +130232,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_ils_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130617,7 +130254,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_ils_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130637,14 +130273,12 @@ GROUP PFDcapt
       GROUP ILS heading RIGHT
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_ils_mode
         LOCKED
-        HIDE
         gen_LED heading left 100s 2
           POS 335.500000 280.500000
           IMAGE LED/airbus_display_LED_18_magenta
           DATAREF sim/cockpit2/radios/indicators/fac
           SHOW_GREATER 99.500000 sim/cockpit2/radios/indicators/fac
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -130663,7 +130297,6 @@ GROUP PFDcapt
           SHOW_LESS 99.500000 sim/cockpit2/radios/indicators/fac
           SHOW_GREATER 9.500000 sim/cockpit2/radios/indicators/fac
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -130681,7 +130314,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/radios/indicators/fac
           SHOW_LESS 9.500000 sim/cockpit2/radios/indicators/fac
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -130697,14 +130329,12 @@ GROUP PFDcapt
       GROUP ILS heading LEFT
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_ils_mode
         LOCKED
-        HIDE
         gen_LED heading left 100s 2
           POS 115.500000 280.500000
           IMAGE LED/airbus_display_LED_18_magenta
           DATAREF sim/cockpit2/radios/indicators/fac
           SHOW_GREATER 99.500000 sim/cockpit2/radios/indicators/fac
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -130723,7 +130353,6 @@ GROUP PFDcapt
           SHOW_LESS 99.500000 sim/cockpit2/radios/indicators/fac
           SHOW_GREATER 9.500000 sim/cockpit2/radios/indicators/fac
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -130741,7 +130370,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/radios/indicators/fac
           SHOW_LESS 9.500000 sim/cockpit2/radios/indicators/fac
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -130758,14 +130386,12 @@ GROUP PFDcapt
     GROUP TRACK MAG
       SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/true_north
       LOCKED
-      HIDE
       gen_rotary Track Right Static
         POS 339.000000 299.000000
         IMAGE PFD/track_diamond
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_track_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130788,7 +130414,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_track_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130808,12 +130433,10 @@ GROUP PFDcapt
       GROUP TRACK ALL
         SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_track_mode
         LOCKED
-        HIDE
         GROUP Track Pointer
           SHOW_LESS 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 20
@@ -130828,7 +130451,6 @@ GROUP PFDcapt
             IMAGE PFD/track_diamond
             DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -130844,7 +130466,6 @@ GROUP PFDcapt
         GROUP Track Pointer
           SHOW_LESS 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 20
@@ -130863,7 +130484,6 @@ GROUP PFDcapt
             IMAGE PFD/track_diamond
             DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -130883,7 +130503,6 @@ GROUP PFDcapt
         GROUP Track Pointer
           SHOW_GREATER 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 20
@@ -130902,7 +130521,6 @@ GROUP PFDcapt
             IMAGE PFD/track_diamond
             DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -130924,14 +130542,12 @@ GROUP PFDcapt
     GROUP TRACK TRU
       SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north
       LOCKED
-      HIDE
       gen_rotary Track Right Static
         POS 339.000000 299.000000
         IMAGE PFD/track_diamond
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_track_true_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130954,7 +130570,6 @@ GROUP PFDcapt
         DATAREF 
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_track_true_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -130974,12 +130589,10 @@ GROUP PFDcapt
       GROUP TRACK ALL
         SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_track_true_mode
         LOCKED
-        HIDE
         GROUP Track Pointer 2
           SHOW_LESS 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 20
@@ -130994,7 +130607,6 @@ GROUP PFDcapt
             IMAGE PFD/track_diamond
             DATAREF sim/cockpit2/gauges/indicators/ground_track_true_pilot
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -131010,7 +130622,6 @@ GROUP PFDcapt
         GROUP Track Pointer 2
           SHOW_LESS 30.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 20
@@ -131029,7 +130640,6 @@ GROUP PFDcapt
             IMAGE PFD/track_diamond
             DATAREF sim/cockpit2/gauges/indicators/ground_track_true_pilot
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -131049,7 +130659,6 @@ GROUP PFDcapt
         GROUP Track Pointer 2
           SHOW_GREATER 330.000000 sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
           LOCKED
-          HIDE
           GROUP_ANIMATE_MODE TRANSLATE
           GROUP_WIDTH 228
           GROUP_HEIGHT 20
@@ -131068,7 +130677,6 @@ GROUP PFDcapt
             IMAGE PFD/track_diamond
             DATAREF sim/cockpit2/gauges/indicators/ground_track_true_pilot
             LOCKED
-            HIDE
             KF_WRAP_BOTTOM
             KF_WRAP_TOP
             LIGHT_MODE GLASS_AUTO
@@ -131089,14 +130697,12 @@ GROUP PFDcapt
     END_GROUP
     GROUP Heading
       LOCKED
-      HIDE
       gen_LED Heading Right
         POS 324.000000 314.000000
         IMAGE LED/airbus_display_LED_18_cyan_nozeros
         DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
         SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_heading_mode
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -131111,14 +130717,12 @@ GROUP PFDcapt
       GROUP Heading Left
         SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_heading_mode
         LOCKED
-        HIDE
         gen_LED heading left 100s
           POS 125.000000 314.000000
           IMAGE LED/airbus_display_LED_18_cyan_nozeros
           DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           SHOW_GREATER 99.500000 sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -131137,7 +130741,6 @@ GROUP PFDcapt
           SHOW_LESS 99.500000 sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           SHOW_GREATER 9.500000 sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -131155,7 +130758,6 @@ GROUP PFDcapt
           DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           SHOW_LESS 9.500000 sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
           LOCKED
-          HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
@@ -131176,7 +130778,6 @@ GROUP PFDcapt
       SHOW_LESS 4.000000 sim/cockpit/radios/gps_cdi_sensitivity
       SHOW_GREATER -998.000000 sim/cockpit2/radios/indicators/fms_fpta_pilot
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -131189,23 +130790,18 @@ GROUP PFDcapt
       OFFSET 0.000000
 
     GROUP Baro
-      HIDE
       GROUP QNH
         SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
-        HIDE
         GROUP QNH Normal
           SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_warn_pilot
           LOCKED
-          HIDE
           GROUP Normal
-            HIDE
             gen_LED Baro inHg
               POS 441.000000 336.000000
               IMAGE LED/airbus_display_LED_18_cyan_nozeros
               DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
               SHOW_EQUAL 0.000000 laminar/A333/barometer/capt_inHg_hPa_pos
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131223,7 +130819,6 @@ GROUP PFDcapt
               DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
               SHOW_EQUAL 1.000000 laminar/A333/barometer/capt_inHg_hPa_pos
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131240,7 +130835,6 @@ GROUP PFDcapt
               IMAGE PFD/QNH
               DATAREF 
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131261,11 +130855,9 @@ GROUP PFDcapt
         END_GROUP
         GROUP QNH Warn
           SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_warn_pilot
-          HIDE
           GROUP_OPEN
           GROUP Dim
             SHOW_EQUAL 0.000000 laminar/A333/PFD/baro_warning_brightness
-            HIDE
             GROUP_OPEN
             gen_LED Baro inHg
               POS 441.000000 336.000000
@@ -131273,7 +130865,6 @@ GROUP PFDcapt
               DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
               SHOW_EQUAL 0.000000 laminar/A333/barometer/capt_inHg_hPa_pos
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131291,7 +130882,6 @@ GROUP PFDcapt
               DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
               SHOW_EQUAL 1.000000 laminar/A333/barometer/capt_inHg_hPa_pos
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131308,7 +130898,6 @@ GROUP PFDcapt
               IMAGE PFD/QNH_dim
               DATAREF 
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131328,7 +130917,6 @@ GROUP PFDcapt
           END_GROUP
           GROUP Bright
             SHOW_EQUAL 1.000000 laminar/A333/PFD/baro_warning_brightness
-            HIDE
             GROUP_OPEN
             gen_LED Baro inHg
               POS 441.000000 336.000000
@@ -131336,7 +130924,6 @@ GROUP PFDcapt
               DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
               SHOW_EQUAL 0.000000 laminar/A333/barometer/capt_inHg_hPa_pos
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131354,7 +130941,6 @@ GROUP PFDcapt
               DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
               SHOW_EQUAL 1.000000 laminar/A333/barometer/capt_inHg_hPa_pos
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131371,7 +130957,6 @@ GROUP PFDcapt
               IMAGE PFD/QNH
               DATAREF 
               LOCKED
-              HIDE
               LIGHT_MODE GLASS_AUTO
               LIGHT_RHEOSTAT 0
               BUS_SRC 8
@@ -131393,16 +130978,13 @@ GROUP PFDcapt
       END_GROUP
       GROUP STD
         SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
-        HIDE
         GROUP STD Normal
           SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_warn_pilot
-          HIDE
           gen_rotary Baro STD
             POS 422.000000 337.000000
             IMAGE PFD/standard_baro_ind
             DATAREF 
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -131422,14 +131004,12 @@ GROUP PFDcapt
         END_GROUP
         GROUP STD Warn
           SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_warn_pilot
-          HIDE
           gen_rotary Baro STD Dim
             POS 422.000000 337.000000
             IMAGE PFD/standard_baro_ind_dim
             DATAREF 
             SHOW_EQUAL 0.000000 laminar/A333/PFD/baro_warning_brightness
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -131452,7 +131032,6 @@ GROUP PFDcapt
             DATAREF 
             SHOW_EQUAL 1.000000 laminar/A333/PFD/baro_warning_brightness
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 0
             BUS_SRC 8
@@ -131478,7 +131057,6 @@ GROUP PFDcapt
       DATAREF laminar/A333/PFD/ils_flasher_capt
       SHOW_EQUAL 1.000000 laminar/A333/PDF/ils_flasher_status_capt
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -131502,7 +131080,6 @@ GROUP PFDcapt
       SHOW_LESS 0.000000 laminar/A333/status/capt_ls_bars
       SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -131526,7 +131103,6 @@ GROUP PFDcapt
       SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north
       SHOW_GREATER 1.000000 laminar/A333/status/capt_ls_bars
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -131546,14 +131122,12 @@ GROUP PFDcapt
     GROUP IAS Trend arrows
       SHOW_GREATER 30.000000 sim/cockpit2/gauges/indicators/airspeed_kts_pilot
       LOCKED
-      HIDE
       gen_pointer IAS TREND POS
         POS 54.000000 575.000000
         IMAGE PFD/Trend_Vector_pos
         DATAREF sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
         SHOW_GREATER 0.200000 sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -131572,7 +131146,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
         SHOW_GREATER 0.200000 sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -131590,7 +131163,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
         SHOW_LESS -0.200000 sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -131609,7 +131181,6 @@ GROUP PFDcapt
         DATAREF sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
         SHOW_LESS -0.200000 sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -131624,13 +131195,11 @@ GROUP PFDcapt
     END_GROUP
     GROUP Marker Beacons
       LOCKED
-      HIDE
       gen_rotary Outer Marker
         POS 334.000000 379.000000
         IMAGE PFD/outer_marker
         DATAREF sim/cockpit2/radios/indicators/outer_marker_lit
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -131652,7 +131221,6 @@ GROUP PFDcapt
         IMAGE PFD/middle_marker
         DATAREF sim/cockpit2/radios/indicators/middle_marker_lit
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -131674,7 +131242,6 @@ GROUP PFDcapt
         IMAGE PFD/inner_marker
         DATAREF sim/cockpit2/radios/indicators/inner_marker_lit
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 8
@@ -131697,7 +131264,6 @@ GROUP PFDcapt
       IMAGE PFD/speed_indicator_arrow
       DATAREF 
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 8
@@ -134071,6 +133637,7 @@ GROUP PFDfo
     SHOW_EQUAL 1.000000 AG330/Displays/PFDfo/normalOperation
     LOCKED
     HIDE
+    GROUP_OPEN
     GROUP Horizon ROLL 2
       LOCKED
       HIDE
@@ -135491,7 +135058,7 @@ GROUP PFDfo
       IMAGE LED/airbus_display_LED_24_green
       DATAREF sim/cockpit2/gauges/indicators/mach_copilot
       SHOW_EQUAL 0.000000 laminar/A333/status/fo_ls_bars
-      SHOW_GREATER 0.500000 sim/cockpit2/gauges/indicators/mach_copilot
+      SHOW_GREATER 28000.000000 sim/cockpit/pressure/cabin_altitude_actual_ft 
       LOCKED
       HIDE
       LIGHT_MODE GLASS_AUTO
