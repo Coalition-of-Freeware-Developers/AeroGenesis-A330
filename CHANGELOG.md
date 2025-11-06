@@ -1,5 +1,9 @@
 # AeroGenesis A330 For X-Plane 12
 
+## Version 1.2.0-r1
+- Added Laminar Research's XP12.3.0-b4 & -rc1 changes to the A333
+- stable release of this version, we are leaving the beta stage!
+  
 ## Version 1.2.0-b2
 - Fixed and enhanced GPWS alerts
 - Fixed chocks now holding aircraft in position again
