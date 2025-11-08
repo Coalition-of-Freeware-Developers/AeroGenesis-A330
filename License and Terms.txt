@@ -11,7 +11,7 @@ By installing and using any files included in this download, you acknowledge tha
 
 
 Contact us via email
-aerogenesisdev@gmail.com
+aerogenesis.devs@gmail.com
 
 Also, join our Discord server! You can report bugs there and see sneak peeks of our work before the official release.
 https://discord.gg/cyXrG4V4ZJ
