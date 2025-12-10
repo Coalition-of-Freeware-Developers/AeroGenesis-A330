@@ -8,6 +8,7 @@
 - Fixed PW4000 engines not casting shadows on ground
 - Corrected EMPTY WEIGHT
 - Added experimental PanelState save/load feature
+- Added PACK 1/2 OFF MSG on FWS/EWD
 
 ---
 
