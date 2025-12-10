@@ -9,7 +9,7 @@ jit.off()
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
 * 10/09/2025   AG330 v1.2.0   add ADIRS ALIGN MSG to EWD
-*
+* 10/12/2025   AG330 v1.3.0	  add PACK 1/2 OFF announcement on EWD
 *
 *
 *
@@ -1153,6 +1153,14 @@ A333_ewd_msg.SPEED_BRAKE.CmdInputs = ''
 A333_ewd_msg.PARK_BRAKE = newEWDwarningMessage('PARK_BRAKE', 'MEM1$0020', 'PARK BRK    ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9010)
 A333_ewd_msg.PARK_BRAKE.Inhibit = {0,0,0,0,0,0,0,0,0,0}
 A333_ewd_msg.PARK_BRAKE.CmdInputs = ''
+
+A333_ewd_msg.PACK1 = newEWDwarningMessage('PACK1', 'MEM1$0022', 'PACK 1 OFF   ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9012)
+A333_ewd_msg.PACK1.Inhibit = {0,0,0,0,0,0,0,0,0,0}
+A333_ewd_msg.PACK1.CmdInputs = ''
+
+A333_ewd_msg.PACK2 = newEWDwarningMessage('PACK2', 'MEM1$0023', 'PACK 2 OFF   ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9013)
+A333_ewd_msg.PACK2.Inhibit = {0,0,0,0,0,0,0,0,0,0}
+A333_ewd_msg.PACK2.CmdInputs = ''
 
 A333_ewd_msg.RAT_OUT = newEWDwarningMessage('RAT_OUT', 'MEM1$0030', 'RAT OUT     ', '', 0, 0, 1, 1, 6, 0, 0, 0, 0, 9020)
 A333_ewd_msg.RAT_OUT.Inhibit = {0,0,0,0,0,0,0,0,0,0}
