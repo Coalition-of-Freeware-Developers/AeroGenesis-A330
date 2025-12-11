@@ -9,7 +9,7 @@ jit.off()
 * Revisions:
 * -- DATE --  --- REV NO ---  --- DESCRIPTION -------------------------------------------
 * 10/09/2025   AG330 v1.2.0   add ADIRS ALIGN MSG to EWD
-*
+* 10/12/2025   AG330 v1.3.0	  add PACK 1/2 OFF announcement on EWD
 *
 *
 *
@@ -3716,8 +3716,40 @@ end
 
 
 
+function A333_ewd_msg.PACK2.WarningMonitor()
 
+	local a = {E1 = AP2PBOF, E2 = bNOT(ZPH3)}
+	a.S = bAND(a.E1, a.E2)
 
+	A333_ewd_msg.PACK2.Monitor.video.IN = bool2num[a.S]
+
+	local b = {E1 = ZPH4, E2 = ZPH5, E3 = ZPH6, E4 = ZPH7, E5 = ZPH8}
+	b.S = bOR5(b.E1, b.E2, b.E3, b.E4, b.E5)
+
+	if b.S then
+		A333_ewd_msg.PACK2.TitleColor = 1
+	else
+		A333_ewd_msg.PACK2.TitleColor = 2
+	end
+
+end
+function A333_ewd_msg.PACK1.WarningMonitor()
+
+	local a = {E1 = AP1PBOF, E2 = bNOT(ZPH3)}
+	a.S = bAND(a.E1, a.E2)
+
+	A333_ewd_msg.PACK1.Monitor.video.IN = bool2num[a.S]
+
+	local b = {E1 = ZPH4, E2 = ZPH5, E3 = ZPH6, E4 = ZPH7, E5 = ZPH8}
+	b.S = bOR5(b.E1, b.E2, b.E3, b.E4, b.E5)
+
+	if b.S then
+		A333_ewd_msg.PACK1.TitleColor = 1
+	else
+		A333_ewd_msg.PACK1.TitleColor = 2
+	end
+
+end
 
 function A333_ewd_msg.PARK_BRAKE.WarningMonitor()
 
