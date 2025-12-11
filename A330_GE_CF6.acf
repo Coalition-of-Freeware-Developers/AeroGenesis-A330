@@ -130859,6 +130859,117 @@ GROUP PFDcapt
         OFFSET 0.000000
 
     END_GROUP
+     GROUP METRIC ALT
+      SHOW_EQUAL 1.000000 laminar/A333/autopilot/metric_mode
+      LOCKED
+      GROUP_OPEN
+      GROUP ALT SEL
+        LOCKED
+        GROUP_OPEN
+        gen_LED ALT SEL
+          POS 336.000000 668.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF AG330/Instruments/Altimeter/altitude_m_selected
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_ROUND
+
+        gen_rotary M
+          POS 379.000000 667.000000
+          IMAGE AeroGenesis/M_blue
+          DATAREF 
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 1.000000 1.000000
+          DIGITS 1
+          ROTARY_TYPE NO_CLICK
+          CLICK_RADIUS 10.000000
+          CLICK_RADIUS_DY 0.000000
+          OFFSET 0.000000
+          STEP1 1.000000
+          STEP2 1.000000
+          CURSOR DEFAULT
+          CLICK_DX 0
+          CLICK_DY 0
+
+      END_GROUP
+      GROUP ALT IND
+        LOCKED
+        gen_rotary Background
+          POS 408.000000 310.000000
+          IMAGE PFD/vvi_digital_square
+          DATAREF 
+          SIZE 2.000000
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          CORNERS 0.214287 10.666666  0.000000 -9.285715  27.333347 -9.285711  27.547634 10.666670
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 1.000000 0.000000
+          DIGITS 1
+          ROTARY_TYPE NO_CLICK
+          CLICK_RADIUS 10.000000
+          CLICK_RADIUS_DY 0.000000
+          OFFSET 0.000000
+          STEP1 1.000000
+          STEP2 1.000000
+          CURSOR DEFAULT
+          CLICK_DX 0
+          CLICK_DY 0
+
+        gen_rotary M
+          POS 452.000000 310.000000
+          IMAGE AeroGenesis/M_green
+          DATAREF 
+          SIZE 0.750000
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 1.000000 1.000000
+          DIGITS 1
+          ROTARY_TYPE NO_CLICK
+          CLICK_RADIUS 10.000000
+          CLICK_RADIUS_DY 0.000000
+          OFFSET 0.000000
+          STEP1 1.000000
+          STEP2 1.000000
+          CURSOR DEFAULT
+          CLICK_DX 0
+          CLICK_DY 0
+
+        gen_LED green VS 16
+          POS 413.000000 309.500000
+          IMAGE LED/airbus_display_LED_16_green_all_zeros
+          DATAREF AG330/Instruments/Altimeter/altitude_m_actual
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          CORNERS 0.000000 0.500000  0.000000 0.000000  0.000000 0.000000  0.000000 0.500000
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 1000.000000 1000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 4
+          ROUNDING ROUND_ROUND
+
+      END_GROUP
+    END_GROUP
     GROUP Speed Tapes
       LOCKED
       HIDE
@@ -137879,6 +137990,117 @@ GROUP PFDfo
         IS_VERTICAL 1
         OFFSET 0.000000
 
+    END_GROUP
+     GROUP METRIC ALT
+      SHOW_EQUAL 1.000000 laminar/A333/autopilot/metric_mode
+      LOCKED
+      GROUP_OPEN
+      GROUP ALT SEL
+        LOCKED
+        gen_LED ALT SEL 2
+          POS 336.000000 160.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF AG330/Instruments/Altimeter/altitude_m_selected
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_ROUND
+
+        gen_rotary M 2
+          POS 379.000000 159.000000
+          IMAGE AeroGenesis/M_blue
+          DATAREF 
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 1.000000 1.000000
+          DIGITS 1
+          ROTARY_TYPE NO_CLICK
+          CLICK_RADIUS 10.000000
+          CLICK_RADIUS_DY 0.000000
+          OFFSET 0.000000
+          STEP1 1.000000
+          STEP2 1.000000
+          CURSOR DEFAULT
+          CLICK_DX 0
+          CLICK_DY 0
+
+      END_GROUP
+      GROUP ALT IND
+        LOCKED
+        GROUP_OPEN
+        gen_rotary Background
+          POS 408.000000 -205.000000
+          IMAGE PFD/vvi_digital_square
+          DATAREF 
+          SIZE 2.000000
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          CORNERS 0.214287 10.666666  0.000000 -9.285715  27.333347 -9.285711  27.547634 10.666670
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 1.000000 0.000000
+          DIGITS 1
+          ROTARY_TYPE NO_CLICK
+          CLICK_RADIUS 10.000000
+          CLICK_RADIUS_DY 0.000000
+          OFFSET 0.000000
+          STEP1 1.000000
+          STEP2 1.000000
+          CURSOR DEFAULT
+          CLICK_DX 0
+          CLICK_DY 0
+
+        gen_rotary M
+          POS 452.000000 -205.000000
+          IMAGE AeroGenesis/M_green
+          DATAREF 
+          SIZE 0.750000
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 1.000000 1.000000
+          DIGITS 1
+          ROTARY_TYPE NO_CLICK
+          CLICK_RADIUS 10.000000
+          CLICK_RADIUS_DY 0.000000
+          OFFSET 0.000000
+          STEP1 1.000000
+          STEP2 1.000000
+          CURSOR DEFAULT
+          CLICK_DX 0
+          CLICK_DY 0
+
+        gen_LED green VS 16
+          POS 413.000000 -204.500000
+          IMAGE LED/airbus_display_LED_16_green_all_zeros
+          DATAREF AG330/Instruments/Altimeter/altitude_m_actual
+          LOCKED
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          CORNERS 0.000000 0.500000  0.000000 0.000000  0.000000 0.000000  0.000000 0.500000
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 1000.000000 1000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 4
+          ROUNDING ROUND_ROUND
+
+      END_GROUP
     END_GROUP
     GROUP Speed Tapes 2
       LOCKED
