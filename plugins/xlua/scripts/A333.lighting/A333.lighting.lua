@@ -154,7 +154,7 @@ simDR_generator_amps2			= find_dataref("sim/cockpit2/electrical/generator_amps[1
 simDR_apu_gen_amps				= find_dataref("sim/cockpit2/electrical/APU_generator_amps")
 simDR_battery1_on				= find_dataref("sim/cockpit2/electrical/battery_on[0])")
 simDR_battery2_on				= find_dataref("sim/cockpit2/electrical/battery_on[1])")
-simDR_external_pwr_on			= find_dataref("sim/cockpit2/annunciators/external_power_on")
+simDR_external_pwr_on			= find_dataref("sim/cockpit/electrical/gpu_on")
 
 simDR_FMS1_brightness			= find_dataref("sim/cockpit2/switches/instrument_brightness_ratio[6]")
 simDR_FMS2_brightness			= find_dataref("sim/cockpit2/switches/instrument_brightness_ratio[7]")

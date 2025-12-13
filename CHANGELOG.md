@@ -2,6 +2,7 @@
 
 
 ## COMING SOON: Version 1.3.0-b1 (as is on 01/11/25)
+- Fixed DOME LT auto on even with GPU connected
 - Fixed GroundHandling behaviour
 - Fixed IRS not aligned when using "start with engines running" option
 - Fixed IAS/MACH convertion behaviour
