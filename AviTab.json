@@ -1,9 +1,0 @@
-{
-    "panel": {
-        "left":     0,
-        "bottom":   1024,
-        "width":    800,
-        "height":   480,
-        "enabled": true
-    }
-}
