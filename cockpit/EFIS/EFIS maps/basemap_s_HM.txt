@@ -1,0 +1,8 @@
+A
+750 version
+x   y  
+0 -155	// comment: rose offsets in expanded mode
+0 6	// comment: rose offsets in centered mode
+2.6 2.6	// factor for symbol size
+33 -15	// text label offset
+65280	642
