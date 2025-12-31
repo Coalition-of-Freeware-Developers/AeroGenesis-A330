@@ -1,28 +1,29 @@
 # AeroGenesis A330 For X-Plane 12
 
 
-## COMING SOON: Version 1.3.0-b1 (as is on 01/11/25)
-- Fixed DOME LT auto on even with GPU connected
-- Fixed GroundHandling behaviour
-- Fixed IRS not aligned when using "start with engines running" option
-- Fixed IAS/MACH convertion behaviour
-- Fixed PW4000 engines not casting shadows on ground
-- Corrected EMPTY WEIGHT
-- Added experimental PanelState save/load feature
-- Added PACK 1/2 OFF MSG on FWS/EWD
-- Added METRIC ALT function on PFD
+### COMING SOON: Version 1.3.0 (as is on 31/12/25)
+NOTE: This update withdraws some of the features below since they got outdated with Laminar Research's XP12.4.0 update.
+
+**The new version now consists of the following features:**
+
+- Laminar Research's XP12.4.0 changes to their A333
+- Popout panels
+- Electronic Flight Bag (Tablet)
+- improved cockpit textures & some changed 3D models
+- PW4000 and GE CF6 engine variants (now changeable in runtime, you don't have three different Aircraft showing up)
+- BaroSync
 
 ---
 
-## LATEST: Version 1.2.0-r1
+### LATEST: Version 1.2.0-r1
 - Added Laminar Research's XP12.3.0-b4 & -rc1 changes to the A333
 - stable release of this version, we are leaving the beta stage!
   
-## Version 1.2.0-b2
+### Version 1.2.0-b2
 - Fixed and enhanced GPWS alerts
 - Fixed chocks now holding aircraft in position again
 
-## Version 1.2.0-b1
+### Version 1.2.0-b1
 - Laminar Research A330 improvements
 - BARO Sync feature
 - ISIS now working when you only have battery power
@@ -33,19 +34,19 @@
 
 ---
 
-## Version 1.1.2
+### Version 1.1.2
 - Fixed ENG 2 won't start after ASU been turned on
 - Fixed ECAM ADIRS ALIGN MSG overlapping
 - Removed SelfTest debug messages
 
 ---
 
-## Version 1.1.1
+### Version 1.1.1
 - Fixed build bundle for Windows platform
 
 ---
 
-## Version 1.1.0
+### Version 1.1.0
 - Added UNIX support
 - Disable xLua Lua-JIT for better Performance
 - Fixed ANN LT too bright & Right DOME LT staying on
@@ -60,7 +61,7 @@
 
 ---
 
-## Version 1.0.0
+### Version 1.0.0
 - Added Laminar's updates
 - More realistic Cold&Dark State
 - Added some system depth (SelfTest, ADIRS align)
@@ -83,7 +84,7 @@
 
 ---
 
-## Version 0.9.0
+### Version 0.9.0
 - Fixed autopilot random disconnections on cruise
 - Corrected fuel burn
 - Upscaled cockpit textures
