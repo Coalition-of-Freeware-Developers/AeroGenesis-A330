@@ -1,13 +1,5 @@
-﻿A330.acf~
-A330_PW4000.acf~
-plugins/AG330_SASL/data/output/SASLLog.txt
-plugins/AG330_SASL/data/modules/state.txt
-A330_PW4000_prefs.txt
-
-/.idea
-A330_prefs.txt
-A330_GE_CF6.acf~
-A330_AI.acf~
+﻿/.idea
+/.acf~
 A330_prefs.txt
 plugins/AG330_SASL/data/output/SASLLog.txt
 plugins/AG330_SASL/data/modules/state.txt
