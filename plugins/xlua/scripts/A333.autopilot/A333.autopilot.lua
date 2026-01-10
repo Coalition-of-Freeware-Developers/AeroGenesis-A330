@@ -77,6 +77,8 @@ simDR_capt_hsi						= find_dataref("sim/cockpit2/radios/actuators/HSI_source_sel
 simDR_fo_hsi						= find_dataref("sim/cockpit2/radios/actuators/HSI_source_select_copilot")
 
 simDR_speed_window_open				= find_dataref("sim/cockpit2/autopilot/vnav_speed_window_open")
+simDR_hide_capt_hdg					= find_dataref("sim/cockpit2/EFIS/EFIS_hdg_hidden_pilot")
+simDR_hide_fo_hdg					= find_dataref("sim/cockpit2/EFIS/EFIS_hdg_hidden_copilot")
 
 simDR_gpss_status					= find_dataref("sim/cockpit2/autopilot/gpss_status")
 simDR_heading_mode					= find_dataref("sim/cockpit2/autopilot/heading_mode")
@@ -873,12 +875,18 @@ local function A333_autopilot()
 		simDR_hdg_setting = simDR_current_heading
 	end
 
+	if ap_hdg_window_open == 0 then
+		simDR_hide_capt_hdg = 1
+		simDR_hide_fo_hdg = 1
+	else simDR_hide_capt_hdg = 0
+		simDR_hide_fo_hdg = 0
+	end
+
 	simDR_vertical_mode = ap_vertical_mode
 	simDR_gpss_status = ap_gpss_status
 	A333_hdg_window_open = ap_hdg_window_open
 	A333_VVI_window_open = VVI_window_open
-
-
+	
 end
 
 

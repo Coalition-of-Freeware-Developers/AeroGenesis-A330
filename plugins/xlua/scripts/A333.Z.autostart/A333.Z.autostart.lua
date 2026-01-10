@@ -822,6 +822,11 @@ end
 
 
 ----- AUTO-BOARD SEQUENCE ---------------------------------------------------------------
+local function A333_autoboard_phase_timeout()
+    autoboard.sequence_timeout = true
+    A333_print_sequence_status(autoboard.step, autoboard.phase[autoboard.step], "Step Has Timed Out...")
+end
+
 local function A333_autoboard_init()
 	if is_timer_scheduled(A333_autoboard_phase_timeout) == true then
 	    stop_timer(A333_autoboard_phase_timeout)
@@ -858,10 +863,12 @@ local function A333_print_autoboard_timer_start(step, phase)
     A333_print_sequence_status(step, phase, "Auto-Board Phase Timer Started...")
 end
 
+--[[
 local function A333_autoboard_phase_timeout()
     autoboard.sequence_timeout = true
     A333_print_sequence_status(autoboard.step, autoboard.phase[autoboard.step], "Step Has Timed Out...")
 end
+--]]
 
 local function A333_autoboard_phase_monitor(time)
     if autoboard.phase[autoboard.step] == 2 then
@@ -2271,6 +2278,11 @@ end -- AUTO-BOARD SEQUENCE
 
 
 ----- AUTO-START SEQUENCE ---------------------------------------------------------------
+local function A333_autostart_phase_timeout()
+    autostart.sequence_timeout = true
+    A333_print_sequence_status(autostart.step, autostart.phase[autostart.step], "Step Has Timed Out...")
+end
+
 local function A333_autostart_init()
     if is_timer_scheduled(A333_autostart_phase_timeout) == true then
         stop_timer(A333_autostart_phase_timeout)                                -- KILL THE TIMER
@@ -2307,10 +2319,12 @@ local function A333_print_autostart_timer_start(step, phase)
     A333_print_sequence_status(step, phase, "Auto-Start Phase Timer Started...")
 end
 
+--[[
 local function A333_autostart_phase_timeout()
     autostart.sequence_timeout = true
     A333_print_sequence_status(autostart.step, autostart.phase[autostart.step], "Step Has Timed Out...")
 end
+--]]
 
 local function A333_autostart_phase_monitor(time)
     if autostart.phase[autostart.step] == 2 then

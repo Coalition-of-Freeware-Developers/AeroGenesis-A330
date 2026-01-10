@@ -36156,21 +36156,21 @@ IDX	26520
 	ANIM_begin
 	ANIM_trans	-0.31681001	0.85558999	1.90222	-0.31681001	0.85558999	1.90222
 	ANIM_rotate	1	0	0	161.99981	161.99981
-	ANIM_trans_begin	CMND=sim/instruments/chrono2_cycle
+	ANIM_trans_begin	CMND=sim/instruments/elapsed2_cycle
 	ANIM_trans_key	0	0	0	-0
 	ANIM_trans_key	1	0	0	0.001
 	ANIM_trans_end
-		ATTR_manip_command	button	sim/instruments/chrono2_cycle	Captain MFD Chrono
+		ATTR_manip_command	button	sim/instruments/elapsed2_cycle	Captain MFD Chrono
 		TRIS	31926 108
 	ANIM_end
 	ANIM_begin
 	ANIM_trans	0.31681001	0.85558999	1.90222	0.31681001	0.85558999	1.90222
 	ANIM_rotate	1	0	0	161.99981	161.99981
-	ANIM_trans_begin	CMND=sim/instruments/chrono3_cycle
+	ANIM_trans_begin	CMND=sim/instruments/elapsed3_cycle
 	ANIM_trans_key	0	0	0	-0
 	ANIM_trans_key	1	0	0	0.001
 	ANIM_trans_end
-		ATTR_manip_command	button	sim/instruments/chrono3_cycle	F/O MFD Chrono
+		ATTR_manip_command	button	sim/instruments/elapsed3_cycle	F/O MFD Chrono
 		TRIS	32034 108
 	ANIM_end
 	ANIM_begin
@@ -39199,12 +39199,12 @@ IDX	26520
 	ANIM_rotate	0	1	0	17.747941	17.747941
 	ANIM_rotate	0	0	-1	16.985334	16.985334
 	ANIM_rotate	1	0	0	-177.02448	-177.02448
-	ANIM_rotate_begin	0	0	-1	sim/cockpit2/switches/instrument_brightness_ratio[1]
+	ANIM_rotate_begin	0	0	-1	sim/cockpit2/EFIS/EFIS_weather_alpha
 	ANIM_rotate_key	0	120.00028
 	ANIM_rotate_key	0.5	0
 	ANIM_rotate_key	1	-120.00028
 	ANIM_rotate_end
-			ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.010	0.050	sim/cockpit2/switches/instrument_brightness_ratio[1]	Captain ND Brightness
+			ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.010	0.050	sim/cockpit2/EFIS/EFIS_weather_alpha	Capt Terrain Weather brightness
 			TRIS	54750 204
 	ANIM_end
 	ANIM_begin
@@ -39249,12 +39249,12 @@ IDX	26520
 	ANIM_rotate	0	1	0	-17.740492	-17.740492
 	ANIM_rotate	0	0	-1	-16.856418	-16.856418
 	ANIM_rotate	1	0	0	-177.02677	-177.02677
-	ANIM_rotate_begin	0	0	-1	sim/cockpit2/switches/instrument_brightness_ratio[4]
+	ANIM_rotate_begin	0	0	-1	sim/cockpit2/EFIS/EFIS_weather_alpha_copilot
 	ANIM_rotate_key	0	120.00028
 	ANIM_rotate_key	0.5	0
 	ANIM_rotate_key	1	-120.00028
 	ANIM_rotate_end
-		ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.010	0.050	sim/cockpit2/switches/instrument_brightness_ratio[4]	F/O ND Brightness
+		ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.010	0.050	sim/cockpit2/EFIS/EFIS_weather_alpha_copilot	FO Weather / Terrain Brightness
 		TRIS	55590 204
 	ANIM_end
 	ANIM_begin
@@ -39295,12 +39295,12 @@ IDX	26520
 	ANIM_rotate	0	1	0	17.747941	17.747941
 	ANIM_rotate	0	0	-1	16.985334	16.985334
 	ANIM_rotate	1	0	0	-177.02448	-177.02448
-	ANIM_rotate_begin	0	0	-1	sim/cockpit2/EFIS/EFIS_weather_alpha
+	ANIM_rotate_begin	0	0	-1	sim/cockpit2/switches/instrument_brightness_ratio[1]
 	ANIM_rotate_key	0	120.00028
 	ANIM_rotate_key	0.5	0
 	ANIM_rotate_key	1	-120.00028
 	ANIM_rotate_end
-		ATTR_manip_axis_knob	rotate_small	0.000	1.000	0.010	0.050	sim/cockpit2/EFIS/EFIS_weather_alpha	Capt Terrain Weather brightness
+		ATTR_manip_axis_knob	rotate_small	0.000	1.000	0.010	0.050	sim/cockpit2/switches/instrument_brightness_ratio[1]	Captain ND Brightness
 		TRIS	56196 102
 	ANIM_end
 	ANIM_begin
@@ -39308,12 +39308,12 @@ IDX	26520
 	ANIM_rotate	0	1	0	-17.740492	-17.740492
 	ANIM_rotate	0	0	-1	-16.856418	-16.856418
 	ANIM_rotate	1	0	0	-177.02677	-177.02677
-	ANIM_rotate_begin	0	0	-1	sim/cockpit2/EFIS/EFIS_weather_alpha_copilot
+	ANIM_rotate_begin	0	0	-1	sim/cockpit2/switches/instrument_brightness_ratio[4]
 	ANIM_rotate_key	0	120.00028
 	ANIM_rotate_key	0.5	0
 	ANIM_rotate_key	1	-120.00028
 	ANIM_rotate_end
-		ATTR_manip_axis_knob	rotate_small	0.000	1.000	0.010	0.050	sim/cockpit2/EFIS/EFIS_weather_alpha_copilot	FO Weather / Terrain Brightness
+		ATTR_manip_axis_knob	rotate_small	0.000	1.000	0.010	0.050	sim/cockpit2/switches/instrument_brightness_ratio[4]	F/O ND Brightness
 		TRIS	56298 102
 	ANIM_end
 	ANIM_begin

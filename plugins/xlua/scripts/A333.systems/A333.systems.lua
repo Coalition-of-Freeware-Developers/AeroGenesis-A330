@@ -504,6 +504,8 @@ simDR_eng2_N2 = find_dataref("sim/flightmodel2/engines/N2_percent[1]")
 simDR_throttle1_pos = find_dataref("sim/cockpit2/engine/actuators/throttle_ratio[0]")
 simDR_throttle2_pos = find_dataref("sim/cockpit2/engine/actuators/throttle_ratio[1]")
 
+simDR_FADEC_EPR = find_dataref("sim/flightmodel2/engines/EPR_FADEC")
+
 simDR_throttle_used = find_dataref("sim/flightmodel2/engines/throttle_used_ratio")
 simDR_throttle1_used = find_dataref("sim/flightmodel2/engines/throttle_used_ratio[0]")
 simDR_throttle2_used = find_dataref("sim/flightmodel2/engines/throttle_used_ratio[1]")
@@ -1111,6 +1113,9 @@ A333_ECAM_APU_volts = create_dataref("laminar/A333/ecam/apu_volts", "number")
 A333_ECAM_APU_hertz = create_dataref("laminar/A333/ecam/apu_hz", "number")
 A333_ECAM_APU_egt_hot_status = create_dataref("laminar/A333/ecam/apu_overheat_status", "number")
 
+A333_ECAM_engine_donut1 = create_dataref("laminar/A333/ecam/throttle_pos_donut_eng1", "number")
+A333_ECAM_engine_donut2 = create_dataref("laminar/A333/ecam/throttle_pos_donut_eng2", "number")
+
 -- ECAM COMMON
 
 A333_ECAM_g_load_state = create_dataref("laminar/A333/ecam/g_load_state", "number") -- 0 = no show, 1 = out of g-limits, 2 = on 5 second time out
@@ -1570,6 +1575,7 @@ A333_lvr_mct_status = create_dataref("laminar/A333/PFD/FMAs/lvr_mct_status", "nu
 A333_lvr_clb_mct_flasher = create_dataref("laminar/A333/PFD/FMAs/lvr_clb_mct_flasher", "number")
 
 A333_nav_loc_arm_status = create_dataref("laminar/A333/PFD/FMAs/nav_loc_arm_status", "number") -- 0 = hide, 1 = nav, 2 = loc, 3 = nav loc
+A333_alt_crz_heading_mode = create_dataref("laminar/A333/PFD/FMAs/alt_crz_heading_status", "number")
 
 -- SIDESTICK PRIORITY
 A333_composite_stick_pitch = create_dataref("laminar/A333/sidestick/composite_pitch_ratio", "number")
@@ -1586,7 +1592,7 @@ A333_dual_input = create_dataref("laminar/A333/sidestick/dual_input", "number")	
 
 
 A333DR_baro_warning_brightness = create_dataref("laminar/A333/PFD/baro_warning_brightness", "number")
-
+A333DR_baro_warning_brightness_fo = create_dataref("laminar/A333/PFD/baro_warning_brightness_fo", "number")
 
 A333DR_var_test = create_dataref("laminar/A333/var_test", "number")
 A333_laminar_no_ref = create_dataref("laminar/no_ref", "number")
@@ -5150,7 +5156,20 @@ local function A333_fuel_totalizer_reset()
 
 end
 
+local function A333_throttle_pos_ind()
 
+
+	if simDR_FADEC_EPR[0] == 0 then
+		A333_ECAM_engine_donut1 = 1
+	else A333_ECAM_engine_donut1 = simDR_FADEC_EPR[0]
+	end
+	
+	if simDR_FADEC_EPR[1] == 0 then
+		A333_ECAM_engine_donut2 = 1
+	else A333_ECAM_engine_donut2 = simDR_FADEC_EPR[1]
+	end	
+
+end
 
 
 ---- ENGINE IDLE MODE ---------------------------------------------------------------------
@@ -6362,6 +6381,10 @@ local function A333_FMAs()
 
 	A333_nav_loc_arm_status = nav_loc_arm_stat
 
+	if heading_mode == 13 or heading_mode == 1 then
+		A333_alt_crz_heading_mode = 1
+	else A333_alt_crz_heading_mode = 0
+	end
 
 end
 
@@ -6502,11 +6525,16 @@ local function A333_baro_warning_brightness()
 
     local time = m.fmod(simDR_flight_time, 1.0)
     local barometer_setting_warn_pilot = simDR_barometer_setting_warn_pilot
+	local barometer_setting_warn_copilot = simDR_barometer_setting_warn_copilot
 
     local bright = ((barometer_setting_warn_pilot == 1 or barometer_setting_warn_pilot == 1)
         and (time > 0.5 and time <= 1.0))
+        
+	local bright_fo = ((barometer_setting_warn_copilot == 1 or barometer_setting_warn_copilot == 1)
+        and (time > 0.5 and time <= 1.0))
 
     A333DR_baro_warning_brightness = bool2num[bright]
+	A333DR_baro_warning_brightness_fo = bool2num[bright_fo]
 
 end
 
@@ -6535,74 +6563,6 @@ local function A333_ND_nav_rad_ID()
 
 end
 
-
-
---[[
-local function A333_ND_GPS_dme_time()
-
-    local gps1_dme_time = simDR_gps1_dme_time
-    local gps2_dme_time = simDR_gps2_dme_time
-
-	A333_gps_dme_time_min = m.floor(gps1_dme_time)
-	A333_gps2_dme_time_min = m.floor(gps2_dme_time)
-
-	lcl.total_gps_seconds = gps1_dme_time * 60
-	lcl.total_gps2_seconds = gps2_dme_time * 60
-
-	lcl.gps_seconds = m.fmod(lcl.total_gps_seconds, 60)
-	lcl.gps2_seconds = m.fmod(lcl.total_gps2_seconds, 60)
-
-	A333_gps_dme_time_sec = m.floor(lcl.gps_seconds)
-	A333_gps2_dme_time_sec = m.floor(lcl.gps2_seconds)
-
-end
---]]
-
--- This code resolves XPD-17010 as per Jim Keir (original code above)
-local total_gps_seconds = 0
-local total_gps2_seconds = 0
-local gps_seconds = 0
-local gps2_seconds = 0
-
-local function isnan(x)
-    return type(x) == "number" and x == x+1
-end
-
-local function A333_ND_GPS_dme_time()
-    local gps1_dme_time = simDR_gps1_dme_time
-    local gps2_dme_time = simDR_gps2_dme_time
-
-    if isnan(gps1_dme_time) then
-        gps1_dme_time = 0
-    end
-    if isnan(gps2_dme_time) then
-        gps2_dme_time = 0
-    end
-
-    A333_gps_dme_time_min = m.floor(simDR_gps1_dme_time)
-    A333_gps2_dme_time_min = m.floor(simDR_gps2_dme_time)
-    A333_gps_dme_time_min = m.floor(gps1_dme_time)
-    A333_gps2_dme_time_min = m.floor(gps2_dme_time)
-
-    total_gps_seconds = simDR_gps1_dme_time * 60
-    total_gps2_seconds = simDR_gps2_dme_time * 60
-    total_gps_seconds = gps1_dme_time * 60
-    total_gps2_seconds = gps2_dme_time * 60
-
-	gps_seconds = m.fmod(total_gps_seconds, 60)
-    gps2_seconds = m.fmod(total_gps2_seconds, 60)
-
-    A333_gps_dme_time_sec = m.floor(gps_seconds)
-    A333_gps2_dme_time_sec = m.floor(gps2_seconds)
-
-
-	A333_gps_eta_time_min = m.floor(m.fmod( ((simDR_zulu_time_sec / 60) + gps1_dme_time), 60) )
-	A333_gps2_eta_time_min = m.floor(m.fmod( ((simDR_zulu_time_sec / 60) + gps2_dme_time), 60) )
-
-	A333_gps_eta_time_hour = m.floor(m.fmod( ((simDR_zulu_time_sec / 3600) + (gps1_dme_time / 60)), 24) )
-	A333_gps2_eta_time_hour = m.floor(m.fmod( ((simDR_zulu_time_sec / 3600) + (gps2_dme_time / 60)), 24) )
-
-end
 
 local function A333_TCAS_flasher_ND()
 
@@ -6844,14 +6804,13 @@ local function A333_ALL_systems()
 	A333_ecam_page_BLEED()
 	A333_ecam_page_COND()
 	A333_FPV_calculations()
-	A333_PFD_indicators()
 	A333_flight_directors()
 	A333_DH_flashers()
 	A333_InstrumentVisibility()
 	A333_ND_nav_rad_ID()
-	A333_ND_GPS_dme_time()
 	A333_gps_info_show()
 	A333_fuel_totalizer_reset()
+	A333_throttle_pos_ind()
 	A333_vspeeds()
 	A333_ground_timer()
 	A333_idle_mode_logic()
@@ -6884,6 +6843,7 @@ function before_physics()
 
 	A333_map_range_ring_hide()
 	A333_FMAs()
+	A333_PFD_indicators()
 
 end
 
@@ -6898,5 +6858,6 @@ function after_replay()
 	A333_ALL_systems()
 	A333_map_range_ring_hide()
 	A333_FMAs()
+	A333_PFD_indicators()
 	
 end

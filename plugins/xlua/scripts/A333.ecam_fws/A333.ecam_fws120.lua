@@ -472,7 +472,7 @@ function newLeadingEdgeDelayedConfirmation(name, duration)
 		end
 		if not self.IN
 			and
-			(self.OUT == true or is_timer_scheduled(self.timer))
+			(self.OUT == true or is_timer_scheduled(self.timerFunc))
 		then
 			self:resetTimer()
 		end
@@ -519,7 +519,7 @@ function newFallingEdgeDelayedConfirmation(name, duration)
 		end
 		if self.IN
 			and
-			(self.OUT == false or is_timer_scheduled(self.timer))
+			(self.OUT == false or is_timer_scheduled(self.timerFunc))
 		then
 			self:resetTimer()
 		end
