@@ -1,7 +1,7 @@
 # AeroGenesis A330 For X-Plane 12
 
 
-### COMING SOON: Version 1.3.0 (as is on 31/12/25)
+### LATEST: Version 1.3.0 (as is on 31/12/25)
 NOTE: This update withdraws some of the features below since they got outdated with Laminar Research's XP12.4.0 update.
 
 **The new version now consists of the following features:**
@@ -15,7 +15,7 @@ NOTE: This update withdraws some of the features below since they got outdated w
 
 ---
 
-### LATEST: Version 1.2.0-r1
+### Version 1.2.0-r1
 - Added Laminar Research's XP12.3.0-b4 & -rc1 changes to the A333
 - stable release of this version, we are leaving the beta stage!
   
