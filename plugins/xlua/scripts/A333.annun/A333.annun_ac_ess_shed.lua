@@ -314,11 +314,11 @@ local function A333_annun_ac_ess_shed_processing()
     local elec_idg2_off_annun_target = annun_light_switch_dim_or_brt and bool2num[A333DR_IDG2_status == 0] or annun_light_switch_test
     local elec_galley_off_annun_target = annun_light_switch_dim_or_brt and bool2num[A333DR_buttons_galley_pos == 0] or annun_light_switch_test
     local autopilot_a_thr_mode = annun_light_switch_dim_or_brt and simDR_autothrottle_on or annun_light_switch_test
-    local autopilot_alt_mode = annun_light_switch_dim_or_brt and bool2num[simDR_altitude_hold_status == 2 and simDR_alts_captured == 0 and simDR_altv_captured] or annun_light_switch_test
+    local autopilot_alt_mode = annun_light_switch_dim_or_brt and bool2num[simDR_altitude_hold_status == 2 and simDR_alts_captured == 0 and simDR_altv_captured == 0] or annun_light_switch_test
     local autopilot_ap1_mode = annun_light_switch_dim_or_brt and simDR_autopilot1_on or annun_light_switch_test
     local autopilot_ap2_mode = annun_light_switch_dim_or_brt and simDR_autopilot2_on or annun_light_switch_test
     local autopilot_appr_mode = annun_light_switch_dim_or_brt and bool2num[simDR_approach_status >= 1] or annun_light_switch_test
-    local autopilot_loc_mode = annun_light_switch_dim_or_brt and bool2num[simDR_loc_status >= 1] or annun_light_switch_test
+    local autopilot_loc_mode = annun_light_switch_dim_or_brt and bool2num[simDR_loc_status >= 1 and simDR_glideslope_status == 0] or annun_light_switch_test
     local fuel_pump_L1_fault_annun_target = annun_light_switch_dim_or_brt and bool2num[left_fuel_pump1_button_pos >= 1 and fuel_tank_qty[0] < 150] or annun_light_switch_test
     local fuel_pump_L1_off_annun_target = annun_light_switch_dim_or_brt and bool2num[left_fuel_pump1_button_pos == 0] or annun_light_switch_test
     local fuel_pump_R1_fault_annun_target = annun_light_switch_dim_or_brt and bool2num[right_fuel_pump1_button_pos >= 1 and fuel_tank_qty[2] < 150] or annun_light_switch_test

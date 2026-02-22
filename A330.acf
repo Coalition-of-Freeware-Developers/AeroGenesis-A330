@@ -38617,7 +38617,7 @@ P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
 P acf/_author Alex Unruh, Rodrigo Fernandez, Massimo Durando, Jim Gregory, Marco Auer
-P acf/_auto_engage_BC_deg 120.000000000
+P acf/_auto_engage_BC_deg 0
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
 P acf/_auto_omega_open 0.000000000
@@ -42789,7 +42789,7 @@ GROUP Autopilot
     POS 1629.000000 -163.000000
     IMAGE 7segment/Autopilot/circle_indicator
     DATAREF 
-    SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
+    SHOW_EQUAL 1.000000 laminar/A333/lvl_ch_dot
     LOCKED
     HIDE
     LIGHT_MODE BACK_LIT_AUTO
@@ -223766,6 +223766,28 @@ GROUP PFDs
     GROUP Capt multi
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 214.000000 750.000000
+        IMAGE PFD/FMA/column_multi_box
+        DATAREF laminar/A333/FMAs/column2_3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary FMA line tall
         POS 109.000000 728.000000
         IMAGE PFD/FMA/multi/FMA_divider
@@ -224040,7 +224062,6 @@ GROUP PFDs
       GROUP Speed IAS
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/speed_ias_status
         HIDE
-        GROUP_OPEN
         gen_LED IAS
           POS 170.000000 704.000000
           IMAGE LED/airbus_display_LED_20_zeros_cyan
@@ -224083,6 +224104,29 @@ GROUP PFDs
     GROUP Capt column 1
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 57.000000 750.000000
+        IMAGE PFD/FMA/column1_2_box
+        DATAREF laminar/A333/FMAs/column1_box
+        SHOW_LESS 0.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -224141,7 +224185,7 @@ GROUP PFDs
               CLICK_DY 0
 
             gen_rotary MAN FLEX 2
-              POS 66.000000 727.000000
+              POS 70.000000 727.000000
               IMAGE PFD/FMA/cyan_plus
               DATAREF 
               LOCKED
@@ -224163,7 +224207,7 @@ GROUP PFDs
               CLICK_DY 0
 
             gen_LED FLEX TEMP
-              POS 82.000000 727.000000
+              POS 87.000000 727.000000
               IMAGE LED/airbus_display_LED_20_zeros_cyan
               DATAREF sim/flightmodel/engine/ENGN_assumed_temp[0]
               LOCKED
@@ -224207,7 +224251,7 @@ GROUP PFDs
             POS 57.000000 739.000000
             IMAGE PFD/FMA/column 1/man_thr
             DATAREF 
-            SHOW_EQUAL 1.000000 laminar/no_ref
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/man_thrust_status
             LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
@@ -224232,8 +224276,7 @@ GROUP PFDs
           LOCKED
           HIDE
           GROUP Thrust Mode 1
-            SHOW_LESS 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
-            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/autothrottle_enabled
+            SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
             LOCKED
             HIDE
             gen_rotary THR LVR
@@ -224412,7 +224455,7 @@ GROUP PFDs
           CLICK_DY 0
 
         gen_rotary A. FLOOR
-          POS 56.000000 750.000000
+          POS 57.000000 750.000000
           IMAGE PFD/FMA/column 1/alpha_floor
           DATAREF 
           SHOW_EQUAL 1.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
@@ -224435,7 +224478,7 @@ GROUP PFDs
           CLICK_DY 0
 
         gen_rotary TOGA LK
-          POS 56.000000 750.000000
+          POS 57.000000 750.000000
           IMAGE PFD/FMA/column 1/toga_lk
           DATAREF 
           SHOW_EQUAL 2.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
@@ -224459,6 +224502,7 @@ GROUP PFDs
 
       END_GROUP
       GROUP Row 2
+        SHOW_EQUAL 0.000000 laminar/A333/PFD/FMAs/lvr_assym_status
         LOCKED
         HIDE
         gen_rotary LVR CLB
@@ -224560,9 +224604,32 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP Capt column 2
+      SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/final_app_status
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 162.000000 750.000000
+        IMAGE PFD/FMA/column1_2_box
+        DATAREF laminar/A333/FMAs/column2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -224971,7 +225038,7 @@ GROUP PFDs
           LOCKED
           HIDE
           gen_LED VVI
-            POS 187.000000 750.000000
+            POS 184.000000 750.000000
             IMAGE LED/airbus_display_LED_20_zeros_cyan
             DATAREF sim/cockpit2/autopilot/vvi_dial_fpm
             LOCKED
@@ -224988,7 +225055,7 @@ GROUP PFDs
             ROUNDING ROUND_ROUND
 
           gen_rotary V/S plus
-            POS 157.000000 750.000000
+            POS 156.000000 750.000000
             IMAGE PFD/FMA/cyan_plus
             DATAREF 
             SHOW_GREATER 0.500000 sim/cockpit2/autopilot/vvi_dial_fpm
@@ -225011,7 +225078,7 @@ GROUP PFDs
             CLICK_DY 0
 
           gen_rotary V/S
-            POS 132.000000 750.000000
+            POS 134.000000 750.000000
             IMAGE PFD/FMA/column 2/vertical_speed
             DATAREF 
             LOCKED
@@ -225593,14 +225660,37 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP Capt column 3
+      SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/final_app_status
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 273.000000 750.000000
+        IMAGE PFD/FMA/column3_box
+        DATAREF laminar/A333/FMAs/column3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
         gen_rotary RWY
-          POS 273.000000 750.000000
+          POS 273.000000 749.000000
           IMAGE PFD/FMA/column 3/rwy
           DATAREF 
           SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/runway_status
@@ -225909,6 +225999,7 @@ GROUP PFDs
           POS 273.000000 727.000000
           IMAGE PFD/FMA/column 3/nav_loc_arm
           DATAREF laminar/A333/PFD/FMAs/nav_loc_arm_status
+          SHOW_LESS 0.000000 sim/cockpit2/autopilot/backcourse_status
           LOCKED
           HIDE
           LIGHT_MODE GLASS_AUTO
@@ -225985,6 +226076,50 @@ GROUP PFDs
     GROUP Capt column 4
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 378.000000 750.000000
+        IMAGE PFD/FMA/column4_box
+        DATAREF laminar/A333/FMAs/column4_row1_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row2 box
+        POS 378.000000 727.000000
+        IMAGE PFD/FMA/column4_box
+        DATAREF laminar/A333/FMAs/column4_row2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary Landing Cat
         POS 378.000000 750.000000
         IMAGE PFD/FMA/column 4/cat_123
@@ -226010,7 +226145,7 @@ GROUP PFDs
         CLICK_DY 0
 
       gen_rotary Cat SINGLE
-        POS 378.000000 727.000000
+        POS 378.000000 728.000000
         IMAGE PFD/FMA/column 4/single
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/landing_single_dual
@@ -226033,7 +226168,7 @@ GROUP PFDs
         CLICK_DY 0
 
       gen_rotary Cat DUAL
-        POS 379.000000 727.000000
+        POS 379.000000 728.000000
         IMAGE PFD/FMA/column 4/dual
         DATAREF 
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/landing_single_dual
@@ -226177,6 +226312,72 @@ GROUP PFDs
     GROUP Capt column 5
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 465.000000 750.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row1_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row2 box
+        POS 465.000000 727.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row3 box
+        POS 465.000000 704.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary AP mode
         POS 464.000000 750.000000
         IMAGE PFD/FMA/ap12_mode
@@ -226259,6 +226460,28 @@ GROUP PFDs
     GROUP FO multi
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 214.000000 238.000000
+        IMAGE PFD/FMA/column_multi_box
+        DATAREF laminar/A333/FMAs/column2_3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary FMA line tall
         POS 109.000000 216.000000
         IMAGE PFD/FMA/multi/FMA_divider
@@ -226579,6 +226802,29 @@ GROUP PFDs
     GROUP FO column 1
       LOCKED
       HIDE
+      gen_rotary row1 box 2
+        POS 57.000000 238.000000
+        IMAGE PFD/FMA/column1_2_box
+        DATAREF laminar/A333/FMAs/column1_box
+        SHOW_LESS 0.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -226637,7 +226883,7 @@ GROUP PFDs
               CLICK_DY 0
 
             gen_rotary MAN FLEX 2
-              POS 66.000000 215.000000
+              POS 70.000000 215.000000
               IMAGE PFD/FMA/cyan_plus
               DATAREF 
               LOCKED
@@ -226659,7 +226905,7 @@ GROUP PFDs
               CLICK_DY 0
 
             gen_LED FLEX TEMP
-              POS 82.000000 215.000000
+              POS 87.000000 215.000000
               IMAGE LED/airbus_display_LED_20_zeros_cyan
               DATAREF sim/flightmodel/engine/ENGN_assumed_temp[0]
               LOCKED
@@ -226703,7 +226949,7 @@ GROUP PFDs
             POS 57.000000 227.000000
             IMAGE PFD/FMA/column 1/man_thr
             DATAREF 
-            SHOW_EQUAL 1.000000 laminar/no_ref
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/man_thrust_status
             LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
@@ -226728,8 +226974,7 @@ GROUP PFDs
           LOCKED
           HIDE
           GROUP Thrust Mode 1
-            SHOW_LESS 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
-            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/autothrottle_enabled
+            SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
             LOCKED
             HIDE
             gen_rotary THR LVR
@@ -226908,7 +227153,7 @@ GROUP PFDs
           CLICK_DY 0
 
         gen_rotary A. FLOOR
-          POS 56.000000 238.000000
+          POS 57.000000 238.000000
           IMAGE PFD/FMA/column 1/alpha_floor
           DATAREF 
           SHOW_EQUAL 1.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
@@ -226931,7 +227176,7 @@ GROUP PFDs
           CLICK_DY 0
 
         gen_rotary TOGA LK
-          POS 56.000000 238.000000
+          POS 57.000000 238.000000
           IMAGE PFD/FMA/column 1/toga_lk
           DATAREF 
           SHOW_EQUAL 2.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
@@ -226955,6 +227200,7 @@ GROUP PFDs
 
       END_GROUP
       GROUP Row 2
+        SHOW_EQUAL 0.000000 laminar/A333/PFD/FMAs/lvr_assym_status
         LOCKED
         HIDE
         gen_rotary LVR CLB
@@ -227056,9 +227302,32 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP FO column 2
+      SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/final_app_status
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 162.000000 238.000000
+        IMAGE PFD/FMA/column1_2_box
+        DATAREF laminar/A333/FMAs/column2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -227467,7 +227736,7 @@ GROUP PFDs
           LOCKED
           HIDE
           gen_LED VVI
-            POS 187.000000 238.000000
+            POS 184.000000 238.000000
             IMAGE LED/airbus_display_LED_20_zeros_cyan
             DATAREF sim/cockpit2/autopilot/vvi_dial_fpm
             LOCKED
@@ -227484,7 +227753,7 @@ GROUP PFDs
             ROUNDING ROUND_ROUND
 
           gen_rotary V/S plus
-            POS 157.000000 238.000000
+            POS 156.000000 238.000000
             IMAGE PFD/FMA/cyan_plus
             DATAREF 
             SHOW_GREATER 0.500000 sim/cockpit2/autopilot/vvi_dial_fpm
@@ -227507,7 +227776,7 @@ GROUP PFDs
             CLICK_DY 0
 
           gen_rotary V/S
-            POS 132.000000 238.000000
+            POS 134.000000 238.000000
             IMAGE PFD/FMA/column 2/vertical_speed
             DATAREF 
             LOCKED
@@ -228089,9 +228358,32 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP FO column 3
+      SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/final_app_status
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 273.000000 238.000000
+        IMAGE PFD/FMA/column3_box
+        DATAREF laminar/A333/FMAs/column3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -228405,6 +228697,7 @@ GROUP PFDs
           POS 273.000000 215.000000
           IMAGE PFD/FMA/column 3/nav_loc_arm
           DATAREF laminar/A333/PFD/FMAs/nav_loc_arm_status
+          SHOW_LESS 0.000000 sim/cockpit2/autopilot/backcourse_status
           LOCKED
           HIDE
           LIGHT_MODE GLASS_AUTO
@@ -228481,6 +228774,50 @@ GROUP PFDs
     GROUP FO column 4
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 378.000000 238.000000
+        IMAGE PFD/FMA/column4_box
+        DATAREF laminar/A333/FMAs/column4_row1_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row2 box
+        POS 378.000000 215.000000
+        IMAGE PFD/FMA/column4_box
+        DATAREF laminar/A333/FMAs/column4_row2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary Landing Cat
         POS 378.000000 238.000000
         IMAGE PFD/FMA/column 4/cat_123
@@ -228506,7 +228843,7 @@ GROUP PFDs
         CLICK_DY 0
 
       gen_rotary Cat SINGLE
-        POS 378.000000 215.000000
+        POS 378.000000 216.000000
         IMAGE PFD/FMA/column 4/single
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/landing_single_dual
@@ -228529,7 +228866,7 @@ GROUP PFDs
         CLICK_DY 0
 
       gen_rotary Cat DUAL
-        POS 379.000000 215.000000
+        POS 379.000000 216.000000
         IMAGE PFD/FMA/column 4/dual
         DATAREF 
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/landing_single_dual
@@ -228673,6 +229010,72 @@ GROUP PFDs
     GROUP FO column 5
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 465.000000 238.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row1_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row2 box
+        POS 465.000000 215.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row3 box
+        POS 465.000000 192.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary AP mode
         POS 464.000000 238.000000
         IMAGE PFD/FMA/ap12_mode
