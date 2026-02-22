@@ -488,7 +488,7 @@ local function A333_ecp_ProcessCLR()
 
 	-------------------------------------------------------------------------------
 	--|                        CLEAR E/WD ZONE 0 (LEFT)							|--
-	-------------------------------------------------------------------------------
+    -------------------------------------------------------------------------------
 	if EWDzone0hasMsgsToClear() then
 
 		-- SET THE COUNTERS:
@@ -925,10 +925,6 @@ local function A333_fws_CLR()
     if ZCLRUP then 	-- CLR BUTTON PRESS (PULSE)
 
         local pb_process_step = A333DR_ecp_pushbutton_process_step
-
-        for i = 0, 20 do
-            print(i, pb_process_step[i])
-        end
 
         if pb_process_step[17] == 1 or pb_process_step[20] == 1 then
 

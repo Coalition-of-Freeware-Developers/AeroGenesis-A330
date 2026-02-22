@@ -54,6 +54,8 @@ local transponder_decel_timer = 0
 local TA_mode_ground = 0
 local startup_timer = 0
 local fail_index = 0 -- 0 = none, 1 = ATC1 FAIL, 2 = ATC2 FAIL, 3 = ALL FAIL
+local clear_timer = 0
+local saved_code = 0
 
 --*************************************************************************************--
 --** 				                X-PLANE DATAREFS            			    	 **--
@@ -70,6 +72,7 @@ simDR_windshear_alert				= find_dataref("sim/cockpit2/annunciators/windshear_war
 simDR_GPWS_alert					= find_dataref("sim/cockpit2/annunciators/GPWS")
 
 simDR_tcas_fail						= find_dataref("sim/operation/failures/rel_xpndr")
+simDR_xponder_code					= find_dataref("sim/cockpit2/radios/actuators/transponder_code")
 
 -- (off=0, stdby=1, on (mode A)=2, alt (mode C)=3, test=4, GND (mode S)=5, ta_only (mode S)=6, ta/ra=7)
 
@@ -103,6 +106,8 @@ A333_transponder_thrt_all_abv_blw	= create_dataref("laminar/A333/transponder/thr
 A333_tcas_startup					= create_dataref("laminar/A333/PFD/TCAS_startup", "number")
 A333_failure_flag					= create_dataref("laminar/A333/transponder/failure_flag", "number") -- 0 = all working, 1 = 1 fail, 2 = 2 fail, 3 = all fail
 
+A333_digits_showing					= create_dataref("laminar/A333/transponder/digits_showing", "number")
+
 ----- AI --------------------------------------------------------------------------------
 A333DR_init_transponder_CD           	= create_dataref("laminar/A333/init_CD/transponder", "number")
 
@@ -128,6 +133,10 @@ function simCMD_trans0_beforeCMDhandler(phase, duration) end
 function simCMD_trans0_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponder0_pos = 1
+		if A333_digits_showing < 4 then
+			A333_digits_showing = A333_digits_showing + 1
+			clear_timer = 0
+		end
 	elseif phase == 2 then
 		A333_transponder0_pos = 0
 	end
@@ -137,6 +146,10 @@ function simCMD_trans1_beforeCMDhandler(phase, duration) end
 function simCMD_trans1_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponder1_pos = 1
+		if A333_digits_showing < 4 then
+			A333_digits_showing = A333_digits_showing + 1
+			clear_timer = 0
+		end
 	elseif phase == 2 then
 		A333_transponder1_pos = 0
 	end
@@ -146,6 +159,10 @@ function simCMD_trans2_beforeCMDhandler(phase, duration) end
 function simCMD_trans2_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponder2_pos = 1
+		if A333_digits_showing < 4 then
+			A333_digits_showing = A333_digits_showing + 1
+			clear_timer = 0
+		end
 	elseif phase == 2 then
 		A333_transponder2_pos = 0
 	end
@@ -155,6 +172,10 @@ function simCMD_trans3_beforeCMDhandler(phase, duration) end
 function simCMD_trans3_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponder3_pos = 1
+		if A333_digits_showing < 4 then
+			A333_digits_showing = A333_digits_showing + 1
+			clear_timer = 0
+		end
 	elseif phase == 2 then
 		A333_transponder3_pos = 0
 	end
@@ -164,6 +185,10 @@ function simCMD_trans4_beforeCMDhandler(phase, duration) end
 function simCMD_trans4_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponder4_pos = 1
+		if A333_digits_showing < 4 then
+			A333_digits_showing = A333_digits_showing + 1
+			clear_timer = 0
+		end
 	elseif phase == 2 then
 		A333_transponder4_pos = 0
 	end
@@ -173,6 +198,10 @@ function simCMD_trans5_beforeCMDhandler(phase, duration) end
 function simCMD_trans5_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponder5_pos = 1
+		if A333_digits_showing < 4 then
+			A333_digits_showing = A333_digits_showing + 1
+			clear_timer = 0
+		end
 	elseif phase == 2 then
 		A333_transponder5_pos = 0
 	end
@@ -182,6 +211,10 @@ function simCMD_trans6_beforeCMDhandler(phase, duration) end
 function simCMD_trans6_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponder6_pos = 1
+		if A333_digits_showing < 4 then
+			A333_digits_showing = A333_digits_showing + 1
+			clear_timer = 0
+		end
 	elseif phase == 2 then
 		A333_transponder6_pos = 0
 	end
@@ -191,6 +224,10 @@ function simCMD_trans7_beforeCMDhandler(phase, duration) end
 function simCMD_trans7_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponder7_pos = 1
+		if A333_digits_showing < 4 then
+			A333_digits_showing = A333_digits_showing + 1
+			clear_timer = 0
+		end
 	elseif phase == 2 then
 		A333_transponder7_pos = 0
 	end
@@ -200,6 +237,9 @@ function simCMD_transCLR_beforeCMDhandler(phase, duration) end
 function simCMD_transCLR_afterCMDhandler(phase, duration)
 	if phase == 0 then
 		A333_transponderCLR_pos = 1
+		saved_code = simDR_xponder_code
+		A333_digits_showing = 0
+		clear_timer = 0
 	elseif phase == 2 then
 		A333_transponderCLR_pos = 0
 	end
@@ -588,6 +628,22 @@ local function A333_transponder_switching_fail_handler()
 
 end
 
+local function A333_clear_key_timer()
+
+	if A333_digits_showing < 4 then
+		clear_timer = clear_timer + SIM_PERIOD
+	end
+	
+	if clear_timer > 10 then
+		A333_digits_showing = 4
+		simDR_xponder_code = saved_code
+		clear_timer = 0
+	end
+
+
+
+end
+
 
 ----- SET STATE TO COLD & DARK ----------------------------------------------------------
 local function A333_set_transponder_CD()
@@ -649,6 +705,7 @@ local function A333_flight_start_transponder()
     -- ALL MODES ------------------------------------------------------------------------
     A333_set_transponder_all_modes()
 
+	A333_digits_showing = 4
 
     -- COLD & DARK ----------------------------------------------------------------------
     if simDR_startup_running == 0 then
@@ -675,6 +732,7 @@ local function A333_ALL_transponder()
 	A333_transponder_mode_switching()
 	A333_transponder_startup()
 	A333_transponder_switching_fail_handler()
+	A333_clear_key_timer()
 
 end
 

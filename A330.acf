@@ -42460,25 +42460,175 @@ GROUP MISC
       CLICK_DY 0
 
   END_GROUP
-  gen_LED Transponder
-    POS 1677.000000 -212.500000
-    IMAGE 7segment/transponder
-    DATAREF sim/cockpit2/radios/actuators/transponder_code[0]
+  GROUP Transponder digits
     SHOW_EQUAL 1.000000 laminar/A333/elec/ac_bus1_has_power
     SHOW_GREATER 1.000000 laminar/A333/PFD/TCAS_startup
-    LOCKED
     HIDE
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 11
-    BUS_SRC 2
-    KEY_FRAME 0.000000 0.000000 1.000000
-    KEY_FRAME 7777.000000 7777.000000
-    DIGITS 4
-    DECIMALS 0
-    PERIOD_WIDTH 0
-    LED_ROWS 4
-    ROUNDING ROUND_ROUND
+    gen_rotary transponder_dash
+      POS 1725.000000 -212.000000
+      IMAGE 7segment/transponder_dash
+      DATAREF 
+      SHOW_LESS 3.000000 laminar/A333/transponder/digits_showing
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 11
+      BUS_SRC 2
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
 
+    gen_rotary transponder_dash
+      POS 1693.000000 -212.000000
+      IMAGE 7segment/transponder_dash
+      DATAREF 
+      SHOW_LESS 2.000000 laminar/A333/transponder/digits_showing
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 11
+      BUS_SRC 2
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary transponder_dash
+      POS 1661.000000 -212.000000
+      IMAGE 7segment/transponder_dash
+      DATAREF 
+      SHOW_LESS 1.000000 laminar/A333/transponder/digits_showing
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 11
+      BUS_SRC 2
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary transponder_dash
+      POS 1629.000000 -212.000000
+      IMAGE 7segment/transponder_dash
+      DATAREF 
+      SHOW_LESS 0.000000 laminar/A333/transponder/digits_showing
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 11
+      BUS_SRC 2
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_LED Transponder 1s
+      POS 1725.000000 -213.000000
+      IMAGE 7segment/transponder
+      DATAREF sim/cockpit2/radios/actuators/transponder_code[0]
+      SHOW_GREATER 4.000000 laminar/A333/transponder/digits_showing
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 11
+      BUS_SRC 2
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 7.000000 7.000000
+      DIGITS 1
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 4
+      ROUNDING ROUND_DOWN
+
+    gen_LED Transponder 10s
+      POS 1693.000000 -213.000000
+      IMAGE 7segment/transponder
+      DATAREF sim/cockpit2/radios/actuators/transponder_code[0]
+      SHOW_GREATER 3.000000 laminar/A333/transponder/digits_showing
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 11
+      BUS_SRC 2
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 70.000000 7.000000
+      DIGITS 1
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 4
+      ROUNDING ROUND_DOWN
+
+    gen_LED Transponder 100s
+      POS 1661.000000 -213.000000
+      IMAGE 7segment/transponder
+      DATAREF sim/cockpit2/radios/actuators/transponder_code[0]
+      SHOW_GREATER 2.000000 laminar/A333/transponder/digits_showing
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 11
+      BUS_SRC 2
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 700.000000 7.000000
+      DIGITS 1
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 4
+      ROUNDING ROUND_DOWN
+
+    gen_LED Transponder 1000s
+      POS 1629.000000 -213.000000
+      IMAGE 7segment/transponder
+      DATAREF sim/cockpit2/radios/actuators/transponder_code[0]
+      SHOW_GREATER 1.000000 laminar/A333/transponder/digits_showing
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 11
+      BUS_SRC 2
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 7000.000000 7.000000
+      DIGITS 1
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 4
+      ROUNDING ROUND_DOWN
+
+  END_GROUP
 END_GROUP
 GROUP Chronograph
   SHOW_LESS 1.000000 laminar/a333/switches/ann_light_pos
@@ -42789,7 +42939,7 @@ GROUP Autopilot
     POS 1629.000000 -163.000000
     IMAGE 7segment/Autopilot/circle_indicator
     DATAREF 
-    SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
+    SHOW_EQUAL 1.000000 laminar/A333/lvl_ch_dot
     LOCKED
     HIDE
     LIGHT_MODE BACK_LIT_AUTO
@@ -46201,7 +46351,7 @@ GROUP ECAMS
           gen_needle EPR1_setting
             POS 1182.000000 698.000000
             IMAGE ECAM/EPR_setting
-            DATAREF sim/flightmodel2/engines/EPR_FADEC[0]
+            DATAREF laminar/A333/ecam/throttle_pos_donut_eng1
             SHOW_LESS 0.050000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[0]
             SHOW_EQUAL 0.020000 [0]
             LOCKED
@@ -46209,6 +46359,7 @@ GROUP ECAMS
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 8
+            KEY_FRAME 0.000000 -41.000000 1.000000
             KEY_FRAME 0.800000 -41.000000 1.000000
             KEY_FRAME 1.900000 192.000000
             IS_DRAGGABLE 0
@@ -46220,7 +46371,6 @@ GROUP ECAMS
             DATAREF sim/flightmodel/engine/ENGN_fadec_targets[0]
             SHOW_LESS 0.100000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[0]
             SHOW_EQUAL 0.040000 [0]
-            LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
@@ -46239,7 +46389,7 @@ GROUP ECAMS
           gen_needle EPR2_setting
             POS 1378.000000 698.000000
             IMAGE ECAM/EPR_setting
-            DATAREF sim/flightmodel2/engines/EPR_FADEC[1]
+            DATAREF laminar/A333/ecam/throttle_pos_donut_eng2
             SHOW_LESS 0.050000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[1]
             SHOW_EQUAL 0.020000 [1]
             LOCKED
@@ -46247,6 +46397,7 @@ GROUP ECAMS
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 8
+            KEY_FRAME 0.000000 -41.000000 1.000000
             KEY_FRAME 0.800000 -41.000000 1.000000
             KEY_FRAME 1.900000 192.000000
             IS_DRAGGABLE 0
@@ -128458,7 +128609,7 @@ GROUP ECAMS
           gen_needle EPR1_setting 2
             POS 1694.000000 698.000000
             IMAGE ECAM/EPR_setting
-            DATAREF sim/flightmodel2/engines/EPR_FADEC[0]
+            DATAREF laminar/A333/ecam/throttle_pos_donut_eng1
             SHOW_LESS 0.050000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[0]
             SHOW_EQUAL 0.020000 [0]
             LOCKED
@@ -128466,6 +128617,7 @@ GROUP ECAMS
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 3
             BUS_SRC 2
+            KEY_FRAME 0.000000 -41.000000 1.000000
             KEY_FRAME 0.800000 -41.000000 1.000000
             KEY_FRAME 1.900000 192.000000
             IS_DRAGGABLE 0
@@ -128496,7 +128648,7 @@ GROUP ECAMS
           gen_needle EPR2_setting 2
             POS 1890.000000 698.000000
             IMAGE ECAM/EPR_setting
-            DATAREF sim/flightmodel2/engines/EPR_FADEC[1]
+            DATAREF laminar/A333/ecam/throttle_pos_donut_eng2
             SHOW_LESS 0.050000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[1]
             SHOW_EQUAL 0.020000 [1]
             LOCKED
@@ -128504,6 +128656,7 @@ GROUP ECAMS
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 3
             BUS_SRC 2
+            KEY_FRAME 0.000000 -41.000000 1.000000
             KEY_FRAME 0.800000 -41.000000 1.000000
             KEY_FRAME 1.900000 192.000000
             IS_DRAGGABLE 0
@@ -212661,6 +212814,7 @@ GROUP PFDs
       CLICK_DY 0
 
     GROUP HDG AP pointer ALL
+      SHOW_LESS 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_pilot
       SHOW_EQUAL 0.000000 laminar/A333/PFD/capt_heading_mode
       LOCKED
       HIDE
@@ -212779,7 +212933,6 @@ GROUP PFDs
       POS 251.000000 516.000000
       IMAGE PFD/PFD_background
       DATAREF 
-      LOCKED
       HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -213626,15 +213779,15 @@ GROUP PFDs
         gen_rotary autopilot alt box
           POS 407.000000 509.000000
           IMAGE PFD/autopilot_alt_setting_box
-          DATAREF 
+          DATAREF sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
           LOCKED
           HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
           KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 1.000000 0.000000
-          DIGITS 1
+          KEY_FRAME 1.000000 1.000000
+          DIGITS 2
           ROTARY_TYPE NO_CLICK
           CLICK_RADIUS 10.000000
           CLICK_RADIUS_DY 0.000000
@@ -213667,61 +213820,124 @@ GROUP PFDs
           CLICK_DX 0
           CLICK_DY 0
 
-        gen_LED cyan autopilot alt 
-          POS 422.000000 509.000000
-          IMAGE LED/airbus_display_LED_21_cyan
-          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
+        GROUP Normal
+          SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 0
-          BUS_SRC 8
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 3
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED cyan autopilot alt 
+            POS 422.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 3
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
-        gen_LED cyan autopilot alt 
-          POS 416.000000 509.000000
-          IMAGE LED/airbus_display_LED_21_cyan
-          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
+          gen_LED cyan autopilot alt 
+            POS 416.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 4
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+          gen_LED cyan autopilot alt 
+            POS 410.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 5
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+        END_GROUP
+        GROUP FL
+          SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 0
-          BUS_SRC 8
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 4
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED cyan autopilot alt
+            POS 398.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_no_neg_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 3
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
-        gen_LED cyan autopilot alt 
-          POS 410.000000 509.000000
-          IMAGE LED/airbus_display_LED_21_cyan
-          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
-          HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 0
-          BUS_SRC 8
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 5
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED cyan autopilot alt
+            POS 410.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 1
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
+          gen_LED cyan autopilot alt
+            POS 404.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 2
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+        END_GROUP
       END_GROUP
     END_GROUP
     GROUP ALTAutopilot Magent
@@ -213753,15 +213969,15 @@ GROUP PFDs
         gen_rotary autopilot alt box 2
           POS 407.000000 509.000000
           IMAGE PFD/autopilot_alt_setting_box
-          DATAREF 
+          DATAREF sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
           LOCKED
           HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 0
           BUS_SRC 8
           KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 1.000000 0.000000
-          DIGITS 1
+          KEY_FRAME 1.000000 1.000000
+          DIGITS 2
           ROTARY_TYPE NO_CLICK
           CLICK_RADIUS 10.000000
           CLICK_RADIUS_DY 0.000000
@@ -213794,61 +214010,125 @@ GROUP PFDs
           CLICK_DX 0
           CLICK_DY 0
 
-        gen_LED mag autopilot alt
-          POS 410.000000 509.000000
-          IMAGE LED/airbus_display_LED_21_magenta
-          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-          LOCKED
+        GROUP Normal
+          SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 0
-          BUS_SRC 8
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 5
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED mag autopilot alt
+            POS 410.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 5
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
-        gen_LED mag autopilot alt 2
-          POS 416.000000 509.000000
-          IMAGE LED/airbus_display_LED_21_magenta
-          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-          LOCKED
+          gen_LED mag autopilot alt 2
+            POS 422.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_GREATER -999.900024 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 3
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+          gen_LED mag autopilot alt 2
+            POS 416.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME -1000.000000 -1000.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 4
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+        END_GROUP
+        GROUP FL
+          SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 0
-          BUS_SRC 8
-          KEY_FRAME -1000.000000 -1000.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 4
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          GROUP_OPEN
+          gen_LED mag autopilot alt 2
+            POS 398.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_no_neg_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 3
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
-        gen_LED mag autopilot alt 2
-          POS 422.000000 509.000000
-          IMAGE LED/airbus_display_LED_21_magenta
-          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
-          SHOW_GREATER -999.900024 sim/cockpit2/autopilot/altitude_vnav_ft
-          LOCKED
-          HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 0
-          BUS_SRC 8
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 3
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED mag autopilot alt 2
+            POS 410.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 1
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
+          gen_LED mag autopilot alt 2
+            POS 404.000000 509.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 2
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+        END_GROUP
       END_GROUP
     END_GROUP
     GROUP Speed Tape AP inds
@@ -214259,243 +214539,997 @@ GROUP PFDs
       SHOW_EQUAL 1.000000 laminar/A333/PFD/ap_alt_ind_color
       LOCKED
       HIDE
-      gen_LED magenta autopilot a
-        POS 410.000000 653.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
-        SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-        LOCKED
+      GROUP NORMAL
+        SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 5
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        gen_LED magenta autopilot a
+          POS 410.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
 
-      gen_LED magenta autopilot a
-        POS 422.000000 653.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
-        SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
-        LOCKED
+        gen_LED magenta autopilot a
+          POS 422.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot a
+          POS 416.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 4
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 410.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 422.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 416.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 4
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
+      GROUP FL
+        SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        GROUP 10000s FL
+          SHOW_GREATER 10000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos
+            POS 393.000000 652.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED magenta autopilot a
-        POS 416.000000 653.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 4
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+          gen_rotary FL neg
+            POS 393.000000 364.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED magenta autopilot b
-        POS 410.000000 365.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
-        SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 5
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        END_GROUP
+        GROUP 1000s FL
+          SHOW_LESS 9999.990234 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_GREATER 1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos
+            POS 405.000000 652.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED magenta autopilot b
-        POS 422.000000 365.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
-        SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+          gen_rotary FL neg
+            POS 405.000000 364.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED magenta autopilot b
-        POS 416.000000 365.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 4
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        END_GROUP
+        GROUP 100s FL
+          SHOW_LESS 999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos
+            POS 417.000000 652.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
+          gen_rotary FL neg
+            POS 417.000000 364.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP -100s FL
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos 2
+            POS 405.000000 652.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_rotary FL neg 2
+            POS 405.000000 364.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP -1000s FL
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos 2 2
+            POS 393.000000 652.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_rotary FL neg 2 2
+            POS 393.000000 364.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        gen_LED magenta autopilot a
+          POS 422.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_no_neg_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot a
+          POS 434.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 1
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot a
+          POS 428.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 422.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_no_neg_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 434.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 1
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 428.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_vnav_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
     END_GROUP
     GROUP Cyan ALT INDs
       SHOW_EQUAL 0.000000 laminar/A333/PFD/ap_alt_ind_color
       LOCKED
       HIDE
-      gen_LED cyan autopilot abov
-        POS 410.000000 653.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
-        SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
-        LOCKED
+      GROUP NORMAL
+        SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 5
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        gen_LED cyan autopilot abov
+          POS 410.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
 
-      gen_LED cyan autopilot abov
-        POS 422.000000 653.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
-        SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
-        LOCKED
+        gen_LED cyan autopilot abov
+          POS 422.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot abov
+          POS 416.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 4
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 410.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 422.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -1000.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 416.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -1000.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 4
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
+      GROUP FL
+        SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        GROUP 10000s FL
+          SHOW_GREATER 10000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos
+            POS 393.000000 652.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED cyan autopilot abov
-        POS 416.000000 653.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 4
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+          gen_rotary FL neg
+            POS 393.000000 364.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED cyan autopilot belo
-        POS 410.000000 365.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
-        SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 5
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        END_GROUP
+        GROUP 1000s FL
+          SHOW_LESS 9999.990234 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_GREATER 1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos
+            POS 405.000000 652.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED cyan autopilot belo
-        POS 422.000000 365.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
-        SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME -1000.000000 -1000.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+          gen_rotary FL neg
+            POS 405.000000 364.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED cyan autopilot belo
-        POS 416.000000 365.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 8
-        KEY_FRAME -1000.000000 -1000.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 4
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        END_GROUP
+        GROUP 100s FL
+          SHOW_LESS 999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos
+            POS 417.000000 652.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
+          gen_rotary FL neg
+            POS 417.000000 364.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP -100s FL
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos 2
+            POS 405.000000 652.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_rotary FL neg 2
+            POS 405.000000 364.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP -1000s FL
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos 2 2
+            POS 393.000000 652.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_rotary FL neg 2 2
+            POS 393.000000 364.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 0
+            BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        gen_LED cyan autopilot abov
+          POS 422.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_no_neg_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot abov
+          POS 434.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 1
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot abov
+          POS 428.000000 653.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 422.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_no_neg_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 434.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 1
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 428.000000 365.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/capt_autopilot_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 0
+          BUS_SRC 8
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
     END_GROUP
     gen_rotary CHECK ALT flag
       POS 436.000000 591.000000
@@ -215701,6 +216735,7 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP Heading
+      SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_pilot
       LOCKED
       HIDE
       gen_LED Heading Right
@@ -217975,6 +219010,7 @@ GROUP PFDs
       CLICK_DY 0
 
     GROUP HDG AP pointer ALL
+      SHOW_LESS 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_copilot
       SHOW_EQUAL 0.000000 laminar/A333/PFD/fo_heading_mode
       LOCKED
       HIDE
@@ -218940,15 +219976,15 @@ GROUP PFDs
         gen_rotary autopilot alt box 2
           POS 407.000000 -3.000000
           IMAGE PFD/autopilot_alt_setting_box
-          DATAREF 
+          DATAREF sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
           LOCKED
           HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 5
           BUS_SRC 4
           KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 1.000000 0.000000
-          DIGITS 1
+          KEY_FRAME 1.000000 1.000000
+          DIGITS 2
           ROTARY_TYPE NO_CLICK
           CLICK_RADIUS 10.000000
           CLICK_RADIUS_DY 0.000000
@@ -218981,61 +220017,124 @@ GROUP PFDs
           CLICK_DX 0
           CLICK_DY 0
 
-        gen_LED cyan autopilot alt
-          POS 422.000000 -3.000000
-          IMAGE LED/airbus_display_LED_21_cyan
-          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_GREATER -999.900024 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
+        GROUP NORMAL
+          SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 5
-          BUS_SRC 4
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 3
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED cyan autopilot alt
+            POS 422.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER -999.900024 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 3
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
-        gen_LED cyan autopilot alt
-          POS 416.000000 -3.000000
-          IMAGE LED/airbus_display_LED_21_cyan
-          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
+          gen_LED cyan autopilot alt
+            POS 416.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 4
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+          gen_LED cyan autopilot alt
+            POS 410.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 5
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+        END_GROUP
+        GROUP FL
+          SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 5
-          BUS_SRC 4
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 4
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED cyan autopilot alt
+            POS 398.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_no_neg_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 3
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
-        gen_LED cyan autopilot alt
-          POS 410.000000 -3.000000
-          IMAGE LED/airbus_display_LED_21_cyan
-          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
-          HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 5
-          BUS_SRC 4
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 5
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED cyan autopilot alt
+            POS 410.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 1
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
+          gen_LED cyan autopilot alt
+            POS 404.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_cyan
+            DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 2
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+        END_GROUP
       END_GROUP
     END_GROUP
     GROUP ALTAutopilot Magent
@@ -219067,15 +220166,15 @@ GROUP PFDs
         gen_rotary autopilot alt box 2
           POS 407.000000 -3.000000
           IMAGE PFD/autopilot_alt_setting_box
-          DATAREF 
+          DATAREF sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
           LOCKED
           HIDE
           LIGHT_MODE GLASS_AUTO
           LIGHT_RHEOSTAT 5
           BUS_SRC 4
           KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 1.000000 0.000000
-          DIGITS 1
+          KEY_FRAME 1.000000 1.000000
+          DIGITS 2
           ROTARY_TYPE NO_CLICK
           CLICK_RADIUS 10.000000
           CLICK_RADIUS_DY 0.000000
@@ -219108,61 +220207,124 @@ GROUP PFDs
           CLICK_DX 0
           CLICK_DY 0
 
-        gen_LED mag autopilot alt 2
-          POS 422.000000 -3.000000
-          IMAGE LED/airbus_display_LED_21_magenta
-          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
-          SHOW_GREATER -999.900024 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
+        GROUP NORMAL
+          SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 5
-          BUS_SRC 4
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 3
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED mag autopilot alt 2
+            POS 422.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+            SHOW_GREATER -999.900024 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 3
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
-        gen_LED mag autopilot alt 2
-          POS 416.000000 -3.000000
-          IMAGE LED/airbus_display_LED_21_magenta
-          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
+          gen_LED mag autopilot alt 2
+            POS 416.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 4
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+          gen_LED mag autopilot alt 2
+            POS 410.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 50000.000000
+            DIGITS 5
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+        END_GROUP
+        GROUP FL
+          SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 5
-          BUS_SRC 4
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 4
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED mag autopilot alt 2
+            POS 398.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_no_neg_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 3
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
-        gen_LED mag autopilot alt 2
-          POS 410.000000 -3.000000
-          IMAGE LED/airbus_display_LED_21_magenta
-          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
-          LOCKED
-          HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 5
-          BUS_SRC 4
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 50000.000000 50000.000000
-          DIGITS 5
-          DECIMALS 0
-          PERIOD_WIDTH 0
-          LED_ROWS 2
-          ROUNDING ROUND_DOWN
+          gen_LED mag autopilot alt 2
+            POS 410.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 1
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
 
+          gen_LED mag autopilot alt 2
+            POS 404.000000 -3.000000
+            IMAGE LED/airbus_display_LED_21_magenta
+            DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+            SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 50000.000000 500.000000
+            DIGITS 2
+            DECIMALS 0
+            PERIOD_WIDTH 0
+            LED_ROWS 2
+            ROUNDING ROUND_DOWN
+
+        END_GROUP
       END_GROUP
     END_GROUP
     GROUP Speed Tape AP inds
@@ -219573,243 +220735,997 @@ GROUP PFDs
       SHOW_EQUAL 1.000000 laminar/A333/PFD/ap_alt_ind_color
       LOCKED
       HIDE
-      gen_LED magenta autopilot a
-        POS 410.000000 141.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
-        SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-        LOCKED
+      GROUP NORMAL
+        SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 5
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        gen_LED magenta autopilot a
+          POS 410.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
 
-      gen_LED magenta autopilot a
-        POS 422.000000 141.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
-        SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
-        LOCKED
+        gen_LED magenta autopilot a
+          POS 422.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot a
+          POS 416.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 4
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 410.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 422.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 416.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 4
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
+      GROUP FL
+        SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        GROUP 10000s
+          SHOW_GREATER 10000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos
+            POS 393.000000 140.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED magenta autopilot a
-        POS 416.000000 141.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 4
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+          gen_rotary FL neg
+            POS 393.000000 -148.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED magenta autopilot b
-        POS 410.000000 -147.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
-        SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 5
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        END_GROUP
+        GROUP 1000s
+          SHOW_LESS 9999.990234 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_GREATER 1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos
+            POS 405.000000 140.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED magenta autopilot b
-        POS 422.000000 -147.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
-        SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+          gen_rotary FL neg
+            POS 405.000000 -148.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED magenta autopilot b
-        POS 416.000000 -147.000000
-        IMAGE LED/airbus_display_LED_21_magenta
-        DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 4
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        END_GROUP
+        GROUP 100s
+          SHOW_LESS 999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos
+            POS 417.000000 140.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
+          gen_rotary FL neg
+            POS 417.000000 -148.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP -100s
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos 2
+            POS 405.000000 140.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_rotary FL neg 2
+            POS 405.000000 -148.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP -1000s
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          HIDE
+          gen_rotary FL pos 2 2
+            POS 393.000000 140.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_rotary FL neg 2 2
+            POS 393.000000 -148.000000
+            IMAGE PFD/FL_mag
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        gen_LED magenta autopilot a
+          POS 422.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_no_neg_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot a
+          POS 434.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 1
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot a
+          POS 428.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 422.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_no_neg_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 434.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_vnav_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 1
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED magenta autopilot b
+          POS 428.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_magenta
+          DATAREF sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_vnav_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_vnav_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
     END_GROUP
     GROUP Cyan ALT INDs 2
       SHOW_EQUAL 0.000000 laminar/A333/PFD/ap_alt_ind_color
       LOCKED
       HIDE
-      gen_LED cyan autopilot abov
-        POS 410.000000 141.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
-        SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
-        LOCKED
+      GROUP NORMAL
+        SHOW_EQUAL 0.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 5
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        gen_LED cyan autopilot abov
+          POS 410.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
 
-      gen_LED cyan autopilot abov
-        POS 422.000000 141.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
-        SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
-        LOCKED
+        gen_LED cyan autopilot abov
+          POS 422.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot abov
+          POS 416.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 4
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 410.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 5
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 422.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 416.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 50000.000000 50000.000000
+          DIGITS 4
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
+      GROUP FL
+        SHOW_EQUAL 1.000000 sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        GROUP 10000s
+          SHOW_GREATER 10000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos
+            POS 393.000000 140.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED cyan autopilot abov
-        POS 416.000000 141.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 4
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+          gen_rotary FL neg
+            POS 393.000000 -148.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED cyan autopilot belo
-        POS 410.000000 -147.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
-        SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 5
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        END_GROUP
+        GROUP 1000s
+          SHOW_LESS 9999.990234 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_GREATER 1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos
+            POS 405.000000 140.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED cyan autopilot belo
-        POS 422.000000 -147.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
-        SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+          gen_rotary FL neg
+            POS 405.000000 -148.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-      gen_LED cyan autopilot belo
-        POS 416.000000 -147.000000
-        IMAGE LED/airbus_display_LED_21_cyan
-        DATAREF sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
-        SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
-        LOCKED
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50000.000000 50000.000000
-        DIGITS 4
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 2
-        ROUNDING ROUND_DOWN
+        END_GROUP
+        GROUP 100s
+          SHOW_LESS 999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos
+            POS 417.000000 140.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
+          gen_rotary FL neg
+            POS 417.000000 -148.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP -100s
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos 2
+            POS 405.000000 140.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_rotary FL neg 2
+            POS 405.000000 -148.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP -1000s
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          HIDE
+          gen_rotary FL pos 2 2
+            POS 393.000000 140.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_rotary FL neg 2 2
+            POS 393.000000 -148.000000
+            IMAGE PFD/FL_cyan
+            DATAREF 
+            SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 5
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 0.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        gen_LED cyan autopilot abov
+          POS 422.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_no_neg_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot abov
+          POS 434.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 1
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot abov
+          POS 428.000000 141.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 422.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_no_neg_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          SHOW_GREATER 0.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 3
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 434.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -0.010000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          SHOW_GREATER -999.989990 sim/cockpit2/autopilot/altitude_dial_ft
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 1
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+        gen_LED cyan autopilot belo
+          POS 428.000000 -147.000000
+          IMAGE LED/airbus_display_LED_21_cyan
+          DATAREF sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_LESS -1000.000000 sim/cockpit2/autopilot/altitude_dial_ft
+          SHOW_EQUAL -1.000000 laminar/A333/PFD/fo_autopilot_alt_display_mode
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 5
+          BUS_SRC 4
+          KEY_FRAME -1000.000000 -10.000000 1.000000
+          KEY_FRAME 50000.000000 500.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 0
+          LED_ROWS 2
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
     END_GROUP
     gen_rotary CHECK ALT flag 2
       POS 436.000000 79.000000
@@ -221015,6 +222931,7 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP Heading
+      SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_copilot
       LOCKED
       HIDE
       gen_LED Heading Right 2
@@ -221533,7 +223450,7 @@ GROUP PFDs
           LOCKED
           HIDE
           GROUP Dim
-            SHOW_EQUAL 0.000000 laminar/A333/PFD/baro_warning_brightness
+            SHOW_EQUAL 0.000000 laminar/A333/PFD/baro_warning_brightness_fo
             LOCKED
             HIDE
             gen_LED Baro inHg
@@ -221596,7 +223513,7 @@ GROUP PFDs
 
           END_GROUP
           GROUP Bright
-            SHOW_EQUAL 1.000000 laminar/A333/PFD/baro_warning_brightness
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/baro_warning_brightness_fo
             LOCKED
             HIDE
             gen_LED Baro inHg
@@ -221699,7 +223616,7 @@ GROUP PFDs
             POS 422.000000 -174.000000
             IMAGE PFD/standard_baro_ind_dim
             DATAREF 
-            SHOW_EQUAL 0.000000 laminar/A333/PFD/baro_warning_brightness
+            SHOW_EQUAL 0.000000 laminar/A333/PFD/baro_warning_brightness_fo
             LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
@@ -221722,7 +223639,7 @@ GROUP PFDs
             POS 422.000000 -174.000000
             IMAGE PFD/standard_baro_ind
             DATAREF 
-            SHOW_EQUAL 1.000000 laminar/A333/PFD/baro_warning_brightness
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/baro_warning_brightness_fo
             LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
@@ -221999,6 +223916,28 @@ GROUP PFDs
     GROUP Capt multi
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 214.000000 750.000000
+        IMAGE PFD/FMA/column_multi_box
+        DATAREF laminar/A333/FMAs/column2_3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary FMA line tall
         POS 109.000000 728.000000
         IMAGE PFD/FMA/multi/FMA_divider
@@ -222273,7 +224212,6 @@ GROUP PFDs
       GROUP Speed IAS
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/speed_ias_status
         HIDE
-        GROUP_OPEN
         gen_LED IAS
           POS 170.000000 704.000000
           IMAGE LED/airbus_display_LED_20_zeros_cyan
@@ -222316,6 +224254,29 @@ GROUP PFDs
     GROUP Capt column 1
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 57.000000 750.000000
+        IMAGE PFD/FMA/column1_2_box
+        DATAREF laminar/A333/FMAs/column1_box
+        SHOW_LESS 0.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -222374,7 +224335,7 @@ GROUP PFDs
               CLICK_DY 0
 
             gen_rotary MAN FLEX 2
-              POS 66.000000 727.000000
+              POS 70.000000 727.000000
               IMAGE PFD/FMA/cyan_plus
               DATAREF 
               LOCKED
@@ -222396,7 +224357,7 @@ GROUP PFDs
               CLICK_DY 0
 
             gen_LED FLEX TEMP
-              POS 82.000000 727.000000
+              POS 87.000000 727.000000
               IMAGE LED/airbus_display_LED_20_zeros_cyan
               DATAREF sim/flightmodel/engine/ENGN_assumed_temp[0]
               LOCKED
@@ -222440,7 +224401,7 @@ GROUP PFDs
             POS 57.000000 739.000000
             IMAGE PFD/FMA/column 1/man_thr
             DATAREF 
-            SHOW_EQUAL 1.000000 laminar/no_ref
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/man_thrust_status
             LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
@@ -222465,8 +224426,7 @@ GROUP PFDs
           LOCKED
           HIDE
           GROUP Thrust Mode 1
-            SHOW_LESS 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
-            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/autothrottle_enabled
+            SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
             LOCKED
             HIDE
             gen_rotary THR LVR
@@ -222645,7 +224605,7 @@ GROUP PFDs
           CLICK_DY 0
 
         gen_rotary A. FLOOR
-          POS 56.000000 750.000000
+          POS 57.000000 750.000000
           IMAGE PFD/FMA/column 1/alpha_floor
           DATAREF 
           SHOW_EQUAL 1.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
@@ -222668,7 +224628,7 @@ GROUP PFDs
           CLICK_DY 0
 
         gen_rotary TOGA LK
-          POS 56.000000 750.000000
+          POS 57.000000 750.000000
           IMAGE PFD/FMA/column 1/toga_lk
           DATAREF 
           SHOW_EQUAL 2.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
@@ -222692,6 +224652,7 @@ GROUP PFDs
 
       END_GROUP
       GROUP Row 2
+        SHOW_EQUAL 0.000000 laminar/A333/PFD/FMAs/lvr_assym_status
         LOCKED
         HIDE
         gen_rotary LVR CLB
@@ -222793,9 +224754,32 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP Capt column 2
+      SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/final_app_status
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 162.000000 750.000000
+        IMAGE PFD/FMA/column1_2_box
+        DATAREF laminar/A333/FMAs/column2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -223038,8 +225022,8 @@ GROUP PFDs
 
           END_GROUP
         END_GROUP
-        GROUP NAV condition
-          SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/gpss_status
+        GROUP Heading condition
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/alt_crz_heading_status
           LOCKED
           HIDE
           GROUP Soft condition
@@ -223204,7 +225188,7 @@ GROUP PFDs
           LOCKED
           HIDE
           gen_LED VVI
-            POS 187.000000 750.000000
+            POS 184.000000 750.000000
             IMAGE LED/airbus_display_LED_20_zeros_cyan
             DATAREF sim/cockpit2/autopilot/vvi_dial_fpm
             LOCKED
@@ -223221,7 +225205,7 @@ GROUP PFDs
             ROUNDING ROUND_ROUND
 
           gen_rotary V/S plus
-            POS 157.000000 750.000000
+            POS 156.000000 750.000000
             IMAGE PFD/FMA/cyan_plus
             DATAREF 
             SHOW_GREATER 0.500000 sim/cockpit2/autopilot/vvi_dial_fpm
@@ -223244,7 +225228,7 @@ GROUP PFDs
             CLICK_DY 0
 
           gen_rotary V/S
-            POS 132.000000 750.000000
+            POS 134.000000 750.000000
             IMAGE PFD/FMA/column 2/vertical_speed
             DATAREF 
             LOCKED
@@ -223826,14 +225810,37 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP Capt column 3
+      SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/final_app_status
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 273.000000 750.000000
+        IMAGE PFD/FMA/column3_box
+        DATAREF laminar/A333/FMAs/column3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
         gen_rotary RWY
-          POS 273.000000 750.000000
+          POS 273.000000 749.000000
           IMAGE PFD/FMA/column 3/rwy
           DATAREF 
           SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/runway_status
@@ -224142,6 +226149,7 @@ GROUP PFDs
           POS 273.000000 727.000000
           IMAGE PFD/FMA/column 3/nav_loc_arm
           DATAREF laminar/A333/PFD/FMAs/nav_loc_arm_status
+          SHOW_LESS 0.000000 sim/cockpit2/autopilot/backcourse_status
           LOCKED
           HIDE
           LIGHT_MODE GLASS_AUTO
@@ -224218,6 +226226,50 @@ GROUP PFDs
     GROUP Capt column 4
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 378.000000 750.000000
+        IMAGE PFD/FMA/column4_box
+        DATAREF laminar/A333/FMAs/column4_row1_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row2 box
+        POS 378.000000 727.000000
+        IMAGE PFD/FMA/column4_box
+        DATAREF laminar/A333/FMAs/column4_row2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary Landing Cat
         POS 378.000000 750.000000
         IMAGE PFD/FMA/column 4/cat_123
@@ -224243,7 +226295,7 @@ GROUP PFDs
         CLICK_DY 0
 
       gen_rotary Cat SINGLE
-        POS 378.000000 727.000000
+        POS 378.000000 728.000000
         IMAGE PFD/FMA/column 4/single
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/landing_single_dual
@@ -224266,7 +226318,7 @@ GROUP PFDs
         CLICK_DY 0
 
       gen_rotary Cat DUAL
-        POS 379.000000 727.000000
+        POS 379.000000 728.000000
         IMAGE PFD/FMA/column 4/dual
         DATAREF 
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/landing_single_dual
@@ -224410,6 +226462,72 @@ GROUP PFDs
     GROUP Capt column 5
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 465.000000 750.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row1_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row2 box
+        POS 465.000000 727.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row3 box
+        POS 465.000000 704.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 8
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary AP mode
         POS 464.000000 750.000000
         IMAGE PFD/FMA/ap12_mode
@@ -224492,6 +226610,28 @@ GROUP PFDs
     GROUP FO multi
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 214.000000 238.000000
+        IMAGE PFD/FMA/column_multi_box
+        DATAREF laminar/A333/FMAs/column2_3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary FMA line tall
         POS 109.000000 216.000000
         IMAGE PFD/FMA/multi/FMA_divider
@@ -224812,6 +226952,29 @@ GROUP PFDs
     GROUP FO column 1
       LOCKED
       HIDE
+      gen_rotary row1 box 2
+        POS 57.000000 238.000000
+        IMAGE PFD/FMA/column1_2_box
+        DATAREF laminar/A333/FMAs/column1_box
+        SHOW_LESS 0.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -224870,7 +227033,7 @@ GROUP PFDs
               CLICK_DY 0
 
             gen_rotary MAN FLEX 2
-              POS 66.000000 215.000000
+              POS 70.000000 215.000000
               IMAGE PFD/FMA/cyan_plus
               DATAREF 
               LOCKED
@@ -224892,7 +227055,7 @@ GROUP PFDs
               CLICK_DY 0
 
             gen_LED FLEX TEMP
-              POS 82.000000 215.000000
+              POS 87.000000 215.000000
               IMAGE LED/airbus_display_LED_20_zeros_cyan
               DATAREF sim/flightmodel/engine/ENGN_assumed_temp[0]
               LOCKED
@@ -224936,7 +227099,7 @@ GROUP PFDs
             POS 57.000000 227.000000
             IMAGE PFD/FMA/column 1/man_thr
             DATAREF 
-            SHOW_EQUAL 1.000000 laminar/no_ref
+            SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/man_thrust_status
             LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
@@ -224961,8 +227124,7 @@ GROUP PFDs
           LOCKED
           HIDE
           GROUP Thrust Mode 1
-            SHOW_LESS 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
-            SHOW_GREATER 0.000000 sim/cockpit2/autopilot/autothrottle_enabled
+            SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
             LOCKED
             HIDE
             gen_rotary THR LVR
@@ -225141,7 +227303,7 @@ GROUP PFDs
           CLICK_DY 0
 
         gen_rotary A. FLOOR
-          POS 56.000000 238.000000
+          POS 57.000000 238.000000
           IMAGE PFD/FMA/column 1/alpha_floor
           DATAREF 
           SHOW_EQUAL 1.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
@@ -225164,7 +227326,7 @@ GROUP PFDs
           CLICK_DY 0
 
         gen_rotary TOGA LK
-          POS 56.000000 238.000000
+          POS 57.000000 238.000000
           IMAGE PFD/FMA/column 1/toga_lk
           DATAREF 
           SHOW_EQUAL 2.000000 sim/flightmodel2/controls/airbus_speed_warn_thro_1
@@ -225188,6 +227350,7 @@ GROUP PFDs
 
       END_GROUP
       GROUP Row 2
+        SHOW_EQUAL 0.000000 laminar/A333/PFD/FMAs/lvr_assym_status
         LOCKED
         HIDE
         gen_rotary LVR CLB
@@ -225289,9 +227452,32 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP FO column 2
+      SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/final_app_status
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 162.000000 238.000000
+        IMAGE PFD/FMA/column1_2_box
+        DATAREF laminar/A333/FMAs/column2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -225534,8 +227720,8 @@ GROUP PFDs
 
           END_GROUP
         END_GROUP
-        GROUP NAV condition
-          SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/gpss_status
+        GROUP Heading condition
+          SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/alt_crz_heading_status
           LOCKED
           HIDE
           GROUP Soft condition
@@ -225700,7 +227886,7 @@ GROUP PFDs
           LOCKED
           HIDE
           gen_LED VVI
-            POS 187.000000 238.000000
+            POS 184.000000 238.000000
             IMAGE LED/airbus_display_LED_20_zeros_cyan
             DATAREF sim/cockpit2/autopilot/vvi_dial_fpm
             LOCKED
@@ -225717,7 +227903,7 @@ GROUP PFDs
             ROUNDING ROUND_ROUND
 
           gen_rotary V/S plus
-            POS 157.000000 238.000000
+            POS 156.000000 238.000000
             IMAGE PFD/FMA/cyan_plus
             DATAREF 
             SHOW_GREATER 0.500000 sim/cockpit2/autopilot/vvi_dial_fpm
@@ -225740,7 +227926,7 @@ GROUP PFDs
             CLICK_DY 0
 
           gen_rotary V/S
-            POS 132.000000 238.000000
+            POS 134.000000 238.000000
             IMAGE PFD/FMA/column 2/vertical_speed
             DATAREF 
             LOCKED
@@ -226322,9 +228508,32 @@ GROUP PFDs
       END_GROUP
     END_GROUP
     GROUP FO column 3
+      SHOW_LESS 0.000000 laminar/A333/PFD/FMAs/final_app_status
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/flare_status
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 273.000000 238.000000
+        IMAGE PFD/FMA/column3_box
+        DATAREF laminar/A333/FMAs/column3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       GROUP Row 1
         LOCKED
         HIDE
@@ -226638,6 +228847,7 @@ GROUP PFDs
           POS 273.000000 215.000000
           IMAGE PFD/FMA/column 3/nav_loc_arm
           DATAREF laminar/A333/PFD/FMAs/nav_loc_arm_status
+          SHOW_LESS 0.000000 sim/cockpit2/autopilot/backcourse_status
           LOCKED
           HIDE
           LIGHT_MODE GLASS_AUTO
@@ -226714,6 +228924,50 @@ GROUP PFDs
     GROUP FO column 4
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 378.000000 238.000000
+        IMAGE PFD/FMA/column4_box
+        DATAREF laminar/A333/FMAs/column4_row1_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row2 box
+        POS 378.000000 215.000000
+        IMAGE PFD/FMA/column4_box
+        DATAREF laminar/A333/FMAs/column4_row2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary Landing Cat
         POS 378.000000 238.000000
         IMAGE PFD/FMA/column 4/cat_123
@@ -226739,7 +228993,7 @@ GROUP PFDs
         CLICK_DY 0
 
       gen_rotary Cat SINGLE
-        POS 378.000000 215.000000
+        POS 378.000000 216.000000
         IMAGE PFD/FMA/column 4/single
         DATAREF 
         SHOW_EQUAL 1.000000 laminar/A333/PFD/FMAs/landing_single_dual
@@ -226762,7 +229016,7 @@ GROUP PFDs
         CLICK_DY 0
 
       gen_rotary Cat DUAL
-        POS 379.000000 215.000000
+        POS 379.000000 216.000000
         IMAGE PFD/FMA/column 4/dual
         DATAREF 
         SHOW_EQUAL 2.000000 laminar/A333/PFD/FMAs/landing_single_dual
@@ -226906,6 +229160,72 @@ GROUP PFDs
     GROUP FO column 5
       LOCKED
       HIDE
+      gen_rotary row1 box
+        POS 465.000000 238.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row1_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row2 box
+        POS 465.000000 215.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row2_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary row3 box
+        POS 465.000000 192.000000
+        IMAGE PFD/FMA/column5_box
+        DATAREF laminar/A333/FMAs/column5_row3_box
+        LOCKED
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 4
+        KEY_FRAME 0.000000 -1.000000 1.000000
+        KEY_FRAME 1.000000 0.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary AP mode
         POS 464.000000 238.000000
         IMAGE PFD/FMA/ap12_mode
@@ -227746,7 +230066,7 @@ GROUP NDs
           gen_needle EPR1_setting 2
             POS 670.000000 698.000000
             IMAGE ECAM/EPR_setting
-            DATAREF sim/flightmodel2/engines/EPR_FADEC[0]
+            DATAREF laminar/A333/ecam/throttle_pos_donut_eng1
             SHOW_LESS 0.050000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[0]
             SHOW_EQUAL 0.020000 [0]
             LOCKED
@@ -227754,6 +230074,7 @@ GROUP NDs
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 8
+            KEY_FRAME 0.000000 -41.000000 1.000000
             KEY_FRAME 0.800000 -41.000000 1.000000
             KEY_FRAME 1.900000 192.000000
             IS_DRAGGABLE 0
@@ -227784,7 +230105,7 @@ GROUP NDs
           gen_needle EPR2_setting 2
             POS 866.000000 698.000000
             IMAGE ECAM/EPR_setting
-            DATAREF sim/flightmodel2/engines/EPR_FADEC[1]
+            DATAREF laminar/A333/ecam/throttle_pos_donut_eng2
             SHOW_LESS 0.050000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[1]
             SHOW_EQUAL 0.020000 [1]
             LOCKED
@@ -227792,6 +230113,7 @@ GROUP NDs
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 8
+            KEY_FRAME 0.000000 -41.000000 1.000000
             KEY_FRAME 0.800000 -41.000000 1.000000
             KEY_FRAME 1.900000 192.000000
             IS_DRAGGABLE 0
@@ -229082,172 +231404,389 @@ GROUP NDs
           CLICK_DY 0
 
       END_GROUP
-      GROUP Map Hide HDG only
-        SHOW_EQUAL 1.000000 laminar/A333/ND/draw_map_mode_capt
-        SHOW_GREATER 1.000000 laminar/A333/elec/ac_ess_bus_has_power[8]
-        LOCKED
+      GROUP Map Rose Arcs
+        SHOW_GREATER 1.000000 laminar/A333/ND/draw_map_mode_capt
         HIDE
-        gen_rotary NAV rose marks
-          POS 768.000000 496.000000
-          IMAGE ND/small_rose_marks
-          DATAREF 
-          SHOW_EQUAL 3.000000 sim/cockpit2/EFIS/map_mode
+        GROUP Rose Hide
+          SHOW_LESS 1.000000 sim/cockpit2/EFIS/map_mode
+          SHOW_GREATER 1.000000 laminar/A333/elec/ac_ess_bus_has_power[8]
           LOCKED
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 1
-          BUS_SRC 8
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 1.000000 1.000000
-          DIGITS 1
-          ROTARY_TYPE NO_CLICK
-          CLICK_RADIUS 10.000000
-          CLICK_RADIUS_DY 0.000000
-          OFFSET 0.000000
-          STEP1 1.000000
-          STEP2 1.000000
-          CURSOR DEFAULT
-          CLICK_DX 0
-          CLICK_DY 0
-
-        GROUP NAV rose
-          SHOW_EQUAL 3.000000 sim/cockpit2/EFIS/map_mode
-          HIDE
-          GROUP_ANIMATE_MODE ROTATE
-          GROUP_WIDTH 0
-          GROUP_HEIGHT 0
-          DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
-          POS 768.000000 518.000000
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 30.000000 -30.000000
-          ROTATE_OFFSET_X 0.000000
-          ROTATE_OFFSET_Y 0.000000
-          gen_needle ROSE
-            POS 768.000000 518.000000
-            IMAGE ND/small_rose
+          gen_rotary NAV rose marks 2
+            POS 768.000000 496.000000
+            IMAGE ND/small_rose_marks
             DATAREF 
+            LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 8
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 1.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          GROUP NAV rose 2
+            HIDE
+            GROUP_ANIMATE_MODE ROTATE
+            GROUP_WIDTH 0
+            GROUP_HEIGHT 0
+            DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
+            POS 768.000000 518.000000
             KEY_FRAME 0.000000 0.000000 1.000000
             KEY_FRAME 30.000000 -30.000000
-            IS_DRAGGABLE 0
-            OFFSET 0.000000
+            ROTATE_OFFSET_X 0.000000
+            ROTATE_OFFSET_Y 0.000000
+            gen_needle ROSE 2
+              POS 768.000000 518.000000
+              IMAGE ND/small_rose
+              DATAREF 
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 -30.000000
+              IS_DRAGGABLE 0
+              OFFSET 0.000000
 
-          gen_needle AP HDG pointer
-            POS 768.000000 518.000000
-            IMAGE ND/heading_sel
-            DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
+            gen_needle ILS Pointer 2
+              POS 768.000000 518.000000
+              IMAGE ND/ILS_sword
+              DATAREF sim/cockpit2/radios/indicators/fac_copilot
+              SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/map_mode
+              SHOW_GREATER 1.000000 laminar/A333/status/capt_ls_bars
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 60.000000 60.000000
+              IS_DRAGGABLE 0
+              OFFSET 177.000000
+
+            gen_needle Track Pointer Mag 2
+              POS 768.000000 518.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/true_north
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 60.000000 60.000000
+              IS_DRAGGABLE 0
+              OFFSET 152.000000
+
+            gen_needle Track Pointer True
+              POS 768.000000 518.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_true_pilot
+              SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 60.000000 60.000000
+              IS_DRAGGABLE 0
+              OFFSET 152.000000
+
+            gen_needle AP HDG pointer 2
+              POS 768.000000 518.000000
+              IMAGE ND/heading_sel
+              DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_pilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 60.000000 60.000000
+              IS_DRAGGABLE 0
+              OFFSET 169.000000
+
+          END_GROUP
+          gen_rotary NAV rose pointer 2
+            POS 768.000000 676.000000
+            IMAGE ND/heading_mark
+            DATAREF 
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 1
+            BUS_SRC 8
+            KEY_FRAME 0.000000 1.000000 1.000000
+            KEY_FRAME 1.000000 1.000000
+            DIGITS 2
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP Nav Hide
+          SHOW_EQUAL 3.000000 sim/cockpit2/EFIS/map_mode
+          SHOW_GREATER 1.000000 laminar/A333/elec/ac_ess_bus_has_power[8]
+          LOCKED
+          HIDE
+          gen_rotary NAV rose marks
+            POS 768.000000 496.000000
+            IMAGE ND/small_rose_marks
+            DATAREF 
+            LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 8
             KEY_FRAME 0.000000 0.000000 1.000000
-            KEY_FRAME 30.000000 30.000000
-            IS_DRAGGABLE 0
-            OFFSET 169.000000
+            KEY_FRAME 1.000000 1.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-        END_GROUP
-        gen_rotary NAV rose pointer
-          POS 768.000000 676.000000
-          IMAGE ND/heading_mark
-          DATAREF 
-          SHOW_EQUAL 3.000000 sim/cockpit2/EFIS/map_mode
-          LOCKED
-          HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 1
-          BUS_SRC 8
-          KEY_FRAME 0.000000 1.000000 1.000000
-          KEY_FRAME 1.000000 1.000000
-          DIGITS 2
-          ROTARY_TYPE NO_CLICK
-          CLICK_RADIUS 10.000000
-          CLICK_RADIUS_DY 0.000000
-          OFFSET 0.000000
-          STEP1 1.000000
-          STEP2 1.000000
-          CURSOR DEFAULT
-          CLICK_DX 0
-          CLICK_DY 0
-
-      END_GROUP
-      GROUP Map Hide ARC only
-        SHOW_EQUAL 1.000000 laminar/A333/ND/draw_map_mode_capt
-        SHOW_GREATER 1.000000 laminar/A333/elec/ac_ess_bus_has_power[8]
-        LOCKED
-        HIDE
-        GROUP_ANIMATE_MODE ROTATE
-        GROUP_WIDTH 494
-        GROUP_HEIGHT 170
-        DATAREF 
-        POS 768.000000 639.000000
-        CLIP
-        ROTATE_OFFSET_X 0.000000
-        ROTATE_OFFSET_Y 0.000000
-        GROUP NAV rose 2
-          SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/map_mode
-          HIDE
-          GROUP_ANIMATE_MODE ROTATE
-          GROUP_WIDTH 0
-          GROUP_HEIGHT 0
-          DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
-          POS 768.000000 357.000000
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 30.000000 -30.000000
-          ROTATE_OFFSET_X 0.000000
-          ROTATE_OFFSET_Y 0.000000
-          gen_needle ROSE 2
-            POS 768.000000 357.000000
-            IMAGE ND/large_rose
-            DATAREF 
+          GROUP NAV rose
             HIDE
-            LIGHT_MODE GLASS_AUTO
-            LIGHT_RHEOSTAT 1
-            BUS_SRC 8
+            GROUP_ANIMATE_MODE ROTATE
+            GROUP_WIDTH 0
+            GROUP_HEIGHT 0
+            DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
+            POS 768.000000 518.000000
             KEY_FRAME 0.000000 0.000000 1.000000
             KEY_FRAME 30.000000 -30.000000
-            IS_DRAGGABLE 0
-            OFFSET 0.000000
+            ROTATE_OFFSET_X 0.000000
+            ROTATE_OFFSET_Y 0.000000
+            gen_needle ROSE
+              POS 768.000000 518.000000
+              IMAGE ND/small_rose
+              DATAREF 
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 -30.000000
+              IS_DRAGGABLE 0
+              OFFSET 0.000000
 
-          gen_needle AP HDG pointer 2
+            gen_needle ILS Pointer
+              POS 768.000000 518.000000
+              IMAGE ND/ILS_sword
+              DATAREF sim/cockpit2/radios/indicators/fac_copilot
+              SHOW_EQUAL 1.000000 laminar/A333/status/capt_ls_bars
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 60.000000 60.000000
+              IS_DRAGGABLE 0
+              OFFSET 177.000000
+
+            gen_needle Track Pointer Mag
+              POS 768.000000 518.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/true_north
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 60.000000 60.000000
+              IS_DRAGGABLE 0
+              OFFSET 152.000000
+
+            gen_needle Track Pointer True
+              POS 768.000000 518.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_true_pilot
+              SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 60.000000 60.000000
+              IS_DRAGGABLE 0
+              OFFSET 152.000000
+
+            gen_needle AP HDG pointer
+              POS 768.000000 518.000000
+              IMAGE ND/heading_sel
+              DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_pilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 60.000000 60.000000
+              IS_DRAGGABLE 0
+              OFFSET 169.000000
+
+          END_GROUP
+          gen_rotary NAV rose pointer
+            POS 768.000000 676.000000
+            IMAGE ND/heading_mark
+            DATAREF 
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 1
+            BUS_SRC 8
+            KEY_FRAME 0.000000 1.000000 1.000000
+            KEY_FRAME 1.000000 1.000000
+            DIGITS 2
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP Arc Hide
+          SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/map_mode
+          SHOW_GREATER 1.000000 laminar/A333/elec/ac_ess_bus_has_power[8]
+          LOCKED
+          HIDE
+          GROUP_ANIMATE_MODE ROTATE
+          GROUP_WIDTH 498
+          GROUP_HEIGHT 170
+          DATAREF 
+          POS 768.000000 639.000000
+          CLIP
+          ROTATE_OFFSET_X 0.000000
+          ROTATE_OFFSET_Y 0.000000
+          GROUP NAV rose 2
+            HIDE
+            GROUP_ANIMATE_MODE ROTATE
+            GROUP_WIDTH 0
+            GROUP_HEIGHT 0
+            DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
             POS 768.000000 357.000000
-            IMAGE ND/heading_sel_arc
-            DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 30.000000 -30.000000
+            ROTATE_OFFSET_X 0.000000
+            ROTATE_OFFSET_Y 0.000000
+            gen_needle ROSE 2
+              POS 768.000000 357.000000
+              IMAGE ND/large_rose
+              DATAREF 
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 -30.000000
+              IS_DRAGGABLE 0
+              OFFSET 0.000000
+
+            gen_needle ILS Pointer
+              POS 768.000000 357.000000
+              IMAGE ND/ILS_sword
+              DATAREF sim/cockpit2/radios/indicators/fac_copilot
+              SHOW_EQUAL 1.000000 laminar/A333/status/capt_ls_bars
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 338.000000
+
+            gen_needle Track Pointer Mag
+              POS 768.000000 357.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/true_north
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 313.000000
+
+            gen_needle Track Pointer True
+              POS 768.000000 357.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_true_pilot
+              SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 313.000000
+
+            gen_needle AP HDG pointer 2
+              POS 768.000000 357.000000
+              IMAGE ND/heading_sel_arc
+              DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_pilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 8
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 331.000000
+
+          END_GROUP
+          gen_rotary NAV arc pointer 2
+            POS 768.000000 677.000000
+            IMAGE ND/heading_mark
+            DATAREF 
+            LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 8
             KEY_FRAME 0.000000 0.000000 1.000000
-            KEY_FRAME 30.000000 30.000000
-            IS_DRAGGABLE 0
-            OFFSET 331.000000
+            KEY_FRAME 1.000000 0.000000
+            DIGITS 2
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
         END_GROUP
-        gen_rotary NAV arc pointer 2
-          POS 768.000000 677.000000
-          IMAGE ND/heading_mark
-          DATAREF 
-          SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/map_mode
-          LOCKED
-          HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 1
-          BUS_SRC 8
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 1.000000 0.000000
-          DIGITS 2
-          ROTARY_TYPE NO_CLICK
-          CLICK_RADIUS 10.000000
-          CLICK_RADIUS_DY 0.000000
-          OFFSET 0.000000
-          STEP1 1.000000
-          STEP2 1.000000
-          CURSOR DEFAULT
-          CLICK_DX 0
-          CLICK_DY 0
-
       END_GROUP
       gen_rotary TA ONLY
         POS 768.000000 308.000000
@@ -229513,7 +232052,7 @@ GROUP NDs
           CLICK_DY 0
 
         gen_rotary ARC flag HDG
-          POS 768.000000 619.000000
+          POS 768.000000 618.000000
           IMAGE ND/flags/ARC_hdg_flag
           DATAREF 
           SHOW_LESS 0.000000 laminar/A333/adiru1/hdg_status
@@ -230840,15 +233379,16 @@ GROUP NDs
       gen_rotary GPS indicators
         POS 1002.000000 731.000000
         IMAGE ND/GPS_deg_nm_minutes
-        DATAREF 
+        DATAREF sim/cockpit2/radios/indicators/fms1_act_eta
         LOCKED
         HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME -1.000000 0.000000 1.000000
+        KEY_FRAME 0.000000 1.000000 1.000000
         KEY_FRAME 1.000000 1.000000
-        DIGITS 1
+        DIGITS 2
         ROTARY_TYPE NO_CLICK
         CLICK_RADIUS 10.000000
         CLICK_RADIUS_DY 0.000000
@@ -230929,14 +233469,15 @@ GROUP NDs
       gen_LED DEST Hours Zulu
         POS 970.000000 708.000000
         IMAGE LED/airbus_display_LED_20_green
-        DATAREF laminar/A333/nd/gps_eta_time_hour
+        DATAREF sim/cockpit2/radios/indicators/fms1_act_eta_hour
+        SHOW_GREATER 0.000000 sim/cockpit2/radios/indicators/fms1_act_eta
         LOCKED
         HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
         KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 60.000000 60.000000
+        KEY_FRAME 99.000000 99.000000
         DIGITS 2
         DECIMALS 0
         PERIOD_WIDTH 7
@@ -230946,7 +233487,8 @@ GROUP NDs
       gen_LED DEST Minutes Zulu
         POS 1006.000000 708.000000
         IMAGE LED/airbus_display_LED_20_green
-        DATAREF laminar/A333/nd/gps_eta_time_min
+        DATAREF sim/cockpit2/radios/indicators/fms1_act_eta_minute
+        SHOW_GREATER 0.000000 sim/cockpit2/radios/indicators/fms1_act_eta
         LOCKED
         HIDE
         LIGHT_MODE GLASS_AUTO
@@ -230963,21 +233505,22 @@ GROUP NDs
     END_GROUP
     GROUP Chrono Capt
       SHOW_EQUAL 1.000000 [1]
-      SHOW_GREATER 0.010000 sim/cockpit2/clock_timer/chrono_time[1]
+      SHOW_GREATER 0.010000 sim/cockpit2/clock_timer/elapsed_time[1]
       LOCKED
       HIDE
       gen_rotary Background
         POS 559.000000 347.000000
         IMAGE ND/chrono_bg
-        DATAREF [1]
+        DATAREF sim/cockpit2/clock_timer/elapsed_timer_hours[1]
         LOCKED
         HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 8
         KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 0.000000
-        DIGITS 1
+        KEY_FRAME 1.000000 1.000000 1.000000
+        KEY_FRAME 2.000000 1.000000
+        DIGITS 2
         ROTARY_TYPE NO_CLICK
         CLICK_RADIUS 10.000000
         CLICK_RADIUS_DY 0.000000
@@ -230988,44 +233531,91 @@ GROUP NDs
         CLICK_DX 0
         CLICK_DY 0
 
-      gen_LED Chrono Min Captain
-        POS 536.000000 346.000000
-        IMAGE LED/airbus_display_LED_20_green
-        DATAREF sim/cockpit2/clock_timer/chrono_timer_minutes[1]
-        SHOW_EQUAL 1.000000 [2]
-        SHOW_GREATER 19.950001 [2]
-        LOCKED
+      GROUP MIN/SEC
+        SHOW_LESS 0.000000 sim/cockpit2/clock_timer/elapsed_timer_hours[1]
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 1
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 100.000000 100.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 6
-        LED_ROWS 1
-        ROUNDING ROUND_ROUND
+        gen_LED Chrono Min Captain
+          POS 536.000000 346.000000
+          IMAGE LED/airbus_display_LED_20_green
+          DATAREF sim/cockpit2/clock_timer/elapsed_timer_minutes[1]
+          SHOW_EQUAL 1.000000 [2]
+          SHOW_GREATER 19.950001 [2]
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 1
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 60.000000 60.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 6
+          LED_ROWS 1
+          ROUNDING ROUND_DOWN
 
-      gen_LED Chrono Sec Captain
-        POS 572.000000 346.000000
-        IMAGE LED/airbus_display_LED_20_green
-        DATAREF sim/cockpit2/clock_timer/chrono_timer_seconds[1]
-        SHOW_EQUAL 1.000000 [2]
-        SHOW_GREATER 19.950001 [2]
-        LOCKED
+        gen_LED Chrono Sec Captain
+          POS 572.000000 346.000000
+          IMAGE LED/airbus_display_LED_20_green
+          DATAREF sim/cockpit2/clock_timer/elapsed_timer_seconds[1]
+          SHOW_EQUAL 1.000000 [2]
+          SHOW_GREATER 19.950001 [2]
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 1
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 60.000000 60.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 6
+          LED_ROWS 1
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
+      GROUP HRS/MIN
+        SHOW_LESS 59.000000 [1]
+        SHOW_GREATER 1.000000 sim/cockpit2/clock_timer/elapsed_timer_hours[1]
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 1
-        BUS_SRC 8
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 100.000000 100.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 6
-        LED_ROWS 1
-        ROUNDING ROUND_ROUND
+        gen_LED Chrono Hours Captai
+          POS 536.000000 346.000000
+          IMAGE LED/airbus_display_LED_20_no_zeros_green
+          DATAREF sim/cockpit2/clock_timer/elapsed_timer_hours[1]
+          SHOW_EQUAL 1.000000 [2]
+          SHOW_GREATER 19.950001 [2]
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 1
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 99.000000 99.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 6
+          LED_ROWS 6
+          ROUNDING ROUND_DOWN
 
+        gen_LED Chrono Mins Captai
+          POS 572.000000 346.000000
+          IMAGE LED/airbus_display_LED_20_green
+          DATAREF sim/cockpit2/clock_timer/elapsed_timer_minutes[1]
+          SHOW_EQUAL 1.000000 [2]
+          SHOW_GREATER 19.950001 [2]
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 1
+          BUS_SRC 8
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 60.000000 60.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 6
+          LED_ROWS 1
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
     END_GROUP
     GROUP XTK Capt
       SHOW_EQUAL 1.000000 laminar/A333/adiru1/lrn_status
@@ -233760,7 +236350,7 @@ GROUP NDs
           gen_needle EPR1_setting 2 2
             POS 670.000000 186.000000
             IMAGE ECAM/EPR_setting
-            DATAREF sim/flightmodel2/engines/EPR_FADEC[0]
+            DATAREF laminar/A333/ecam/throttle_pos_donut_eng1
             SHOW_LESS 0.050000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[0]
             SHOW_EQUAL 0.020000 [0]
             LOCKED
@@ -233768,6 +236358,7 @@ GROUP NDs
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 4
             BUS_SRC 4
+            KEY_FRAME 0.000000 -41.000000 1.000000
             KEY_FRAME 0.800000 -41.000000 1.000000
             KEY_FRAME 1.900000 192.000000
             IS_DRAGGABLE 0
@@ -233798,7 +236389,7 @@ GROUP NDs
           gen_needle EPR2_setting 2 2
             POS 866.000000 186.000000
             IMAGE ECAM/EPR_setting
-            DATAREF sim/flightmodel2/engines/EPR_FADEC[1]
+            DATAREF laminar/A333/ecam/throttle_pos_donut_eng2
             SHOW_LESS 0.050000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[1]
             SHOW_EQUAL 0.020000 [1]
             LOCKED
@@ -233806,6 +236397,7 @@ GROUP NDs
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 4
             BUS_SRC 4
+            KEY_FRAME 0.000000 -41.000000 1.000000
             KEY_FRAME 0.800000 -41.000000 1.000000
             KEY_FRAME 1.900000 192.000000
             IS_DRAGGABLE 0
@@ -235098,172 +237690,389 @@ GROUP NDs
           CLICK_DY 0
 
       END_GROUP
-      GROUP Map Hide HDG only
-        SHOW_EQUAL 1.000000 laminar/A333/ND/draw_map_mode_fo
-        SHOW_GREATER 1.000000 laminar/A333/elec/ac_bus2_has_power[8]
-        LOCKED
+      GROUP Map Rose Arcs
+        SHOW_GREATER 1.000000 laminar/A333/ND/draw_map_mode_fo
         HIDE
-        gen_rotary NAV rose marks 2
-          POS 768.000000 -16.000000
-          IMAGE ND/small_rose_marks
-          DATAREF 
-          SHOW_EQUAL 3.000000 sim/cockpit2/EFIS/map_mode_copilot
+        GROUP Rose Hide
+          SHOW_LESS 1.000000 sim/cockpit2/EFIS/map_mode_copilot
+          SHOW_GREATER 1.000000 laminar/A333/elec/ac_bus2_has_power[8]
           LOCKED
           HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 1
-          BUS_SRC 4
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 1.000000 1.000000
-          DIGITS 1
-          ROTARY_TYPE NO_CLICK
-          CLICK_RADIUS 10.000000
-          CLICK_RADIUS_DY 0.000000
-          OFFSET 0.000000
-          STEP1 1.000000
-          STEP2 1.000000
-          CURSOR DEFAULT
-          CLICK_DX 0
-          CLICK_DY 0
-
-        GROUP NAV rose 2
-          SHOW_EQUAL 3.000000 sim/cockpit2/EFIS/map_mode_copilot
-          HIDE
-          GROUP_ANIMATE_MODE ROTATE
-          GROUP_WIDTH 0
-          GROUP_HEIGHT 0
-          DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_copilot
-          POS 768.000000 6.000000
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 30.000000 -30.000000
-          ROTATE_OFFSET_X 0.000000
-          ROTATE_OFFSET_Y 0.000000
-          gen_needle ROSE 2
-            POS 768.000000 6.000000
-            IMAGE ND/small_rose
+          gen_rotary NAV rose marks 2 2
+            POS 768.000000 -16.000000
+            IMAGE ND/small_rose_marks
             DATAREF 
+            LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 1.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          GROUP NAV rose 2 2
+            HIDE
+            GROUP_ANIMATE_MODE ROTATE
+            GROUP_WIDTH 0
+            GROUP_HEIGHT 0
+            DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_copilot
+            POS 768.000000 6.000000
             KEY_FRAME 0.000000 0.000000 1.000000
             KEY_FRAME 30.000000 -30.000000
-            IS_DRAGGABLE 0
-            OFFSET 0.000000
+            ROTATE_OFFSET_X 0.000000
+            ROTATE_OFFSET_Y 0.000000
+            gen_needle ROSE 2 2
+              POS 768.000000 6.000000
+              IMAGE ND/small_rose
+              DATAREF 
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 -30.000000
+              IS_DRAGGABLE 0
+              OFFSET 0.000000
 
-          gen_needle AP HDG pointer 2
-            POS 768.000000 6.000000
-            IMAGE ND/heading_sel
-            DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_copilot
+            gen_needle ILS Pointer
+              POS 768.000000 6.000000
+              IMAGE ND/ILS_sword
+              DATAREF sim/cockpit2/radios/indicators/fac
+              SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/map_mode_copilot
+              SHOW_GREATER 1.000000 laminar/A333/status/fo_ls_bars
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 177.000000
+
+            gen_needle Track Pointer Mag
+              POS 768.000000 6.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_copilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/true_north_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 152.000000
+
+            gen_needle Track Pointer True
+              POS 768.000000 6.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_true_copilot
+              SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 152.000000
+
+            gen_needle AP HDG pointer 2 2
+              POS 768.000000 6.000000
+              IMAGE ND/heading_sel
+              DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_copilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 169.000000
+
+          END_GROUP
+          gen_rotary NAV rose pointer 2
+            POS 768.000000 164.000000
+            IMAGE ND/heading_mark
+            DATAREF 
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 1
+            BUS_SRC 4
+            KEY_FRAME 0.000000 1.000000 1.000000
+            KEY_FRAME 1.000000 1.000000
+            DIGITS 2
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP Nav Hide
+          SHOW_EQUAL 3.000000 sim/cockpit2/EFIS/map_mode_copilot
+          SHOW_GREATER 1.000000 laminar/A333/elec/ac_bus2_has_power[8]
+          LOCKED
+          HIDE
+          gen_rotary NAV rose marks 2
+            POS 768.000000 -16.000000
+            IMAGE ND/small_rose_marks
+            DATAREF 
+            LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 4
             KEY_FRAME 0.000000 0.000000 1.000000
-            KEY_FRAME 30.000000 30.000000
-            IS_DRAGGABLE 0
-            OFFSET 169.000000
+            KEY_FRAME 1.000000 1.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
-        END_GROUP
-        gen_rotary NAV rose pointer 2
-          POS 768.000000 164.000000
-          IMAGE ND/heading_mark
-          DATAREF 
-          SHOW_EQUAL 3.000000 sim/cockpit2/EFIS/map_mode_copilot
-          LOCKED
-          HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 1
-          BUS_SRC 4
-          KEY_FRAME 0.000000 1.000000 1.000000
-          KEY_FRAME 1.000000 1.000000
-          DIGITS 2
-          ROTARY_TYPE NO_CLICK
-          CLICK_RADIUS 10.000000
-          CLICK_RADIUS_DY 0.000000
-          OFFSET 0.000000
-          STEP1 1.000000
-          STEP2 1.000000
-          CURSOR DEFAULT
-          CLICK_DX 0
-          CLICK_DY 0
-
-      END_GROUP
-      GROUP Map Hide ARC only
-        SHOW_EQUAL 1.000000 laminar/A333/ND/draw_map_mode_fo
-        SHOW_GREATER 1.000000 laminar/A333/elec/ac_bus2_has_power[8]
-        LOCKED
-        HIDE
-        GROUP_ANIMATE_MODE ROTATE
-        GROUP_WIDTH 494
-        GROUP_HEIGHT 170
-        DATAREF 
-        POS 768.000000 127.000000
-        CLIP
-        ROTATE_OFFSET_X 0.000000
-        ROTATE_OFFSET_Y 0.000000
-        GROUP NAV rose 2 2
-          SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/map_mode_copilot
-          HIDE
-          GROUP_ANIMATE_MODE ROTATE
-          GROUP_WIDTH 0
-          GROUP_HEIGHT 0
-          DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_copilot
-          POS 768.000000 -155.000000
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 30.000000 -30.000000
-          ROTATE_OFFSET_X 0.000000
-          ROTATE_OFFSET_Y 0.000000
-          gen_needle ROSE 2 2
-            POS 768.000000 -155.000000
-            IMAGE ND/large_rose
-            DATAREF 
+          GROUP NAV rose 2
             HIDE
-            LIGHT_MODE GLASS_AUTO
-            LIGHT_RHEOSTAT 1
-            BUS_SRC 4
+            GROUP_ANIMATE_MODE ROTATE
+            GROUP_WIDTH 0
+            GROUP_HEIGHT 0
+            DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_copilot
+            POS 768.000000 6.000000
             KEY_FRAME 0.000000 0.000000 1.000000
             KEY_FRAME 30.000000 -30.000000
-            IS_DRAGGABLE 0
-            OFFSET 0.000000
+            ROTATE_OFFSET_X 0.000000
+            ROTATE_OFFSET_Y 0.000000
+            gen_needle ROSE 2
+              POS 768.000000 6.000000
+              IMAGE ND/small_rose
+              DATAREF 
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 -30.000000
+              IS_DRAGGABLE 0
+              OFFSET 0.000000
 
-          gen_needle AP HDG pointer 2 2
+            gen_needle ILS Pointer
+              POS 768.000000 6.000000
+              IMAGE ND/ILS_sword
+              DATAREF sim/cockpit2/radios/indicators/fac
+              SHOW_EQUAL 1.000000 laminar/A333/status/fo_ls_bars
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 177.000000
+
+            gen_needle Track Pointer Mag
+              POS 768.000000 6.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_copilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/true_north_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 152.000000
+
+            gen_needle Track Pointer True
+              POS 768.000000 6.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_true_copilot
+              SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 152.000000
+
+            gen_needle AP HDG pointer 2
+              POS 768.000000 6.000000
+              IMAGE ND/heading_sel
+              DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_copilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 169.000000
+
+          END_GROUP
+          gen_rotary NAV rose pointer 2
+            POS 768.000000 164.000000
+            IMAGE ND/heading_mark
+            DATAREF 
+            LOCKED
+            HIDE
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 1
+            BUS_SRC 4
+            KEY_FRAME 0.000000 1.000000 1.000000
+            KEY_FRAME 1.000000 1.000000
+            DIGITS 2
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP Arc Hide
+          SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/map_mode_copilot
+          SHOW_GREATER 1.000000 laminar/A333/elec/ac_bus2_has_power[8]
+          LOCKED
+          HIDE
+          GROUP_ANIMATE_MODE ROTATE
+          GROUP_WIDTH 498
+          GROUP_HEIGHT 170
+          DATAREF 
+          POS 768.000000 127.000000
+          CLIP
+          ROTATE_OFFSET_X 0.000000
+          ROTATE_OFFSET_Y 0.000000
+          GROUP NAV rose 2 2
+            HIDE
+            GROUP_ANIMATE_MODE ROTATE
+            GROUP_WIDTH 0
+            GROUP_HEIGHT 0
+            DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_copilot
             POS 768.000000 -155.000000
-            IMAGE ND/heading_sel_arc
-            DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_copilot
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 30.000000 -30.000000
+            ROTATE_OFFSET_X 0.000000
+            ROTATE_OFFSET_Y 0.000000
+            gen_needle ROSE 2 2
+              POS 768.000000 -155.000000
+              IMAGE ND/large_rose
+              DATAREF 
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 -30.000000
+              IS_DRAGGABLE 0
+              OFFSET 0.000000
+
+            gen_needle ILS Pointer
+              POS 768.000000 -155.000000
+              IMAGE ND/ILS_sword
+              DATAREF sim/cockpit2/radios/indicators/fac
+              SHOW_EQUAL 1.000000 laminar/A333/status/fo_ls_bars
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 338.000000
+
+            gen_needle Track Pointer Mag
+              POS 768.000000 -155.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_copilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/true_north_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 313.000000
+
+            gen_needle Track Pointer True
+              POS 768.000000 -155.000000
+              IMAGE ND/track_diamond
+              DATAREF sim/cockpit2/gauges/indicators/ground_track_true_copilot
+              SHOW_EQUAL 1.000000 sim/cockpit2/EFIS/true_north_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 313.000000
+
+            gen_needle AP HDG pointer 2 2
+              POS 768.000000 -155.000000
+              IMAGE ND/heading_sel_arc
+              DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_copilot
+              SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/EFIS_hdg_hidden_copilot
+              HIDE
+              LIGHT_MODE GLASS_AUTO
+              LIGHT_RHEOSTAT 1
+              BUS_SRC 4
+              KEY_FRAME 0.000000 0.000000 1.000000
+              KEY_FRAME 30.000000 30.000000
+              IS_DRAGGABLE 0
+              OFFSET 331.000000
+
+          END_GROUP
+          gen_rotary NAV arc pointer 2 2
+            POS 768.000000 165.000000
+            IMAGE ND/heading_mark
+            DATAREF 
+            LOCKED
             HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 1
             BUS_SRC 4
             KEY_FRAME 0.000000 0.000000 1.000000
-            KEY_FRAME 30.000000 30.000000
-            IS_DRAGGABLE 0
-            OFFSET 331.000000
+            KEY_FRAME 1.000000 0.000000
+            DIGITS 2
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
 
         END_GROUP
-        gen_rotary NAV arc pointer 2 2
-          POS 768.000000 165.000000
-          IMAGE ND/heading_mark
-          DATAREF 
-          SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/map_mode_copilot
-          LOCKED
-          HIDE
-          LIGHT_MODE GLASS_AUTO
-          LIGHT_RHEOSTAT 1
-          BUS_SRC 4
-          KEY_FRAME 0.000000 0.000000 1.000000
-          KEY_FRAME 1.000000 0.000000
-          DIGITS 2
-          ROTARY_TYPE NO_CLICK
-          CLICK_RADIUS 10.000000
-          CLICK_RADIUS_DY 0.000000
-          OFFSET 0.000000
-          STEP1 1.000000
-          STEP2 1.000000
-          CURSOR DEFAULT
-          CLICK_DX 0
-          CLICK_DY 0
-
       END_GROUP
       gen_rotary TA ONLY 2
         POS 768.000000 -204.000000
@@ -235529,7 +238338,7 @@ GROUP NDs
           CLICK_DY 0
 
         gen_rotary ARC flag HDG
-          POS 768.000000 107.000000
+          POS 768.000000 106.000000
           IMAGE ND/flags/ARC_hdg_flag
           DATAREF 
           SHOW_LESS 0.000000 laminar/A333/adiru2/hdg_status
@@ -236856,15 +239665,16 @@ GROUP NDs
       gen_rotary GPS indicators 2 2
         POS 1002.000000 219.000000
         IMAGE ND/GPS_deg_nm_minutes
-        DATAREF 
+        DATAREF sim/cockpit2/radios/indicators/fms2_act_eta
         LOCKED
         HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME -1.000000 0.000000 1.000000
+        KEY_FRAME 0.000000 1.000000 1.000000
         KEY_FRAME 1.000000 1.000000
-        DIGITS 1
+        DIGITS 2
         ROTARY_TYPE NO_CLICK
         CLICK_RADIUS 10.000000
         CLICK_RADIUS_DY 0.000000
@@ -236945,14 +239755,15 @@ GROUP NDs
       gen_LED DEST Hours Zulu
         POS 970.000000 196.000000
         IMAGE LED/airbus_display_LED_20_green
-        DATAREF laminar/A333/nd/gps2_eta_time_hour
+        DATAREF sim/cockpit2/radios/indicators/fms2_act_eta_hour
+        SHOW_GREATER 0.000000 sim/cockpit2/radios/indicators/fms2_act_eta
         LOCKED
         HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 4
         KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 60.000000 60.000000
+        KEY_FRAME 99.000000 99.000000
         DIGITS 2
         DECIMALS 0
         PERIOD_WIDTH 7
@@ -236962,7 +239773,8 @@ GROUP NDs
       gen_LED DEST Minutes Zulu
         POS 1006.000000 196.000000
         IMAGE LED/airbus_display_LED_20_green
-        DATAREF laminar/A333/nd/gps2_eta_time_min
+        DATAREF sim/cockpit2/radios/indicators/fms2_act_eta_minute
+        SHOW_GREATER 0.000000 sim/cockpit2/radios/indicators/fms2_act_eta
         LOCKED
         HIDE
         LIGHT_MODE GLASS_AUTO
@@ -236979,21 +239791,22 @@ GROUP NDs
     END_GROUP
     GROUP Chrono FO
       SHOW_EQUAL 1.000000 [2]
-      SHOW_GREATER 0.010000 sim/cockpit2/clock_timer/chrono_time[2]
+      SHOW_GREATER 0.010000 sim/cockpit2/clock_timer/elapsed_time[2]
       LOCKED
       HIDE
       gen_rotary Background 2
         POS 559.000000 -165.000000
         IMAGE ND/chrono_bg
-        DATAREF [1]
+        DATAREF sim/cockpit2/clock_timer/elapsed_timer_hours[2]
         LOCKED
         HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 4
         KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 0.000000
-        DIGITS 1
+        KEY_FRAME 1.000000 1.000000 1.000000
+        KEY_FRAME 2.000000 1.000000
+        DIGITS 2
         ROTARY_TYPE NO_CLICK
         CLICK_RADIUS 10.000000
         CLICK_RADIUS_DY 0.000000
@@ -237004,44 +239817,92 @@ GROUP NDs
         CLICK_DX 0
         CLICK_DY 0
 
-      gen_LED Chrono Min Captain
-        POS 536.000000 -166.000000
-        IMAGE LED/airbus_display_LED_20_green
-        DATAREF sim/cockpit2/clock_timer/chrono_timer_minutes[2]
-        SHOW_EQUAL 1.000000 [2]
-        SHOW_GREATER 19.950001 [2]
-        LOCKED
+      GROUP MIN/SEC
+        SHOW_LESS 0.000000 sim/cockpit2/clock_timer/elapsed_timer_hours[2]
+        SHOW_GREATER 0.000000 [2]
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 4
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 100.000000 100.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 6
-        LED_ROWS 1
-        ROUNDING ROUND_ROUND
+        gen_LED Chrono Min Captain
+          POS 536.000000 -166.000000
+          IMAGE LED/airbus_display_LED_20_green
+          DATAREF sim/cockpit2/clock_timer/elapsed_timer_minutes[2]
+          SHOW_EQUAL 1.000000 [2]
+          SHOW_GREATER 19.950001 [2]
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 4
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 60.000000 60.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 6
+          LED_ROWS 1
+          ROUNDING ROUND_DOWN
 
-      gen_LED Chrono Sec Captain
-        POS 572.000000 -166.000000
-        IMAGE LED/airbus_display_LED_20_green
-        DATAREF sim/cockpit2/clock_timer/chrono_timer_seconds[2]
-        SHOW_EQUAL 1.000000 [2]
-        SHOW_GREATER 19.950001 [2]
-        LOCKED
+        gen_LED Chrono Sec Captain
+          POS 572.000000 -166.000000
+          IMAGE LED/airbus_display_LED_20_green
+          DATAREF sim/cockpit2/clock_timer/elapsed_timer_seconds[2]
+          SHOW_EQUAL 1.000000 [2]
+          SHOW_GREATER 19.950001 [2]
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 4
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 60.000000 60.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 6
+          LED_ROWS 1
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
+      GROUP HRS/MIN
+        SHOW_LESS 0.000000 [2]
+        SHOW_GREATER 1.000000 sim/cockpit2/clock_timer/elapsed_timer_hours[2]
         HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 4
-        BUS_SRC 4
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 100.000000 100.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 6
-        LED_ROWS 1
-        ROUNDING ROUND_ROUND
+        gen_LED Chrono Hours FO
+          POS 536.000000 -166.000000
+          IMAGE LED/airbus_display_LED_20_no_zeros_green
+          DATAREF sim/cockpit2/clock_timer/elapsed_timer_hours[2]
+          SHOW_EQUAL 1.000000 [2]
+          SHOW_GREATER 19.950001 [2]
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 4
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 99.000000 99.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 6
+          LED_ROWS 6
+          ROUNDING ROUND_DOWN
 
+        gen_LED Chrono Min FO
+          POS 572.000000 -166.000000
+          IMAGE LED/airbus_display_LED_20_green
+          DATAREF sim/cockpit2/clock_timer/elapsed_timer_minutes[2]
+          SHOW_EQUAL 1.000000 [2]
+          SHOW_GREATER 19.950001 [2]
+          LOCKED
+          HIDE
+          LIGHT_MODE GLASS_AUTO
+          LIGHT_RHEOSTAT 4
+          BUS_SRC 4
+          KEY_FRAME 0.000000 0.000000 1.000000
+          KEY_FRAME 60.000000 60.000000
+          DIGITS 2
+          DECIMALS 0
+          PERIOD_WIDTH 6
+          LED_ROWS 1
+          ROUNDING ROUND_DOWN
+
+      END_GROUP
     END_GROUP
     GROUP XTK FO
       SHOW_EQUAL 1.000000 laminar/A333/adiru2/lrn_status

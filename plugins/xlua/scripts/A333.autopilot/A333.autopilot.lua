@@ -77,6 +77,8 @@ simDR_capt_hsi						= find_dataref("sim/cockpit2/radios/actuators/HSI_source_sel
 simDR_fo_hsi						= find_dataref("sim/cockpit2/radios/actuators/HSI_source_select_copilot")
 
 simDR_speed_window_open				= find_dataref("sim/cockpit2/autopilot/vnav_speed_window_open")
+simDR_hide_capt_hdg					= find_dataref("sim/cockpit2/EFIS/EFIS_hdg_hidden_pilot")
+simDR_hide_fo_hdg					= find_dataref("sim/cockpit2/EFIS/EFIS_hdg_hidden_copilot")
 
 simDR_gpss_status					= find_dataref("sim/cockpit2/autopilot/gpss_status")
 simDR_heading_mode					= find_dataref("sim/cockpit2/autopilot/heading_mode")
@@ -180,6 +182,8 @@ A333_FD_hide_PFD					= create_dataref("laminar/A333/autopilot/FD_pfd_hide", "num
 
 A333_adiru1_flag					= create_dataref("laminar/A333/adiru1/flag", "number")
 A333_adiru2_flag					= create_dataref("laminar/A333/adiru2/flag", "number")
+
+A333_lvl_ch_dot_status				= create_dataref("laminar/A333/lvl_ch_dot", "number")
 
 ---- AI ---------------------------------------------------------------------------------
 
@@ -873,12 +877,21 @@ local function A333_autopilot()
 		simDR_hdg_setting = simDR_current_heading
 	end
 
+	if ap_hdg_window_open == 0 then
+		simDR_hide_capt_hdg = 1
+		simDR_hide_fo_hdg = 1
+	else simDR_hide_capt_hdg = 0
+		simDR_hide_fo_hdg = 0
+	end
+
+	A333_lvl_ch_dot_status = ((simDR_fms_vnav == 1 and ap_vertical_mode ~= 6) and 1) or 0
+
 	simDR_vertical_mode = ap_vertical_mode
 	simDR_gpss_status = ap_gpss_status
 	A333_hdg_window_open = ap_hdg_window_open
 	A333_VVI_window_open = VVI_window_open
 
-
+	
 end
 
 
@@ -1123,90 +1136,6 @@ local function A333_FD_PFD_flags()
 	A333_FD_hide_PFD = (((A333_capt_FD_flag == 1 or A333_fo_FD_flag == 1) and (A333_adiru1_flag == 0 and A333_adiru2_flag == 0)) and 1) or 0
 
 end
-
-
---[[
-
-A333_capt_FD_bars_bypass
-A333_fo_FD_bars_bypass
-
-A333DR_adiru1_adr_status = find_dataref("laminar/A333/adiru1/adr_status")
-A333DR_adiru1_att_status = find_dataref("laminar/A333/adiru1/att_status")
-A333DR_adiru1_hdg_status = find_dataref("laminar/A333/adiru1/hdg_status")
-A333DR_adiru1_lrn_status = find_dataref("laminar/A333/adiru1/lrn_status")
-
-A333DR_adiru2_adr_status = find_dataref("laminar/A333/adiru2/adr_status")
-A333DR_adiru2_att_status = find_dataref("laminar/A333/adiru2/att_status")
-A333DR_adiru2_hdg_status = find_dataref("laminar/A333/adiru2/hdg_status")
-A333DR_adiru2_lrn_status = find_dataref("laminar/A333/adiru2/lrn_status")
-A333_capt_FD_flag					= create_dataref("laminar/A333/autopilot/capt_FD_flag", "number")
-A333_fo_FD_flag						= create_dataref("laminar/A333/autopilot/fo_FD_flag", "number")
-
-local function A333_FD_init() -- TEMPORARY FIX UNTIL WE GET THE FD ISSUE SORTED
-
-
-	if simDR_autopilot_has_pwr == 0 then
-		A333_capt_FD_bars_bypass = 0
-		A333_fo_FD_bars_bypass = 0
-		ap_power_flag = 1
-	end
-	
-	if ap_power_flag == 1 then
-	
-		if simDR_autopilot_has_pwr == 1 then
-			simDR_fd_bars_fo = 1
-			A333_capt_FD_bars_bypass = 1
-			A333_fo_FD_bars_bypass = 1
-			ap_power_flag = 2
-		end
-
-	elseif ap_power_flag == 2 then
-
-		if simDR_AHARS1_gyro > 0.95 then
-			simDR_fd_bars_capt = A333_capt_FD_bars_bypass
-			ap_power_flag = 3
-		end
-
-		if simDR_AHARS2_gyro > 0.95 then
-			simDR_fd_bars_fo = A333_fo_FD_bars_bypass
-			ap_power_flag = 4
-		end
-
-	elseif ap_power_flag == 3 then
-
-		simDR_fd_bars_capt = A333_capt_FD_bars_bypass
-
-		if simDR_AHARS2_gyro > 0.95 then
-			simDR_fd_bars_fo = A333_fo_FD_bars_bypass
-			ap_power_flag = 5
-		end		
-
-	elseif ap_power_flag == 4 then
-
-		simDR_fd_bars_fo = A333_fo_FD_bars_bypass
-
-		if simDR_AHARS1_gyro > 0.95 then
-			simDR_fd_bars_capt = A333_capt_FD_bars_bypass
-			ap_power_flag = 5
-		end		
-
-	elseif ap_power_flag == 5 then
-	
-		simDR_fd_bars_capt = A333_capt_FD_bars_bypass
-		simDR_fd_bars_fo = A333_fo_FD_bars_bypass
-
-		if simDR_AHARS1_gyro < 0.95 and simDR_AHARS2_gyro < 0.95 then
-			ap_power_flag = 2
-		elseif simDR_AHARS1_gyro > 0.95 and simDR_AHARS2_gyro < 0.95 then
-			ap_power_flag = 4
-		elseif simDR_AHARS1_gyro < 0.95 and simDR_AHARS2_gyro > 0.95 then
-			ap_power_flag = 3
-		end
-
-	end
-
-end
-]]--
 
 
 ----- SET STATE FOR ALL MODES -----------------------------------------------------------

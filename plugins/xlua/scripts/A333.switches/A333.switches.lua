@@ -157,6 +157,9 @@ local true_north_pos = 0
 local flight_rcdr_mode_store = 0
 local flight_rcdr_mode_timer = 0
 
+local engine_start_1_flag = 0
+local engine_start_2_flag = 0
+
 local audio_panel_capt_volume_0_init = 1.0 -- m.random()
 local audio_panel_capt_volume_1_init = m.random()
 local audio_panel_capt_volume_7_init = m.random()
@@ -334,6 +337,7 @@ simDR_eng1_fuel_pump_tog			= find_dataref("sim/cockpit2/engine/actuators/fuel_pu
 simDR_eng2_fuel_pump_tog			= find_dataref("sim/cockpit2/engine/actuators/fuel_pump_on[1]")
 
 simDR_idle_mode						= find_dataref("sim/cockpit2/engine/actuators/idle_speed")
+simDR_eng_N2						= find_dataref("sim/flightmodel2/engines/N2_percent")
 
 simDR_window_heat1					= find_dataref("sim/cockpit2/ice/ice_window_heat_on_window[0]")
 simDR_window_heat2					= find_dataref("sim/cockpit2/ice/ice_window_heat_on_window[1]")
@@ -6051,8 +6055,6 @@ local function A333_window_heat_ramp()
 end
 
 
-
-
 local function A333_engine_starter_cutoff_sentinel()
 
 	local engine1_start_switch_pos = A333_switches_engine1_start_pos
@@ -6063,6 +6065,7 @@ local function A333_engine_starter_cutoff_sentinel()
 	if engine1_starter_cutoff_sentinel == 0 then
 		if engine1_start_switch_pos == 1 and engine1_start_switch_lift_pos == 0 then
 			simCMD_engine1_start:once()
+			engine_start_1_flag = 1
 			simDR_eng1_fuel_pump_tog = 1
 			engine1_starter_cutoff_sentinel = 1
 		end
@@ -6079,6 +6082,7 @@ local function A333_engine_starter_cutoff_sentinel()
 	if engine2_starter_cutoff_sentinel == 0 then
 		if engine2_start_switch_pos == 1 and engine2_start_switch_lift_pos == 0 then
 			simCMD_engine2_start:once()
+			engine_start_2_flag = 1
 			simDR_eng2_fuel_pump_tog = 1
 			engine2_starter_cutoff_sentinel = 1
 		end
@@ -6781,6 +6785,36 @@ local function A333_emergency_call_sequence()
 
 end
 
+local function A333_idle_reset_on_start()
+
+	if engine_start_1_flag == 1 and simDR_engine1_running == 1 and simDR_eng_N2[0] > 55 then
+		if simDR_engine1_heat == 0 then
+			if simDR_idle_mode[0] == 1 then
+				simCMD_hi_lo_idle_tog1:once()
+				engine_start_1_flag = 0
+			end
+		elseif simDR_engine1_heat == 1 then
+			if simDR_idle_mode[0] == 1 then
+				engine_start_1_flag = 0
+			end
+		end
+	end
+
+	if engine_start_2_flag == 1 and simDR_engine2_running == 1 and simDR_eng_N2[1] > 55 then
+		if simDR_engine2_heat == 0 then
+			if simDR_idle_mode[1] == 1 then
+				simCMD_hi_lo_idle_tog2:once()
+				engine_start_2_flag = 0
+			end
+		elseif simDR_engine2_heat == 1 then
+			if simDR_idle_mode[1] == 1 then
+				engine_start_2_flag = 0
+			end
+		end
+	end
+
+end
+
 
 ----- SET STATE FOR ALL MODES -----------------------------------------------------------
 local function A333_set_switches_all_modes()
@@ -7327,6 +7361,7 @@ local function A333_ALL_switches()
     A333_cockpit_door_locking_system()
     A333_cockpit_door_keypad_led()
 	A333_emergency_call_sequence()
+	A333_idle_reset_on_start()
 	
 end
 

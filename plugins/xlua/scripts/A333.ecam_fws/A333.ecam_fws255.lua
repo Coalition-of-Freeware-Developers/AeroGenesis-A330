@@ -218,7 +218,7 @@ end
 
 
 
-local function A333_fws_hide_rcl_normal_msg()
+function A333_fws_hide_rcl_normal_msg()
     A333_fws_rcl_stop_timer()
     A333DR_fws_rcl_normal_msg_show = 0
 end

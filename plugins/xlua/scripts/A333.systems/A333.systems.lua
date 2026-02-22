@@ -306,8 +306,57 @@ local lcl = {
  	anti_ice_multiplier = 1,
 	anti_ice_multiplier_g = 1,
     anti_ice_multiplier_lo = 1,
-	anti_ice_multiplier_g_lo = 1
-    
+	anti_ice_multiplier_g_lo = 1,
+ 
+-- FMA box variables
+
+	column5_row1_flag = 0,
+	AP_modes = 0,
+	column5_row1_flag_timer = 0,
+	AP_modes_saved = 0,
+
+	column5_row2_flag = 0,
+	FD_modes = 0,
+	column5_row2_flag_timer = 0,
+	FD_modes_saved = 0,
+
+	column5_row3_flag = 0,
+	ATHR_modes = 0,
+	column5_row3_flag_timer = 0,
+	ATHR_modes_saved = 0,
+
+	column4_row1_flag = 0,
+	CAT_modes = 0,
+	column4_row1_flag_timer = 0,
+	CAT_modes_saved = 0,
+
+	column4_row2_flag = 0,
+	single_dual = 0,
+	column4_row2_flag_timer = 0,
+	single_dual_saved = 0,
+	
+	column1_flag = 0,
+	thrust_mode_enum = 0,
+	column1_flag_timer = 0,
+	thrust_mode_enum_saved = 0,
+	
+	column2_flag = 0,
+	alt_mode_enum = 0,
+	alt_mode_enum_base = 0,
+	column2_flag_timer = 0,
+	alt_mode_enum_saved = 0,
+
+	column3_flag = 0,
+	hdg_mode_enum = 0,
+	column3_flag_timer = 0,
+	hdg_mode_enum_saved = 0,
+	
+	column_multi_flag = 0,
+	land_mode_enum = 0,
+	column_multi_flag_timer = 0,
+	land_mode_enum_saved = 0
+
+
 }
 
 
@@ -504,6 +553,8 @@ simDR_eng2_N2 = find_dataref("sim/flightmodel2/engines/N2_percent[1]")
 simDR_throttle1_pos = find_dataref("sim/cockpit2/engine/actuators/throttle_ratio[0]")
 simDR_throttle2_pos = find_dataref("sim/cockpit2/engine/actuators/throttle_ratio[1]")
 
+simDR_FADEC_EPR = find_dataref("sim/flightmodel2/engines/EPR_FADEC")
+
 simDR_throttle_used = find_dataref("sim/flightmodel2/engines/throttle_used_ratio")
 simDR_throttle1_used = find_dataref("sim/flightmodel2/engines/throttle_used_ratio[0]")
 simDR_throttle2_used = find_dataref("sim/flightmodel2/engines/throttle_used_ratio[1]")
@@ -666,6 +717,11 @@ simDR_fo_altitude = find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_cop
 simDR_altv_armed = find_dataref("sim/cockpit2/autopilot/altv_armed")
 simDR_altv_captured = find_dataref("sim/cockpit2/autopilot/altv_captured")
 
+simDR_alts_armed = find_dataref("sim/cockpit2/autopilot/alts_armed")
+simDR_alts_captured = find_dataref("sim/cockpit2/autopilot/alts_captured")
+
+simDR_soft_ride = find_dataref("sim/cockpit2/annunciators/autopilot_soft_ride")
+
 simDR_capt_AHARS_heading = find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot")
 simDR_fo_AHARS_heading = find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_copilot")
 simDR_capt_track_heading = find_dataref("sim/cockpit2/gauges/indicators/ground_track_mag_pilot")
@@ -728,6 +784,8 @@ simDR_dh_lit_fo					= find_dataref("sim/cockpit2/gauges/indicators/radio_altimet
 
 simDR_nav_horz_sig 				= find_dataref("sim/cockpit2/radios/indicators/nav_display_horizontal")
 simDR_runway_status				= find_dataref("sim/cockpit2/autopilot/runway_status")
+simDR_runway_trk_status			= find_dataref("sim/cockpit2/autopilot/runway_track_status")
+simDR_backcourse_status			= find_dataref("sim/cockpit2/autopilot/backcourse_status")
 simDR_rollout_status			= find_dataref("sim/cockpit2/autopilot/rollout_status")
 simDR_flare_status				= find_dataref("sim/cockpit2/autopilot/flare_status")
 
@@ -801,6 +859,8 @@ simDR_ian_mode = find_dataref("sim/cockpit2/radios/indicators/ian_mode")	-- 0 = 
 
 simDR_gps_cdi_sens = find_dataref("sim/cockpit/radios/gps_cdi_sensitivity")
 simDR_nav_status = find_dataref("sim/cockpit2/autopilot/nav_status")
+
+simDR_thrust_warn = find_dataref("sim/flightmodel2/controls/airbus_speed_warn_thro_1")
 
 -- ELEV FAIL
 simDR_fail_elev_U = find_dataref("sim/operation/failures/rel_elv_U")
@@ -1110,6 +1170,9 @@ A333_ECAM_APU_PSI = create_dataref("laminar/A333/ecam/apu_psi", "number")
 A333_ECAM_APU_volts = create_dataref("laminar/A333/ecam/apu_volts", "number")
 A333_ECAM_APU_hertz = create_dataref("laminar/A333/ecam/apu_hz", "number")
 A333_ECAM_APU_egt_hot_status = create_dataref("laminar/A333/ecam/apu_overheat_status", "number")
+
+A333_ECAM_engine_donut1 = create_dataref("laminar/A333/ecam/throttle_pos_donut_eng1", "number")
+A333_ECAM_engine_donut2 = create_dataref("laminar/A333/ecam/throttle_pos_donut_eng2", "number")
 
 -- ECAM COMMON
 
@@ -1534,13 +1597,14 @@ A333_range_ring_flag_fo = create_dataref("laminar/A333/ND/range_ring_flag_fo", "
 A333_AP_modes = create_dataref("laminar/A333/PFD/FMAs/autopilot_12_status", "number")
 A333_FD_modes = create_dataref("laminar/A333/PFD/FMAs/flight_dir_12_status", "number")
 A333_climb_descend = create_dataref("laminar/A333/PFD/FMAs/climb_descend", "number") -- 0 = no climb or descend, -1 = descend, 1 = climb
-A333_alt_star_status = create_dataref("laminar/A333/PFD/FMAs/alt_star_status", "number") -- 0 = STAR, 1 = CAPTURED
+A333_alt_star_status = create_dataref("laminar/A333/PFD/FMAs/alt_star_status", "number") -- 1 = STAR, 0 = CAPTURED
 A333_gs_star_status = create_dataref("laminar/A333/PFD/FMAs/gs_star_status", "number") -- 0 = STAR, 1 = captured
 A333_loc_star_status = create_dataref("laminar/A333/PFD/FMAs/loc_star_status", "number") -- 0 = STAR, 1 = CAPTURED
 
 A333_man_toga = create_dataref("laminar/A333/PFD/FMAs/man_toga_status", "number")
 A333_man_mct = create_dataref("laminar/A333/PFD/FMAs/man_mct_status", "number")
 A333_man_flex = create_dataref("laminar/A333/PFD/FMAs/man_flex_status", "number")
+A333_man_thr = create_dataref("laminar/A333/PFD/FMAs/man_thrust_status", "number")
 
 A333_thr_mct = create_dataref("laminar/A333/PFD/FMAs/thr_mct_status", "number")
 A333_thr_clb = create_dataref("laminar/A333/PFD/FMAs/thr_clb_status", "number")
@@ -1570,6 +1634,24 @@ A333_lvr_mct_status = create_dataref("laminar/A333/PFD/FMAs/lvr_mct_status", "nu
 A333_lvr_clb_mct_flasher = create_dataref("laminar/A333/PFD/FMAs/lvr_clb_mct_flasher", "number")
 
 A333_nav_loc_arm_status = create_dataref("laminar/A333/PFD/FMAs/nav_loc_arm_status", "number") -- 0 = hide, 1 = nav, 2 = loc, 3 = nav loc
+A333_alt_crz_heading_mode = create_dataref("laminar/A333/PFD/FMAs/alt_crz_heading_status", "number")
+
+---- FMA BOXES --------------------------------------------------------------------------
+
+A333_column1_FMA_box				= create_dataref("laminar/A333/FMAs/column1_box", "number")
+A333_column2_FMA_box				= create_dataref("laminar/A333/FMAs/column2_box", "number")
+A333_column3_FMA_box				= create_dataref("laminar/A333/FMAs/column3_box", "number")
+A333_combo2_3_box					= create_dataref("laminar/A333/FMAs/column2_3_box", "number")
+A333_column4_row1_FMA_box			= create_dataref("laminar/A333/FMAs/column4_row1_box", "number")
+A333_column4_row2_FMA_box			= create_dataref("laminar/A333/FMAs/column4_row2_box", "number")
+A333_column5_row1_FMA_box			= create_dataref("laminar/A333/FMAs/column5_row1_box", "number")
+A333_column5_row2_FMA_box			= create_dataref("laminar/A333/FMAs/column5_row2_box", "number")
+A333_column5_row3_FMA_box			= create_dataref("laminar/A333/FMAs/column5_row3_box", "number")
+
+A333_thrust_mode_enum				= create_dataref("laminar/A333/FMAs/thrust_mode_enum", "number")
+A333_alt_mode_enum					= create_dataref("laminar/A333/FMAs/alt_mode_enum", "number")
+A333_hdg_mode_enum					= create_dataref("laminar/A333/FMAs/hdg_mode_enum", "number")
+A333_land_mode_enum					= create_dataref("laminar/A333/FMAs/land_mode_enum", "number")
 
 -- SIDESTICK PRIORITY
 A333_composite_stick_pitch = create_dataref("laminar/A333/sidestick/composite_pitch_ratio", "number")
@@ -1586,7 +1668,7 @@ A333_dual_input = create_dataref("laminar/A333/sidestick/dual_input", "number")	
 
 
 A333DR_baro_warning_brightness = create_dataref("laminar/A333/PFD/baro_warning_brightness", "number")
-
+A333DR_baro_warning_brightness_fo = create_dataref("laminar/A333/PFD/baro_warning_brightness_fo", "number")
 
 A333DR_var_test = create_dataref("laminar/A333/var_test", "number")
 A333_laminar_no_ref = create_dataref("laminar/no_ref", "number")
@@ -5150,7 +5232,20 @@ local function A333_fuel_totalizer_reset()
 
 end
 
+local function A333_throttle_pos_ind()
 
+
+	if simDR_FADEC_EPR[0] == 0 then
+		A333_ECAM_engine_donut1 = 1
+	else A333_ECAM_engine_donut1 = simDR_FADEC_EPR[0]
+	end
+	
+	if simDR_FADEC_EPR[1] == 0 then
+		A333_ECAM_engine_donut2 = 1
+	else A333_ECAM_engine_donut2 = simDR_FADEC_EPR[1]
+	end	
+
+end
 
 
 ---- ENGINE IDLE MODE ---------------------------------------------------------------------
@@ -5969,7 +6064,7 @@ local function A333_FMAs()
 	local nav_loc_arm_stat = A333_nav_loc_arm_status
 
     -- SINGLE ENGINE STATUS
-    lcl.single_engine_status = (((eng_N2[0] >= 5 and eng_N2[1] < 5) or (eng_N2[0] < 5 and eng_N2[1] >= 5)) and 1) or 0
+    lcl.single_engine_status = (((eng_N2[0] >= 55 and eng_N2[1] < 55) or (eng_N2[0] < 55 and eng_N2[1] >= 55)) and 1) or 0
 
 	if capt_fd_on == 0 and fo_fd_on == 0 then
         FD_modes = 0
@@ -6262,21 +6357,37 @@ local function A333_FMAs()
 			A333_thr_lvr = 0
 		end
 
+		if throttle_loc_eng[0] == 0 and throttle_loc_eng[1] == 0 and (simDR_throttle1_pos > 0.53 or simDR_throttle2_pos > 0.53) and flight_phase >= 5 then
+			A333_man_thr = 1
+		else
+			A333_man_thr = 0
+		end
+
+	--A333_man_thr = 0
+	-- flight_phase >= 6
+	--simDR_throttle1_pos >= 0.53
+
 	elseif throttle_loc_eng[0] ~= throttle_loc_eng[1] then
 
-		if throttle_loc_eng[0] == 1 then
-			if throttle_loc_eng[1] >= 2 then
-				A333_thr_lvr = 1
-			elseif throttle_loc_eng[1] == 0 then
+		if lcl.single_engine_status == 0 then
+
+			if throttle_loc_eng[0] == 1 then
+				if throttle_loc_eng[1] >= 2 then
+					A333_thr_lvr = 1
+				elseif throttle_loc_eng[1] == 0 then
+					A333_thr_lvr = 0
+				end
+			elseif throttle_loc_eng[1] == 1 then
+				if throttle_loc_eng[0] >= 2 then
+					A333_thr_lvr = 1
+				elseif throttle_loc_eng[0] == 0 then
+					A333_thr_lvr = 0
+				end
+			elseif throttle_loc_eng[0] ~= 1 and throttle_loc_eng[1] ~= 1 then
 				A333_thr_lvr = 0
 			end
-		elseif throttle_loc_eng[1] == 1 then
-			if throttle_loc_eng[0] >= 2 then
-				A333_thr_lvr = 1
-			elseif throttle_loc_eng[0] == 0 then
-				A333_thr_lvr = 0
-			end
-		elseif throttle_loc_eng[0] ~= 1 and throttle_loc_eng[1] ~= 1 then
+
+		elseif lcl.single_engine_status == 1 then
 			A333_thr_lvr = 0
 		end
 
@@ -6324,7 +6435,7 @@ local function A333_FMAs()
 				A333_lvr_clb_status = 0
 			end
 		elseif lcl.single_engine_status == 1 then
-			if (throttle_loc_eng[0] == 3 or throttle_loc_eng[1] == 3) or throttle_loc_eng[0] == 0 or throttle_loc_eng[1] == 0 then
+			if (throttle_loc_eng[0] == 3 or throttle_loc_eng[1] == 3) or (throttle_loc_eng[0] <= 1 and throttle_loc_eng[1] <= 1) then
 				A333_lvr_mct_status = 1
 				A333_lvr_clb_status = 0
 			else
@@ -6346,22 +6457,438 @@ local function A333_FMAs()
 	if simDR_gpss_status ~= 1 and simDR_nav_status ~= 1 then
 		nav_loc_arm_stat = 0
 	elseif simDR_gpss_status == 1 and simDR_nav_status ~= 1 then
-		if simDR_gps_cdi_sens <= 4 then
-			nav_loc_arm_stat = 1
-		else nav_loc_arm_stat = 0
-		end
-	elseif simDR_gpss_status == 0 and simDR_nav_status == 1 then
+		nav_loc_arm_stat = 1
+	elseif simDR_gpss_status ~= 1 and simDR_nav_status == 1 then
 		nav_loc_arm_stat = 2
 	elseif simDR_gpss_status == 1 and simDR_nav_status == 1 then
-		if simDR_gps_cdi_sens <= 4 then
-			nav_loc_arm_stat = 3
-		else nav_loc_arm_stat = 2
-		end
+		nav_loc_arm_stat = 3
 	end
 
 
 	A333_nav_loc_arm_status = nav_loc_arm_stat
 
+	if heading_mode == 13 or heading_mode == 1 then
+		A333_alt_crz_heading_mode = 1
+	else A333_alt_crz_heading_mode = 0
+	end
+
+end
+
+local function A333_autopilot_mode_enums()
+
+	---- ATHR ----
+
+	if simDR_thrust_warn == 0 then
+	
+		if simDR_autothrottle_mode <= 0 then
+			A333_thrust_mode_enum = 0
+		elseif simDR_autothrottle_mode == 1 then
+			if A333_thr_lvr == 1 then
+				A333_thrust_mode_enum = 1
+			elseif A333_thr_lvr == 0 then
+				if simDR_ias_mach_ind == 0 then
+					A333_thrust_mode_enum = 6
+				elseif simDR_ias_mach_ind == 1 then
+					A333_thrust_mode_enum = 7
+				end
+			end
+		elseif simDR_autothrottle_mode == 2 then
+			if A333_thr_mct == 1 then
+				A333_thrust_mode_enum = 3
+			end
+			if A333_thr_clb == 1 then
+				A333_thrust_mode_enum = 2
+			end
+			if A333_thr_lvr == 1 then
+				A333_thrust_mode_enum = 1
+			end
+		elseif simDR_autothrottle_mode == 3 then
+			A333_thrust_mode_enum = 4
+		elseif simDR_autothrottle_mode == 4 then
+			A333_thrust_mode_enum = 5
+		end
+	
+	elseif simDR_thrust_warn >= 1 then
+		A333_thrust_mode_enum = 8
+	end	
+
+	---- LAND ----
+	
+	if A333_final_app_status == 1 then
+		A333_land_mode_enum = 1
+	elseif A333_final_app_status == 0 then
+		if simDR_flare_status == 0 and simDR_rollout_status == 0 then
+			A333_land_mode_enum = 0
+		elseif simDR_flare_status == 1 and simDR_rollout_status == 1 and simDR_radio_altimeter_capt <= 400 then
+			A333_land_mode_enum = 2
+		elseif simDR_flare_status == 2 and simDR_rollout_status == 1 then
+			A333_land_mode_enum = 3
+		elseif simDR_rollout_status == 2 then
+			A333_land_mode_enum = 4
+		end
+	end
+
+	---- HEADING ----
+	
+	if simDR_ian_mode <= 1 then
+
+	if simDR_heading_mode == 0 then
+		A333_hdg_mode_enum = 0
+	elseif simDR_heading_mode == 1 then
+		A333_hdg_mode_enum = 3
+	elseif simDR_heading_mode == 2 then
+		if A333_loc_star_status == 0 then
+			if simDR_backcourse_status <= 1 then
+				A333_hdg_mode_enum = 6
+			elseif simDR_backcourse_status == 2 then
+				A333_hdg_mode_enum = 7
+			end
+		else 
+			if simDR_backcourse_status <= 1 then
+				A333_hdg_mode_enum = 8
+			elseif simDR_backcourse_status == 2 then
+				A333_hdg_mode_enum = 9
+			end
+		end
+	elseif simDR_heading_mode == 13 then
+		A333_hdg_mode_enum = 5
+	elseif simDR_heading_mode == 14 then
+		A333_hdg_mode_enum = 3
+	elseif simDR_heading_mode == 18 then
+		if simDR_altitude_mode == 10 then
+			A333_hdg_mode_enum = 11
+		else A333_hdg_mode_enum = 4
+		end
+	elseif simDR_heading_mode == 21 then
+		A333_hdg_mode_enum = 1
+	elseif simDR_heading_mode == 22 then
+		A333_hdg_mode_enum = 2
+	end
+
+	elseif simDR_ian_mode == 2 then
+		if simDR_glideslope_status <= 1 and simDR_approach_status == 2 then
+			A333_hdg_mode_enum = 10
+		end
+	end
+
+	---- ALTITUDE ----
+
+	if simDR_altitude_mode == 3 then
+		alt_mode_enum_base = 0
+	elseif simDR_altitude_mode == 10 then
+		alt_mode_enum_base = 1
+	elseif simDR_altitude_mode == 20 then
+		if A333_climb_descend == 1 then
+			alt_mode_enum_base = 2
+		else alt_mode_enum_base = 5
+		end
+	elseif simDR_altitude_mode == 5 then
+		if A333_climb_descend == 1 then
+			alt_mode_enum_base = 3
+		else alt_mode_enum_base = 7
+		end
+	elseif simDR_altitude_mode == 6 then
+		alt_mode_enum_base = 4
+	elseif simDR_altitude_mode == 9 then
+		if A333_climb_descend == -1 then
+			alt_mode_enum_base = 6
+		end
+	elseif simDR_altitude_mode == 8 then
+		if simDR_ian_mode == 0 then
+			if A333_gs_star_status == 0 then
+				alt_mode_enum_base = 8
+			else alt_mode_enum_base = 9
+			end
+		end
+	elseif simDR_altitude_mode == 4 then
+		alt_mode_enum_base = 10
+	elseif simDR_altitude_mode == 19 then
+		alt_mode_enum_base = 11
+	end
+
+	if alt_mode_enum_base ~= 4 then
+		A333_alt_mode_enum = alt_mode_enum_base
+	elseif alt_mode_enum_base == 4 then
+		if A333_alt_star_status == 0 then
+		
+			if simDR_soft_ride == 1 then
+				if A333_alt_crz_heading_mode == 1 then
+					A333_alt_mode_enum = 18
+				end
+			elseif simDR_soft_ride == 0 then
+				if simDR_alts_captured == 1 then
+					A333_alt_mode_enum = 15
+				elseif simDR_alts_captured == 0 then
+					if simDR_altv_captured == 0 then
+						A333_alt_mode_enum = 16
+					elseif simDR_altv_captured == 1 then
+						A333_alt_mode_enum = 17
+					end
+				end
+			end
+
+		elseif A333_alt_star_status == 1 then
+			if simDR_alts_captured == 1 then
+				A333_alt_mode_enum = 12
+			elseif simDR_alts_captured == 0 then
+				if simDR_altv_captured == 0 then
+					A333_alt_mode_enum = 13
+				elseif simDR_altv_captured == 1 then
+					A333_alt_mode_enum = 14
+				end
+			end
+		end
+	end
+
+end	
+	
+
+--	alt_mode_enum_base	
+	
+--[[
+A333_thrust_mode_enum		A333_land_mode_enum			A333_hdg_mode_enum						A333_alt_mode_enum_base
+NONE = 0					NONE = 0					NONE = 0								-NONE = 0
+THR LVR = 1					FINAL APP = 1				RWY = 1			heading_mode = 21		-SRS = 1					altitude_mode = 10
+THR CLB = 2					LAND = 2					RWY TRK = 2		heading_mode = 22		-CLB = 2					altitude_mode = 20	
+THR MCT = 3					FLARE = 3					HDG = 3			heading_mode = 1		-OP CLB = 3					altitude_mode = 5
+THR IDLE = 4				ROLLOUT = 4					HDG HOLD = 3	heading_mode = 14		-ALT* (ALTS) = 4		12
+THR DEC = 5												TRK = 4			heading_mode = 18		-ALT* (NO ALTS/V) = 4	13
+THR SPEED = 6											NAV = 5			heading_mode = 13		-ALT CST* (ALTV) = 4	14	
+THR MACH = 7											LOC* = 6		heading_mode = 2		-ALT	(ALTS) = 4		15	
+THR WARN = 8											LOC B/C* = 7	heading_mode = 2		-ALT (NO ALTS/V) = 4	16
+														LOC = 8			heading_mode = 2		-ALT CST (ALTV) = 4		17
+														LOC B/C = 9		heading_mode = 2		-ALT CRZ = 4			18
+														APP NAV = 10	ian_mode == 2			-DES	= 5					altitude_mode = 20
+														GA TRK = 11	heading_mode = 18			-DES PATH = 6				altitude_mode = 9
+																								-OP DES = 7					altitude_mode = 5
+																								-G/S* = 8					altitude_mode = 8
+																								-G/S = 9					altitude_mode = 8
+																								-V/S = 10					altitude_mode = 4
+																								-FPA = 11					altitude_mode = 19
+
+
+
+A333_alt_star_status
+simDR_alts_captured
+simDR_altv_captured
+simDR_soft_ride
+A333_alt_crz_heading_mode
+A333_climb_descend
+simDR_ian_mode
+A333_gs_star_status
+	
+A333_alt_mode_enum
+
+]]--
+
+
+local function A333_FMA_boxes()
+
+--[[
+-- THEORY OF OPERATION -- 	WE LOOK TO SEE WHAT MODE THE AUTOPILOT IS IN, EITHER THROUGH SIM DATAREFS OR THROUGH OUR OWN FROM THE MODE ENUMS FUNCTION ABOVE
+							IF WE SEE A CHANGE OVER A LOOP, WE SET A FLAG AND SET A 10 SECOND TIMER.
+							WE RESET THE TIMER, CLEAR THE FLAG, AND CLEAR THE BOX IF THE ASSOCIATED MODE GOES TO '0' OR IF THE TIMER EXCEEDS 10 SECONDS
+							MODE CHANGES THAT HAPPEN DURING THE 10 SECOND WINDOW WILL REINIT THE TIMER BACK TO '0'
+							
+]]--
+
+	-- COLUMN 5 ROW 1
+
+	AP_modes = A333_AP_modes
+	
+	if AP_modes ~= AP_modes_saved then												-- IF previous frame doesn't match current frame
+		lcl.column5_row1_flag = 1
+		lcl.column5_row1_flag_timer = 0
+	end
+
+	if lcl.column5_row1_flag == 1 then												-- flag sets TIMER in motion - sets BOX
+		lcl.column5_row1_flag_timer = lcl.column5_row1_flag_timer + lcl_SIM_PERIOD
+		A333_column5_row1_FMA_box = 1
+	end
+
+	if lcl.column5_row1_flag_timer > 10 or AP_modes == 0 then						-- TIMER / FLAG / BOX reset
+		lcl.column5_row1_flag = 0
+		A333_column5_row1_FMA_box = 0
+		lcl.column5_row1_flag_timer = 0
+	end
+		
+	AP_modes_saved = AP_modes
+
+	-- COLUMN 5 ROW 2
+	
+	FD_modes = A333_FD_modes
+	
+	if FD_modes ~= FD_modes_saved then												-- IF previous frame doesn't match current frame
+		lcl.column5_row2_flag = 1
+		lcl.column5_row2_flag_timer = 0
+	end
+
+	if lcl.column5_row2_flag == 1 then												-- flag sets TIMER in motion - sets BOX
+		lcl.column5_row2_flag_timer = lcl.column5_row2_flag_timer + lcl_SIM_PERIOD
+		A333_column5_row2_FMA_box = 1
+	end
+
+	if lcl.column5_row2_flag_timer > 10 or FD_modes == 0 then						-- TIMER / FLAG / BOX reset
+		lcl.column5_row2_flag = 0
+		A333_column5_row2_FMA_box = 0
+		lcl.column5_row2_flag_timer = 0
+	end
+		
+	FD_modes_saved = FD_modes
+	
+	-- COLUMN 5 ROW 3
+
+	ATHR_modes = simDR_autothrottle_mode <= 1 and simDR_autothrottle_mode or 1
+			
+	if ATHR_modes ~= ATHR_modes_saved then											-- IF previous frame doesn't match current frame
+		lcl.column5_row3_flag = 1
+		lcl.column5_row3_flag_timer = 0
+	end
+
+	if lcl.column5_row3_flag == 1 then												-- flag sets TIMER in motion - sets BOX
+		lcl.column5_row3_flag_timer = lcl.column5_row3_flag_timer + lcl_SIM_PERIOD
+		A333_column5_row3_FMA_box = 1
+	end
+
+	if lcl.column5_row3_flag_timer > 10 or ATHR_modes == -1 then					-- TIMER / FLAG / BOX reset
+		lcl.column5_row3_flag = 0
+		A333_column5_row3_FMA_box = 0
+		lcl.column5_row3_flag_timer = 0
+	end
+		
+	ATHR_modes_saved = ATHR_modes
+		
+	-- COLUMN 4 ROW 1
+
+	CAT_modes = A333_landing_category_enum
+			
+	if CAT_modes ~= CAT_modes_saved then											-- IF previous frame doesn't match current frame
+		lcl.column4_row1_flag = 1
+		lcl.column4_row1_flag_timer = 0
+	end
+
+	if lcl.column4_row1_flag == 1 then												-- flag sets TIMER in motion - sets BOX
+		lcl.column4_row1_flag_timer = lcl.column4_row1_flag_timer + lcl_SIM_PERIOD
+		A333_column4_row1_FMA_box = 1
+	end
+
+	if lcl.column4_row1_flag_timer > 10 or CAT_modes == 0 then						-- TIMER / FLAG / BOX reset
+		lcl.column4_row1_flag = 0
+		A333_column4_row1_FMA_box = 0
+		lcl.column4_row1_flag_timer = 0
+	end
+		
+	CAT_modes_saved = CAT_modes
+
+	-- COLUMN 4 ROW 2
+
+	single_dual = A333_single_dual_mode
+			
+	if single_dual ~= single_dual_saved then										-- IF previous frame doesn't match current frame
+		lcl.column4_row2_flag = 1
+		lcl.column4_row2_flag_timer = 0
+	end
+
+	if lcl.column4_row2_flag == 1 then												-- flag sets TIMER in motion - sets BOX
+		lcl.column4_row2_flag_timer = lcl.column4_row2_flag_timer + lcl_SIM_PERIOD
+		A333_column4_row2_FMA_box = 1
+	end
+
+	if lcl.column4_row2_flag_timer > 10 or single_dual == 0 then					-- TIMER / FLAG / BOX reset
+		lcl.column4_row2_flag = 0
+		A333_column4_row2_FMA_box = 0
+		lcl.column4_row2_flag_timer = 0
+	end
+		
+	single_dual_saved = single_dual	
+	
+	-- COLUMN 1
+	
+	thrust_mode_enum = A333_thrust_mode_enum
+			
+	if thrust_mode_enum ~= thrust_mode_enum_saved then								-- IF previous frame doesn't match current frame
+		lcl.column1_flag = 1
+		lcl.column1_flag_timer = 0
+	end
+
+	if lcl.column1_flag == 1 then													-- flag sets TIMER in motion - sets BOX
+		lcl.column1_flag_timer = lcl.column1_flag_timer + lcl_SIM_PERIOD
+		A333_column1_FMA_box = 1
+	end
+
+	if lcl.column1_flag_timer > 10 or thrust_mode_enum == 0 then					-- TIMER / FLAG / BOX reset
+		lcl.column1_flag = 0
+		A333_column1_FMA_box = 0
+		lcl.column1_flag_timer = 0
+	end
+		
+	thrust_mode_enum_saved = thrust_mode_enum
+
+	-- COLUMN 2
+	
+	alt_mode_enum = A333_alt_mode_enum
+			
+	if alt_mode_enum ~= alt_mode_enum_saved then									-- IF previous frame doesn't match current frame
+		lcl.column2_flag = 1
+		lcl.column2_flag_timer = 0
+	end
+
+	if lcl.column2_flag == 1 then													-- flag sets TIMER in motion - sets BOX
+		lcl.column2_flag_timer = lcl.column2_flag_timer + lcl_SIM_PERIOD
+		A333_column2_FMA_box = 1
+	end
+
+	if lcl.column2_flag_timer > 10 or alt_mode_enum == 0 then						-- TIMER / FLAG / BOX reset
+		lcl.column2_flag = 0
+		A333_column2_FMA_box = 0
+		lcl.column2_flag_timer = 0
+	end
+		
+	alt_mode_enum_saved = alt_mode_enum
+
+	-- COLUMN 3
+	
+	hdg_mode_enum = A333_hdg_mode_enum
+			
+	if hdg_mode_enum ~= hdg_mode_enum_saved then									-- IF previous frame doesn't match current frame
+		lcl.column3_flag = 1
+		lcl.column3_flag_timer = 0
+	end
+
+	if lcl.column3_flag == 1 then													-- flag sets TIMER in motion - sets BOX
+		lcl.column3_flag_timer = lcl.column3_flag_timer + lcl_SIM_PERIOD
+		A333_column3_FMA_box = 1
+	end
+
+	if lcl.column3_flag_timer > 10 or hdg_mode_enum == 0 then						-- TIMER / FLAG / BOX reset
+		lcl.column3_flag = 0
+		A333_column3_FMA_box = 0
+		lcl.column3_flag_timer = 0
+	end
+		
+	hdg_mode_enum_saved = hdg_mode_enum
+
+	-- MULTI COLUMN
+	
+	land_mode_enum = A333_land_mode_enum
+			
+	if land_mode_enum ~= land_mode_enum_saved then									-- IF previous frame doesn't match current frame
+		lcl.column_multi_flag = 1
+		lcl.column_multi_flag_timer = 0
+	end
+
+	if lcl.column_multi_flag == 1 then												-- flag sets TIMER in motion - sets BOX
+		lcl.column_multi_flag_timer = lcl.column_multi_flag_timer + lcl_SIM_PERIOD
+		A333_combo2_3_box = 1
+	end
+
+	if lcl.column_multi_flag_timer > 10 or land_mode_enum == 0 then					-- TIMER / FLAG / BOX reset
+		lcl.column_multi_flag = 0
+		A333_combo2_3_box = 0
+		lcl.column_multi_flag_timer = 0
+	end
+		
+	land_mode_enum_saved = land_mode_enum
 
 end
 
@@ -6502,11 +7029,16 @@ local function A333_baro_warning_brightness()
 
     local time = m.fmod(simDR_flight_time, 1.0)
     local barometer_setting_warn_pilot = simDR_barometer_setting_warn_pilot
+	local barometer_setting_warn_copilot = simDR_barometer_setting_warn_copilot
 
     local bright = ((barometer_setting_warn_pilot == 1 or barometer_setting_warn_pilot == 1)
         and (time > 0.5 and time <= 1.0))
+        
+	local bright_fo = ((barometer_setting_warn_copilot == 1 or barometer_setting_warn_copilot == 1)
+        and (time > 0.5 and time <= 1.0))
 
     A333DR_baro_warning_brightness = bool2num[bright]
+	A333DR_baro_warning_brightness_fo = bool2num[bright_fo]
 
 end
 
@@ -6535,74 +7067,6 @@ local function A333_ND_nav_rad_ID()
 
 end
 
-
-
---[[
-local function A333_ND_GPS_dme_time()
-
-    local gps1_dme_time = simDR_gps1_dme_time
-    local gps2_dme_time = simDR_gps2_dme_time
-
-	A333_gps_dme_time_min = m.floor(gps1_dme_time)
-	A333_gps2_dme_time_min = m.floor(gps2_dme_time)
-
-	lcl.total_gps_seconds = gps1_dme_time * 60
-	lcl.total_gps2_seconds = gps2_dme_time * 60
-
-	lcl.gps_seconds = m.fmod(lcl.total_gps_seconds, 60)
-	lcl.gps2_seconds = m.fmod(lcl.total_gps2_seconds, 60)
-
-	A333_gps_dme_time_sec = m.floor(lcl.gps_seconds)
-	A333_gps2_dme_time_sec = m.floor(lcl.gps2_seconds)
-
-end
---]]
-
--- This code resolves XPD-17010 as per Jim Keir (original code above)
-local total_gps_seconds = 0
-local total_gps2_seconds = 0
-local gps_seconds = 0
-local gps2_seconds = 0
-
-local function isnan(x)
-    return type(x) == "number" and x == x+1
-end
-
-local function A333_ND_GPS_dme_time()
-    local gps1_dme_time = simDR_gps1_dme_time
-    local gps2_dme_time = simDR_gps2_dme_time
-
-    if isnan(gps1_dme_time) then
-        gps1_dme_time = 0
-    end
-    if isnan(gps2_dme_time) then
-        gps2_dme_time = 0
-    end
-
-    A333_gps_dme_time_min = m.floor(simDR_gps1_dme_time)
-    A333_gps2_dme_time_min = m.floor(simDR_gps2_dme_time)
-    A333_gps_dme_time_min = m.floor(gps1_dme_time)
-    A333_gps2_dme_time_min = m.floor(gps2_dme_time)
-
-    total_gps_seconds = simDR_gps1_dme_time * 60
-    total_gps2_seconds = simDR_gps2_dme_time * 60
-    total_gps_seconds = gps1_dme_time * 60
-    total_gps2_seconds = gps2_dme_time * 60
-
-	gps_seconds = m.fmod(total_gps_seconds, 60)
-    gps2_seconds = m.fmod(total_gps2_seconds, 60)
-
-    A333_gps_dme_time_sec = m.floor(gps_seconds)
-    A333_gps2_dme_time_sec = m.floor(gps2_seconds)
-
-
-	A333_gps_eta_time_min = m.floor(m.fmod( ((simDR_zulu_time_sec / 60) + gps1_dme_time), 60) )
-	A333_gps2_eta_time_min = m.floor(m.fmod( ((simDR_zulu_time_sec / 60) + gps2_dme_time), 60) )
-
-	A333_gps_eta_time_hour = m.floor(m.fmod( ((simDR_zulu_time_sec / 3600) + (gps1_dme_time / 60)), 24) )
-	A333_gps2_eta_time_hour = m.floor(m.fmod( ((simDR_zulu_time_sec / 3600) + (gps2_dme_time / 60)), 24) )
-
-end
 
 local function A333_TCAS_flasher_ND()
 
@@ -6844,14 +7308,13 @@ local function A333_ALL_systems()
 	A333_ecam_page_BLEED()
 	A333_ecam_page_COND()
 	A333_FPV_calculations()
-	A333_PFD_indicators()
 	A333_flight_directors()
 	A333_DH_flashers()
 	A333_InstrumentVisibility()
 	A333_ND_nav_rad_ID()
-	A333_ND_GPS_dme_time()
 	A333_gps_info_show()
 	A333_fuel_totalizer_reset()
+	A333_throttle_pos_ind()
 	A333_vspeeds()
 	A333_ground_timer()
 	A333_idle_mode_logic()
@@ -6884,6 +7347,9 @@ function before_physics()
 
 	A333_map_range_ring_hide()
 	A333_FMAs()
+	A333_autopilot_mode_enums()
+	A333_FMA_boxes()
+	A333_PFD_indicators()
 
 end
 
@@ -6898,5 +7364,8 @@ function after_replay()
 	A333_ALL_systems()
 	A333_map_range_ring_hide()
 	A333_FMAs()
+	A333_autopilot_mode_enums()
+	A333_FMA_boxes()
+	A333_PFD_indicators()
 	
 end

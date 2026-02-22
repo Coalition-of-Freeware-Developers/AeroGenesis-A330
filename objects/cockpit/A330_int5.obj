@@ -76605,7 +76605,7 @@ IDX	58712
 	ANIM_rotate	0	1	0	17.747941	17.747941
 	ANIM_rotate	0	0	-1	16.985334	16.985334
 	ANIM_rotate	1	0	0	-177.02448	-177.02448
-	ANIM_rotate_begin	0	0	-1	sim/cockpit2/switches/instrument_brightness_ratio[1]
+	ANIM_rotate_begin	0	0	-1	sim/cockpit2/EFIS/EFIS_weather_alpha
 	ANIM_rotate_key	0	120.00028
 	ANIM_rotate_key	0.5	0
 	ANIM_rotate_key	1	-120.00028
@@ -78561,7 +78561,7 @@ IDX	58712
 	ANIM_rotate	0	1	0	-17.740492	-17.740492
 	ANIM_rotate	0	0	-1	-16.856418	-16.856418
 	ANIM_rotate	1	0	0	-177.02677	-177.02677
-	ANIM_rotate_begin	0	0	-1	sim/cockpit2/switches/instrument_brightness_ratio[4]
+	ANIM_rotate_begin	0	0	-1	sim/cockpit2/EFIS/EFIS_weather_alpha_copilot
 	ANIM_rotate_key	0	120.00028
 	ANIM_rotate_key	0.5	0
 	ANIM_rotate_key	1	-120.00028
@@ -78600,7 +78600,7 @@ IDX	58712
 	ANIM_rotate	0	1	0	-17.740492	-17.740492
 	ANIM_rotate	0	0	-1	-16.856418	-16.856418
 	ANIM_rotate	1	0	0	-177.02677	-177.02677
-	ANIM_rotate_begin	0	0	-1	sim/cockpit2/EFIS/EFIS_weather_alpha_copilot
+	ANIM_rotate_begin	0	0	-1	sim/cockpit2/switches/instrument_brightness_ratio[4]
 	ANIM_rotate_key	0	120.00028
 	ANIM_rotate_key	0.5	0
 	ANIM_rotate_key	1	-120.00028
@@ -78613,7 +78613,7 @@ IDX	58712
 	ANIM_rotate	0	1	0	17.747941	17.747941
 	ANIM_rotate	0	0	-1	16.985334	16.985334
 	ANIM_rotate	1	0	0	-177.02448	-177.02448
-	ANIM_rotate_begin	0	0	-1	sim/cockpit2/EFIS/EFIS_weather_alpha
+	ANIM_rotate_begin	0	0	-1	sim/cockpit2/switches/instrument_brightness_ratio[1]
 	ANIM_rotate_key	0	120.00028
 	ANIM_rotate_key	0.5	0
 	ANIM_rotate_key	1	-120.00028

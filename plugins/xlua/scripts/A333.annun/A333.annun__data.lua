@@ -137,6 +137,7 @@ simDR_autopilot2_on = find_dataref("sim/cockpit2/autopilot/servos2_on")
 simDR_altitude_hold_status = find_dataref("sim/cockpit2/autopilot/altitude_hold_status") -- 1 = armed, 2 = cap
 simDR_approach_status = find_dataref("sim/cockpit2/autopilot/approach_status") -- 1 = armed, 2 = captured
 simDR_loc_status = find_dataref("sim/cockpit2/autopilot/nav_status") -- 1 = armed, 2 = captured
+simDR_glideslope_status = find_dataref("sim/cockpit2/autopilot/glideslope_status") -- 1 = armed, 2 = captured
 simDR_engine_bleed_sov_status = find_dataref("sim/cockpit2/bleedair/actuators/engine_bleed_sov")
 simDR_engine_starter_running = find_dataref("sim/flightmodel2/engines/starter_is_running")
 simDR_engine_bleed1_fail = find_dataref("sim/operation/failures/rel_bleed_air_lft")
