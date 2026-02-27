@@ -1,0 +1,391 @@
+A
+1100
+VRCONFIG
+
+REF_POINT_ACF
+
+################################
+#TELEPORT HOTSPOTS
+################################
+
+BEGIN_TELEPORT_HOTSPOT SITTING Pilot's Seat
+	AABB -1.0 -0.8 1.0 0.0 1.50 2.65
+	PRESET_XYZ -0.490728 0.981456 2.4109677
+	PRESET_PSI 0.0
+	PRESET_THE 0.0
+	PRESET_PHI 0.0
+END_TELEPORT_HOTSPOT
+
+BEGIN_TELEPORT_HOTSPOT SITTING Copilot's Seat
+	AABB 0.0 -0.8 1.0 1.0 1.50 2.65
+	PRESET_XYZ 0.490728 0.981456 2.4109677
+	PRESET_PSI 0.0
+	PRESET_THE 0.0
+	PRESET_PHI 0.0
+END_TELEPORT_HOTSPOT
+
+BEGIN_TELEPORT_HOTSPOT SITTING Observer's Seat
+	AABB -0.1 -0.8 3.0 0.4 1.50 3.7
+	PRESET_XYZ 0.190728 0.981456 3.40
+	PRESET_PSI 0.0
+	PRESET_THE 0.0
+	PRESET_PHI 0.0
+END_TELEPORT_HOTSPOT
+
+BEGIN_MANIP drag_xy sim/cockpit2/controls/yoke_roll_ratio sim/cockpit2/controls/yoke_pitch_ratio
+	#JOYSTICK_MANIP <ptch min> <ptch max> <roll min> <roll max>
+	JOYSTICK_MANIP -16.0 16.0 -20.0 20.0
+END_MANIP
+
+BEGIN_MANIP drag_xy sim/cockpit2/controls/yoke_roll_ratio_copilot sim/cockpit2/controls/yoke_pitch_ratio_copilot
+	#JOYSTICK_MANIP <ptch min> <ptch max> <roll min> <roll max>
+	JOYSTICK_MANIP -16.0 16.0 -20.0 20.0
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/knob/baro/capt_hPa laminar/A333/knob/baro/capt_inHg
+	DEG_PER_ACTION 45
+END_MANIP
+
+
+BEGIN_MANIP command_knob laminar/A333/knobs/capt_EFIS_knob_right laminar/A333/knobs/capt_EFIS_knob_left
+	DEG_PER_ACTION 40
+END_MANIP
+
+BEGIN_MANIP axis_knob sim/cockpit2/EFIS/map_range
+	ACTION command_knob sim/instruments/map_zoom_out sim/instruments/map_zoom_in
+	DEG_PER_ACTION 30
+END_MANIP
+
+BEGIN_MANIP command_switch_up_down laminar/A333/autopilot/speed_knob_push laminar/A333/autopilot/speed_knob_pull
+	ACTION command_axis 0.0 0.0 0.2 laminar/A333/autopilot/speed_knob_push laminar/A333/autopilot/speed_knob_pull
+	HOLD_MANIP
+END_MANIP
+
+BEGIN_MANIP command_knob sim/autopilot/airspeed_up sim/autopilot/airspeed_down
+END_MANIP
+
+BEGIN_MANIP command_switch_up_down laminar/A333/autopilot/heading_knob_push laminar/A333/autopilot/heading_knob_pull
+	ACTION command_axis 0.0 0.0 0.2 laminar/A333/autopilot/heading_knob_push laminar/A333/autopilot/heading_knob_pull
+	HOLD_MANIP
+END_MANIP
+
+BEGIN_MANIP command_knob sim/autopilot/heading_up sim/autopilot/heading_down
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/autopilot/alt_step_right laminar/A333/autopilot/alt_step_left
+	DEG_PER_ACTION 40
+END_MANIP
+
+BEGIN_MANIP command_knob sim/autopilot/altitude_up sim/autopilot/altitude_down
+END_MANIP
+
+BEGIN_MANIP command_switch_up_down laminar/A333/autopilot/altitude_knob_push laminar/A333/autopilot/altitude_knob_pull
+	ACTION command_axis 0.0 0.0 0.2 laminar/A333/autopilot/altitude_knob_push laminar/A333/autopilot/altitude_knob_pull
+	HOLD_MANIP
+END_MANIP
+
+BEGIN_MANIP command_knob sim/autopilot/vertical_speed_up sim/autopilot/vertical_speed_down
+END_MANIP
+
+BEGIN_MANIP command_switch_up_down laminar/A333/autopilot/vertical_knob_push laminar/A333/autopilot/vertical_knob_pull
+	ACTION command_axis 0.0 0.0 0.2 laminar/A333/autopilot/vertical_knob_push laminar/A333/autopilot/vertical_knob_pull
+	HOLD_MANIP
+END_MANIP
+
+BEGIN_MANIP axis_knob sim/cockpit2/EFIS/map_range_copilot
+	ACTION command_knob sim/instruments/map_copilot_zoom_out sim/instruments/map_copilot_zoom_in
+	DEG_PER_ACTION 30
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/knobs/fo_EFIS_knob_right laminar/A333/knobs/fo_EFIS_knob_left
+	DEG_PER_ACTION 40
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/knob/baro/fo_hPa laminar/A333/knob/baro/fo_inHg
+	DEG_PER_ACTION 45
+END_MANIP
+
+BEGIN_MANIP command_knob sim/instruments/barometer_copilot_up sim/instruments/barometer_copilot_down
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/clock/ET_run_stop_reset_dn laminar/A333/clock/ET_run_stop_reset_up
+	DEG_PER_ACTION 30
+	HOLD_MANIP
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/rtp_L/freq_MHz/sel_dial_up laminar/A333/rtp_L/freq_MHz/sel_dial_dn
+	DEG_PER_ACTION 5
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/rtp_L/freq_khz/sel_dial_up laminar/A333/rtp_L/freq_khz/sel_dial_dn
+	DEG_PER_ACTION 5
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/rtp_R/freq_khz/sel_dial_up laminar/A333/rtp_R/freq_khz/sel_dial_dn
+	DEG_PER_ACTION 5
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/rtp_R/freq_MHz/sel_dial_up laminar/A333/rtp_R/freq_MHz/sel_dial_dn
+	DEG_PER_ACTION 5
+END_MANIP
+
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_0
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_0
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_1
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_1
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_2
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_2
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_3
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_3
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_4
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_4
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_5
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_5
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_6
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_6
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_7
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_7
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_8
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_8
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_9
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_9
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_10
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_10
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_11
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_11
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_12
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_12
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_13
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_13
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_14
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_14
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/capt/volume_pos_15
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/capt/volume_pos_15
+END_MANIP
+
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_0
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_0
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_1
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_1
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_2
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_2
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_3
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_3
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_4
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_4
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_5
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_5
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_6
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_6
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_7
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_7
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_8
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_8
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_9
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_9
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_10
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_10
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_11
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_11
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_12
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_12
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_13
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_13
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_14
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_14
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/fo/volume_pos_15
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/fo/volume_pos_15
+END_MANIP
+
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_0
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_0
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_1
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_1
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_2
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_2
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_3
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_3
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_4
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_4
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_5
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_5
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_6
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_6
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_7
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_7
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_8
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_8
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_9
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_9
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_10
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_10
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_11
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_11
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_12
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_12
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_13
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_13
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_14
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_14
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/audio/obs/volume_pos_15
+	ACTION axis_knob 0.0 1.0 0.01 laminar/A333/audio/obs/volume_pos_15
+END_MANIP
+
+BEGIN_MANIP axis_knob laminar/a333/rheostats/flood_brightness
+	ACTION axis_knob 0.0 1.0 0.01 laminar/a333/rheostats/flood_brightness
+END_MANIP
+
+BEGIN_MANIP axis_knob laminar/a333/rheostats/ped_flood_brightness
+	ACTION axis_knob 0.0 1.0 0.01 laminar/a333/rheostats/ped_flood_brightness
+END_MANIP
+
+BEGIN_MANIP command_switch_up_down laminar/A333/switches/cockpit_door_lock_up laminar/A333/switches/cockpit_door_lock_dn
+	HOLD_MANIP
+END_MANIP
+
+BEGIN_MANIP command_switch_left_right sim/flight_controls/rudder_trim_right sim/flight_controls/rudder_trim_left
+	HOLD_MANIP
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/transponder/auto_on_off_right laminar/A333/transponder/auto_on_off_left
+	DEG_PER_ACTION 20
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/transponder/atc2 laminar/A333/transponder/atc1
+	DEG_PER_ACTION 20
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/transponder/alt_rpt_on laminar/A333/transponder/alt_rpt_off
+	DEG_PER_ACTION 20
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/transponder/thrt_all_abv_blw_right laminar/A333/transponder/thrt_all_abv_blw_left
+	DEG_PER_ACTION 20
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/transponder/ta_ra_right laminar/A333/transponder/ta_ra_left
+	DEG_PER_ACTION 20
+END_MANIP
+
+BEGIN_MANIP command sim/lights/generic_09_light_tog
+	ACTION command_switch_up_down2 sim/lights/generic_09_light_tog
+END_MANIP
+
+BEGIN_MANIP command sim/lights/generic_10_light_tog
+	ACTION command_switch_up_down2 sim/lights/generic_10_light_tog
+END_MANIP
+
+BEGIN_MANIP command sim/lights/generic_12_light_tog
+	ACTION command_switch_up_down2 sim/lights/generic_12_light_tog
+END_MANIP
+
+BEGIN_MANIP command sim/lights/generic_13_light_tog
+	ACTION command_switch_up_down2 sim/lights/generic_13_light_tog
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/switch/eng_mode_right laminar/A333/switch/eng_mode_left
+	DEG_PER_ACTION 60
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/switch/parking_brake_right laminar/A333/switch/parking_brake_left
+	DEG_PER_ACTION 90
+END_MANIP
+
+BEGIN_MANIP command laminar/A333/rtp_L/off_switch
+	ACTION command_switch_up_down2 laminar/A333/rtp_L/off_switch
+	INVERT_MANIP
+END_MANIP
+
+BEGIN_MANIP command laminar/A333/rtp_R/off_switch
+	ACTION command_switch_up_down2 laminar/A333/rtp_R/off_switch
+	INVERT_MANIP
+END_MANIP
+
+BEGIN_MANIP command_switch_up_down2 laminar/A333/rtp_C/off_switch
+	INVERT_MANIP
+END_MANIP
+
+BEGIN_MANIP command_knob sim/systems/wipers_up sim/systems/wipers_dn
+	DEG_PER_ACTION 30
+END_MANIP
+BEGIN_MANIP command_knob sim/systems/wipers2_up sim/systems/wipers2_dn
+	DEG_PER_ACTION 30
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/knobs/press_press_flow_right laminar/A333/knobs/press_press_flow_left
+	DEG_PER_ACTION 30
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/knobs/press_isol_valve_right laminar/A333/knobs/press_isol_valve_left
+	DEG_PER_ACTION 30
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/buttons/cargo_cond/cooling_knob_right laminar/A333/buttons/cargo_cond/cooling_knob_left
+	DEG_PER_ACTION 30
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/rtp_C/freq_khz/sel_dial_up laminar/A333/rtp_C/freq_khz/sel_dial_dn
+	DEG_PER_ACTION 5
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/rtp_C/freq_MHz/sel_dial_up laminar/A333/rtp_C/freq_MHz/sel_dial_dn
+	DEG_PER_ACTION 5
+END_MANIP
+
+BEGIN_MANIP command_knob laminar/A333/knobs/adirs/ir1_knob_right laminar/A333/knobs/adirs/ir1_knob_left
+	DEG_PER_ACTION 30
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/knobs/adirs/ir3_knob_right laminar/A333/knobs/adirs/ir3_knob_left
+	DEG_PER_ACTION 30
+END_MANIP
+BEGIN_MANIP command_knob laminar/A333/knobs/adirs/ir2_knob_right laminar/A333/knobs/adirs/ir2_knob_left
+	DEG_PER_ACTION 30
+END_MANIP
+
+BEGIN_MANIP axis_knob laminar/A333/knob/cockpit_temp
+	ACTION axis_knob -1.0 1.0 0.02 laminar/A333/knob/cockpit_temp
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/knob/cabin_temp
+	ACTION axis_knob -1.0 1.0 0.02 laminar/A333/knob/cabin_temp
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/knob/fwd_cargo_temp
+	ACTION axis_knob -1.0 1.0 0.02 laminar/A333/knob/fwd_cargo_temp
+END_MANIP
+BEGIN_MANIP axis_knob laminar/A333/knob/aft_cargo_temp
+	ACTION axis_knob -1.0 1.0 0.02 laminar/A333/knob/aft_cargo_temp
+END_MANIP
