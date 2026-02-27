@@ -38766,8 +38766,8 @@ P acf/_ann_wav_file/count 198
 P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
-P acf/_author Alex Unruh, Rodrigo Fernandez, Massimo Durando, Jim Gregory, Marco Auer, AeroGenesis Team
-P acf/_auto_engage_BC_deg 120.000000000
+P acf/_author Alex Unruh, Rodrigo Fernandez, Massimo Durando, Jim Gregory, Marco Auer
+P acf/_auto_engage_BC_deg 0
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
 P acf/_auto_omega_open 0.000000000
@@ -41348,7 +41348,7 @@ P acf/_vect_min_nace 0.000000000
 P acf/_vect_power_aft 1.000000000
 P acf/_vect_power_for 1.000000000
 P acf/_vect_rate 15.000000000
-P acf/_version 1.3.0
+P acf/_version 1.3.1-r2
 P acf/_vnav_descend_auto_arm 0
 P acf/_vor_mode_has_dead_reckon 1
 P acf/_vvi_but_adjusts_pitch 0
