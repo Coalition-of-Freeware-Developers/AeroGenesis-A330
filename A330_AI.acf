@@ -9967,6 +9967,19 @@ P _obja/28/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/28/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/28/_v10_is_internal 1
 P _obja/28/_v10_steers_with_gear 0
+P _obja/29/_obj_flags 13
+P _obja/29/_v10_att_body -1
+P _obja/29/_v10_att_file_stl cockpit/Console.obj
+P _obja/29/_v10_att_gear -1
+P _obja/29/_v10_att_phi_ref 0.000000000
+P _obja/29/_v10_att_psi_ref 0.000000000
+P _obja/29/_v10_att_the_ref 0.000000000
+P _obja/29/_v10_att_wing -1
+P _obja/29/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/29/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/29/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/29/_v10_is_internal 0
+P _obja/29/_v10_steers_with_gear 0
 P _obja/3/_obj_flags 24
 P _obja/3/_v10_att_body -1
 P _obja/3/_v10_att_file_stl A330_wings_AI.obj
@@ -9980,6 +9993,45 @@ P _obja/3/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/3/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/3/_v10_is_internal 0
 P _obja/3/_v10_steers_with_gear 0
+P _obja/30/_obj_flags 13
+P _obja/30/_v10_att_body -1
+P _obja/30/_v10_att_file_stl cockpit/Pen.obj
+P _obja/30/_v10_att_gear -1
+P _obja/30/_v10_att_phi_ref 0.000000000
+P _obja/30/_v10_att_psi_ref 0.000000000
+P _obja/30/_v10_att_the_ref 0.000000000
+P _obja/30/_v10_att_wing -1
+P _obja/30/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/30/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/30/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/30/_v10_is_internal 0
+P _obja/30/_v10_steers_with_gear 0
+P _obja/31/_obj_flags 13
+P _obja/31/_v10_att_body -1
+P _obja/31/_v10_att_file_stl cockpit/penholder.obj
+P _obja/31/_v10_att_gear -1
+P _obja/31/_v10_att_phi_ref 0.000000000
+P _obja/31/_v10_att_psi_ref 0.000000000
+P _obja/31/_v10_att_the_ref 0.000000000
+P _obja/31/_v10_att_wing -1
+P _obja/31/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/31/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/31/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/31/_v10_is_internal 0
+P _obja/31/_v10_steers_with_gear 0
+P _obja/32/_obj_flags 13
+P _obja/32/_v10_att_body -1
+P _obja/32/_v10_att_file_stl EFB/EFB_PRO.obj
+P _obja/32/_v10_att_gear -1
+P _obja/32/_v10_att_phi_ref 0.000000000
+P _obja/32/_v10_att_psi_ref 0.000000000
+P _obja/32/_v10_att_the_ref 0.000000000
+P _obja/32/_v10_att_wing -1
+P _obja/32/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/32/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/32/_v10_att_z_acf_prt_ref 0.000000000
+P _obja/32/_v10_is_internal 0
+P _obja/32/_v10_steers_with_gear 0
 P _obja/4/_obj_flags 24
 P _obja/4/_v10_att_body -1
 P _obja/4/_v10_att_file_stl A330_trent_700_AI.obj
@@ -10058,7 +10110,7 @@ P _obja/9/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/9/_v10_att_z_acf_prt_ref 0.000000000
 P _obja/9/_v10_is_internal -291569519
 P _obja/9/_v10_steers_with_gear 0
-P _obja/count 29
+P _obja/count 33
 P _prop/0/_des_AOA_pwr 1.000000000
 P _prop/0/_des_AOA_root 0.000000000
 P _prop/0/_des_AOA_tip 0.000000000
@@ -10721,7 +10773,7 @@ P _wing/0/_chord_for_RIB/3 35.805000305
 P _wing/0/_chord_for_RIB/4 34.290000916
 P _wing/0/_chord_for_RIB/5 32.775001526
 P _wing/0/_chord_for_RIB/6 31.260000229
-P _wing/0/_chord_for_RIB/7 29.745000839
+P _wing/0/_chord_for_RIB/7 29.744998932
 P _wing/0/_chord_for_RIB/8 28.229999542
 P _wing/0/_chord_for_RIB/9 26.715000153
 P _wing/0/_chord_for_RIB/count 11
@@ -12524,7 +12576,7 @@ P _wing/1/_chord_for_RIB/3 35.805000305
 P _wing/1/_chord_for_RIB/4 34.290000916
 P _wing/1/_chord_for_RIB/5 32.775001526
 P _wing/1/_chord_for_RIB/6 31.260000229
-P _wing/1/_chord_for_RIB/7 29.745000839
+P _wing/1/_chord_for_RIB/7 29.744998932
 P _wing/1/_chord_for_RIB/8 28.229999542
 P _wing/1/_chord_for_RIB/9 26.715000153
 P _wing/1/_chord_for_RIB/count 11
@@ -14327,9 +14379,9 @@ P _wing/10/_chord_for_RIB/3 21.022047043
 P _wing/10/_chord_for_RIB/4 19.499292374
 P _wing/10/_chord_for_RIB/5 17.950853348
 P _wing/10/_chord_for_RIB/6 16.426456451
-P _wing/10/_chord_for_RIB/7 14.884174347
+P _wing/10/_chord_for_RIB/7 14.884172440
 P _wing/10/_chord_for_RIB/8 13.348372459
-P _wing/10/_chord_for_RIB/9 11.818071365
+P _wing/10/_chord_for_RIB/9 11.818070412
 P _wing/10/_chord_for_RIB/count 11
 P _wing/10/_dihed_design 90.000000000
 P _wing/10/_dihed_full_up 0.000000000
@@ -26950,7 +27002,7 @@ P _wing/4/_chord_for_RIB/5 15.875000000
 P _wing/4/_chord_for_RIB/6 15.067999840
 P _wing/4/_chord_for_RIB/7 14.260999680
 P _wing/4/_chord_for_RIB/8 13.454000473
-P _wing/4/_chord_for_RIB/9 12.647000313
+P _wing/4/_chord_for_RIB/9 12.646999359
 P _wing/4/_chord_for_RIB/count 11
 P _wing/4/_dihed_design 9.300000191
 P _wing/4/_dihed_full_up 0.000000000
@@ -28753,7 +28805,7 @@ P _wing/5/_chord_for_RIB/5 15.875000000
 P _wing/5/_chord_for_RIB/6 15.067999840
 P _wing/5/_chord_for_RIB/7 14.260999680
 P _wing/5/_chord_for_RIB/8 13.454000473
-P _wing/5/_chord_for_RIB/9 12.647000313
+P _wing/5/_chord_for_RIB/9 12.646999359
 P _wing/5/_chord_for_RIB/count 11
 P _wing/5/_dihed_design 9.300000191
 P _wing/5/_dihed_full_up 0.000000000
@@ -30550,7 +30602,7 @@ P _wing/6/_chord_for_RIB/0 11.840000153
 P _wing/6/_chord_for_RIB/1 11.223333359
 P _wing/6/_chord_for_RIB/10 0.000000000
 P _wing/6/_chord_for_RIB/2 10.606666565
-P _wing/6/_chord_for_RIB/3 9.990000725
+P _wing/6/_chord_for_RIB/3 9.989999771
 P _wing/6/_chord_for_RIB/4 9.373333931
 P _wing/6/_chord_for_RIB/5 8.756667137
 P _wing/6/_chord_for_RIB/6 8.140000343
@@ -32353,7 +32405,7 @@ P _wing/7/_chord_for_RIB/0 11.840000153
 P _wing/7/_chord_for_RIB/1 11.223333359
 P _wing/7/_chord_for_RIB/10 0.000000000
 P _wing/7/_chord_for_RIB/2 10.606666565
-P _wing/7/_chord_for_RIB/3 9.990000725
+P _wing/7/_chord_for_RIB/3 9.989999771
 P _wing/7/_chord_for_RIB/4 9.373333931
 P _wing/7/_chord_for_RIB/5 8.756667137
 P _wing/7/_chord_for_RIB/6 8.140000343
@@ -34160,9 +34212,9 @@ P _wing/8/_chord_for_RIB/3 13.803999901
 P _wing/8/_chord_for_RIB/4 12.771999359
 P _wing/8/_chord_for_RIB/5 11.739999771
 P _wing/8/_chord_for_RIB/6 10.708000183
-P _wing/8/_chord_for_RIB/7 9.675999641
+P _wing/8/_chord_for_RIB/7 9.676000595
 P _wing/8/_chord_for_RIB/8 8.644000053
-P _wing/8/_chord_for_RIB/9 7.611999989
+P _wing/8/_chord_for_RIB/9 7.612000465
 P _wing/8/_chord_for_RIB/count 11
 P _wing/8/_dihed_design 8.000000000
 P _wing/8/_dihed_full_up 0.000000000
@@ -35963,9 +36015,9 @@ P _wing/9/_chord_for_RIB/3 13.803999901
 P _wing/9/_chord_for_RIB/4 12.771999359
 P _wing/9/_chord_for_RIB/5 11.739999771
 P _wing/9/_chord_for_RIB/6 10.708000183
-P _wing/9/_chord_for_RIB/7 9.675999641
+P _wing/9/_chord_for_RIB/7 9.676000595
 P _wing/9/_chord_for_RIB/8 8.644000053
-P _wing/9/_chord_for_RIB/9 7.611999989
+P _wing/9/_chord_for_RIB/9 7.612000465
 P _wing/9/_chord_for_RIB/count 11
 P _wing/9/_dihed_design 8.000000000
 P _wing/9/_dihed_full_up 0.000000000
@@ -38486,7 +38538,7 @@ P acf/_ann_wav_file/count 198
 P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
-P acf/_author Alex Unruh, Rodrigo Fernandez, Massimo Durando, Jim Gregory, Marco Auer
+P acf/_author Alex Unruh, Rodrigo Fernandez, Massimo Durando, Jim Gregory, Marco Auer, AeroGenesis Team
 P acf/_auto_engage_BC_deg 120.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -38501,7 +38553,7 @@ P acf/_auto_sync_EQ 0
 P acf/_auto_trim_EQ 0
 P acf/_autofeather_min_throttle 0.500000000
 P acf/_autopilot_logic 12
-P acf/_average_mac_acf 24.836240768
+P acf/_average_mac_acf 24.836244583
 P acf/_bagg_1/0 5.190000057
 P acf/_bagg_1/1 -7.619999886
 P acf/_bagg_1/2 31.379999161
@@ -39541,7 +39593,7 @@ P acf/_cyclic_dn_trim_rat 0.000000000
 P acf/_cyclic_lf_trim_rat 0.000000000
 P acf/_cyclic_rt_trim_rat 0.000000000
 P acf/_cyclic_up_trim_rat 0.000000000
-P acf/_default_livery_name Lufthansa D-AIKN
+P acf/_default_livery_name   AeroGenesis Home
 P acf/_deg_psi_per_deg_def 10.000000000
 P acf/_deg_the_per_deg_def 6.000000000
 P acf/_delta3 0.000000000
@@ -39953,7 +40005,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.054000001
 P acf/_ff_rat_idle_PRP 0.100000001
 P acf/_ff_rat_idle_turbo 0.100000001
-P acf/_file_writer_version 123008
+P acf/_file_writer_version 124001
 P acf/_fixed_max/0 2E4
 P acf/_fixed_max/1 2E4
 P acf/_fixed_max/2 2E4
@@ -40471,7 +40523,7 @@ P acf/_n1_power_curve1 2.799999952
 P acf/_n1_power_curve2 2.150000095
 P acf/_n1_rated_thrust 100.000000000
 P acf/_n2_power_curve 3.210000038
-P acf/_name Airbus A330-300
+P acf/_name AeroGenesis Airbus A330-300
 P acf/_new_plot_XP3D_cock/0 1
 P acf/_new_plot_outer_acf/0 1
 P acf/_no_default_chocks 0
@@ -40877,7 +40929,7 @@ P acf/_starter_torque_rat 0.064000003
 P acf/_steerdeg_castor 0.000000000
 P acf/_ster_hi_speed_use 40.000000000
 P acf/_stickshaker 0
-P acf/_studio Laminar Research
+P acf/_studio Laminar Research, AeroGenesis
 P acf/_sweep_extend_protect 0
 P acf/_sweep_m1 0.000000000
 P acf/_sweep_m2 0.000000000
@@ -40895,7 +40947,7 @@ P acf/_tail_rot_with_v2_kts 0.000000000
 P acf/_tail_rotor_lf_trim_rat 0.000000000
 P acf/_tail_rotor_rt_trim_rat 0.000000000
 P acf/_tail_with_coll 0.000000000
-P acf/_tailnum D-AIKN
+P acf/_tailnum D-AGEN
 P acf/_tailrotor_EQ 0
 P acf/_takeoff_trim_11 -0.300000012
 P acf/_tank_name/0 Left Wing
@@ -41068,7 +41120,7 @@ P acf/_vect_min_nace 0.000000000
 P acf/_vect_power_aft 1.000000000
 P acf/_vect_power_for 1.000000000
 P acf/_vect_rate 15.000000000
-P acf/_version 1.01
+P acf/_version 1.3.0
 P acf/_vnav_descend_auto_arm 0
 P acf/_vor_mode_has_dead_reckon 1
 P acf/_vvi_but_adjusts_pitch 0
