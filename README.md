@@ -1,9 +1,9 @@
 # IMPORTANT NOTICE - PLEASE READ!
-This repository has been moved to codeberg.org. You can find it under https:://codeberg.org/AeroGenesis
+This repository has been moved to codeberg.org. You can find it [here](https:://codeberg.org/AeroGenesis)
 This repo on GitHub has been archived and will not be maintained any further. Please visit us at codeberg for updates, questions and issues.
 Thank you.
 
-# AeroGenesis-A330
+## AeroGenesis-A330
 ### AeroGenesis Airbus A330 for X-Plane 12
 
 We are a small group of X-Plane developers who decided to rework Laminar Research's Airbus A330-300 for X-Plane 12.
