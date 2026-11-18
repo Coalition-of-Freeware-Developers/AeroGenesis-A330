@@ -1,5 +1,5 @@
 # IMPORTANT NOTICE - PLEASE READ!
-This repository has been moved to codeberg.org. [You can find it here.](https:://codeberg.org/AeroGenesis)
+This repository has been moved to codeberg.org. [You can find it here.](https://codeberg.org/AeroGenesis)
 This repo on GitHub has been archived and will not be maintained any further. Please visit us at codeberg for updates, questions and issues.
 Thank you.
 
